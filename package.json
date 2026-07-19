@@ -7,7 +7,8 @@
     "captures": "node tools/capture.js"
   },
   "devDependencies": {
-    "puppeteer-core": "^23.0.0"
+    "puppeteer-core": "^23.0.0",
+    "sharp": "^0.35.3"
   },
   "dependencies": {
     "puppeteer": "^25.3.0"

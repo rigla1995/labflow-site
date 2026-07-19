@@ -6,28 +6,104 @@
 <title>Demander un accès à LabFlow — réponse sous 24 h</title>
 <meta name="description" content="Demandez votre accès à LabFlow en 2 minutes : un conseiller vous recontacte sous 24 h pour une démonstration personnalisée. Sans engagement, sans paiement.">
 <meta name="robots" content="index,follow">
-<link rel="stylesheet" href="assets/css/site.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230ea5e9'/%3E%3Cstop offset='52%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='8' y='8' width='36' height='36' rx='7' fill='url(%23g)' transform='rotate(45 26 26)'/%3E%3C/svg%3E">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/v2.css">
 <style>
-  .form-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 30px; max-width: 680px; margin: 0 auto; }
-  .f-row { margin-bottom: 18px; }
-  .f-row label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; }
-  .f-row .aide { display: block; font-size: 0.75rem; color: var(--ink-faint); font-weight: 400; margin-top: 3px; }
-  .f-row input[type="text"], .f-row input[type="email"], .f-row input[type="tel"], .f-row input[type="number"], .f-row select, .f-row textarea {
-    width: 100%; box-sizing: border-box; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 10px;
-    font-size: 0.95rem; font-family: inherit; background: var(--paper); color: var(--ink);
+  /* ── Split-screen ── */
+  body { background: var(--bg-lin); }
+  .split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); min-height: 100vh; }
+  .volet-form { padding: 96px 48px 60px; display: flex; flex-direction: column; align-items: center; }
+  .volet-form > div { width: 100%; max-width: 560px; }
+  .volet-nuit {
+    background: var(--bg-nuit); color: var(--texte-nuit); padding: 120px 48px 60px;
+    display: flex; flex-direction: column; gap: 0; position: sticky; top: 0; height: 100vh; overflow: auto;
   }
-  .f-row input:focus, .f-row select:focus, .f-row textarea:focus { outline: 2px solid var(--indigo); border-color: var(--indigo); }
+  .volet-nuit h2 { font-size: 1.5rem; margin-bottom: 26px; }
+  .etapes-suite { display: flex; flex-direction: column; gap: 0; margin-bottom: 34px; }
+  .es { display: flex; gap: 16px; }
+  .es .pastille {
+    flex: none; width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center;
+    background: var(--grad-marque); color: #fff; font-weight: 800; font-size: 0.9rem; font-family: var(--font-titre);
+  }
+  .es .fil-es { display: flex; flex-direction: column; align-items: center; flex: none; width: 34px; }
+  .es-corps { padding-bottom: 26px; }
+  .es-corps b { display: block; font-family: var(--font-titre); color: #fff; margin-bottom: 3px; }
+  .es-corps p { font-size: 0.86rem; color: var(--texte-nuit-2); }
+  .es-trait { width: 2px; flex: 1; background: var(--border-nuit); margin: 4px 0; }
+  .volet-nuit .reassurances { justify-content: flex-start; margin: 0 0 30px; }
+  .volet-nuit .shot { max-width: 400px; }
+
+  /* ── Formulaire 2 étapes ── */
+  .prog { display: flex; align-items: center; gap: 12px; margin: 18px 0 26px; }
+  .prog .bar { flex: 1; height: 6px; border-radius: 999px; background: var(--border-sable); overflow: hidden; }
+  .prog .bar i { display: block; height: 100%; width: 50%; background: var(--grad-marque); border-radius: inherit; transition: width 0.4s ease; }
+  .prog span { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--encre-2); }
+  .fstep { display: none; }
+  .fstep.actif { display: block; animation: pas-suivant 0.35s ease; }
+  @keyframes pas-suivant { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+  .fstep h2 { font-size: 1.35rem; margin-bottom: 4px; }
+  .fstep .sous-titre { color: var(--encre-2); font-size: 0.9rem; margin-bottom: 22px; }
+  .f-row { margin-bottom: 18px; position: relative; }
+  .f-row label { display: block; font-size: 0.86rem; font-weight: 700; margin-bottom: 5px; }
+  .f-row .aide { display: block; font-size: 0.76rem; color: var(--encre-2); margin-top: 5px; }
+  .f-row .erreur-msg { display: none; font-size: 0.78rem; color: #B91C1C; margin-top: 5px; font-weight: 600; }
+  .champ, .f-row select, .f-row textarea {
+    width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid var(--border-sable); border-radius: 11px;
+    font-size: 0.96rem; font-family: inherit; background: var(--surface); color: var(--encre);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .champ:focus, .f-row select:focus, .f-row textarea:focus { outline: none; border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18); }
+  .f-row.valide .champ { border-color: var(--vert-marge); }
+  .f-row.valide::after { content: '✓'; position: absolute; right: 13px; top: 37px; color: var(--vert-marge); font-weight: 800; }
+  .f-row.invalide .champ { border-color: #DC2626; }
+  .f-row.invalide .erreur-msg { display: block; }
+  .tel-groupe { display: flex; }
+  .tel-groupe .prefixe {
+    flex: none; display: grid; place-items: center; padding: 0 13px; border: 1.5px solid var(--border-sable); border-right: 0;
+    border-radius: 11px 0 0 11px; background: var(--bg-lin); font-family: var(--font-mono); font-size: 0.92rem; color: var(--encre-2); font-weight: 700;
+  }
+  .tel-groupe .champ { border-radius: 0 11px 11px 0; font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .f-row.valide .tel-groupe ~ .erreur-msg { display: none; }
   .f-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 600px) { .f-2col { grid-template-columns: 1fr; } }
   .f-radio { display: flex; gap: 8px; }
-  .f-radio button { border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 20px; padding: 7px 18px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
-  .f-radio button.on { border-color: var(--indigo); background: var(--indigo-soft); color: var(--indigo); }
-  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 0.78rem; color: var(--ink-soft); background: var(--tint); border-radius: 10px; padding: 14px; }
-  .consent input { margin-top: 3px; }
-  .calc-recap { background: var(--indigo-soft); border-radius: 10px; padding: 12px 16px; font-size: 0.82rem; margin-bottom: 18px; }
-  .err { display: none; background: #FDECEC; color: #B91C1C; border-radius: 10px; padding: 12px 16px; font-size: 0.85rem; margin-bottom: 16px; }
+  .f-radio button {
+    border: 1.5px solid var(--border-sable); background: var(--surface); color: var(--encre-2); border-radius: 999px;
+    padding: 9px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.15s ease;
+  }
+  .f-radio button.on { border-color: transparent; background: var(--grad-marque); color: #fff; }
+  .compteur { font-family: var(--font-mono); font-size: 0.72rem; color: var(--encre-2); text-align: right; margin-top: 4px; }
+  .nav-etapes { display: flex; gap: 14px; align-items: center; margin-top: 26px; }
+  .btn-retour { background: none; border: 0; color: var(--encre-2); font-weight: 650; font-size: 0.92rem; cursor: pointer; padding: 10px 6px; }
+  .btn-retour:hover { color: var(--indigo); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+  .consent-court { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; margin: 22px 0 6px; }
+  .consent-court input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--indigo); }
+  details.legal { border: 0; background: none; padding: 0; margin-bottom: 18px; }
+  details.legal summary { font-size: 0.78rem; color: var(--encre-2); font-weight: 600; padding: 4px 0; }
+  details.legal summary::after { position: static; display: inline; margin-left: 6px; }
+  details.legal p { font-size: 0.76rem; color: var(--encre-2); background: var(--surface); border: 1px solid var(--border-sable); border-radius: 10px; padding: 12px 14px; }
+  .calc-recap {
+    background: #fff; border: 1px dashed var(--border-sable); border-radius: 4px; padding: 12px 16px;
+    font-size: 0.8rem; margin-bottom: 20px; font-family: var(--font-mono);
+  }
+  .err-globale { display: none; background: #FDECEC; color: #B91C1C; border-radius: 10px; padding: 12px 16px; font-size: 0.86rem; margin-bottom: 16px; }
   .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+  .spinner { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; margin-right: 8px; vertical-align: -2px; animation: rot 0.7s linear infinite; }
+  @keyframes rot { to { transform: rotate(360deg); } }
+
+  @media (max-width: 960px) {
+    .split { grid-template-columns: 1fr; }
+    .volet-nuit { position: static; height: auto; order: -1; padding: 96px 24px 30px; }
+    .volet-nuit .shot, .volet-nuit .reassurances { display: none; }
+    .volet-nuit h2 { font-size: 1.2rem; margin-bottom: 18px; }
+    .es-corps { padding-bottom: 16px; }
+    .es-corps p { display: none; }
+    .volet-form { padding: 40px 20px 80px; }
+    .f-2col { grid-template-columns: 1fr; gap: 0; }
+  }
 </style>
 </head>
 <body>
@@ -46,119 +122,178 @@
         <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
-      <text x="62" y="26" font-family="'Work Sans', system-ui, -apple-system, sans-serif" font-size="22" font-weight="300" letter-spacing="1.8" dominant-baseline="middle"><tspan fill="var(--logo-lab)">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
+      <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
     </symbol>
   </defs>
 </svg>
 
-<nav class="top">
+<nav class="top scrolled" id="topnav">
   <div class="nav-inner">
     <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
     <div class="nav-links">
-      <a href="index.html#fonctionnalites">Fonctionnalités</a>
-      <a href="index.html#pourqui">Pour qui&nbsp;?</a>
+      <a href="index.html#fonctionnalites">Le système</a>
+      <a href="index.html#pourqui">Votre métier</a>
       <a href="tarifs.html">Tarifs</a>
       <a href="index.html#faq">FAQ</a>
     </div>
   </div>
 </nav>
 
-<header class="hero" style="padding:52px 0 58px">
-  <div class="container">
-    <div class="surtitre">Sans engagement · sans paiement · réponse sous 24&nbsp;h</div>
-    <h1 style="max-width:22ch">Demander un accès à LabFlow</h1>
-    <p class="sub">Deux minutes suffisent. Remplissez ce formulaire, un conseiller vous recontacte sous 24&nbsp;h pour comprendre votre activité et vous montrer LabFlow en conditions réelles.</p>
-  </div>
-</header>
+<div class="split">
+  <main class="volet-form">
+    <div>
+      <div class="kicker">Sans engagement · sans paiement</div>
+      <h1 style="font-size:clamp(1.9rem,4vw,2.6rem)">Demander un accès</h1>
+      <div class="prog" aria-hidden="true"><div class="bar"><i id="prog-i"></i></div><span id="prog-txt">1/2</span></div>
 
-<section style="padding:56px 0 80px">
-  <div class="container">
-    <form class="form-card" id="f" novalidate>
       <div id="calc-recap" class="calc-recap" style="display:none"></div>
-      <div class="err" id="err"></div>
+      <div class="err-globale" id="err" role="alert"></div>
 
-      <div class="f-2col">
-        <div class="f-row">
-          <label for="nom">Nom complet *</label>
-          <input type="text" id="nom" name="nom" autocomplete="name" required maxlength="150">
-          <span class="aide">Votre prénom et votre nom, tels que vous souhaitez être contacté.</span>
-        </div>
-        <div class="f-row">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="email" autocomplete="email" required maxlength="255">
-          <span class="aide">Nous vous y enverrons la confirmation de votre demande.</span>
-        </div>
-      </div>
-      <div class="f-2col">
-        <div class="f-row">
-          <label for="telephone">Téléphone *</label>
-          <input type="tel" id="telephone" name="telephone" autocomplete="tel" required placeholder="22 345 678">
-          <span class="aide">Numéro tunisien à 8 chiffres — c'est par ce numéro que votre conseiller vous contacte (appel ou WhatsApp).</span>
-        </div>
-        <div class="f-row">
-          <label for="ville">Ville</label>
-          <input type="text" id="ville" name="ville" maxlength="100">
-          <span class="aide">La ville de votre activité principale.</span>
-        </div>
-      </div>
-      <div class="f-2col">
-        <div class="f-row">
-          <label for="type">Type d'activité</label>
-          <select id="type" name="type">
-            <option value="">— Choisir —</option>
-            <option value="restaurant">Restaurant</option>
-            <option value="cafe_bar">Café / bar</option>
-            <option value="patisserie_boulangerie">Pâtisserie / boulangerie</option>
-            <option value="boucherie">Boucherie</option>
-            <option value="traiteur">Traiteur</option>
-            <option value="labo_depot">Labo / dépôt</option>
-            <option value="autre">Autre</option>
-          </select>
-        </div>
-        <div class="f-row">
-          <label for="npv">Nombre de points de vente</label>
-          <input type="number" id="npv" name="npv" min="0" max="50">
-          <span class="aide">Indiquez 0 si vous n'avez qu'un dépôt.</span>
-        </div>
-      </div>
-      <div class="f-2col">
-        <div class="f-row">
-          <label>Avez-vous un laboratoire de production&nbsp;?</label>
-          <div class="f-radio" id="r-labo">
-            <button type="button" data-v="oui">Oui</button>
-            <button type="button" data-v="non">Non</button>
+      <form id="f" novalidate>
+        <!-- ÉTAPE 1 — coordonnées -->
+        <section class="fstep actif" id="step1" aria-label="Étape 1 sur 2 : vos coordonnées">
+          <h2>Vos coordonnées</h2>
+          <p class="sous-titre">C'est tout ce qu'il nous faut pour vous rappeler — le reste nous aide à préparer la démonstration.</p>
+
+          <div class="f-row" data-champ="nom">
+            <label for="nom">Nom complet *</label>
+            <input class="champ" type="text" id="nom" name="nom" autocomplete="name" required maxlength="150">
+            <span class="aide">Prénom et nom, tels que vous souhaitez être contacté — 2 caractères minimum.</span>
+            <span class="erreur-msg" aria-live="polite">Entrez au moins 2 caractères.</span>
           </div>
-          <span class="aide">Un atelier ou labo central qui produit pour un ou plusieurs points de vente.</span>
-        </div>
-        <div class="f-row">
-          <label>Vendez-vous à des professionnels&nbsp;?</label>
-          <div class="f-radio" id="r-b2b">
-            <button type="button" data-v="oui">Oui</button>
-            <button type="button" data-v="non">Non</button>
+          <div class="f-row" data-champ="email">
+            <label for="email">Email *</label>
+            <input class="champ" type="email" id="email" name="email" autocomplete="email" required maxlength="255" inputmode="email">
+            <span class="aide">Format&nbsp;: nom@domaine.tn — nous y envoyons la confirmation de votre demande.</span>
+            <span class="erreur-msg" aria-live="polite">Cet email n'a pas un format valide (ex.&nbsp;: sami@monlabo.tn).</span>
           </div>
-          <span class="aide">Cafés, hôtels, revendeurs… LabFlow inclut un portail où vos acheteurs pros commandent seuls.</span>
-        </div>
+          <div class="f-row" data-champ="telephone">
+            <label for="telephone">Téléphone *</label>
+            <div class="tel-groupe">
+              <span class="prefixe" aria-hidden="true">+216</span>
+              <input class="champ" type="tel" id="telephone" name="telephone" autocomplete="tel-national" required placeholder="22 345 678" inputmode="numeric" maxlength="10" aria-describedby="tel-aide">
+            </div>
+            <span class="aide" id="tel-aide">8 chiffres, commence par 2, 5, 7 ou 9 — votre conseiller vous joint par appel ou WhatsApp.</span>
+            <span class="erreur-msg" aria-live="polite">Numéro tunisien attendu&nbsp;: 8 chiffres commençant par 2, 5, 7 ou 9.</span>
+          </div>
+
+          <div class="nav-etapes">
+            <button type="button" class="btn" id="btn-continuer" disabled>Continuer →</button>
+            <span class="aide" style="margin:0">Étape 2&nbsp;: votre activité (30 secondes)</span>
+          </div>
+        </section>
+
+        <!-- ÉTAPE 2 — activité -->
+        <section class="fstep" id="step2" aria-label="Étape 2 sur 2 : votre activité">
+          <h2>Votre activité</h2>
+          <p class="sous-titre">Tout est optionnel ici — mais plus on en sait, plus la démonstration vous ressemble.</p>
+
+          <div class="f-2col">
+            <div class="f-row">
+              <label for="ville">Ville</label>
+              <input class="champ" type="text" id="ville" name="ville" maxlength="100">
+              <span class="aide">La ville de votre activité principale.</span>
+            </div>
+            <div class="f-row">
+              <label for="type">Type d'activité</label>
+              <select id="type" name="type">
+                <option value="">— Choisir —</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="cafe_bar">Café / bar</option>
+                <option value="patisserie_boulangerie">Pâtisserie / boulangerie</option>
+                <option value="boucherie">Boucherie</option>
+                <option value="traiteur">Traiteur</option>
+                <option value="labo_depot">Labo / dépôt</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-2col">
+            <div class="f-row" data-champ="npv">
+              <label for="npv">Nombre de points de vente</label>
+              <input class="champ" type="number" id="npv" name="npv" min="0" max="50" inputmode="numeric">
+              <span class="aide">De 0 (dépôt seul) à 50.</span>
+              <span class="erreur-msg" aria-live="polite">Entrez un nombre entre 0 et 50.</span>
+            </div>
+            <div class="f-row">
+              <label id="lbl-labo">Un laboratoire de production&nbsp;?</label>
+              <div class="f-radio" id="r-labo" role="group" aria-labelledby="lbl-labo">
+                <button type="button" data-v="oui">Oui</button>
+                <button type="button" data-v="non">Non</button>
+              </div>
+              <span class="aide">Un atelier ou labo central qui produit pour un ou plusieurs points de vente.</span>
+            </div>
+          </div>
+          <div class="f-row">
+            <label id="lbl-b2b">Vendez-vous à des professionnels&nbsp;?</label>
+            <div class="f-radio" id="r-b2b" role="group" aria-labelledby="lbl-b2b">
+              <button type="button" data-v="oui">Oui</button>
+              <button type="button" data-v="non">Non</button>
+            </div>
+            <span class="aide">Cafés, hôtels, revendeurs… LabFlow inclut un portail où vos acheteurs pros commandent seuls.</span>
+          </div>
+          <div class="f-row">
+            <label for="message">Votre message (optionnel)</label>
+            <textarea id="message" name="message" rows="4" maxlength="2000" placeholder="Votre organisation, vos priorités, vos questions."></textarea>
+            <div class="compteur"><span id="cpt">0</span>/2000</div>
+          </div>
+
+          <!-- Piège anti-robots : champ invisible, à laisser vide -->
+          <div class="hp" aria-hidden="true"><label>Site web<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+          <div class="consent-court">
+            <input type="checkbox" id="consent" required>
+            <label for="consent" style="font-weight:500; margin:0">J'accepte que LabFlow utilise ces informations dans le seul but de me recontacter. *</label>
+          </div>
+          <details class="legal">
+            <summary>Lire le détail (loi 2004-63, conservation, vos droits)</summary>
+            <p>En cochant cette case, j'accepte que LabFlow collecte et traite les informations de ce formulaire dans le seul but de répondre à ma demande d'accès et de me recontacter. Conformément à la loi organique n°&nbsp;2004-63 du 27 juillet 2004 relative à la protection des données à caractère personnel, ces données ne sont ni cédées ni utilisées à d'autres fins. Elles sont conservées au maximum 12&nbsp;mois si ma demande ne débouche pas sur un contrat, puis supprimées. Je dispose d'un droit d'accès, de rectification et d'effacement (voir la <a href="confidentialite.html">politique de confidentialité</a>), sous le contrôle de l'INPDP.</p>
+          </details>
+
+          <div class="nav-etapes">
+            <button type="button" class="btn-retour" id="btn-retour">← Retour</button>
+            <button type="submit" class="btn" id="submit" style="flex:1">Envoyer ma demande d'accès</button>
+          </div>
+          <p style="font-size:0.75rem; color:var(--encre-2); text-align:center; margin-top:12px;">Réponse sous 24&nbsp;h · échange sans engagement · aucun paiement en ligne</p>
+        </section>
+      </form>
+    </div>
+  </main>
+
+  <aside class="volet-nuit">
+    <div class="kicker" style="color:var(--texte-nuit-2)">Comment ça se passe</div>
+    <h2>Trois étapes, zéro paperasse</h2>
+    <div class="etapes-suite">
+      <div class="es">
+        <div class="fil-es"><span class="pastille">1</span><span class="es-trait"></span></div>
+        <div class="es-corps"><b>Sous 24 h, un conseiller vous appelle</b><p>Un humain, pas un robot. Il écoute votre organisation&nbsp;: labo, points de vente, clients pros.</p></div>
       </div>
-      <div class="f-row">
-        <label for="message">Votre message (optionnel)</label>
-        <textarea id="message" name="message" rows="4" maxlength="2000" placeholder="Dites-nous en plus si vous le souhaitez : votre organisation, vos priorités, vos questions."></textarea>
+      <div class="es">
+        <div class="fil-es"><span class="pastille">2</span><span class="es-trait"></span></div>
+        <div class="es-corps"><b>Démonstration personnalisée</b><p>LabFlow en conditions réelles, sur des cas comme les vôtres — en français, en dinars.</p></div>
       </div>
-
-      <!-- Piège anti-robots : champ invisible, à laisser vide -->
-      <div class="hp" aria-hidden="true"><label>Site web<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-
-      <div class="f-row consent">
-        <input type="checkbox" id="consent" required>
-        <label for="consent" style="font-weight:400; margin:0">En cochant cette case, j'accepte que LabFlow collecte et traite les informations de ce formulaire dans le seul but de répondre à ma demande d'accès et de me recontacter. Conformément à la loi organique n°&nbsp;2004-63 du 27 juillet 2004 relative à la protection des données à caractère personnel, ces données ne sont ni cédées ni utilisées à d'autres fins. Elles sont conservées au maximum 12&nbsp;mois si ma demande ne débouche pas sur un contrat, puis supprimées. Je dispose d'un droit d'accès, de rectification et d'effacement (voir la <a href="confidentialite.html">politique de confidentialité</a>), sous le contrôle de l'INPDP.</label>
+      <div class="es">
+        <div class="fil-es"><span class="pastille">3</span></div>
+        <div class="es-corps"><b>Devis, contrat, compte livré prêt</b><p>Si ça vous convient&nbsp;: devis personnalisé, contrat clair, et notre équipe paramètre tout.</p></div>
       </div>
+    </div>
+    <div class="reassurances" style="flex-direction:column; gap:10px; font-size:0.86rem">
+      <span>Aucun paiement en ligne</span>
+      <span>Vos données protégées (loi 2004-63)</span>
+      <span>Réponse sous 24 h, aussi sur WhatsApp</span>
+    </div>
+    <div class="shot">
+      <div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
+      <picture>
+        <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif 1x, assets/img/kpi-marge@2x.avif 2x">
+        <img src="assets/img/kpi-marge@1x.webp" srcset="assets/img/kpi-marge@1x.webp 1x, assets/img/kpi-marge@2x.webp 2x" width="420" height="246" alt="Carte marge brute du tableau de bord LabFlow : 5 662 DT, 67 % du CA" loading="lazy" style="width:100%">
+      </picture>
+    </div>
+    <p class="mention-demo">Compte de démonstration — montants en DT.</p>
+  </aside>
+</div>
 
-      <button type="submit" class="btn" id="submit" style="width:100%; font-size:1rem; padding:14px;">Envoyer ma demande d'accès</button>
-      <p style="font-size:0.75rem; color:var(--ink-faint); text-align:center; margin-top:12px;">Réponse sous 24&nbsp;h · échange sans engagement · aucun paiement en ligne</p>
-    </form>
-  </div>
-</section>
-
-<footer>
+<footer style="margin-top:0">
   <div class="container foot">
     <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
     <div>
@@ -172,6 +307,75 @@
   var startedAt = Date.now();
   var labo = null, b2b = null;
 
+  /* ── Validation live : au blur d'abord, puis à la frappe après une 1ʳᵉ erreur ── */
+  var VALIDE = {
+    nom: function (v) { return v.trim().length >= 2; },
+    email: function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim()); },
+    telephone: function (v) { return /^(\+216)?[2579]\d{7}$/.test(v.replace(/[\s.-]/g, '')); },
+    npv: function (v) { if (v === '') return true; var n = Number(v); return Number.isInteger(n) && n >= 0 && n <= 50; },
+  };
+  function rowOf(id) { return document.querySelector('.f-row[data-champ="' + id + '"]'); }
+  function valider(id, silencieux) {
+    var el = document.getElementById(id);
+    var ok = VALIDE[id](el.value);
+    var row = rowOf(id);
+    var vide = el.value.trim() === '';
+    row.classList.toggle('valide', ok && !vide);
+    if (!silencieux) {
+      row.classList.toggle('invalide', !ok);
+      el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    } else if (ok) {
+      row.classList.remove('invalide');
+      el.setAttribute('aria-invalid', 'false');
+    }
+    return ok;
+  }
+  ['nom', 'email', 'telephone', 'npv'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener('blur', function () { if (el.value !== '') valider(id, false); majContinuer(); });
+    el.addEventListener('input', function () {
+      // en direct seulement après une première erreur (sinon simple maj de l'état ✓)
+      valider(id, !rowOf(id).classList.contains('invalide'));
+      majContinuer();
+    });
+  });
+
+  /* ── Masque téléphone : XX XXX XXX appliqué à la frappe ── */
+  var tel = document.getElementById('telephone');
+  tel.addEventListener('input', function () {
+    var d = tel.value.replace(/\D/g, '').slice(0, 8);
+    var out = d;
+    if (d.length > 5) out = d.slice(0, 2) + ' ' + d.slice(2, 5) + ' ' + d.slice(5);
+    else if (d.length > 2) out = d.slice(0, 2) + ' ' + d.slice(2);
+    tel.value = out;
+  });
+
+  /* ── Étapes ── */
+  var step = 1;
+  function majContinuer() {
+    var ok = VALIDE.nom(document.getElementById('nom').value)
+      && VALIDE.email(document.getElementById('email').value)
+      && VALIDE.telephone(tel.value);
+    document.getElementById('btn-continuer').disabled = !ok;
+    return ok;
+  }
+  function montrer(n) {
+    step = n;
+    document.getElementById('step1').classList.toggle('actif', n === 1);
+    document.getElementById('step2').classList.toggle('actif', n === 2);
+    document.getElementById('prog-i').style.width = n === 1 ? '50%' : '100%';
+    document.getElementById('prog-txt').textContent = n + '/2';
+    var premier = document.querySelector('#step' + n + ' .champ');
+    if (premier && n === 2) premier.focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.getElementById('btn-continuer').addEventListener('click', function () {
+    ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
+    if (majContinuer()) montrer(2);
+  });
+  document.getElementById('btn-retour').addEventListener('click', function () { montrer(1); });
+
+  /* ── Boutons oui/non ── */
   function wireRadio(id, set) {
     document.querySelectorAll('#' + id + ' button').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -184,7 +388,11 @@
   wireRadio('r-labo', function (v) { labo = v; });
   wireRadio('r-b2b', function (v) { b2b = v; });
 
-  // Configuration issue du calculateur (page Tarifs / accueil)
+  /* ── Compteur message ── */
+  var msg = document.getElementById('message');
+  msg.addEventListener('input', function () { document.getElementById('cpt').textContent = msg.value.length; });
+
+  /* ── Récap configuration du calculateur (clé lf_calc, conservée) ── */
   var calcConfig = null;
   try {
     calcConfig = JSON.parse(localStorage.getItem('lf_calc') || 'null');
@@ -197,7 +405,7 @@
       if (parts.length) {
         var recap = document.getElementById('calc-recap');
         recap.style.display = '';
-        recap.innerHTML = '🧮 <strong>Votre estimation&nbsp;:</strong> ' + parts.join(' · ') + ' — elle sera jointe à votre demande.';
+        recap.innerHTML = '🧾 <strong>VOTRE ESTIMATION</strong><br>' + parts.join('<br>') + '<br>— jointe à votre demande.';
         var el = document.getElementById('npv'); if (el && !el.value) el.value = calcConfig.act;
         if (calcConfig.lab > 0) { labo = true; document.querySelector('#r-labo button[data-v="oui"]').classList.add('on'); }
         if (calcConfig.palier > 0) { b2b = true; document.querySelector('#r-b2b button[data-v="oui"]').classList.add('on'); }
@@ -205,6 +413,7 @@
     }
   } catch (e) {}
 
+  /* ── Envoi — payload IDENTIQUE à la V1 (contrat API public) ── */
   document.getElementById('f').addEventListener('submit', function (ev) {
     ev.preventDefault();
     var err = document.getElementById('err');
@@ -212,11 +421,17 @@
 
     var nom = document.getElementById('nom').value.trim();
     var email = document.getElementById('email').value.trim();
-    // Normalisation : « 22 345 678 », « 22-345-678 », « +216 22 345 678 » → +216 accepté, 8 chiffres
-    var tel = document.getElementById('telephone').value.replace(/[\s.-]/g, '');
-    if (nom.length < 2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !/^(\+216)?[2579]\d{7}$/.test(tel)) {
+    // Normalisation : espaces du masque / tirets retirés, +216 optionnel accepté
+    var telv = tel.value.replace(/[\s.-]/g, '');
+    if (!VALIDE.nom(nom) || !VALIDE.email(email) || !VALIDE.telephone(telv)) {
+      montrer(1);
+      ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
       err.textContent = 'Vérifiez votre nom, votre email et votre numéro de téléphone tunisien (8 chiffres).';
       err.style.display = '';
+      return;
+    }
+    if (!VALIDE.npv(document.getElementById('npv').value)) {
+      valider('npv', false);
       return;
     }
     if (!document.getElementById('consent').checked) {
@@ -232,18 +447,18 @@
 
     var btn = document.getElementById('submit');
     btn.disabled = true;
-    btn.textContent = 'Envoi en cours…';
+    btn.innerHTML = '<span class="spinner" aria-hidden="true"></span>Envoi…';
 
     var body = {
       nom: nom,
       email: email,
-      telephone: tel,
+      telephone: telv,
       ville: document.getElementById('ville').value.trim() || null,
       typeActivite: document.getElementById('type').value || null,
       nbPointsVente: document.getElementById('npv').value !== '' ? Number(document.getElementById('npv').value) : null,
       aLabo: labo,
       interetB2b: b2b,
-      message: document.getElementById('message').value.trim() || null,
+      message: msg.value.trim() || null,
       configCalculateur: calcConfig,
       website: document.querySelector('input[name="website"]').value,
     };
