@@ -13,14 +13,19 @@ const puppeteer = require('puppeteer');
 
   await page.goto('http://localhost:8322/demande-acces.html', { waitUntil: 'networkidle0' });
 
-  // 1) formulaire en un seul écran : tous les champs visibles d'emblée
-  const unEcran = await page.evaluate(() =>
-    ['nom', 'email', 'telephone', 'ville', 'type', 'npv', 'message', 'consent'].every((id) => {
-      const el = document.getElementById(id);
-      return el && el.offsetParent !== null;
-    })
-  );
-  console.log('tous les champs visibles (1 écran) :', unEcran ? 'OK' : 'ÉCHEC');
+  // 1) étape 1 affichée, Continuer désactivé, et la vue tient SANS défilement
+  const etat0 = await page.evaluate(() => ({
+    step1: document.getElementById('step1').classList.contains('actif'),
+    continuer: document.getElementById('btn-continuer').disabled,
+    sansScroll: (() => {
+      const vf = document.querySelector('.volet-form');
+      const btn = document.getElementById('btn-continuer').getBoundingClientRect();
+      return vf.scrollHeight <= vf.clientHeight + 1 && btn.bottom <= innerHeight;
+    })(),
+  }));
+  console.log('étape 1 par défaut :', etat0.step1 ? 'OK' : 'ÉCHEC');
+  console.log('continuer désactivé au départ :', etat0.continuer ? 'OK' : 'ÉCHEC');
+  console.log('étape 1 sans défilement (1440×900) :', etat0.sansScroll ? 'OK' : 'ÉCHEC');
 
   // 2) téléphone invalide → blur → erreur visible
   await page.type('#telephone', '12345678');
@@ -37,10 +42,24 @@ const puppeteer = require('puppeteer');
   console.log('masque tél « ' + telVal + ' » :', telVal === '22 345 678' ? 'OK' : 'ÉCHEC');
   console.log('erreur effacée à la frappe :', errGone ? 'OK' : 'ÉCHEC');
 
-  // 4) nom + email valides
+  // 4) nom + email valides → Continuer s'active → étape 2, qui tient aussi sans défilement
   await page.type('#nom', 'Test Refonte V2');
   await page.type('#email', 'm.khelil.prof+testv2@gmail.com');
   await new Promise((r) => setTimeout(r, 200));
+  const cont = await page.$eval('#btn-continuer', (b) => b.disabled);
+  console.log('continuer activé une fois valide :', !cont ? 'OK' : 'ÉCHEC');
+  await page.click('#btn-continuer');
+  await new Promise((r) => setTimeout(r, 400));
+  const etat2 = await page.evaluate(() => ({
+    step2: document.getElementById('step2').classList.contains('actif'),
+    sansScroll: (() => {
+      const vf = document.querySelector('.volet-form');
+      const btn = document.getElementById('submit').getBoundingClientRect();
+      return vf.scrollHeight <= vf.clientHeight + 1 && btn.bottom <= innerHeight;
+    })(),
+  }));
+  console.log('étape 2 affichée :', etat2.step2 ? 'OK' : 'ÉCHEC');
+  console.log('étape 2 sans défilement (1440×900) :', etat2.sansScroll ? 'OK' : 'ÉCHEC');
 
   await page.type('#ville', 'Tunis');
   await page.select('#type', 'patisserie_boulangerie');

@@ -12,16 +12,16 @@
 <link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/v2.css">
 <style>
-  /* ── Split-screen ── */
+  /* ── Split-screen plein écran : chaque étape tient dans la vue, sans défilement ── */
   body { background: var(--bg-lin); }
-  .split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); min-height: 100vh; }
-  .volet-form { padding: 96px 48px 60px; display: flex; flex-direction: column; align-items: center; }
-  .volet-form > div { width: 100%; max-width: 560px; }
+  .split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); height: 100vh; }
+  .volet-form { height: 100vh; overflow-y: auto; padding: 70px 48px 12px; display: flex; }
+  .volet-form > div { width: 100%; max-width: 560px; margin: auto; }
   .volet-nuit {
-    background: var(--bg-nuit); color: var(--texte-nuit); padding: 120px 48px 60px;
-    display: flex; flex-direction: column; gap: 0; position: sticky; top: 0; height: 100vh; overflow: auto;
+    background: var(--bg-nuit); color: var(--texte-nuit); padding: 90px 48px 30px;
+    display: flex; flex-direction: column; gap: 0; height: 100vh; overflow: auto;
   }
-  .volet-nuit h2 { font-size: 1.5rem; margin-bottom: 26px; }
+  .volet-nuit h2 { font-size: 1.35rem; margin-bottom: 20px; }
   .etapes-suite { display: flex; flex-direction: column; gap: 0; margin-bottom: 34px; }
   .es { display: flex; gap: 16px; }
   .es .pastille {
@@ -36,18 +36,23 @@
   .volet-nuit .reassurances { justify-content: flex-start; margin: 0 0 30px; }
   .volet-nuit .shot { max-width: 400px; }
 
-  /* ── Formulaire en un seul écran ── */
-  .fstep { padding: 0; } /* neutralise le padding générique des <section> de v2.css */
-  .fstep h2 { font-size: 1.2rem; margin: 26px 0 4px; }
-  .fstep h2:first-child { margin-top: 0; }
-  .fstep .sous-titre { color: var(--encre-2); font-size: 0.88rem; margin-bottom: 18px; }
-  .f-row { margin-bottom: 18px; position: relative; }
-  .f-row label { display: block; font-size: 0.86rem; font-weight: 700; margin-bottom: 5px; }
-  .f-row .aide { display: block; font-size: 0.76rem; color: var(--encre-2); margin-top: 5px; }
+  /* ── Formulaire en 2 étapes — chaque étape tient à l'écran ── */
+  .prog { display: flex; align-items: center; gap: 12px; margin: 12px 0 18px; }
+  .prog .bar { flex: 1; height: 6px; border-radius: 999px; background: var(--border-sable); overflow: hidden; }
+  .prog .bar i { display: block; height: 100%; width: 50%; background: var(--grad-marque); border-radius: inherit; transition: width 0.4s ease; }
+  .prog span { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--encre-2); }
+  .fstep { padding: 0; display: none; } /* padding:0 neutralise le padding générique des <section> */
+  .fstep.actif { display: block; animation: pas-suivant 0.3s ease; }
+  @keyframes pas-suivant { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+  .fstep h2 { font-size: 1.15rem; margin: 0 0 2px; }
+  .fstep .sous-titre { color: var(--encre-2); font-size: 0.85rem; margin-bottom: 10px; }
+  .f-row { margin-bottom: 12px; position: relative; }
+  .f-row label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+  .f-row .aide { display: block; font-size: 0.74rem; color: var(--encre-2); margin-top: 4px; }
   .f-row .erreur-msg { display: none; font-size: 0.78rem; color: #B91C1C; margin-top: 5px; font-weight: 600; }
   .champ, .f-row select, .f-row textarea {
-    width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid var(--border-sable); border-radius: 11px;
-    font-size: 0.96rem; font-family: inherit; background: var(--surface); color: var(--encre);
+    width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid var(--border-sable); border-radius: 11px;
+    font-size: 0.95rem; font-family: inherit; background: var(--surface); color: var(--encre);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
   .champ:focus, .f-row select:focus, .f-row textarea:focus { outline: none; border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18); }
@@ -69,12 +74,14 @@
     padding: 12px 22px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.15s ease;
   }
   .f-radio button.on { border-color: transparent; background: var(--grad-marque-texte); color: #fff; }
-  .compteur { font-family: var(--font-mono); font-size: 0.72rem; color: var(--encre-2); text-align: right; margin-top: 4px; }
-  .nav-etapes { display: flex; gap: 14px; align-items: center; margin-top: 26px; }
+  .compteur { font-family: var(--font-mono); font-size: 0.72rem; color: var(--encre-2); text-align: right; margin-top: 2px; }
+  .nav-etapes { display: flex; gap: 14px; align-items: center; margin-top: 18px; }
+  .btn-retour { background: none; border: 0; color: var(--encre-2); font-weight: 650; font-size: 0.92rem; cursor: pointer; padding: 10px 6px; }
+  .btn-retour:hover { color: var(--indigo-lien); }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
-  .consent-court { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; margin: 22px 0 6px; }
+  .consent-court { display: flex; gap: 10px; align-items: flex-start; font-size: 0.83rem; margin: 14px 0 4px; }
   .consent-court input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--indigo); }
-  details.legal { border: 0; background: none; padding: 0; margin-bottom: 18px; }
+  details.legal { border: 0; background: none; padding: 0; margin-bottom: 10px; }
   details.legal summary { font-size: 0.78rem; color: var(--encre-2); font-weight: 600; padding: 4px 0; }
   details.legal summary::after { position: static; display: inline; margin-left: 6px; }
   details.legal p { font-size: 0.76rem; color: var(--encre-2); background: var(--surface); border: 1px solid var(--border-sable); border-radius: 10px; padding: 12px 14px; }
@@ -87,14 +94,26 @@
   .spinner { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; margin-right: 8px; vertical-align: -2px; animation: rot 0.7s linear infinite; }
   @keyframes rot { to { transform: rotate(360deg); } }
 
+  .bandeau-mobile { display: none; }
+  /* écrans peu hauts (laptops 768p) : on compacte pour que l'étape 2 tienne aussi sans défiler */
+  @media (min-width: 961px) and (max-height: 820px) {
+    .volet-form { padding-top: 62px; }
+    .prog { margin: 8px 0 12px; }
+    .fstep .sous-titre { display: none; }
+    #step2 .f-row .aide { display: none; }
+    .f-row { margin-bottom: 10px; }
+    .volet-nuit { padding-top: 74px; }
+    .volet-nuit .shot, .volet-nuit .mention-demo { display: none; }
+  }
   @media (max-width: 960px) {
-    .split { grid-template-columns: 1fr; }
-    .volet-nuit { position: static; height: auto; order: -1; padding: 96px 24px 30px; }
-    .volet-nuit .shot, .volet-nuit .reassurances, .volet-nuit .mention-demo { display: none; }
-    .volet-nuit h2 { font-size: 1.2rem; margin-bottom: 18px; }
-    .es-corps { padding-bottom: 16px; }
-    .es-corps p { display: none; }
-    .volet-form { padding: 40px 20px 80px; }
+    .split { grid-template-columns: 1fr; height: auto; }
+    /* panneau sombre replié en simple bandeau : le formulaire garde toute la vue */
+    .volet-nuit { height: auto; order: -1; padding: 78px 20px 12px; }
+    .volet-nuit .shot, .volet-nuit .reassurances, .volet-nuit .mention-demo,
+    .volet-nuit .etapes-suite, .volet-nuit h2, .volet-nuit .kicker { display: none; }
+    .bandeau-mobile { display: block; font-size: 0.82rem; color: var(--texte-nuit-2); }
+    .bandeau-mobile b { color: #fff; font-family: var(--font-titre); }
+    .volet-form { height: auto; min-height: calc(100vh - 120px); padding: 22px 20px 60px; }
     .f-2col { grid-template-columns: 1fr; gap: 0; }
   }
 </style>
@@ -137,14 +156,15 @@
   <main class="volet-form">
     <div>
       <div class="kicker">Sans engagement · sans paiement</div>
-      <h1 style="font-size:clamp(1.9rem,4vw,2.6rem)">Demander un accès</h1>
-      <p style="color:var(--encre-2); font-size:0.95rem; margin:10px 0 26px">Deux minutes suffisent — un conseiller vous rappelle sous 24&nbsp;h.</p>
+      <h1 style="font-size:clamp(1.7rem,3.4vw,2.2rem)">Demander un accès</h1>
+      <p style="color:var(--encre-2); font-size:0.9rem; margin:6px 0 0">Deux minutes suffisent — un conseiller vous rappelle sous 24&nbsp;h.</p>
+      <div class="prog" aria-hidden="true"><div class="bar"><i id="prog-i"></i></div><span id="prog-txt">1/2</span></div>
 
       <div id="calc-recap" class="calc-recap" style="display:none"></div>
       <div class="err-globale" id="err" role="alert" tabindex="-1"></div>
 
       <form id="f" novalidate>
-        <section class="fstep" aria-label="Vos coordonnées">
+        <section class="fstep actif" id="step1" aria-label="Étape 1 sur 2 : vos coordonnées">
           <h2>Vos coordonnées</h2>
           <p class="sous-titre">C'est tout ce qu'il nous faut pour vous rappeler.</p>
 
@@ -170,9 +190,13 @@
             <span class="erreur-msg" id="tel-err" aria-live="polite">Numéro tunisien attendu&nbsp;: 8 chiffres commençant par 2, 5, 7 ou 9.</span>
           </div>
 
+          <div class="nav-etapes">
+            <button type="button" class="btn" id="btn-continuer" disabled>Continuer →</button>
+            <span class="aide" style="margin:0">Étape 2&nbsp;: votre activité (30 secondes)</span>
+          </div>
         </section>
 
-        <section class="fstep" aria-label="Votre activité">
+        <section class="fstep" id="step2" aria-label="Étape 2 sur 2 : votre activité">
           <h2>Votre activité <span style="font-weight:500; font-size:0.8em; color:var(--encre-2)">(facultatif)</span></h2>
           <p class="sous-titre">Plus on en sait, plus la démonstration vous ressemble.</p>
 
@@ -218,11 +242,11 @@
               <button type="button" data-v="oui" aria-pressed="false">Oui</button>
               <button type="button" data-v="non" aria-pressed="false">Non</button>
             </div>
-            <span class="aide">Cafés, hôtels, revendeurs… LabFlow inclut un portail où vos acheteurs pros commandent seuls.</span>
+            <span class="aide">Cafés, hôtels, revendeurs… ils commanderont seuls sur leur portail.</span>
           </div>
           <div class="f-row">
             <label for="message">Votre message (optionnel)</label>
-            <textarea id="message" name="message" rows="4" maxlength="2000" placeholder="Votre organisation, vos priorités, vos questions."></textarea>
+            <textarea id="message" name="message" rows="2" maxlength="2000" placeholder="Votre organisation, vos priorités, vos questions."></textarea>
             <div class="compteur"><span id="cpt">0</span>/2000</div>
           </div>
 
@@ -239,15 +263,16 @@
           </details>
 
           <div class="nav-etapes">
+            <button type="button" class="btn-retour" id="btn-retour">← Retour</button>
             <button type="submit" class="btn" id="submit" style="flex:1">Envoyer ma demande d'accès</button>
           </div>
-          <p style="font-size:0.75rem; color:var(--encre-2); text-align:center; margin-top:12px;">Réponse sous 24&nbsp;h · échange sans engagement · aucun paiement en ligne</p>
         </section>
       </form>
     </div>
   </main>
 
   <aside class="volet-nuit">
+    <p class="bandeau-mobile"><b>Réponse sous 24&nbsp;h</b> — un conseiller vous appelle, vous montre LabFlow, puis devis clair. Sans engagement.</p>
     <div class="kicker" style="color:var(--texte-nuit-2)">Comment ça se passe</div>
     <h2>Trois étapes, zéro paperasse</h2>
     <div class="etapes-suite">
@@ -336,10 +361,11 @@
   }
   ['nom', 'email', 'telephone', 'npv'].forEach(function (id) {
     var el = document.getElementById(id);
-    el.addEventListener('blur', function () { if (el.value !== '') valider(id, false); });
+    el.addEventListener('blur', function () { if (el.value !== '') valider(id, false); majContinuer(); });
     el.addEventListener('input', function () {
       // en direct seulement après une première erreur (sinon simple maj de l'état ✓)
       valider(id, !rowOf(id).classList.contains('invalide'));
+      majContinuer();
     });
   });
 
@@ -352,6 +378,27 @@
     else if (d.length > 2) out = d.slice(0, 2) + ' ' + d.slice(2);
     tel.value = out;
   });
+
+  /* ── Étapes : chaque vue tient à l'écran, aucune ne défile ── */
+  function majContinuer() {
+    var ok = VALIDE.nom(document.getElementById('nom').value)
+      && VALIDE.email(document.getElementById('email').value)
+      && VALIDE.telephone(tel.value);
+    document.getElementById('btn-continuer').disabled = !ok;
+    return ok;
+  }
+  function montrer(n) {
+    document.getElementById('step1').classList.toggle('actif', n === 1);
+    document.getElementById('step2').classList.toggle('actif', n === 2);
+    document.getElementById('prog-i').style.width = n === 1 ? '50%' : '100%';
+    document.getElementById('prog-txt').textContent = n + '/2';
+    if (n === 2) { var premier = document.querySelector('#step2 .champ'); if (premier) premier.focus({ preventScroll: true }); }
+  }
+  document.getElementById('btn-continuer').addEventListener('click', function () {
+    ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
+    if (majContinuer()) montrer(2);
+  });
+  document.getElementById('btn-retour').addEventListener('click', function () { montrer(1); });
 
   /* ── Boutons oui/non ── */
   function wireRadio(id, set) {
@@ -409,6 +456,7 @@
       err.focus({ preventScroll: true });
     }
     if (!VALIDE.nom(nom) || !VALIDE.email(email) || !VALIDE.telephone(telv)) {
+      montrer(1);
       ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
       montrerErreur('Vérifiez votre nom, votre email et votre numéro de téléphone tunisien (8 chiffres).');
       return;
