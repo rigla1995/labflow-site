@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demander un accès à LabFlow — réponse sous 24 h</title>
+<meta name="description" content="Demandez votre accès à LabFlow en 2 minutes : un conseiller vous recontacte sous 24 h pour une démonstration personnalisée. Sans engagement, sans paiement.">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230ea5e9'/%3E%3Cstop offset='52%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='8' y='8' width='36' height='36' rx='7' fill='url(%23g)' transform='rotate(45 26 26)'/%3E%3C/svg%3E">
+<style>
+  .form-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 30px; max-width: 680px; margin: 0 auto; }
+  .f-row { margin-bottom: 18px; }
+  .f-row label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; }
+  .f-row .aide { display: block; font-size: 0.75rem; color: var(--ink-faint); font-weight: 400; margin-top: 3px; }
+  .f-row input[type="text"], .f-row input[type="email"], .f-row input[type="tel"], .f-row input[type="number"], .f-row select, .f-row textarea {
+    width: 100%; box-sizing: border-box; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 10px;
+    font-size: 0.95rem; font-family: inherit; background: var(--paper); color: var(--ink);
+  }
+  .f-row input:focus, .f-row select:focus, .f-row textarea:focus { outline: 2px solid var(--indigo); border-color: var(--indigo); }
+  .f-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .f-2col { grid-template-columns: 1fr; } }
+  .f-radio { display: flex; gap: 8px; }
+  .f-radio button { border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 20px; padding: 7px 18px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+  .f-radio button.on { border-color: var(--indigo); background: var(--indigo-soft); color: var(--indigo); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 0.78rem; color: var(--ink-soft); background: var(--tint); border-radius: 10px; padding: 14px; }
+  .consent input { margin-top: 3px; }
+  .calc-recap { background: var(--indigo-soft); border-radius: 10px; padding: 12px 16px; font-size: 0.82rem; margin-bottom: 18px; }
+  .err { display: none; background: #FDECEC; color: #B91C1C; border-radius: 10px; padding: 12px 16px; font-size: 0.85rem; margin-bottom: 16px; }
+  .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
+    <symbol id="lf-logo" viewBox="0 0 192 52">
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
+      <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
+      <g transform="translate(26,26) rotate(45)" fill="#fff">
+        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/><rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
+        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
+        <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
+      </g>
+      <text x="62" y="26" font-family="'Work Sans', system-ui, -apple-system, sans-serif" font-size="22" font-weight="300" letter-spacing="1.8" dominant-baseline="middle"><tspan fill="var(--logo-lab)">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
+    </symbol>
+  </defs>
+</svg>
+
+<nav class="top">
+  <div class="nav-inner">
+    <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
+    <div class="nav-links">
+      <a href="index.html#fonctionnalites">Fonctionnalités</a>
+      <a href="index.html#pourqui">Pour qui&nbsp;?</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" style="padding:52px 0 58px">
+  <div class="container">
+    <div class="surtitre">Sans engagement · sans paiement · réponse sous 24&nbsp;h</div>
+    <h1 style="max-width:22ch">Demander un accès à LabFlow</h1>
+    <p class="sub">Deux minutes suffisent. Remplissez ce formulaire, un conseiller vous recontacte sous 24&nbsp;h pour comprendre votre activité et vous montrer LabFlow en conditions réelles.</p>
+  </div>
+</header>
+
+<section style="padding:56px 0 80px">
+  <div class="container">
+    <form class="form-card" id="f" novalidate>
+      <div id="calc-recap" class="calc-recap" style="display:none"></div>
+      <div class="err" id="err"></div>
+
+      <div class="f-2col">
+        <div class="f-row">
+          <label for="nom">Nom complet *</label>
+          <input type="text" id="nom" name="nom" autocomplete="name" required maxlength="150">
+          <span class="aide">Votre prénom et votre nom, tels que vous souhaitez être contacté.</span>
+        </div>
+        <div class="f-row">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" autocomplete="email" required maxlength="255">
+          <span class="aide">Nous vous y enverrons la confirmation de votre demande.</span>
+        </div>
+      </div>
+      <div class="f-2col">
+        <div class="f-row">
+          <label for="telephone">Téléphone *</label>
+          <input type="tel" id="telephone" name="telephone" autocomplete="tel" required placeholder="22 345 678">
+          <span class="aide">Numéro tunisien à 8 chiffres — c'est par ce numéro que votre conseiller vous contacte (appel ou WhatsApp).</span>
+        </div>
+        <div class="f-row">
+          <label for="ville">Ville</label>
+          <input type="text" id="ville" name="ville" maxlength="100">
+          <span class="aide">La ville de votre activité principale.</span>
+        </div>
+      </div>
+      <div class="f-2col">
+        <div class="f-row">
+          <label for="type">Type d'activité</label>
+          <select id="type" name="type">
+            <option value="">— Choisir —</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="cafe_bar">Café / bar</option>
+            <option value="patisserie_boulangerie">Pâtisserie / boulangerie</option>
+            <option value="boucherie">Boucherie</option>
+            <option value="traiteur">Traiteur</option>
+            <option value="labo_depot">Labo / dépôt</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="f-row">
+          <label for="npv">Nombre de points de vente</label>
+          <input type="number" id="npv" name="npv" min="0" max="50">
+          <span class="aide">Indiquez 0 si vous n'avez qu'un dépôt.</span>
+        </div>
+      </div>
+      <div class="f-2col">
+        <div class="f-row">
+          <label>Avez-vous un laboratoire de production&nbsp;?</label>
+          <div class="f-radio" id="r-labo">
+            <button type="button" data-v="oui">Oui</button>
+            <button type="button" data-v="non">Non</button>
+          </div>
+          <span class="aide">Un atelier ou labo central qui produit pour un ou plusieurs points de vente.</span>
+        </div>
+        <div class="f-row">
+          <label>Vendez-vous à des professionnels&nbsp;?</label>
+          <div class="f-radio" id="r-b2b">
+            <button type="button" data-v="oui">Oui</button>
+            <button type="button" data-v="non">Non</button>
+          </div>
+          <span class="aide">Cafés, hôtels, revendeurs… LabFlow inclut un portail où vos acheteurs pros commandent seuls.</span>
+        </div>
+      </div>
+      <div class="f-row">
+        <label for="message">Votre message (optionnel)</label>
+        <textarea id="message" name="message" rows="4" maxlength="2000" placeholder="Dites-nous en plus si vous le souhaitez : votre organisation, vos priorités, vos questions."></textarea>
+      </div>
+
+      <!-- Piège anti-robots : champ invisible, à laisser vide -->
+      <div class="hp" aria-hidden="true"><label>Site web<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <div class="f-row consent">
+        <input type="checkbox" id="consent" required>
+        <label for="consent" style="font-weight:400; margin:0">En cochant cette case, j'accepte que LabFlow collecte et traite les informations de ce formulaire dans le seul but de répondre à ma demande d'accès et de me recontacter. Conformément à la loi organique n°&nbsp;2004-63 du 27 juillet 2004 relative à la protection des données à caractère personnel, ces données ne sont ni cédées ni utilisées à d'autres fins. Elles sont conservées au maximum 12&nbsp;mois si ma demande ne débouche pas sur un contrat, puis supprimées. Je dispose d'un droit d'accès, de rectification et d'effacement (voir la <a href="confidentialite.html">politique de confidentialité</a>), sous le contrôle de l'INPDP.</label>
+      </div>
+
+      <button type="submit" class="btn" id="submit" style="width:100%; font-size:1rem; padding:14px;">Envoyer ma demande d'accès</button>
+      <p style="font-size:0.75rem; color:var(--ink-faint); text-align:center; margin-top:12px;">Réponse sous 24&nbsp;h · échange sans engagement · aucun paiement en ligne</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
+    <div>
+      <a href="index.html">Accueil</a><a href="tarifs.html">Tarifs</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
+  var startedAt = Date.now();
+  var labo = null, b2b = null;
+
+  function wireRadio(id, set) {
+    document.querySelectorAll('#' + id + ' button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('#' + id + ' button').forEach(function (x) { x.classList.remove('on'); });
+        b.classList.add('on');
+        set(b.getAttribute('data-v') === 'oui');
+      });
+    });
+  }
+  wireRadio('r-labo', function (v) { labo = v; });
+  wireRadio('r-b2b', function (v) { b2b = v; });
+
+  // Configuration issue du calculateur (page Tarifs / accueil)
+  var calcConfig = null;
+  try {
+    calcConfig = JSON.parse(localStorage.getItem('lf_calc') || 'null');
+    if (calcConfig) {
+      var parts = [];
+      if (calcConfig.act > 0) parts.push(calcConfig.act + ' point' + (calcConfig.act > 1 ? 's' : '') + ' de vente (' + (calcConfig.formule === 'basique' ? 'Basique' : 'Premium') + ')');
+      if (calcConfig.lab > 0) parts.push(calcConfig.lab + ' labo' + (calcConfig.lab > 1 ? 's' : ''));
+      if (calcConfig.ger > 0) parts.push(calcConfig.ger + ' gérant' + (calcConfig.ger > 1 ? 's' : ''));
+      if (calcConfig.palier > 0) parts.push('acheteurs ≤ ' + calcConfig.palier);
+      if (parts.length) {
+        var recap = document.getElementById('calc-recap');
+        recap.style.display = '';
+        recap.innerHTML = '🧮 <strong>Votre estimation&nbsp;:</strong> ' + parts.join(' · ') + ' — elle sera jointe à votre demande.';
+        var el = document.getElementById('npv'); if (el && !el.value) el.value = calcConfig.act;
+        if (calcConfig.lab > 0) { labo = true; document.querySelector('#r-labo button[data-v="oui"]').classList.add('on'); }
+        if (calcConfig.palier > 0) { b2b = true; document.querySelector('#r-b2b button[data-v="oui"]').classList.add('on'); }
+      }
+    }
+  } catch (e) {}
+
+  document.getElementById('f').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var err = document.getElementById('err');
+    err.style.display = 'none';
+
+    var nom = document.getElementById('nom').value.trim();
+    var email = document.getElementById('email').value.trim();
+    // Normalisation : « 22 345 678 », « 22-345-678 », « +216 22 345 678 » → +216 accepté, 8 chiffres
+    var tel = document.getElementById('telephone').value.replace(/[\s.-]/g, '');
+    if (nom.length < 2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !/^(\+216)?[2579]\d{7}$/.test(tel)) {
+      err.textContent = 'Vérifiez votre nom, votre email et votre numéro de téléphone tunisien (8 chiffres).';
+      err.style.display = '';
+      return;
+    }
+    if (!document.getElementById('consent').checked) {
+      err.textContent = 'Merci de cocher la case de consentement pour que nous puissions vous recontacter.';
+      err.style.display = '';
+      return;
+    }
+    if (Date.now() - startedAt < 3000) {
+      err.textContent = 'Merci de prendre quelques secondes pour vérifier vos informations avant l\'envoi.';
+      err.style.display = '';
+      return;
+    }
+
+    var btn = document.getElementById('submit');
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours…';
+
+    var body = {
+      nom: nom,
+      email: email,
+      telephone: tel,
+      ville: document.getElementById('ville').value.trim() || null,
+      typeActivite: document.getElementById('type').value || null,
+      nbPointsVente: document.getElementById('npv').value !== '' ? Number(document.getElementById('npv').value) : null,
+      aLabo: labo,
+      interetB2b: b2b,
+      message: document.getElementById('message').value.trim() || null,
+      configCalculateur: calcConfig,
+      website: document.querySelector('input[name="website"]').value,
+    };
+
+    fetch(API + '/api/public/demande-acces', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    }).then(function (r) {
+      if (r.ok) {
+        try { localStorage.removeItem('lf_calc'); } catch (e) {}
+        location.href = 'merci.html';
+      } else {
+        throw new Error('bad status');
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = 'Envoyer ma demande d\'accès';
+      err.textContent = 'L\'envoi n\'a pas abouti. Réessayez dans un instant, ou contactez-nous directement sur WhatsApp.';
+      err.style.display = '';
+    });
+  });
+</script>
+</body>
+</html>
