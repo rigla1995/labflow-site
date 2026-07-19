@@ -3,349 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LabFlow — Le logiciel tunisien des commerces & labos alimentaires</title>
-<meta name="description" content="Stocks, coûts de revient, production, ventes et commandes B2B : LabFlow pilote votre restaurant, pâtisserie, labo ou dépôt. En français, en dinars, avec accompagnement humain.">
-<meta property="og:title" content="LabFlow — Maîtrisez vos coûts, vos stocks et votre production">
-<meta property="og:description" content="Le logiciel tunisien des commerces & labos alimentaires. Demandez un accès : réponse sous 24 h.">
+<title>LabFlow — Le petit ERP des métiers de bouche, conçu en Tunisie</title>
+<meta name="description" content="Stocks, coûts de revient, production, ventes et commandes B2B : LabFlow est le petit ERP des restaurants, pâtisseries, labos et dépôts. En français, en dinars, avec accompagnement humain.">
+<meta property="og:title" content="LabFlow — Tout votre labo. Un seul système.">
+<meta property="og:description" content="Le petit ERP des métiers de bouche. Touchez un prix d'achat : coûts et marges se recalculent dans tout le système. Demandez un accès : réponse sous 24 h.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/dashboard.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230ea5e9'/%3E%3Cstop offset='52%25' stop-color='%236366f1'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='8' y='8' width='36' height='36' rx='7' fill='url(%23g)' transform='rotate(45 26 26)'/%3E%3C/svg%3E">
+<meta property="og:image" content="https://labflow-tn.com/assets/img/og.jpg">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/v2.css">
 <style>
-  .shot img { display: block; width: 100%; height: auto; }
-  :root {
-    --paper: #FDFCF8;
-    --tint: #F4F1E9;
-    --ink: #23212F;
-    --ink-soft: #5C5968;
-    --ink-faint: #908D9C;
-    --indigo: #4338CA;
-    --indigo-deep: #312E81;
-    --indigo-soft: #EEF0FB;
-    --caramel: #B8721F;
-    --teal: #0D9488;
-    --line: #E6E2D8;
-    --card: #FFFFFF;
-    --shadow: 0 10px 34px rgba(35, 33, 47, 0.09);
-    --hero-grad: linear-gradient(150deg, #23204D 0%, #312E81 55%, #4338CA 100%);
-    --logo-lab: #1f2937;
-    --logo-flow: #6b7280;
+  /* ── Ajustements V2.1 « épurée » (spécifiques accueil) ── */
+  .hero-shot { position: relative; }
+  .hero-shot::before {
+    content: ''; position: absolute; inset: -26px; z-index: -1; border-radius: 30px;
+    background: radial-gradient(60% 60% at 50% 45%, rgba(99, 102, 241, 0.16), transparent 75%);
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #16151D; --tint: #1D1C26; --ink: #ECEAF2; --ink-soft: #B6B3C2; --ink-faint: #807D8E;
-      --indigo: #8F89F2; --indigo-deep: #A8A3F6; --indigo-soft: #262440;
-      --caramel: #DDA057; --teal: #2DD4BF; --line: #302E3C; --card: #201F2A;
-      --shadow: 0 10px 34px rgba(0,0,0,0.4);
-      --hero-grad: linear-gradient(150deg, #1B1936 0%, #262254 55%, #37319B 100%);
-      --logo-lab: rgba(255,255,255,0.95);
-      --logo-flow: rgba(255,255,255,0.58);
-    }
+  .modules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 46px; }
+  .module-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
+  .module-card > p { font-size: 0.98rem; margin-bottom: 16px; }
+  .metier-pills { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+  .metier-pills span {
+    font-weight: 650; font-size: 0.95rem; color: var(--encre);
+    background: var(--surface); border: 1px solid var(--border-sable); border-radius: 999px; padding: 10px 22px;
+    box-shadow: var(--ombre-douce);
   }
-  :root[data-theme="dark"] {
-    --paper: #16151D; --tint: #1D1C26; --ink: #ECEAF2; --ink-soft: #B6B3C2; --ink-faint: #807D8E;
-    --indigo: #8F89F2; --indigo-deep: #A8A3F6; --indigo-soft: #262440;
-    --caramel: #DDA057; --teal: #2DD4BF; --line: #302E3C; --card: #201F2A;
-    --shadow: 0 10px 34px rgba(0,0,0,0.4);
-    --hero-grad: linear-gradient(150deg, #1B1936 0%, #262254 55%, #37319B 100%);
-    --logo-lab: rgba(255,255,255,0.95);
-    --logo-flow: rgba(255,255,255,0.58);
+  .metier-pills span::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 3px; background: var(--grad-marque); transform: rotate(45deg); margin-right: 9px; vertical-align: 1px; }
+  @media (max-width: 900px) {
+    .modules-grid { grid-template-columns: 1fr; }
   }
-  :root[data-theme="light"] {
-    --paper: #FDFCF8; --tint: #F4F1E9; --ink: #23212F; --ink-soft: #5C5968; --ink-faint: #908D9C;
-    --indigo: #4338CA; --indigo-deep: #312E81; --indigo-soft: #EEF0FB;
-    --caramel: #B8721F; --teal: #0D9488; --line: #E6E2D8; --card: #FFFFFF;
-    --shadow: 0 10px 34px rgba(35, 33, 47, 0.09);
-    --hero-grad: linear-gradient(150deg, #23204D 0%, #312E81 55%, #4338CA 100%);
-    --logo-lab: #1f2937;
-    --logo-flow: #6b7280;
-  }
-
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; background: var(--paper); }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
-  body {
-    margin: 0; background: var(--paper); color: var(--ink);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.6; font-size: 16px;
-  }
-  h1, h2, h3 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; line-height: 1.18; text-wrap: balance; margin: 0; }
-  p { margin: 0 0 14px; }
-  a { color: var(--indigo); }
-  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-  .narrow { max-width: 760px; margin: 0 auto; }
-
-  /* Bandeau maquette */
-  .ribbon {
-    background: repeating-linear-gradient(45deg, #B8721F, #B8721F 14px, #A26215 14px, #A26215 28px);
-    color: #fff; text-align: center; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase; padding: 7px 12px;
-  }
-
-  /* Nav */
-  nav.top {
-    position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--paper) 88%, transparent);
-    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
-  }
-  .nav-inner { display: flex; align-items: center; gap: 26px; padding: 14px 24px; max-width: 1120px; margin: 0 auto; }
-  .logo { display: block; text-decoration: none; }
-  .lf-mark { display: block; height: 36px; aspect-ratio: 192 / 52; width: auto; }
-  .lf-mark.small { height: 28px; }
-  .nav-links { display: flex; gap: 22px; margin-left: auto; }
-  .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 0.88rem; font-weight: 600; }
-  .nav-links a:hover, .nav-links a:focus-visible { color: var(--indigo); }
-  .btn {
-    display: inline-block; background: var(--indigo); color: #fff; border: none; cursor: pointer;
-    padding: 12px 26px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; text-decoration: none;
-    box-shadow: 0 6px 18px color-mix(in srgb, var(--indigo) 35%, transparent);
-  }
-  .btn:hover { background: var(--indigo-deep); }
-  .btn:focus-visible, a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--caramel); outline-offset: 2px; }
-  .btn.ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.5); box-shadow: none; }
-  .btn.ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
-  .btn.small { padding: 9px 18px; font-size: 0.85rem; }
-  nav .btn { margin-left: 8px; }
-  @media (max-width: 760px) { .nav-links { display: none; } }
-
-  /* Hero */
-  .hero { background: var(--hero-grad); color: #fff; padding: 72px 0 88px; position: relative; overflow: hidden; }
-  .hero::after {
-    content: ""; position: absolute; inset: auto -10% -60% -10%; height: 70%;
-    background: radial-gradient(ellipse at center, rgba(221,160,87,0.22), transparent 65%); pointer-events: none;
-  }
-  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 54px; align-items: center; position: relative; }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
-  .hero .surtitre {
-    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase;
-    color: #E8B476; margin-bottom: 18px;
-  }
-  .hero h1 { font-size: clamp(1.9rem, 4.6vw, 3rem); color: #fff; margin-bottom: 18px; }
-  .hero .sub { font-size: 1.08rem; color: rgba(255,255,255,0.82); max-width: 54ch; margin-bottom: 30px; }
-  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
-  .hero .btn { background: #fff; color: var(--indigo-deep); }
-  .hero .btn:hover { background: #F0EEFF; }
-
-  /* Screenshot placeholder frames */
-  .shot { background: var(--card); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--line); }
-  .shot-bar { display: flex; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
-  .shot-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
-  .shot-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; min-height: 150px; }
-  .sk { border-radius: 7px; background: color-mix(in srgb, var(--indigo) 9%, var(--tint)); }
-  .sk.title { height: 14px; width: 45%; }
-  .sk.kpi-row { display: flex; gap: 10px; background: none; }
-  .sk.kpi-row i { flex: 1; height: 46px; border-radius: 9px; background: color-mix(in srgb, var(--indigo) 13%, var(--tint)); }
-  .sk.kpi-row i.hot { background: color-mix(in srgb, var(--caramel) 30%, var(--tint)); }
-  .sk.bars { display: flex; align-items: flex-end; gap: 8px; height: 74px; background: none; }
-  .sk.bars i { flex: 1; border-radius: 5px 5px 0 0; background: color-mix(in srgb, var(--indigo) 26%, var(--tint)); }
-  .shot-caption {
-    padding: 11px 16px; border-top: 1px dashed var(--caramel); font-size: 0.78rem; color: var(--ink-soft);
-    background: color-mix(in srgb, var(--caramel) 7%, var(--card));
-  }
-  .shot-caption strong { color: var(--caramel); }
-
-  /* Sections */
-  section { padding: 78px 0; }
-  section.alt { background: var(--tint); }
-  .kicker { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--caramel); margin-bottom: 12px; }
-  h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); margin-bottom: 14px; }
-  .sec-intro { color: var(--ink-soft); font-size: 1.02rem; max-width: 62ch; margin-bottom: 40px; }
-
-  /* Confiance */
-  .trust { border-bottom: 1px solid var(--line); background: var(--card); padding: 22px 0; }
-  .trust-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px 30px; }
-  .trust-items div { font-size: 0.86rem; color: var(--ink-soft); display: flex; gap: 9px; align-items: flex-start; font-weight: 550; }
-  .trust-items div::before { content: "✓"; color: var(--teal); font-weight: 800; }
-
-  /* Partenaires (marquee) */
-  .partners { padding: 44px 0 50px; border-bottom: 1px solid var(--line); background: var(--paper); }
-  .partners .kicker { text-align: center; }
-  .partners h2 { text-align: center; font-size: 1.35rem; margin-bottom: 28px; }
-  .marquee { overflow: hidden; position: relative;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .marquee-track { display: flex; gap: 18px; width: max-content; animation: pscroll 32s linear infinite; }
-  @keyframes pscroll { to { transform: translateX(-50%); } }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
-    .marquee { mask-image: none; -webkit-mask-image: none; }
-    .marquee-track > .dup { display: none; }
-  }
-  .plogo {
-    flex: 0 0 auto; width: 158px; height: 66px; border: 1.5px dashed var(--line); border-radius: 12px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-    background: var(--card); color: var(--ink-faint);
-  }
-  .plogo .pi { font-size: 1.25rem; }
-  .plogo .pn { font-size: 0.68rem; font-weight: 700; }
-  .partners-note { text-align: center; font-size: 0.74rem; color: var(--ink-faint); margin-top: 18px; max-width: 68ch; margin-left: auto; margin-right: auto; }
-
-  /* Douleurs */
-  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
-  .pain {
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
-    border-top: 4px solid var(--caramel);
-  }
-  .pain h3 { font-size: 1.05rem; margin-bottom: 9px; }
-  .pain p { font-size: 0.9rem; color: var(--ink-soft); margin: 0; }
-
-  /* Piliers */
-  .pilier { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 34px 0; }
-  .pilier:nth-child(even) .p-visual { order: -1; }
-  @media (max-width: 860px) { .pilier { grid-template-columns: 1fr; } .pilier:nth-child(even) .p-visual { order: 0; } }
-  .p-tag {
-    display: inline-block; background: var(--indigo-soft); color: var(--indigo); font-weight: 800;
-    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 13px; border-radius: 20px; margin-bottom: 12px;
-  }
-  .pilier h3 { font-size: 1.45rem; margin-bottom: 12px; }
-  .pilier .p-text { color: var(--ink-soft); font-size: 0.97rem; margin-bottom: 16px; }
-  .p-points { list-style: none; margin: 0; padding: 0; }
-  .p-points li { font-size: 0.88rem; padding: 5px 0 5px 26px; position: relative; }
-  .p-points li::before { content: "→"; position: absolute; left: 0; color: var(--caramel); font-weight: 700; }
-
-  /* Modules */
-  .mod-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-  .mod { display: flex; flex-direction: column; }
-  .mod .shot-body { min-height: 108px; }
-  .mod h3 { font-size: 1.02rem; margin: 14px 0 6px; }
-  .mod p { font-size: 0.88rem; color: var(--ink-soft); margin: 0; }
-
-  /* Personas */
-  .persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-  .persona { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
-  .persona .who { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--indigo); margin-bottom: 10px; }
-  .persona h3 { font-size: 1.06rem; margin-bottom: 9px; }
-  .persona p { font-size: 0.89rem; color: var(--ink-soft); margin: 0; }
-
-  /* Démo */
-  .demo-frame {
-    aspect-ratio: 16/8.4; max-width: 780px; margin: 0 auto; border-radius: 16px; background: var(--hero-grad);
-    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px;
-    color: #fff; box-shadow: var(--shadow); border: 1px solid var(--line);
-  }
-  .play { width: 74px; height: 74px; border-radius: 50%; background: rgba(255,255,255,0.92); color: var(--indigo-deep); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
-  .demo-frame small { font-size: 0.78rem; color: rgba(255,255,255,0.75); }
-
-  /* Preuves */
-  .proof-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-  .proof {
-    background: var(--card); border: 1.5px dashed var(--caramel); border-radius: 14px; padding: 22px;
-    display: flex; flex-direction: column; gap: 10px;
-  }
-  .proof .ic { font-size: 1.6rem; }
-  .proof p { font-size: 0.88rem; margin: 0; }
-  .proof a { font-size: 0.82rem; font-weight: 700; }
-
-  /* Tarifs + packs */
-  .packs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-bottom: 46px; }
-  .pack { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; position: relative; }
-  .pack.featured { border-color: var(--indigo); box-shadow: 0 0 0 1.5px var(--indigo), var(--shadow); }
-  .pack .badge {
-    position: absolute; top: -11px; left: 22px; background: var(--indigo); color: #fff;
-    font-size: 0.68rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase;
-    padding: 3px 12px; border-radius: 12px;
-  }
-  .pack h3 { font-size: 1.1rem; margin-bottom: 3px; }
-  .pack .for { font-size: 0.8rem; color: var(--ink-faint); margin-bottom: 16px; }
-  .pack .price { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 1.75rem; font-weight: 700; color: var(--caramel); font-variant-numeric: tabular-nums; }
-  .pack .price small { font-size: 0.72rem; color: var(--ink-faint); font-family: system-ui, sans-serif; font-weight: 500; }
-  .pack ul { list-style: none; margin: 16px 0 0; padding: 0; }
-  .pack li { font-size: 0.85rem; color: var(--ink-soft); padding: 4px 0 4px 24px; position: relative; }
-  .pack li::before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: 800; }
-
-  /* Calculateur */
-  .calc { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; }
-  .calc-head { background: var(--hero-grad); color: #fff; padding: 20px 28px; }
-  .calc-head h3 { color: #fff; font-size: 1.2rem; margin-bottom: 3px; }
-  .calc-head p { color: rgba(255,255,255,0.75); font-size: 0.84rem; margin: 0; }
-  .calc-body { display: grid; grid-template-columns: 1.15fr 0.85fr; }
-  @media (max-width: 800px) { .calc-body { grid-template-columns: 1fr; } }
-  .calc-controls { padding: 26px 28px; display: flex; flex-direction: column; gap: 18px; }
-  .ctrl { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-  .ctrl label { font-size: 0.9rem; font-weight: 650; }
-  .ctrl .hint { display: block; font-size: 0.74rem; color: var(--ink-faint); font-weight: 400; margin-top: 2px; max-width: 34ch; }
-  .stepper { display: flex; align-items: center; gap: 12px; }
-  .stepper button {
-    width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--tint);
-    color: var(--ink); font-size: 1.05rem; cursor: pointer; font-weight: 700;
-  }
-  .stepper button:hover { border-color: var(--indigo); color: var(--indigo); }
-  .stepper .val { min-width: 26px; text-align: center; font-weight: 800; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
-  .seg { display: flex; gap: 6px; flex-wrap: wrap; }
-  .seg button {
-    border: 1.5px solid var(--line); background: var(--card); color: var(--ink-soft); border-radius: 20px;
-    padding: 6px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
-  }
-  .seg button.on { border-color: var(--indigo); background: var(--indigo-soft); color: var(--indigo); }
-  .seg button:disabled { opacity: 0.45; cursor: not-allowed; }
-  .calc-result { background: var(--tint); padding: 26px 28px; display: flex; flex-direction: column; justify-content: center; gap: 8px; border-left: 1px solid var(--line); }
-  .calc-note { font-size: 0.8rem; color: var(--warn, #B45309); font-weight: 600; }
-  .calc-total { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 2.5rem; font-weight: 700; color: var(--indigo); font-variant-numeric: tabular-nums; line-height: 1; }
-  .calc-total small { font-size: 0.95rem; color: var(--ink-faint); font-family: system-ui, sans-serif; font-weight: 500; }
-  .calc-detail { font-size: 0.82rem; color: var(--ink-soft); }
-  .calc-detail div { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px dashed var(--line); }
-  .calc-detail div:last-child { border-bottom: none; }
-  .calc-detail b { font-variant-numeric: tabular-nums; }
-  .calc-ob { font-size: 0.8rem; color: var(--ink-soft); margin-top: 6px; }
-  .calc-disclaimer { font-size: 0.74rem; color: var(--ink-faint); margin-top: 10px; }
-  .calc-cta { margin-top: 14px; }
-
-  /* Accompagnement */
-  .steps { counter-reset: n; list-style: none; margin: 0; padding: 0; max-width: 680px; }
-  .steps li { counter-increment: n; position: relative; padding: 0 0 26px 58px; border-left: 2px solid var(--line); margin-left: 20px; }
-  .steps li:last-child { border-left-color: transparent; padding-bottom: 0; }
-  .steps li::before {
-    content: counter(n); position: absolute; left: -21px; top: -2px; width: 40px; height: 40px; border-radius: 50%;
-    background: var(--indigo); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center;
-    font-variant-numeric: tabular-nums; box-shadow: 0 4px 12px color-mix(in srgb, var(--indigo) 35%, transparent);
-  }
-  .steps h3 { font-size: 1.03rem; margin-bottom: 5px; }
-  .steps p { font-size: 0.9rem; color: var(--ink-soft); margin: 0; }
-
-  /* FAQ */
-  .faq-list { max-width: 760px; margin: 0 auto; }
-  details { border-bottom: 1px solid var(--line); }
-  summary {
-    cursor: pointer; padding: 18px 34px 18px 4px; font-weight: 700; font-size: 0.98rem; list-style: none; position: relative;
-  }
-  summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--caramel); font-size: 1.3rem; font-weight: 700; }
-  details[open] summary::after { content: "–"; }
-  details p { padding: 0 4px 20px; color: var(--ink-soft); font-size: 0.92rem; max-width: 68ch; }
-
-  /* CTA final */
-  .final { background: var(--hero-grad); color: #fff; text-align: center; padding: 88px 0; }
-  .final h2 { color: #fff; font-size: clamp(1.6rem, 3.6vw, 2.3rem); margin-bottom: 14px; }
-  .final p { color: rgba(255,255,255,0.8); max-width: 56ch; margin: 0 auto 30px; }
-  .final .btn { background: #fff; color: var(--indigo-deep); font-size: 1.05rem; padding: 15px 36px; }
-  .final .btn:hover { background: #F0EEFF; }
-  .reassure { display: flex; gap: 10px 26px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
-  .reassure span { font-size: 0.82rem; color: rgba(255,255,255,0.75); display: flex; gap: 7px; align-items: center; }
-  .reassure span::before { content: "✓"; color: #E8B476; font-weight: 800; }
-
-  /* Footer */
-  footer { background: var(--paper); border-top: 1px solid var(--line); padding: 36px 0 110px; }
-  .foot { display: flex; gap: 16px 34px; flex-wrap: wrap; align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--ink-faint); }
-  .foot a { color: var(--ink-soft); text-decoration: none; margin-right: 18px; }
-  .foot a:hover { color: var(--indigo); }
-
-  /* Flottants */
-  .wa {
-    position: fixed; right: 20px; bottom: 20px; z-index: 60; width: 56px; height: 56px; border-radius: 50%;
-    background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem; text-decoration: none; box-shadow: 0 8px 24px rgba(37,211,102,0.45);
-  }
-  .sticky-cta {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; display: none;
-    background: var(--card); border-top: 1px solid var(--line); padding: 10px 16px;
-    box-shadow: 0 -6px 20px rgba(0,0,0,0.09);
-  }
-  .sticky-cta .btn { width: 100%; text-align: center; }
-  @media (max-width: 760px) { .sticky-cta { display: block; } .wa { bottom: 74px; } }
 </style>
-
 </head>
 <body>
-<!-- Logo LabFlow (repris du composant LabFlowLogo de l'application) -->
+
+<!-- Logo LabFlow (repris du composant LabFlowLogo de l'application) + dégradés partagés -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
@@ -353,10 +46,15 @@
       <stop offset="52%" stop-color="#6366f1"/>
       <stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
+    <linearGradient id="grad-trait" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="52%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
     <clipPath id="lf-clip">
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/>
     </clipPath>
-    <symbol id="lf-logo" viewBox="0 0 192 52">
+    <symbol id="lf-losange" viewBox="0 0 52 52">
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
       <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
@@ -367,21 +65,27 @@
         <rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
-      <text x="62" y="26" font-family="'Work Sans', system-ui, -apple-system, sans-serif" font-size="22" font-weight="300" letter-spacing="1.8" dominant-baseline="middle"><tspan fill="var(--logo-lab)">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
+    </symbol>
+    <symbol id="lf-logo" viewBox="0 0 192 52">
+      <use href="#lf-losange" width="52" height="52"/>
+      <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
     </symbol>
   </defs>
 </svg>
 
-<nav class="top">
+<nav class="top" id="topnav">
   <div class="nav-inner">
     <a class="logo" href="#top" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
-    <div class="nav-links">
-      <a href="#fonctionnalites">Fonctionnalités</a>
-      <a href="#pourqui">Pour qui&nbsp;?</a>
+    <div class="nav-links" id="nav-links">
+      <a href="#fonctionnalites">Le système</a>
+      <a href="#pourqui">Votre métier</a>
       <a href="tarifs.html">Tarifs</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a class="btn small" href="demande-acces.html">Demander un accès</a>
+    <div style="display:flex; align-items:center; gap:10px">
+      <a class="btn small" href="demande-acces.html">Demander un accès</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -389,312 +93,210 @@
 <header class="hero" id="top">
   <div class="container hero-grid">
     <div>
-      <div class="surtitre">Le logiciel tunisien des commerces &amp; labos alimentaires</div>
-      <h1>Vous savez faire de bons produits. LabFlow vous dit ce qu'ils vous rapportent.</h1>
-      <p class="sub">Stocks, coûts de revient, ventes et commandes pros&nbsp;: tout en dinars, tout en français, tout au même endroit. Vous voyez votre marge réelle chaque matin, sans calculette ni cahier.</p>
+      <div class="eyebrow"><i></i>Le logiciel de gestion des métiers de bouche — conçu en Tunisie</div>
+      <h1>Tout votre labo.<br>Un seul <span class="souligne">système<svg viewBox="0 0 320 28" aria-hidden="true"><path d="M6 20 C 80 26, 150 10, 314 16" pathLength="320"/></svg></span>.</h1>
+      <p class="sub">Stocks, coûts de revient, production, ventes, commandes de vos clients pros. Vous changez un prix d'achat&nbsp;: tout le reste se recalcule — en dinars, en français.</p>
       <div class="hero-ctas">
         <a class="btn" href="demande-acces.html">Demander un accès</a>
-        <a class="btn ghost" href="#demo">Voir LabFlow en images</a>
+        <a class="lien-ghost" href="#principe">Voir comment ça marche ↓</a>
       </div>
     </div>
-    <div class="shot">
-      <div class="shot-bar"><i></i><i></i><i></i></div>
-      <img src="assets/img/dashboard.png" alt="Tableau de bord LabFlow : chiffre d'affaires, marge à 3 étages, food cost et pertes en dinars" loading="eager">
-      <div class="shot-caption"><strong>Écran réel&nbsp;:</strong> le tableau de bord — CA, marge à 3 étages, food cost et pertes, en dinars, calculés chaque jour.</div>
+    <div>
+      <div class="shot hero-shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
+        <picture>
+          <source type="image/avif" srcset="assets/img/dashboard@1x.avif 1x, assets/img/dashboard@2x.avif 2x">
+          <img src="assets/img/dashboard@1x.webp" srcset="assets/img/dashboard@1x.webp 1x, assets/img/dashboard@2x.webp 2x" width="1100" height="688" alt="Tableau de bord LabFlow : chiffre d'affaires 8 455 DT, marge brute 67 %, food cost 33 %, valeur du stock — en dinars" fetchpriority="high">
+        </picture>
+      </div>
+      <p class="mention-demo" style="margin-top:10px">Écran réel du compte de démonstration — montants en DT.</p>
     </div>
   </div>
 </header>
 
-<!-- 2. CONFIANCE -->
-<div class="trust">
-  <div class="container trust-items">
-    <div>100&nbsp;% en français, pensé pour la Tunisie, tarifs en dinars</div>
-    <div>Compte paramétré par notre équipe, livré prêt à travailler</div>
-    <div>Formation incluse, manuel intégré, assistant qui répond sur vos propres chiffres</div>
-    <div>Réponse sous 24&nbsp;h — un conseiller, pas un robot, aussi sur WhatsApp</div>
+<!-- 2. LE PRINCIPE (sombre, compact) -->
+<div class="zone-nuit" data-zone="nuit" id="principe">
+  <div class="container">
+    <div class="kicker rev">Le principe</div>
+    <h2 class="rev">Touchez un chiffre. Tout le système suit.</h2>
+    <p class="sec-intro rev">C'est toute l'idée de LabFlow. Exemple réel du compte de démonstration&nbsp;: la farine augmente chez votre fournisseur — voici ce qui se recalcule tout seul.</p>
+    <div class="cascade" id="cascade">
+      <div class="tuile maillon" data-m="1">
+        <div class="etiquette">Prix d'achat</div>
+        <div class="valeur"><span class="avant">1,904</span><span class="apres dt" data-count="1.904|2.290|3">1,904</span> <span style="font-size:0.6em">DT/kg</span></div>
+        <div class="detail">Farine pâtissière — le nouvel approvisionnement est saisi.</div>
+      </div>
+      <div class="chevron" aria-hidden="true">→</div>
+      <div class="tuile maillon" data-m="2">
+        <div class="etiquette">Coût de revient</div>
+        <div class="valeur"><span class="avant">1,375</span><span class="apres dt" data-count="1.375|1.408|3">1,375</span> <span style="font-size:0.6em">DT</span></div>
+        <div class="detail">Croissant au beurre — la recette est recalculée, automatiquement.</div>
+      </div>
+      <div class="chevron" aria-hidden="true">→</div>
+      <div class="tuile maillon" data-m="3">
+        <div class="etiquette">Marge</div>
+        <div class="valeur"><span class="avant">67,0</span><span class="apres pct" data-count="67.0|66.7|1">67,0</span> <span style="font-size:0.6em">%</span></div>
+        <div class="detail">Vous le voyez le matin même, sur le tableau de bord.</div>
+      </div>
+    </div>
+    <p class="rev" style="margin-top:34px; color:var(--texte-nuit-2); max-width:560px">Fini la calculette, le cahier et les prix qui datent de l'an dernier&nbsp;: le système fait les comptes, vous prenez les décisions.</p>
   </div>
 </div>
 
-<!-- 2b. PARTENAIRES — alimenté par GET /api/public/partenaires ; masqué s'il n'y a aucun partenaire -->
-<div class="partners" id="partenaires" style="display:none">
-  <div class="container">
-    <div class="kicker">Ils nous font confiance</div>
-    <h2>Nos clients sont nos meilleurs partenaires</h2>
-    <div class="marquee" aria-label="Logos de nos clients partenaires">
-      <div class="marquee-track" id="partners-track"></div>
-    </div>
-  </div>
-</div>
-
-<!-- 3. PROBLÈME -->
-<section>
-  <div class="container">
-    <div class="kicker">Le quotidien sans outil</div>
-    <h2>Ces situations, vous les connaissez par cœur</h2>
-    <p class="sec-intro">Ce ne sont pas des cas d'école. C'est ce que nous racontent les patrons qu'on rencontre.</p>
-    <div class="pain-grid">
-      <div class="pain"><h3>La marchandise qui s'évapore</h3><p>Vous achetez dix sacs, dix caisses, dix bidons. À l'inventaire, il en manque deux. Casse, gaspillage, oubli&nbsp;? Personne ne sait, et surtout personne ne le chiffre. À la fin du mois, c'est votre marge qui a fondu avec.</p></div>
-      <div class="pain"><h3>Le produit vendu à perte</h3><p>Le beurre a augmenté, la viande et l'huile aussi. Vos prix de vente, eux, n'ont pas bougé depuis l'an dernier. Certains de vos best-sellers — un gâteau, un plat, un sandwich — vous font peut-être perdre de l'argent à chaque vente. Et vous ne le saurez qu'en le calculant.</p></div>
-      <div class="pain"><h3>Les commandes prises à 22&nbsp;h</h3><p>Le café du coin appelle le soir, l'hôtel envoie un message le matin. Un bout de papier, un oubli, une livraison ratée. Et un client pro déçu, ça ne rappelle pas deux fois.</p></div>
-      <div class="pain"><h3>L'inventaire au cahier</h3><p>Le dimanche soir, calculette à la main, vous additionnez des colonnes. Deux heures plus tard, vous obtenez un chiffre… dont vous doutez déjà. Et il faudra recommencer le mois prochain.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. PILIERS -->
-<section class="alt" id="piliers">
-  <div class="container">
-    <div class="kicker">La solution</div>
-    <h2>Trois gestes&nbsp;: maîtriser, produire, vendre</h2>
-    <div class="pilier">
-      <div>
-        <span class="p-tag">Maîtriser</span>
-        <h3>Sachez où part chaque dinar de marchandise</h3>
-        <p class="p-text">Chaque sac, chaque caisse, chaque bidon entre dans LabFlow avec son prix, son fournisseur et sa référence de facture. Le stock de chaque point de vente — restaurant, boutique, café ou comptoir — est valorisé en dinars, jour après jour. Une avarie, de la casse&nbsp;? Vous la notez, elle est chiffrée. À l'inventaire, fini le mystère&nbsp;: vous comparez ce qu'il devrait rester et ce qu'il reste vraiment.</p>
-        <ul class="p-points">
-          <li>Stock du jour valorisé en dinars, point de vente par point de vente</li>
-          <li>Chaque approvisionnement tracé&nbsp;: prix HT + TVA, fournisseur, référence de facture</li>
-          <li>Pertes et casse chiffrées en DT, pas seulement constatées</li>
-          <li>Seuils et alertes&nbsp;: vous êtes prévenu avant la rupture, pas après</li>
-          <li>Catalogue importé en une fois depuis Excel (modèle fourni, rapport ligne à ligne)</li>
-        </ul>
-      </div>
-      <div class="p-visual shot">
-        <div class="shot-bar"><i></i><i></i><i></i></div>
-        <img src="assets/img/stock.png" alt="Stock du jour d'un point de vente LabFlow, valorisé en dinars" loading="lazy">
-        <div class="shot-caption"><strong>Écran réel&nbsp;:</strong> le stock du jour d'un point de vente, valorisé en dinars.</div>
-      </div>
-    </div>
-    <div class="pilier">
-      <div>
-        <span class="p-tag">Produire</span>
-        <h3>Le vrai coût de chaque recette, sans calculette</h3>
-        <p class="p-text">Votre labo ou votre cuisine centrale a son propre stock. Vous lancez une production — quarante mille-feuilles, vingt kilos de plats cuisinés, une fournée de charcuterie&nbsp;: les ingrédients se déduisent tout seuls, y compris la sous-recette que vous avez produite hier. Le coût de revient se recalcule à chaque changement de prix d'achat. Et quand la marchandise part vers vos points de vente, le transfert est valorisé, facture de transfert à l'appui.</p>
-        <ul class="p-points">
-          <li>Fiches techniques avec sous-recettes, sans limite de profondeur</li>
-          <li>Coût de revient automatique par site, au dernier prix ou au prix moyen pondéré</li>
-          <li>Recalculé à chaque approvisionnement&nbsp;: vos coûts ne datent jamais d'il y a six mois</li>
-          <li>Déduction automatique des ingrédients à chaque lot produit</li>
-          <li>Transferts labo → points de vente valorisés, avec facture de transfert</li>
-        </ul>
-      </div>
-      <div class="p-visual shot">
-        <div class="shot-bar"><i></i><i></i><i></i></div>
-        <img src="assets/img/produits.png" alt="Espace Produits LabFlow : recettes, sous-recettes et coûts de revient calculés" loading="lazy">
-        <div class="shot-caption"><strong>Écran réel&nbsp;:</strong> l'Espace Produits — recettes, sous-recettes et coûts calculés automatiquement.</div>
-      </div>
-    </div>
-    <div class="pilier">
-      <div>
-        <span class="p-tag">Vendre</span>
-        <h3>Vendez partout, au bon prix, avec la marge en face</h3>
-        <p class="p-text">Ventes au comptoir, plateformes de livraison avec leurs commissions, charges fixes&nbsp;: tout entre dans le calcul. Le tableau de bord vous montre votre marge réelle, étage par étage, et votre food cost. Et pour vos clients professionnels, le portail de commande travaille pendant que vous dormez&nbsp;: chacun commande à ses tarifs, la facture fiscale sort toute seule.</p>
-        <ul class="p-points">
-          <li>Marge réelle à 3 étages et food cost, en dinars, au tableau de bord</li>
-          <li>Commission de chaque plateforme de livraison déduite automatiquement</li>
-          <li>Carnet d'acheteurs pros&nbsp;: matricule fiscal, tarifs HT + TVA négociés client par client</li>
-          <li>Factures fiscales automatiques FA-2026-NNNN avec timbre fiscal</li>
-          <li>Portail de commande ouvert 24&nbsp;h/24, suivi en 4 étapes, notification immédiate</li>
-        </ul>
-      </div>
-      <div class="p-visual shot">
-        <div class="shot-bar"><i></i><i></i><i></i></div>
-        <img src="assets/img/portail-catalogue.png" alt="Portail acheteur LabFlow : catalogue aux tarifs négociés de chaque client professionnel" loading="lazy">
-        <div class="shot-caption"><strong>Écran réel&nbsp;:</strong> le portail vu par un acheteur — son catalogue, à ses tarifs négociés.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5. MODULES -->
+<!-- 3. LES MODULES (clair) -->
 <section id="fonctionnalites">
   <div class="container">
-    <div class="kicker">Le produit en images</div>
-    <h2>Six écrans qui changent vos journées</h2>
-    <p class="sec-intro">Pas d'illustrations génériques&nbsp;: chaque bloc recevra une capture réelle du logiciel, annotée, issue du compte démo.</p>
-    <div class="mod-grid">
-      <div class="mod"><div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><img src="assets/img/dashboard-ventes.png" alt="Analyse des ventes et marges LabFlow" loading="lazy"><div class="shot-caption">Ventes &amp; marges sur le mois — ce qui reste vraiment, charges et commissions déduites.</div></div><h3>Tableau de bord</h3><p>Votre journée en un coup d'œil&nbsp;: ventes, coûts, marge — en dinars, pas en pourcentages abstraits.</p></div>
-      <div class="mod"><div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><img src="assets/img/produits.png" alt="Fiches techniques et recettes LabFlow" loading="lazy"><div class="shot-caption">Recettes et coûts de revient — mis à jour dès que vos prix d'achat bougent.</div></div><h3>Fiches techniques</h3><p>Le coût exact de chaque recette — du mille-feuille au plat du jour — recalculé à chaque hausse des prix, sous-recettes comprises.</p></div>
-      <div class="mod"><div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><img src="assets/img/pertes.png" alt="Historique des pertes valorisées en dinars dans LabFlow" loading="lazy"><div class="shot-caption">L'historique des pertes du mois — chiffrées en DT, pas devinées.</div></div><h3>Stock &amp; pertes</h3><p>Chaque avarie a un prix. Vous savez enfin combien vous coûte la poubelle.</p></div>
-      <div class="mod"><div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><img src="assets/img/transferts.png" alt="Historique des transferts labo vers points de vente dans LabFlow" loading="lazy"><div class="shot-caption">Les transferts labo → points de vente, valorisés, avec facture générée.</div></div><h3>Labo &amp; transferts</h3><p>Vous lancez la production, LabFlow déduit les ingrédients et chiffre ce que ça vous a coûté.</p></div>
-      <div class="mod"><div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><img src="assets/img/portail-commandes.png" alt="Suivi de commande sur le portail acheteur LabFlow" loading="lazy"><div class="shot-caption">Le suivi de commande côté acheteur — votre client commande sans vous appeler.</div></div><h3>Portail acheteurs B2B</h3><p>Vos clients pros commandent seuls, à leurs tarifs, même à 22&nbsp;h. Vous êtes prévenu aussitôt.</p></div>
-      <div class="mod"><div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><img src="assets/img/commandes-b2b.png" alt="Commandes B2B et factures fiscales dans LabFlow" loading="lazy"><div class="shot-caption">Les commandes B2B et leurs factures fiscales FA-2026-… avec timbre fiscal.</div></div><h3>Factures &amp; exports</h3><p>Factures fiscales numérotées avec timbre fiscal, exports Excel avec votre logo. Votre comptable vous dira merci — <a href="#preuves">téléchargez des exemples</a>.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 6. PERSONAS -->
-<section class="alt" id="pourqui">
-  <div class="container">
-    <div class="kicker">Pour qui&nbsp;?</div>
-    <h2>Tous les métiers de bouche, un même outil</h2>
-    <p class="sec-intro">Restaurant, café, bar, pâtisserie, boulangerie, boucherie, traiteur, dépôt&nbsp;: si vous achetez de la marchandise, la transformez ou la revendez, LabFlow parle votre langue.</p>
-    <div class="persona-grid">
-      <div class="persona"><div class="who">Restaurant, café, bar</div><h3>Le menu à son vrai prix</h3><p>Chaque plat, chaque boisson a sa fiche et son coût. Les commissions des plateformes de livraison et vos charges fixes entrent dans le calcul&nbsp;: vous voyez la marge réelle de chaque canal, service après service.</p></div>
-      <div class="persona"><div class="who">Pâtisserie, boulangerie</div><h3>Une vitrine pleine ne garantit pas la fin du mois</h3><p>Vos boutiques enregistrent leurs achats et leurs ventes, LabFlow calcule le reste&nbsp;: stock du jour en dinars, pertes chiffrées, marge par produit. Vous passez à la boutique, vous ouvrez le tableau de bord, vous savez.</p></div>
-      <div class="persona"><div class="who">Traiteur</div><h3>Un prix juste avant de dire oui</h3><p>Un buffet pour deux cents personnes&nbsp;? Vos fiches techniques donnent le coût de revient exact, mis à jour aux derniers prix d'achat. Vous annoncez votre prix en connaissance de cause — et vous gardez votre marge.</p></div>
-      <div class="persona"><div class="who">Boucherie, commerce alimentaire</div><h3>La marchandise sous contrôle</h3><p>Achats tracés au prix près, pertes et invendus chiffrés en dinars, inventaires rapides, seuils d'alerte avant la rupture. Votre marge se défend au comptoir, pas sur un cahier.</p></div>
-      <div class="persona"><div class="who">Labo / cuisine centrale + points de vente</div><h3>Le labo produit, vous voyez tout</h3><p>Le labo a son stock, chaque point de vente a le sien. Chaque production déduit les ingrédients, chaque transfert est valorisé avec sa facture. Plus de flou entre l'atelier et les caisses.</p></div>
-      <div class="persona"><div class="who">Dépôt — vente aux professionnels</div><h3>Vos acheteurs commandent seuls</h3><p>Cafés, hôtels, restaurants, revendeurs&nbsp;: chacun a ses tarifs négociés et son accès au portail. Ils commandent 24&nbsp;h/24, vous recevez une notification, la facture fiscale sort automatiquement. Et le compte dépôt existe aussi sans point de vente, 100&nbsp;% B2B.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 7. DÉMO -->
-<section id="demo">
-  <div class="container">
-    <div class="kicker">La preuve par l'écran</div>
-    <h2>Voyez LabFlow tourner, écran par écran</h2>
-    <p class="sec-intro">Une vraie journée dans LabFlow&nbsp;: le stock qui entre avec son prix, la production qui déduit les ingrédients toute seule, la commande qui tombe depuis le portail acheteurs, et la marge qui s'affiche au tableau de bord. Pas de discours&nbsp;: de vrais écrans. Et si vous préférez une visite guidée en direct, un conseiller vous la fait par téléphone ou WhatsApp.</p>
-    <div class="shot" style="max-width:880px; margin:0 auto;">
-      <div class="shot-bar"><i></i><i></i><i></i></div>
-      <img id="demo-slide" src="assets/img/dashboard.png" alt="Visite guidée LabFlow en images" style="transition:opacity 0.35s">
-      <div class="shot-caption" style="display:flex; align-items:center; gap:12px;">
-        <span id="demo-caption" style="flex:1"><strong>1/5</strong> — Le tableau de bord&nbsp;: CA, marge et food cost du mois, en dinars.</span>
-        <button type="button" id="demo-prev" aria-label="Écran précédent" style="border:1px solid var(--line); background:var(--card); border-radius:8px; padding:4px 12px; cursor:pointer; font-size:0.9rem;">←</button>
-        <button type="button" id="demo-next" aria-label="Écran suivant" style="border:1px solid var(--line); background:var(--card); border-radius:8px; padding:4px 12px; cursor:pointer; font-size:0.9rem;">→</button>
+    <div class="kicker rev">Le système</div>
+    <h2 class="rev">Tout ce qu'il vous faut. Rien de plus.</h2>
+    <p class="sec-intro rev">Quatre espaces simples, reliés entre eux. Les écrans ci-dessous sont réels, issus du compte de démonstration.</p>
+    <div class="modules-grid">
+      <div class="tuile module-card rev">
+        <h3>Stocks &amp; pertes</h3>
+        <p>Chaque point de vente et chaque labo a son stock, valorisé en dinars jour après jour. La casse est chiffrée, pas devinée, et vous êtes alerté avant la rupture.</p>
+        <div class="shot"><div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
+          <picture>
+            <source type="image/avif" srcset="assets/img/stock-valeur@1x.avif 1x, assets/img/stock-valeur@2x.avif 2x">
+            <img src="assets/img/stock-valeur@1x.webp" srcset="assets/img/stock-valeur@1x.webp 1x, assets/img/stock-valeur@2x.webp 2x" width="720" height="374" alt="Stock du jour valorisé : stock actuel, coût total HT et TTC par article" loading="lazy">
+          </picture>
+        </div>
+      </div>
+      <div class="tuile module-card rev rev-2">
+        <h3>Recettes &amp; production</h3>
+        <p>Vos recettes avec leurs sous-recettes, et le coût exact de chacune, recalculé à chaque changement de prix. Vous lancez une production&nbsp;: les ingrédients se déduisent tout seuls.</p>
+        <div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div>
+          <picture>
+            <source type="image/avif" srcset="assets/img/ft-arbre@1x.avif 1x, assets/img/ft-arbre@2x.avif 2x">
+            <img src="assets/img/ft-arbre@1x.webp" srcset="assets/img/ft-arbre@1x.webp 1x, assets/img/ft-arbre@2x.webp 2x" width="460" height="486" alt="Fiche technique du mille-feuille : arbre de recette avec sous-recettes et coût en temps réel de 1,494 DT" loading="lazy">
+          </picture>
+        </div>
+      </div>
+      <div class="tuile module-card rev">
+        <h3>Ventes &amp; marges</h3>
+        <p>Comptoir, plateformes de livraison, charges fixes&nbsp;: tout entre dans le calcul. Vous voyez ce qui vous reste vraiment, canal par canal.</p>
+        <div class="shot"><div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
+          <picture>
+            <source type="image/avif" srcset="assets/img/ventes-canaux@1x.avif 1x, assets/img/ventes-canaux@2x.avif 2x">
+            <img src="assets/img/ventes-canaux@1x.webp" srcset="assets/img/ventes-canaux@1x.webp 1x, assets/img/ventes-canaux@2x.webp 2x" width="640" height="221" alt="Du chiffre d'affaires à la marge nette : marges par canal de vente, commissions des livreurs déduites" loading="lazy">
+          </picture>
+        </div>
+      </div>
+      <div class="tuile module-card rev rev-2">
+        <h3>Commandes pros &amp; factures</h3>
+        <p>Vos clients professionnels commandent seuls sur leur portail, à leurs tarifs. La facture fiscale sort toute seule, timbre compris.</p>
+        <div class="shot"><div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
+          <picture>
+            <source type="image/avif" srcset="assets/img/portail-catalogue@1x.avif 1x, assets/img/portail-catalogue@2x.avif 2x">
+            <img src="assets/img/portail-catalogue@1x.webp" srcset="assets/img/portail-catalogue@1x.webp 1x, assets/img/portail-catalogue@2x.webp 2x" width="1100" height="688" alt="Portail de commande B2B : le catalogue d'un client professionnel à ses tarifs négociés" loading="lazy">
+          </picture>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 8. PREUVES -->
-<section class="alt">
+<!-- 4. MÉTIERS + PREUVES (clair, compact) -->
+<section id="pourqui" style="padding-top:0">
   <div class="container">
-    <div class="kicker">Jugez sur pièces</div>
-    <h2>Pas de faux compteurs de clients. Des preuves qui se téléchargent.</h2>
-    <p class="sec-intro">LabFlow se lance. Nous n'allons pas vous raconter que «&nbsp;500 clients nous font confiance&nbsp;» — ce serait faux, et vous le sentiriez. À la place, jugez sur pièces&nbsp;: téléchargez des fichiers produits par le logiciel, tels que vos équipes les utiliseront (données anonymisées). L'étude de cas de notre client pilote est disponible sur demande, et les premiers comptes portent le badge early-adopter, avec des conditions particulières négociées au contrat.</p>
-    <div class="proof-grid" id="preuves">
-      <div class="proof"><span class="ic">📊</span><p><strong>Export Excel des approvisionnements</strong> du labo de démonstration, à la charte LabFlow.</p><a href="assets/files/export-excel-exemple.xlsx" download>Télécharger l'exemple →</a></div>
-      <div class="proof"><span class="ic">🧾</span><p><strong>Facture fiscale d'acheteur pro</strong> du compte de démonstration, numérotée FA-2026-…, avec timbre fiscal.</p><a href="assets/files/facture-acheteur-exemple.pdf" download>Télécharger l'exemple →</a></div>
-      <div class="proof"><span class="ic">🚚</span><p><strong>Export Excel des transferts labo → points de vente</strong>, valorisés ligne par ligne.</p><a href="assets/files/export-transferts-exemple.xlsx" download>Télécharger l'exemple →</a></div>
+    <div class="kicker rev">Pour qui&nbsp;?</div>
+    <h2 class="rev">Pensé pour tous les métiers de bouche</h2>
+    <p class="sec-intro rev">Un plat, un gâteau, un sandwich ou une découpe&nbsp;: si vous achetez de la marchandise, que vous la transformez et que vous la vendez, LabFlow est fait pour vous.</p>
+    <div class="metier-pills rev" aria-label="Métiers couverts par LabFlow">
+      <span>Restaurant</span><span>Café &amp; salon de thé</span><span>Boucherie</span><span>Boulangerie</span><span>Pâtisserie</span><span>Traiteur</span><span>Dépôt &amp; grossiste</span>
     </div>
-    <p style="font-size:0.78rem; color:var(--ink-faint); margin-top:14px;">Fichiers issus du compte de démonstration «&nbsp;Dar Yasmine&nbsp;» — données fictives, générées par LabFlow.</p>
   </div>
 </section>
 
-<!-- 9. TARIFS + CALCULATEUR -->
-<section id="tarifs">
+<section id="preuves" style="padding-top:0">
   <div class="container">
-    <div class="kicker">Tarifs</div>
-    <h2>Des tarifs en dinars, clairs dès le départ</h2>
-    <p class="sec-intro">Trois packs, selon votre organisation. À l'ouverture, la mise en route est un service unique à partir de 500&nbsp;DT (700&nbsp;DT avec labo)&nbsp;: paramétrage complet et formation, vous recevez un compte prêt à travailler.</p>
+    <div class="kicker rev">Rien de maquillé</div>
+    <h2 class="rev">Téléchargez ce que LabFlow produit vraiment</h2>
+    <div class="preuves-grid">
+      <a class="fichier rev" href="assets/files/facture-acheteur-exemple.pdf" download>
+        <span class="type pdf">PDF</span>
+        <b>Facture acheteur</b>
+        <p>Facture fiscale numérotée, TVA détaillée, timbre fiscal — telle que la reçoit votre client pro.</p>
+        <span class="poids">facture-acheteur-exemple.pdf · 10 Ko</span>
+      </a>
+      <a class="fichier rev rev-2" href="assets/files/export-excel-exemple.xlsx" download>
+        <span class="type xls">XLSX</span>
+        <b>Export d'historique</b>
+        <p>L'historique des approvisionnements du labo, en Excel, avec le logo de l'entreprise en en-tête.</p>
+        <span class="poids">export-excel-exemple.xlsx · 58 Ko</span>
+      </a>
+      <a class="fichier rev rev-3" href="assets/files/export-transferts-exemple.xlsx" download>
+        <span class="type xls">XLSX</span>
+        <b>Export des transferts</b>
+        <p>Les transferts labo → points de vente, valorisés, prêts pour votre comptable.</p>
+        <span class="poids">export-transferts-exemple.xlsx</span>
+      </a>
+    </div>
+    <div class="encart-honnete rev">💡<span>Toutes les captures de ce site sortent d'un compte de démonstration réel, montants en dinars. Aucun chiffre client inventé.</span></div>
+    <div class="partenaires-row" id="partenaires" style="display:none" aria-label="Ils utilisent LabFlow"></div>
+  </div>
+</section>
+
+<!-- 5. TARIFS (teaser) -->
+<section id="tarifs" style="padding-top:0">
+  <div class="container">
+    <div class="kicker rev">Tarifs de référence</div>
+    <h2 class="rev">Vous payez pour ce que vous utilisez</h2>
+    <p class="sec-intro rev">Trois configurations types, en dinars. Votre mensualité exacte se compose selon vos sites — <a href="tarifs.html#calculateur">estimez-la en 1 minute sur la page Tarifs</a>.</p>
     <div class="packs">
-      <div class="pack">
-        <h3>Point de vente</h3><div class="for">Restaurant, café, boutique… sans laboratoire</div>
-        <div class="price">dès 150 DT<small>/mois</small></div>
-        <ul><li>Stock quotidien valorisé et ventes</li><li>Pertes chiffrées, inventaires, historiques Excel</li><li>Formule Premium (+ fiches techniques et production)&nbsp;: dès 200 DT</li><li>Dégressif&nbsp;: −20&nbsp;% le 2ᵉ point de vente, −40&nbsp;% dès le 3ᵉ</li></ul>
+      <div class="tuile pack rev">
+        <h3>Point de vente</h3>
+        <div class="prix">dès 150 <small>DT/mois</small></div>
+        <p>Restaurant, café, boutique&nbsp;: stocks, pertes, ventes et marge réelle.</p>
       </div>
-      <div class="pack featured">
-        <span class="badge">Le plus choisi</span>
-        <h3>Labo &amp; points de vente</h3><div class="for">Labo ou cuisine centrale + points de vente</div>
-        <div class="price">ex. 440 DT<small>/mois — 1 labo + 2 points de vente</small></div>
-        <ul><li>Labo à 160 DT/mois, tous vos points de vente à −30&nbsp;%</li><li>Production, coûts de revient, transferts valorisés</li><li>Fiches techniques incluses dès qu'il y a un labo</li><li>Option portail acheteurs B2B</li></ul>
+      <div class="tuile pack vedette rev rev-2">
+        <h3>Labo &amp; points de vente</h3>
+        <div class="prix">ex. 440 <small>DT/mois — 1 labo + 2 points de vente</small></div>
+        <p>Cuisine centrale ou labo + boutiques&nbsp;: recettes, production, transferts — le système complet.</p>
       </div>
-      <div class="pack">
-        <h3>Dépôt B2B</h3><div class="for">Labo seul, vente 100&nbsp;% professionnelle</div>
-        <div class="price">dès 210 DT<small>/mois — labo + 10 acheteurs</small></div>
-        <ul><li>Production et stock labo</li><li>Carnet d'acheteurs + portail de commande</li><li>Factures fiscales automatiques, timbre compris</li><li>Paliers&nbsp;: 10 = 50 DT · 20 = 90 DT · 50 = 150 DT · 100 = 220 DT</li></ul>
+      <div class="tuile pack rev rev-3">
+        <h3>Dépôt B2B</h3>
+        <div class="prix">dès 210 <small>DT/mois</small></div>
+        <p>Grossiste ou dépôt&nbsp;: portail de commande et factures fiscales.</p>
       </div>
     </div>
-
-    <div class="calc" id="calculateur">
-      <div class="calc-head"><h3>Estimer mon tarif en 1 minute</h3><p>Composez votre configuration — l'estimation s'affiche en direct, en dinars.</p></div>
-      <div class="calc-body">
-        <div class="calc-controls">
-          <div class="ctrl">
-            <label>Points de vente<span class="hint">Restaurant, café, boutique… 0 = dépôt 100&nbsp;% B2B</span></label>
-            <div class="stepper"><button type="button" aria-label="Moins de points de vente" onclick="chg('act',-1)">−</button><span class="val" id="v-act">1</span><button type="button" aria-label="Plus de points de vente" onclick="chg('act',1)">+</button></div>
-          </div>
-          <div class="ctrl" id="row-formule">
-            <label>Formule des points de vente<span class="hint" id="hint-formule">Premium ajoute fiches techniques et production</span></label>
-            <div class="seg">
-              <button type="button" id="f-basique" onclick="setFormule('basique')">Basique — 150 DT</button>
-              <button type="button" id="f-premium" class="on" onclick="setFormule('premium')">Premium — 200 DT</button>
-            </div>
-          </div>
-          <div class="ctrl">
-            <label>Laboratoire(s) de production<span class="hint">Le labo passe tous vos points de vente à −30&nbsp;% et inclut les fiches techniques</span></label>
-            <div class="stepper"><button type="button" aria-label="Moins de labos" onclick="chg('lab',-1)">−</button><span class="val" id="v-lab">0</span><button type="button" aria-label="Plus de labos" onclick="chg('lab',1)">+</button></div>
-          </div>
-          <div class="ctrl">
-            <label>Gérants supplémentaires<span class="hint">Comptes délégués à périmètre limité</span></label>
-            <div class="stepper"><button type="button" aria-label="Moins de gérants" onclick="chg('ger',-1)">−</button><span class="val" id="v-ger">0</span><button type="button" aria-label="Plus de gérants" onclick="chg('ger',1)">+</button></div>
-          </div>
-          <div class="ctrl">
-            <label>Acheteurs professionnels (portail B2B)<span class="hint" id="hint-ach">Nécessite au moins un laboratoire</span></label>
-            <div class="seg" id="seg-ach">
-              <button type="button" data-p="0" class="on" onclick="setPalier(0)">Sans</button>
-              <button type="button" data-p="10" onclick="setPalier(10)">≤ 10</button>
-              <button type="button" data-p="20" onclick="setPalier(20)">≤ 20</button>
-              <button type="button" data-p="50" onclick="setPalier(50)">≤ 50</button>
-              <button type="button" data-p="100" onclick="setPalier(100)">≤ 100</button>
-            </div>
-          </div>
-        </div>
-        <div class="calc-result">
-          <div id="calc-warn" class="calc-note" style="display:none"></div>
-          <div id="calc-ok">
-            <div style="font-size:0.76rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-faint); margin-bottom:6px">Votre mensualité estimée</div>
-            <div class="calc-total"><span id="total">200</span> DT <small>/mois</small></div>
-            <div class="calc-detail" id="detail" style="margin-top:14px"></div>
-            <div class="calc-ob" id="ob"></div>
-          </div>
-          <div class="calc-disclaimer">Tarifs de référence en dinars tunisiens — devis personnalisé établi au contrat.</div>
-          <div class="calc-cta"><a class="btn small" id="calc-go" href="demande-acces.html">Demander un accès avec cette configuration</a></div>
-        </div>
-      </div>
+    <div class="rev" style="text-align:center; margin-top:8px">
+      <a class="btn" href="tarifs.html#calculateur" style="background:var(--surface); color:var(--indigo); border:1.5px solid var(--border-sable); box-shadow:var(--ombre-douce)">Estimer ma mensualité →</a>
     </div>
   </div>
 </section>
 
-<!-- 10. ACCOMPAGNEMENT -->
-<section class="alt" id="accompagnement">
+<!-- 6. FAQ -->
+<section id="faq" style="padding-top:0">
   <div class="container">
-    <div class="kicker">Comment on démarre</div>
-    <h2>On ne vous laisse pas seul avec un logiciel</h2>
-    <p class="sec-intro">Pas de compte à créer tout seul, pas de carte bancaire, pas de page vide. De la première prise de contact à votre premier jour de travail, une équipe s'occupe de tout.</p>
-    <ol class="steps">
-      <li><h3>Vous demandez un accès</h3><p>Un formulaire de deux minutes&nbsp;: votre activité, vos coordonnées. Aucun engagement, aucun paiement.</p></li>
-      <li><h3>Un conseiller vous répond sous 24&nbsp;h</h3><p>Par téléphone ou WhatsApp, il écoute votre organisation — combien de points de vente, un labo ou pas, des clients professionnels ou pas — et vous remet un devis clair, en dinars.</p></li>
-      <li><h3>Vous signez un contrat clair</h3><p>Tout est écrit noir sur blanc&nbsp;: formules, tarifs, prestations. La signature se fait électroniquement, depuis votre téléphone. Pas d'imprimante, pas de déplacement.</p></li>
-      <li><h3>On prépare votre compte</h3><p>Notre équipe paramètre tout&nbsp;: vos points de vente, votre labo, vos articles — importés d'un coup depuis votre fichier Excel si vous en avez un, avec un modèle fourni. Vous ne démarrez pas devant un écran vide.</p></li>
-      <li><h3>On vous forme, vous démarrez</h3><p>Une formation pour vous et vos équipes, un manuel illustré de 57 fiches intégré à l'application, et un assistant qui répond à vos questions à partir de vos propres chiffres. Dès le premier jour, vous travaillez — et votre conseiller reste joignable sur WhatsApp.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- 11. FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="kicker">Vos questions, sans détour</div>
-    <h2 style="text-align:center">Les questions qu'on nous pose vraiment</h2>
-    <div class="faq-list" style="margin-top:34px">
-      <details><summary>Je ne suis pas à l'aise avec l'informatique. C'est pour moi&nbsp;?</summary><p>Oui, c'est même pensé pour vous. L'application est simple et entièrement en français, pensée pour le comptoir et le labo, pas pour les informaticiens. Surtout, vous n'êtes pas lâché seul&nbsp;: nous paramétrons votre compte, nous formons votre équipe, un manuel illustré de 57 fiches est intégré à l'application, et un assistant répond à vos questions en français, dans l'application ou sur Messenger. Et s'il faut un humain, votre conseiller est sur WhatsApp.</p></details>
-      <details><summary>Y a-t-il un essai gratuit&nbsp;?</summary><p>Non, et c'est voulu. Un compte vide ne vous apprendrait rien&nbsp;: la valeur de LabFlow, c'est vos recettes, vos prix, vos points de vente déjà paramétrés. Pour vous faire une idée avant de vous engager&nbsp;: la démo de 90 secondes, les fichiers exemples à télécharger, et un échange avec un conseiller qui répond à vos questions concrètes — sans engagement.</p></details>
-      <details><summary>Combien ça coûte vraiment&nbsp;?</summary><p>Les tarifs de référence sont publics&nbsp;: un point de vente seul dès 150 DT/mois, un labo avec deux points de vente autour de 440 DT/mois, un dépôt 100&nbsp;% B2B dès 210 DT/mois. S'y ajoute la mise en route unique (à partir de 500 DT, 700 DT avec labo) qui couvre le paramétrage et la formation. Votre prix exact est fixé au devis, puis au contrat&nbsp;: c'est ce document qui fait foi. Pas de frais cachés.</p></details>
-      <details><summary>Comment se passe le paiement&nbsp;?</summary><p>Par mensualité en dinars, avec une facture PDF chaque mois. Aucun paiement par carte en ligne, aucune surprise&nbsp;: les modalités sont fixées noir sur blanc dans votre contrat, signé électroniquement, avant tout paiement.</p></details>
-      <details><summary>J'ai plusieurs points de vente et un labo. Ça suit&nbsp;?</summary><p>C'est le cœur du logiciel. Chaque site a son stock et ses chiffres, les transferts labo vers points de vente sont valorisés avec facture de transfert, et le coût de revient est calculé par site. Vous pouvez déléguer&nbsp;: un gérant supplémentaire (80 DT/mois) ne voit que le périmètre que vous lui confiez, sur simple invitation par email. Et avec un labo, tous vos points de vente bénéficient de −30&nbsp;% sur leur abonnement.</p></details>
-      <details><summary>Mes clients pros doivent-ils installer ou payer quelque chose&nbsp;?</summary><p>Non, rien. Le portail de commande s'ouvre dans le navigateur de leur téléphone ou de leur ordinateur. Chaque acheteur voit votre catalogue à ses tarifs négociés, commande 24&nbsp;h/24 et suit sa commande en 4 étapes. Vous êtes notifié immédiatement, et la facture fiscale se génère automatiquement, timbre fiscal compris.</p></details>
-      <details><summary>Et si je veux récupérer mes chiffres&nbsp;?</summary><p>Vos données restent vos données. Tous les historiques — stocks, achats, pertes, ventes, productions, commandes — sont filtrables et exportables en Excel quand vous voulez, avec votre logo sur chaque fichier. Vos factures sortent en PDF.</p></details>
+    <div class="kicker rev">Questions franches</div>
+    <h2 class="rev">Ce qu'on nous demande avant de signer</h2>
+    <div class="faq-themes">
+      <div class="faq-theme-titre">Démarrage</div>
+      <details class="rev"><summary>Comment se passe la mise en route&nbsp;?</summary><p>Notre équipe paramètre votre compte&nbsp;: sites, catalogue, utilisateurs. Vous recevez un logiciel prêt à travailler, une formation et un manuel intégré. La mise en route est un service facturé une seule fois — son montant figure sur votre devis (détail sur la <a href="tarifs.html">page Tarifs</a>).</p></details>
+      <details class="rev"><summary>Y a-t-il un essai gratuit&nbsp;?</summary><p>Non — et c'est volontaire. Un outil de gestion mal paramétré ne montre rien. Nous vous faisons une démonstration personnalisée sur des cas comme les vôtres, puis votre compte est livré prêt à l'emploi.</p></details>
+      <div class="faq-theme-titre">Fonctionnement</div>
+      <details class="rev"><summary>Faut-il un labo pour utiliser LabFlow&nbsp;?</summary><p>Non. Un seul point de vente suffit pour les stocks, les ventes et la marge. Le labo ajoute la production, les fiches techniques avec sous-recettes et les transferts valorisés. Le portail B2B, lui, nécessite un labo.</p></details>
+      <details class="rev"><summary>Mes gérants peuvent-ils avoir un accès limité&nbsp;?</summary><p>Oui. Chaque gérant est affecté à ses activités ou labos et ne voit que son périmètre. Vous gardez la vue d'ensemble.</p></details>
+      <div class="faq-theme-titre">Vos données</div>
+      <details class="rev"><summary>Et si je veux récupérer mes chiffres&nbsp;?</summary><p>Vos données restent vos données. Tous les historiques — stocks, achats, pertes, ventes, productions, commandes — sont filtrables et exportables en Excel quand vous voulez, avec votre logo sur chaque fichier. Vos factures sortent en PDF.</p></details>
+      <details class="rev"><summary>Le portail B2B, comment mes clients y accèdent&nbsp;?</summary><p>Vous les invitez par email. Chacun se connecte à son portail, voit son catalogue à ses tarifs négociés et commande 24&nbsp;h/24. Chaque commande est suivie pas à pas et vous êtes notifié immédiatement.</p></details>
+      <div class="faq-theme-titre">Tarifs</div>
+      <details class="rev"><summary>Les prix affichés sont-ils définitifs&nbsp;?</summary><p>Ce sont des tarifs de référence. Chaque compte reçoit un devis personnalisé au contrat, selon vos sites, votre labo et votre carnet d'acheteurs. Pas de frais cachés.</p></details>
+      <details class="rev"><summary>Suis-je engagé sur la durée&nbsp;?</summary><p>L'abonnement est mensuel. Les conditions précises — durée, préavis — sont écrites noir sur blanc dans votre contrat, avant toute mise en route.</p></details>
     </div>
   </div>
 </section>
 
-<!-- 12. CTA FINAL -->
-<section class="final" id="cta">
+<!-- 7. CTA FINAL -->
+<div class="zone-nuit cta-final" data-zone="nuit" id="cta">
+  <div class="fond-bento" aria-hidden="true"></div>
   <div class="container">
-    <h2>Vous faites déjà le plus dur. Laissez les chiffres à LabFlow.</h2>
-    <p>Demandez un accès aujourd'hui&nbsp;: un conseiller vous recontacte sous 24&nbsp;h pour comprendre votre organisation et vous proposer un devis en dinars. Vous décidez ensuite, tranquillement — rien ne se passe sans votre signature.</p>
-    <a class="btn" href="demande-acces.html">Demander un accès</a>
-    <div class="reassure">
-      <span>Réponse sous 24&nbsp;h</span>
-      <span>Échange sans engagement</span>
-      <span>Aucun paiement en ligne — le contrat se signe avant tout</span>
-      <span>Ou parlez à un conseiller sur WhatsApp</span>
-    </div>
+    <svg style="width:64px;height:64px;margin:0 auto 22px;display:block" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+    <h2 class="rev">Votre système vous attend.</h2>
+    <p class="sous rev">Racontez-nous votre labo, vos points de vente, vos clients pros. Un conseiller vous répond sous 24&nbsp;h — un humain, pas un robot.</p>
+    <a class="btn rev" href="demande-acces.html" style="font-size:1.1rem; padding:17px 38px">Demander un accès</a>
+    <div class="reassurances rev"><span>Réponse sous 24&nbsp;h</span><span>Démonstration personnalisée</span><span>Compte livré prêt à travailler</span></div>
   </div>
-</section>
+</div>
 
 <footer>
   <div class="container foot">
@@ -710,150 +312,84 @@
 <div class="sticky-cta"><a class="btn" href="demande-acces.html">Demander un accès</a></div>
 
 <script>
-  var state = { act: 1, formule: 'premium', lab: 0, ger: 0, palier: 0 };
-  var PRIX = { basique: 150, premium: 200, labo: 160, gerant: 80, paliers: { 0: 0, 10: 50, 20: 90, 50: 150, 100: 220 } };
-  var REM = { r2: 20, r3: 40, rl: 30 };
-  var OB = { sans: 500, avec: 700 };
+var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function chg(k, d) {
-    if (k === 'act') state.act = Math.max(0, Math.min(6, state.act + d));
-    if (k === 'lab') state.lab = Math.max(0, Math.min(3, state.lab + d));
-    if (k === 'ger') state.ger = Math.max(0, Math.min(6, state.ger + d));
-    if (state.lab === 0) state.palier = 0;
-    render();
-  }
-  function setFormule(f) { state.formule = f; render(); }
-  function setPalier(p) { if (state.lab === 0 && p > 0) return; state.palier = p; render(); }
-
-  function coutActivites() {
-    var base = state.formule === 'basique' ? PRIX.basique : PRIX.premium;
-    var n = state.act;
-    if (n === 0) return 0;
-    if (state.lab > 0) return Math.round(n * base * (1 - REM.rl / 100));
-    var t = base;
-    if (n >= 2) t += base * (1 - REM.r2 / 100);
-    if (n >= 3) t += (n - 2) * base * (1 - REM.r3 / 100);
-    return Math.round(t);
-  }
-
-  function render() {
-    document.getElementById('v-act').textContent = state.act;
-    document.getElementById('v-lab').textContent = state.lab;
-    document.getElementById('v-ger').textContent = state.ger;
-
-    document.getElementById('row-formule').style.display = state.act > 0 ? '' : 'none';
-    document.getElementById('f-basique').classList.toggle('on', state.formule === 'basique');
-    document.getElementById('f-premium').classList.toggle('on', state.formule === 'premium');
-    document.getElementById('hint-formule').textContent = (state.lab > 0 && state.formule === 'basique')
-      ? 'Avec un labo, les fiches techniques sont incluses même en Basique'
-      : 'Premium ajoute fiches techniques et production';
-
-    var segBtns = document.querySelectorAll('#seg-ach button');
-    segBtns.forEach(function (b) {
-      var p = parseInt(b.getAttribute('data-p'), 10);
-      b.disabled = state.lab === 0 && p > 0;
-      b.classList.toggle('on', p === state.palier);
-    });
-    document.getElementById('hint-ach').textContent = state.lab === 0
-      ? 'Nécessite au moins un laboratoire' : 'Palier selon la taille de votre carnet';
-
-    var warn = document.getElementById('calc-warn');
-    var ok = document.getElementById('calc-ok');
-    if (state.act === 0 && (state.lab === 0 || state.palier === 0)) {
-      warn.style.display = '';
-      warn.textContent = 'Un compte sans point de vente est un dépôt 100 % B2B : ajoutez un laboratoire et un palier d\'acheteurs pour voir votre estimation.';
-      ok.style.display = 'none';
-      return;
-    }
-    warn.style.display = 'none';
-    ok.style.display = '';
-
-    var a = coutActivites();
-    var l = state.lab * PRIX.labo;
-    var g = state.ger * PRIX.gerant;
-    var b = PRIX.paliers[state.palier] || 0;
-    var total = a + l + g + b;
-    document.getElementById('total').textContent = total.toLocaleString('fr-FR');
-
-    var lignes = [];
-    if (state.act > 0) lignes.push(['Points de vente (' + state.act + ' × ' + (state.formule === 'basique' ? 'Basique' : 'Premium') + (state.lab > 0 ? ', −' + REM.rl + ' %' : '') + ')', a]);
-    if (state.lab > 0) lignes.push(['Laboratoire' + (state.lab > 1 ? 's' : '') + ' (' + state.lab + ' × ' + PRIX.labo + ' DT)', l]);
-    if (state.ger > 0) lignes.push(['Gérants (' + state.ger + ' × ' + PRIX.gerant + ' DT)', g]);
-    if (b > 0) lignes.push(['Portail acheteurs (jusqu\'à ' + state.palier + ')', b]);
-    document.getElementById('detail').innerHTML = lignes.map(function (x) {
-      return '<div><span>' + x[0] + '</span><b>' + x[1].toLocaleString('fr-FR') + ' DT</b></div>';
-    }).join('');
-
-    document.getElementById('ob').textContent = 'Mise en route (une seule fois) : à partir de ' + (state.lab > 0 ? OB.avec : OB.sans) + ' DT — paramétrage + formation.';
-    document.getElementById('f-basique').textContent = 'Basique — ' + PRIX.basique + ' DT';
-    document.getElementById('f-premium').textContent = 'Premium — ' + PRIX.premium + ' DT';
-  }
-  render();
-
-  // ── API du produit (partenaires + tarifs de référence) ─────────────────────
-  var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-    ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
-
-  // Tarifs réels (transparence encadrée) : le calculateur se met à jour depuis la grille runtime
-  fetch(API + '/api/public/tarifs-reference').then(function (r) { return r.ok ? r.json() : null; }).then(function (t) {
-    if (!t) return;
-    if (t.prix_base_activite_basique) PRIX.basique = Number(t.prix_base_activite_basique);
-    if (t.prix_base_activite_premium) PRIX.premium = Number(t.prix_base_activite_premium);
-    if (t.labo_sup_mensuel) PRIX.labo = Number(t.labo_sup_mensuel);
-    if (t.gerant_sup_mensuel) PRIX.gerant = Number(t.gerant_sup_mensuel);
-    if (t.remise_2eme_sans_labo != null) REM.r2 = Number(t.remise_2eme_sans_labo);
-    if (t.remise_3eme_plus_sans_labo != null) REM.r3 = Number(t.remise_3eme_plus_sans_labo);
-    if (t.remise_avec_labo != null) REM.rl = Number(t.remise_avec_labo);
-    if (t.onboarding_sans_labo) OB.sans = Number(t.onboarding_sans_labo);
-    if (t.onboarding_avec_labo) OB.avec = Number(t.onboarding_avec_labo);
-    [10, 20, 50, 100].forEach(function (p) { if (t['acheteurs_palier_' + p]) PRIX.paliers[p] = Number(t['acheteurs_palier_' + p]); });
-    render();
-  }).catch(function () {});
-
-  // Partenaires : logos des clients activés par l'admin — section masquée si vide
-  fetch(API + '/api/public/partenaires').then(function (r) { return r.ok ? r.json() : []; }).then(function (list) {
-    if (!Array.isArray(list) || list.length === 0) return;
-    var track = document.getElementById('partners-track');
-    var tile = function (p, dup) {
-      var d = document.createElement('div');
-      d.className = 'plogo' + (dup ? ' dup' : '');
-      d.innerHTML = '<img src="' + p.logo + '" alt="' + p.nom.replace(/"/g, '&quot;') + '" style="max-height:44px; max-width:130px; object-fit:contain"><span class="pn">' + p.nom.replace(/</g, '&lt;') + '</span>';
-      return d;
-    };
-    list.forEach(function (p) { track.appendChild(tile(p, false)); });
-    list.forEach(function (p) { track.appendChild(tile(p, true)); });
-    document.getElementById('partenaires').style.display = '';
-  }).catch(function () {});
-
-  // Visite guidée : diaporama des écrans réels
-  var SLIDES = [
-    ['dashboard.png', 'Le tableau de bord : CA, marge et food cost du mois, en dinars.'],
-    ['stock.png', 'Le stock du jour d\'un point de vente, valorisé au dinar près.'],
-    ['produits.png', 'Les recettes et leurs coûts de revient, recalculés automatiquement.'],
-    ['transferts.png', 'Les transferts labo → points de vente, valorisés et facturés.'],
-    ['portail-catalogue.png', 'Le portail où vos clients pros commandent seuls, à leurs tarifs.'],
-  ];
-  var slideIdx = 0, slideImg = document.getElementById('demo-slide'), slideCap = document.getElementById('demo-caption');
-  function showSlide(i) {
-    slideIdx = (i + SLIDES.length) % SLIDES.length;
-    slideImg.style.opacity = '0';
-    setTimeout(function () {
-      slideImg.src = 'assets/img/' + SLIDES[slideIdx][0];
-      slideCap.innerHTML = '<strong>' + (slideIdx + 1) + '/' + SLIDES.length + '</strong> — ' + SLIDES[slideIdx][1];
-      slideImg.style.opacity = '1';
-    }, 200);
-  }
-  document.getElementById('demo-prev').addEventListener('click', function () { showSlide(slideIdx - 1); clearInterval(slideTimer); });
-  document.getElementById('demo-next').addEventListener('click', function () { showSlide(slideIdx + 1); clearInterval(slideTimer); });
-  var slideTimer = null;
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    slideTimer = setInterval(function () { showSlide(slideIdx + 1); }, 5000);
-  }
-
-  // Le CTA du calculateur emporte la configuration vers le formulaire de demande
-  document.getElementById('calc-go').addEventListener('click', function () {
-    try { localStorage.setItem('lf_calc', JSON.stringify(state)); } catch (e) {}
+/* ── Menu mobile ── */
+var burger = document.getElementById('nav-burger');
+if (burger) {
+  var liens = document.getElementById('nav-links');
+  burger.addEventListener('click', function () {
+    var ouvert = liens.classList.toggle('ouvert');
+    burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+    burger.textContent = ouvert ? '✕' : '☰';
   });
+  liens.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { liens.classList.remove('ouvert'); burger.setAttribute('aria-expanded', 'false'); burger.textContent = '☰'; }
+  });
+}
+
+/* ── Header : trait au scroll + bascule sombre sur les zones nuit ── */
+var topnav = document.getElementById('topnav');
+addEventListener('scroll', function () { topnav.classList.toggle('scrolled', scrollY > 8); }, { passive: true });
+(function () {
+  var zones = document.querySelectorAll('[data-zone="nuit"]');
+  var etats = new Map();
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { etats.set(e.target, e.isIntersecting); });
+    var on = false; etats.forEach(function (v) { if (v) on = true; });
+    topnav.classList.toggle('sombre', on);
+  }, { rootMargin: '-32px 0px -94% 0px', threshold: 0 });
+  zones.forEach(function (z) { io.observe(z); });
+})();
+
+/* ── Révélations + cascade (count-up) ── */
+function countUp(el) {
+  var spec = (el.getAttribute('data-count') || '').split('|');
+  var de = parseFloat(spec[0]), a = parseFloat(spec[1]), dec = parseInt(spec[2] || '0', 10);
+  if (RM) { el.textContent = a.toFixed(dec).replace('.', ','); return; }
+  var t0 = null;
+  function pas(t) {
+    if (!t0) t0 = t;
+    var p = Math.min(1, (t - t0) / 900);
+    var v = de + (a - de) * (1 - Math.pow(1 - p, 3));
+    el.textContent = v.toFixed(dec).replace('.', ',');
+    if (p < 1) requestAnimationFrame(pas);
+  }
+  requestAnimationFrame(pas);
+}
+var io = new IntersectionObserver(function (es) {
+  es.forEach(function (e) {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    io.unobserve(e.target);
+    if (e.target.id === 'cascade') {
+      var ms = e.target.querySelectorAll('.maillon');
+      ms.forEach(function (m, i) {
+        setTimeout(function () {
+          m.classList.add('allume');
+          var c = m.querySelector('[data-count]');
+          if (c) countUp(c);
+        }, RM ? 0 : i * 600);
+      });
+    }
+  });
+}, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+document.querySelectorAll('.rev, #cascade').forEach(function (el) { io.observe(el); });
+
+/* ── Partenaires : rangée statique, masquée si vide ── */
+var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
+fetch(API + '/api/public/partenaires').then(function (r) { return r.ok ? r.json() : []; }).then(function (list) {
+  if (!Array.isArray(list) || list.length === 0) return;
+  var row = document.getElementById('partenaires');
+  list.forEach(function (p) {
+    var d = document.createElement('div');
+    d.className = 'plogo';
+    d.innerHTML = '<img src="' + p.logo + '" alt="' + p.nom.replace(/"/g, '&quot;') + '" style="max-height:40px; max-width:120px; object-fit:contain"><span>' + p.nom.replace(/</g, '&lt;') + '</span>';
+    row.appendChild(d);
+  });
+  row.style.display = '';
+}).catch(function () {});
 </script>
 </body>
 </html>

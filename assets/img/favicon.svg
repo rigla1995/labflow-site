@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="fbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#0ea5e9"/>
+      <stop offset="52%"  stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <clipPath id="fdc">
+      <rect x="-32" y="-32" width="64" height="64" rx="11.97"
+            transform="translate(50,50) rotate(45)"/>
+    </clipPath>
+  </defs>
+
+  <!-- Diamond gradient fill -->
+  <g clip-path="url(#fdc)">
+    <rect width="100" height="100" fill="url(#fbg)"/>
+    <!-- Shine top half -->
+    <rect width="100" height="50" fill="white" fill-opacity="0.13"/>
+  </g>
+
+  <!-- Diamond border -->
+  <rect x="-32" y="-32" width="64" height="64" rx="11.97"
+        transform="translate(50,50) rotate(45)"
+        fill="none" stroke="white" stroke-opacity="0.30" stroke-width="1"/>
+
+  <!-- LF monogram (rotated coordinate space, origin at 50,50) -->
+  <g transform="translate(50,50) rotate(45)" fill="white">
+    <!-- L stem (top shortened — F top bar passes above) -->
+    <rect x="-13.63" y="-9.70"  width="5.99" height="26.63" rx="2.27"/>
+    <!-- L foot -->
+    <rect x="-13.63" y="10.94"  width="20.03" height="5.99"  rx="2.27"/>
+    <!-- F stem (full height) -->
+    <rect x="7.64"   y="-16.93" width="5.99"  height="33.87" rx="2.27"/>
+    <!-- F top bar (full width) -->
+    <rect x="-13.63" y="-16.93" width="27.26" height="5.99"  rx="2.27"/>
+    <!-- F mid bar (shorter) -->
+    <rect x="-2.68"  y="-2.37"  width="16.31" height="5.99"  rx="2.27"/>
+  </g>
+</svg>
