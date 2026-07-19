@@ -38,13 +38,16 @@
 <nav class="top scrolled" id="topnav">
   <div class="nav-inner">
     <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="index.html#fonctionnalites">Le système</a>
       <a href="index.html#pourqui">Votre métier</a>
-      <a href="tarifs.html" style="color:var(--indigo)">Tarifs</a>
+      <a href="tarifs.html" aria-current="page">Tarifs</a>
       <a href="index.html#faq">FAQ</a>
     </div>
-    <a class="btn small" href="demande-acces.html">Demander un accès</a>
+    <div style="display:flex; align-items:center; gap:10px">
+      <a class="btn small" href="demande-acces.html">Demander un accès</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -58,9 +61,9 @@
 
 <section id="tarifs" style="padding-top:40px">
   <div class="container">
+    <h2 class="sr-only">Trois configurations types</h2>
     <div class="packs">
       <div class="tuile pack">
-        <div class="assemblage" aria-hidden="true"><i class="on">S</i><i class="on">V</i><i>P</i><i>B2B</i></div>
         <h3>Point de vente</h3>
         <div class="prix">dès 150 <small>DT/mois</small></div>
         <p>Restaurant, café, boutique… sans laboratoire.</p>
@@ -72,8 +75,7 @@
         </ul>
       </div>
       <div class="tuile pack vedette">
-        <div class="assemblage" aria-hidden="true"><i class="on">S</i><i class="on">V</i><i class="on">P</i><i class="on">Labo</i></div>
-        <h3>Labo &amp; points de vente <span style="font-size:0.66rem; vertical-align:middle; background:var(--grad-marque); border-radius:999px; padding:3px 10px; margin-left:6px">Le plus choisi</span></h3>
+        <h3>Labo &amp; points de vente <span style="font-size:0.66rem; vertical-align:middle; background:var(--grad-marque-texte); border-radius:999px; padding:3px 10px; margin-left:6px">Le plus choisi</span></h3>
         <div class="prix">ex. 440 <small>DT/mois — 1 labo + 2 points de vente</small></div>
         <p>Labo ou cuisine centrale + points de vente.</p>
         <ul>
@@ -84,7 +86,6 @@
         </ul>
       </div>
       <div class="tuile pack">
-        <div class="assemblage" aria-hidden="true"><i class="on">S</i><i>V</i><i class="on">Labo</i><i class="on">B2B</i></div>
         <h3>Dépôt B2B</h3>
         <div class="prix">dès 210 <small>DT/mois — labo + 10 acheteurs</small></div>
         <p>Labo seul, vente 100&nbsp;% professionnelle.</p>
@@ -99,7 +100,7 @@
 
     <div class="calc-zone" id="calculateur">
       <div class="calc-controles">
-        <h3 style="font-size:1.4rem; margin-bottom:6px">Estimer mon tarif en 1 minute</h3>
+        <h2 style="font-size:1.4rem; margin-bottom:6px">Estimer mon tarif en 1 minute</h2>
         <p style="color:var(--encre-2); font-size:0.92rem; margin-bottom:22px">Composez votre configuration — le ticket s'imprime en direct, en dinars.</p>
         <div class="rangee">
           <span class="lbl">Points de vente</span>
@@ -142,7 +143,7 @@
           <div id="calc-ok">
             <div id="detail"></div>
             <hr class="tk-sep">
-            <div class="tk-total"><span>TOTAL / MOIS</span><span><span class="dt" id="total">—</span> <small>DT</small></span></div>
+            <div class="tk-total" role="status" aria-live="polite"><span>TOTAL / MOIS</span><span><span class="dt" id="total">—</span> <small>DT</small></span></div>
             <div class="tk-note" id="ob"></div>
             <div class="tk-note">Tarifs de référence en dinars tunisiens — devis personnalisé établi au contrat.</div>
           </div>
@@ -158,7 +159,7 @@
     <div class="kicker">La mise en route</div>
     <h2>Un démarrage clé en main, pas un logiciel livré vide</h2>
     <p class="sec-intro" style="max-width:none; margin-bottom:18px">Chez LabFlow, il n'y a pas d'inscription en ligne ni de compte à configurer tout seul. Notre équipe paramètre votre compte avec vous&nbsp;: vos points de vente, votre catalogue d'articles (import Excel massif avec modèle fourni), vos fournisseurs, vos tarifs. Puis nous formons votre équipe à l'outil. Le jour du lancement, vous recevez un compte prêt à l'emploi, pas une page blanche.</p>
-    <div class="encart-honnete" style="max-width:none">💡<span>Ce service de démarrage est facturé <strong>une seule fois</strong>&nbsp;: à partir de <strong>500&nbsp;DT</strong>, ou <strong>700&nbsp;DT</strong> avec laboratoire.</span></div>
+    <div class="encart-honnete" style="max-width:none">💡<span>Ce service de démarrage est facturé <strong>une seule fois</strong>&nbsp;: à partir de <strong><span data-ob="sans">500</span>&nbsp;DT</strong>, ou <strong><span data-ob="avec">700</span>&nbsp;DT</strong> avec laboratoire.</span></div>
   </div>
 </section>
 
@@ -170,7 +171,7 @@
       <details><summary>Pourquoi n'affichez-vous pas un prix fixe unique&nbsp;?</summary><p>Parce qu'un forfait unique serait injuste. Une boutique seule paierait pour des modules qu'elle n'utilise pas, et un atelier avec trois points de vente serait à l'étroit. Votre mensualité est composée à partir de votre configuration réelle, avec les tarifs de référence affichés ici. Le montant exact figure dans votre devis, établi au contrat après un échange avec un conseiller.</p></details>
       <details><summary>Puis-je changer de configuration en cours de route&nbsp;?</summary><p>Oui. Vous ouvrez un deuxième point de vente, vous ajoutez un laboratoire, vos acheteurs professionnels passent de 10 à 20&nbsp;: votre configuration évolue avec votre activité. Votre contrat est simplement mis à jour et votre mensualité ajustée selon les mêmes tarifs de référence.</p></details>
       <details><summary>Y a-t-il un engagement&nbsp;?</summary><p>Demander un accès et assister à la démonstration ne vous engagent à rien. Si vous décidez de continuer, les conditions de durée sont écrites noir sur blanc dans votre contrat, signé électroniquement, et discutées avec votre conseiller avant toute signature. Aucune surprise.</p></details>
-      <details><summary>Que couvrent les frais de démarrage&nbsp;?</summary><p>C'est un service, facturé une seule fois&nbsp;: le paramétrage complet de votre compte (points de vente, labo, catalogue d'articles importé depuis votre fichier Excel, fournisseurs, tarifs) et la formation de votre équipe. Vous démarrez sur un compte prêt à l'emploi, avec vos vraies données. À partir de 500&nbsp;DT, ou 700&nbsp;DT avec laboratoire.</p></details>
+      <details><summary>Que couvrent les frais de démarrage&nbsp;?</summary><p>C'est un service, facturé une seule fois&nbsp;: le paramétrage complet de votre compte (points de vente, labo, catalogue d'articles importé depuis votre fichier Excel, fournisseurs, tarifs) et la formation de votre équipe. Vous démarrez sur un compte prêt à l'emploi, avec vos vraies données. À partir de <span data-ob="sans">500</span>&nbsp;DT, ou <span data-ob="avec">700</span>&nbsp;DT avec laboratoire.</p></details>
       <details><summary>Proposez-vous un essai gratuit&nbsp;?</summary><p>Non, et c'est un choix assumé&nbsp;: un outil de gestion livré vide ne montre rien d'utile. À la place, vous voyez d'abord LabFlow en images, puis un conseiller vous fait une démonstration personnalisée sur des cas proches de votre quotidien. C'est gratuit et sans engagement. Ensuite, grâce au démarrage clé en main, vous commencez directement avec un compte configuré pour vous.</p></details>
     </div>
   </div>
@@ -198,6 +199,21 @@
 
 <script>
   var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Menu mobile ── */
+  var burger = document.getElementById('nav-burger');
+  if (burger) {
+    var liens = document.getElementById('nav-links');
+    burger.addEventListener('click', function () {
+      var ouvert = liens.classList.toggle('ouvert');
+      burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+      burger.textContent = ouvert ? '✕' : '☰';
+    });
+    liens.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') { liens.classList.remove('ouvert'); burger.setAttribute('aria-expanded', 'false'); burger.textContent = '☰'; }
+    });
+  }
+
   var state = { act: 1, formule: 'premium', lab: 0, ger: 0, palier: 0 };
   var PRIX = { basique: 150, premium: 200, labo: 160, gerant: 80, paliers: { 0: 0, 10: 50, 20: 90, 50: 150, 100: 220 } };
   var REM = { r2: 20, r3: 40, rl: 30 };
@@ -237,10 +253,13 @@
     document.getElementById('hint-formule').textContent = (state.lab > 0 && state.formule === 'basique')
       ? 'Avec un labo, les fiches techniques sont incluses même en Basique'
       : 'Premium ajoute fiches techniques et production';
+    document.getElementById('f-basique').setAttribute('aria-pressed', state.formule === 'basique');
+    document.getElementById('f-premium').setAttribute('aria-pressed', state.formule === 'premium');
     document.querySelectorAll('#seg-ach button').forEach(function (b) {
       var p = parseInt(b.getAttribute('data-p'), 10);
       b.disabled = state.lab === 0 && p > 0;
       b.classList.toggle('on', p === state.palier);
+      b.setAttribute('aria-pressed', p === state.palier);
     });
     document.getElementById('hint-ach').textContent = state.lab === 0 ? 'Nécessite au moins un laboratoire' : 'Palier selon la taille de votre carnet';
 
@@ -248,7 +267,7 @@
     var ok = document.getElementById('calc-ok');
     if (state.act === 0 && (state.lab === 0 || state.palier === 0)) {
       warn.style.display = '';
-      warn.textContent = 'Un compte sans point de vente est un dépôt 100 % B2B : ajoutez un laboratoire et un palier d\'acheteurs pour voir votre estimation.';
+      warn.textContent = 'Un compte sans point de vente est un dépôt 100 % B2B : ajoutez un laboratoire et un palier d\'acheteurs pour voir votre estimation.';
       ok.style.display = 'none';
       return;
     }
@@ -270,7 +289,7 @@
       return '<div class="tk-ligne"><span>' + x[0] + '</span><b>' + x[1].toLocaleString('fr-FR') + ' DT</b></div>';
     }).join('');
     document.getElementById('total').textContent = total.toLocaleString('fr-FR');
-    document.getElementById('ob').textContent = 'Mise en route (une seule fois) : à partir de ' + (state.lab > 0 ? OB.avec : OB.sans) + ' DT — paramétrage + formation.';
+    document.getElementById('ob').textContent = 'Mise en route (une seule fois) : à partir de ' + (state.lab > 0 ? OB.avec : OB.sans) + ' DT — paramétrage + formation.';
 
     if (totalPrec !== null && totalPrec !== total && !RM) {
       var tk = document.getElementById('ticket');
@@ -295,6 +314,9 @@
     if (t.onboarding_sans_labo) OB.sans = Number(t.onboarding_sans_labo);
     if (t.onboarding_avec_labo) OB.avec = Number(t.onboarding_avec_labo);
     [10, 20, 50, 100].forEach(function (p) { if (t['acheteurs_palier_' + p]) PRIX.paliers[p] = Number(t['acheteurs_palier_' + p]); });
+    // aligne la prose statique (encart + FAQ) sur les tarifs runtime
+    document.querySelectorAll('[data-ob="sans"]').forEach(function (el) { el.textContent = OB.sans.toLocaleString('fr-FR'); });
+    document.querySelectorAll('[data-ob="avec"]').forEach(function (el) { el.textContent = OB.avec.toLocaleString('fr-FR'); });
     render();
   }).catch(function () {});
 

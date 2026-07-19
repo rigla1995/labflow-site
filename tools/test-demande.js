@@ -13,9 +13,14 @@ const puppeteer = require('puppeteer');
 
   await page.goto('http://localhost:8322/demande-acces.html', { waitUntil: 'networkidle0' });
 
-  // 1) bouton Continuer désactivé au départ
-  let disabled = await page.$eval('#btn-continuer', (b) => b.disabled);
-  console.log('continuer désactivé au départ :', disabled ? 'OK' : 'ÉCHEC');
+  // 1) formulaire en un seul écran : tous les champs visibles d'emblée
+  const unEcran = await page.evaluate(() =>
+    ['nom', 'email', 'telephone', 'ville', 'type', 'npv', 'message', 'consent'].every((id) => {
+      const el = document.getElementById(id);
+      return el && el.offsetParent !== null;
+    })
+  );
+  console.log('tous les champs visibles (1 écran) :', unEcran ? 'OK' : 'ÉCHEC');
 
   // 2) téléphone invalide → blur → erreur visible
   await page.type('#telephone', '12345678');
@@ -32,18 +37,10 @@ const puppeteer = require('puppeteer');
   console.log('masque tél « ' + telVal + ' » :', telVal === '22 345 678' ? 'OK' : 'ÉCHEC');
   console.log('erreur effacée à la frappe :', errGone ? 'OK' : 'ÉCHEC');
 
-  // 4) nom + email valides → Continuer s'active
+  // 4) nom + email valides
   await page.type('#nom', 'Test Refonte V2');
   await page.type('#email', 'm.khelil.prof+testv2@gmail.com');
   await new Promise((r) => setTimeout(r, 200));
-  disabled = await page.$eval('#btn-continuer', (b) => b.disabled);
-  console.log('continuer activé une fois valide :', !disabled ? 'OK' : 'ÉCHEC');
-
-  // 5) étape 2
-  await page.click('#btn-continuer');
-  await new Promise((r) => setTimeout(r, 400));
-  const step2Visible = await page.$eval('#step2', (s) => s.classList.contains('actif'));
-  console.log('étape 2 affichée :', step2Visible ? 'OK' : 'ÉCHEC');
 
   await page.type('#ville', 'Tunis');
   await page.select('#type', 'patisserie_boulangerie');

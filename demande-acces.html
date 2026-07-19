@@ -36,16 +36,11 @@
   .volet-nuit .reassurances { justify-content: flex-start; margin: 0 0 30px; }
   .volet-nuit .shot { max-width: 400px; }
 
-  /* ── Formulaire 2 étapes ── */
-  .prog { display: flex; align-items: center; gap: 12px; margin: 18px 0 26px; }
-  .prog .bar { flex: 1; height: 6px; border-radius: 999px; background: var(--border-sable); overflow: hidden; }
-  .prog .bar i { display: block; height: 100%; width: 50%; background: var(--grad-marque); border-radius: inherit; transition: width 0.4s ease; }
-  .prog span { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--encre-2); }
-  .fstep { display: none; }
-  .fstep.actif { display: block; animation: pas-suivant 0.35s ease; }
-  @keyframes pas-suivant { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
-  .fstep h2 { font-size: 1.35rem; margin-bottom: 4px; }
-  .fstep .sous-titre { color: var(--encre-2); font-size: 0.9rem; margin-bottom: 22px; }
+  /* ── Formulaire en un seul écran ── */
+  .fstep { padding: 0; } /* neutralise le padding générique des <section> de v2.css */
+  .fstep h2 { font-size: 1.2rem; margin: 26px 0 4px; }
+  .fstep h2:first-child { margin-top: 0; }
+  .fstep .sous-titre { color: var(--encre-2); font-size: 0.88rem; margin-bottom: 18px; }
   .f-row { margin-bottom: 18px; position: relative; }
   .f-row label { display: block; font-size: 0.86rem; font-weight: 700; margin-bottom: 5px; }
   .f-row .aide { display: block; font-size: 0.76rem; color: var(--encre-2); margin-top: 5px; }
@@ -71,13 +66,11 @@
   .f-radio { display: flex; gap: 8px; }
   .f-radio button {
     border: 1.5px solid var(--border-sable); background: var(--surface); color: var(--encre-2); border-radius: 999px;
-    padding: 9px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.15s ease;
+    padding: 12px 22px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.15s ease;
   }
-  .f-radio button.on { border-color: transparent; background: var(--grad-marque); color: #fff; }
+  .f-radio button.on { border-color: transparent; background: var(--grad-marque-texte); color: #fff; }
   .compteur { font-family: var(--font-mono); font-size: 0.72rem; color: var(--encre-2); text-align: right; margin-top: 4px; }
   .nav-etapes { display: flex; gap: 14px; align-items: center; margin-top: 26px; }
-  .btn-retour { background: none; border: 0; color: var(--encre-2); font-weight: 650; font-size: 0.92rem; cursor: pointer; padding: 10px 6px; }
-  .btn-retour:hover { color: var(--indigo); }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
   .consent-court { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; margin: 22px 0 6px; }
   .consent-court input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--indigo); }
@@ -97,7 +90,7 @@
   @media (max-width: 960px) {
     .split { grid-template-columns: 1fr; }
     .volet-nuit { position: static; height: auto; order: -1; padding: 96px 24px 30px; }
-    .volet-nuit .shot, .volet-nuit .reassurances { display: none; }
+    .volet-nuit .shot, .volet-nuit .reassurances, .volet-nuit .mention-demo { display: none; }
     .volet-nuit h2 { font-size: 1.2rem; margin-bottom: 18px; }
     .es-corps { padding-bottom: 16px; }
     .es-corps p { display: none; }
@@ -130,12 +123,13 @@
 <nav class="top scrolled" id="topnav">
   <div class="nav-inner">
     <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="index.html#fonctionnalites">Le système</a>
       <a href="index.html#pourqui">Votre métier</a>
       <a href="tarifs.html">Tarifs</a>
       <a href="index.html#faq">FAQ</a>
     </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
   </div>
 </nav>
 
@@ -144,49 +138,43 @@
     <div>
       <div class="kicker">Sans engagement · sans paiement</div>
       <h1 style="font-size:clamp(1.9rem,4vw,2.6rem)">Demander un accès</h1>
-      <div class="prog" aria-hidden="true"><div class="bar"><i id="prog-i"></i></div><span id="prog-txt">1/2</span></div>
+      <p style="color:var(--encre-2); font-size:0.95rem; margin:10px 0 26px">Deux minutes suffisent — un conseiller vous rappelle sous 24&nbsp;h.</p>
 
       <div id="calc-recap" class="calc-recap" style="display:none"></div>
-      <div class="err-globale" id="err" role="alert"></div>
+      <div class="err-globale" id="err" role="alert" tabindex="-1"></div>
 
       <form id="f" novalidate>
-        <!-- ÉTAPE 1 — coordonnées -->
-        <section class="fstep actif" id="step1" aria-label="Étape 1 sur 2 : vos coordonnées">
+        <section class="fstep" aria-label="Vos coordonnées">
           <h2>Vos coordonnées</h2>
-          <p class="sous-titre">C'est tout ce qu'il nous faut pour vous rappeler — le reste nous aide à préparer la démonstration.</p>
+          <p class="sous-titre">C'est tout ce qu'il nous faut pour vous rappeler.</p>
 
           <div class="f-row" data-champ="nom">
             <label for="nom">Nom complet *</label>
-            <input class="champ" type="text" id="nom" name="nom" autocomplete="name" required maxlength="150">
-            <span class="aide">Prénom et nom, tels que vous souhaitez être contacté — 2 caractères minimum.</span>
-            <span class="erreur-msg" aria-live="polite">Entrez au moins 2 caractères.</span>
+            <input class="champ" type="text" id="nom" name="nom" autocomplete="name" required maxlength="150" aria-describedby="nom-aide nom-err">
+            <span class="aide" id="nom-aide">Prénom et nom, tels que vous souhaitez être contacté — 2 caractères minimum.</span>
+            <span class="erreur-msg" id="nom-err" aria-live="polite">Entrez au moins 2 caractères.</span>
           </div>
           <div class="f-row" data-champ="email">
             <label for="email">Email *</label>
-            <input class="champ" type="email" id="email" name="email" autocomplete="email" required maxlength="255" inputmode="email">
-            <span class="aide">Format&nbsp;: nom@domaine.tn — nous y envoyons la confirmation de votre demande.</span>
-            <span class="erreur-msg" aria-live="polite">Cet email n'a pas un format valide (ex.&nbsp;: sami@monlabo.tn).</span>
+            <input class="champ" type="email" id="email" name="email" autocomplete="email" required maxlength="255" inputmode="email" aria-describedby="email-aide email-err">
+            <span class="aide" id="email-aide">Format&nbsp;: nom@domaine.tn — c'est à cette adresse que votre conseiller vous répond.</span>
+            <span class="erreur-msg" id="email-err" aria-live="polite">Cet email n'a pas un format valide (ex.&nbsp;: sami@monlabo.tn).</span>
           </div>
           <div class="f-row" data-champ="telephone">
             <label for="telephone">Téléphone *</label>
             <div class="tel-groupe">
               <span class="prefixe" aria-hidden="true">+216</span>
-              <input class="champ" type="tel" id="telephone" name="telephone" autocomplete="tel-national" required placeholder="22 345 678" inputmode="numeric" maxlength="10" aria-describedby="tel-aide">
+              <input class="champ" type="tel" id="telephone" name="telephone" autocomplete="tel-national" required placeholder="22 345 678" inputmode="numeric" maxlength="10" aria-describedby="tel-aide tel-err">
             </div>
-            <span class="aide" id="tel-aide">8 chiffres, commence par 2, 5, 7 ou 9 — votre conseiller vous joint par appel ou WhatsApp.</span>
-            <span class="erreur-msg" aria-live="polite">Numéro tunisien attendu&nbsp;: 8 chiffres commençant par 2, 5, 7 ou 9.</span>
+            <span class="aide" id="tel-aide">8 chiffres, commençant par 2, 5, 7 ou 9 — votre conseiller vous joint par appel ou WhatsApp.</span>
+            <span class="erreur-msg" id="tel-err" aria-live="polite">Numéro tunisien attendu&nbsp;: 8 chiffres commençant par 2, 5, 7 ou 9.</span>
           </div>
 
-          <div class="nav-etapes">
-            <button type="button" class="btn" id="btn-continuer" disabled>Continuer →</button>
-            <span class="aide" style="margin:0">Étape 2&nbsp;: votre activité (30 secondes)</span>
-          </div>
         </section>
 
-        <!-- ÉTAPE 2 — activité -->
-        <section class="fstep" id="step2" aria-label="Étape 2 sur 2 : votre activité">
-          <h2>Votre activité</h2>
-          <p class="sous-titre">Tout est optionnel ici — mais plus on en sait, plus la démonstration vous ressemble.</p>
+        <section class="fstep" aria-label="Votre activité">
+          <h2>Votre activité <span style="font-weight:500; font-size:0.8em; color:var(--encre-2)">(facultatif)</span></h2>
+          <p class="sous-titre">Plus on en sait, plus la démonstration vous ressemble.</p>
 
           <div class="f-2col">
             <div class="f-row">
@@ -218,8 +206,8 @@
             <div class="f-row">
               <label id="lbl-labo">Un laboratoire de production&nbsp;?</label>
               <div class="f-radio" id="r-labo" role="group" aria-labelledby="lbl-labo">
-                <button type="button" data-v="oui">Oui</button>
-                <button type="button" data-v="non">Non</button>
+                <button type="button" data-v="oui" aria-pressed="false">Oui</button>
+                <button type="button" data-v="non" aria-pressed="false">Non</button>
               </div>
               <span class="aide">Un atelier ou labo central qui produit pour un ou plusieurs points de vente.</span>
             </div>
@@ -227,8 +215,8 @@
           <div class="f-row">
             <label id="lbl-b2b">Vendez-vous à des professionnels&nbsp;?</label>
             <div class="f-radio" id="r-b2b" role="group" aria-labelledby="lbl-b2b">
-              <button type="button" data-v="oui">Oui</button>
-              <button type="button" data-v="non">Non</button>
+              <button type="button" data-v="oui" aria-pressed="false">Oui</button>
+              <button type="button" data-v="non" aria-pressed="false">Non</button>
             </div>
             <span class="aide">Cafés, hôtels, revendeurs… LabFlow inclut un portail où vos acheteurs pros commandent seuls.</span>
           </div>
@@ -251,7 +239,6 @@
           </details>
 
           <div class="nav-etapes">
-            <button type="button" class="btn-retour" id="btn-retour">← Retour</button>
             <button type="submit" class="btn" id="submit" style="flex:1">Envoyer ma demande d'accès</button>
           </div>
           <p style="font-size:0.75rem; color:var(--encre-2); text-align:center; margin-top:12px;">Réponse sous 24&nbsp;h · échange sans engagement · aucun paiement en ligne</p>
@@ -266,7 +253,7 @@
     <div class="etapes-suite">
       <div class="es">
         <div class="fil-es"><span class="pastille">1</span><span class="es-trait"></span></div>
-        <div class="es-corps"><b>Sous 24 h, un conseiller vous appelle</b><p>Un humain, pas un robot. Il écoute votre organisation&nbsp;: labo, points de vente, clients pros.</p></div>
+        <div class="es-corps"><b>Sous 24&nbsp;h, un conseiller vous appelle</b><p>Un humain, pas un robot. Il écoute votre organisation&nbsp;: labo, points de vente, clients pros.</p></div>
       </div>
       <div class="es">
         <div class="fil-es"><span class="pastille">2</span><span class="es-trait"></span></div>
@@ -280,13 +267,13 @@
     <div class="reassurances" style="flex-direction:column; gap:10px; font-size:0.86rem">
       <span>Aucun paiement en ligne</span>
       <span>Vos données protégées (loi 2004-63)</span>
-      <span>Réponse sous 24 h, aussi sur WhatsApp</span>
+      <span>Réponse sous 24&nbsp;h, aussi sur WhatsApp</span>
     </div>
-    <div class="shot">
+    <div class="shot" style="max-width:280px">
       <div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
       <picture>
         <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif 1x, assets/img/kpi-marge@2x.avif 2x">
-        <img src="assets/img/kpi-marge@1x.webp" srcset="assets/img/kpi-marge@1x.webp 1x, assets/img/kpi-marge@2x.webp 2x" width="420" height="246" alt="Carte marge brute du tableau de bord LabFlow : 5 662 DT, 67 % du CA" loading="lazy" style="width:100%">
+        <img src="assets/img/kpi-marge@1x.webp" srcset="assets/img/kpi-marge@1x.webp 1x, assets/img/kpi-marge@2x.webp 2x" width="224" height="131" alt="Carte marge brute du tableau de bord LabFlow : 5 662 DT, 67 % du CA" loading="lazy" style="width:100%">
       </picture>
     </div>
     <p class="mention-demo">Compte de démonstration — montants en DT.</p>
@@ -302,10 +289,27 @@
   </div>
 </footer>
 
+<!-- TODO : remplacer 21600000000 par le numéro WhatsApp Business réel -->
+<a class="wa" href="https://wa.me/21600000000" target="_blank" rel="noopener" aria-label="Parler à un conseiller sur WhatsApp" title="Parler à un conseiller sur WhatsApp">💬</a>
+
 <script>
   var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
   var startedAt = Date.now();
   var labo = null, b2b = null;
+
+  /* ── Menu mobile ── */
+  var burger = document.getElementById('nav-burger');
+  if (burger) {
+    var liens = document.getElementById('nav-links');
+    burger.addEventListener('click', function () {
+      var ouvert = liens.classList.toggle('ouvert');
+      burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+      burger.textContent = ouvert ? '✕' : '☰';
+    });
+    liens.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') { liens.classList.remove('ouvert'); burger.setAttribute('aria-expanded', 'false'); burger.textContent = '☰'; }
+    });
+  }
 
   /* ── Validation live : au blur d'abord, puis à la frappe après une 1ʳᵉ erreur ── */
   var VALIDE = {
@@ -332,11 +336,10 @@
   }
   ['nom', 'email', 'telephone', 'npv'].forEach(function (id) {
     var el = document.getElementById(id);
-    el.addEventListener('blur', function () { if (el.value !== '') valider(id, false); majContinuer(); });
+    el.addEventListener('blur', function () { if (el.value !== '') valider(id, false); });
     el.addEventListener('input', function () {
       // en direct seulement après une première erreur (sinon simple maj de l'état ✓)
       valider(id, !rowOf(id).classList.contains('invalide'));
-      majContinuer();
     });
   });
 
@@ -350,37 +353,13 @@
     tel.value = out;
   });
 
-  /* ── Étapes ── */
-  var step = 1;
-  function majContinuer() {
-    var ok = VALIDE.nom(document.getElementById('nom').value)
-      && VALIDE.email(document.getElementById('email').value)
-      && VALIDE.telephone(tel.value);
-    document.getElementById('btn-continuer').disabled = !ok;
-    return ok;
-  }
-  function montrer(n) {
-    step = n;
-    document.getElementById('step1').classList.toggle('actif', n === 1);
-    document.getElementById('step2').classList.toggle('actif', n === 2);
-    document.getElementById('prog-i').style.width = n === 1 ? '50%' : '100%';
-    document.getElementById('prog-txt').textContent = n + '/2';
-    var premier = document.querySelector('#step' + n + ' .champ');
-    if (premier && n === 2) premier.focus();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-  document.getElementById('btn-continuer').addEventListener('click', function () {
-    ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
-    if (majContinuer()) montrer(2);
-  });
-  document.getElementById('btn-retour').addEventListener('click', function () { montrer(1); });
-
   /* ── Boutons oui/non ── */
   function wireRadio(id, set) {
     document.querySelectorAll('#' + id + ' button').forEach(function (b) {
       b.addEventListener('click', function () {
-        document.querySelectorAll('#' + id + ' button').forEach(function (x) { x.classList.remove('on'); });
+        document.querySelectorAll('#' + id + ' button').forEach(function (x) { x.classList.remove('on'); x.setAttribute('aria-pressed', 'false'); });
         b.classList.add('on');
+        b.setAttribute('aria-pressed', 'true');
         set(b.getAttribute('data-v') === 'oui');
       });
     });
@@ -407,8 +386,8 @@
         recap.style.display = '';
         recap.innerHTML = '🧾 <strong>VOTRE ESTIMATION</strong><br>' + parts.join('<br>') + '<br>— jointe à votre demande.';
         var el = document.getElementById('npv'); if (el && !el.value) el.value = calcConfig.act;
-        if (calcConfig.lab > 0) { labo = true; document.querySelector('#r-labo button[data-v="oui"]').classList.add('on'); }
-        if (calcConfig.palier > 0) { b2b = true; document.querySelector('#r-b2b button[data-v="oui"]').classList.add('on'); }
+        if (calcConfig.lab > 0) { labo = true; var bl = document.querySelector('#r-labo button[data-v="oui"]'); bl.classList.add('on'); bl.setAttribute('aria-pressed', 'true'); }
+        if (calcConfig.palier > 0) { b2b = true; var bb = document.querySelector('#r-b2b button[data-v="oui"]'); bb.classList.add('on'); bb.setAttribute('aria-pressed', 'true'); }
       }
     }
   } catch (e) {}
@@ -423,11 +402,15 @@
     var email = document.getElementById('email').value.trim();
     // Normalisation : espaces du masque / tirets retirés, +216 optionnel accepté
     var telv = tel.value.replace(/[\s.-]/g, '');
-    if (!VALIDE.nom(nom) || !VALIDE.email(email) || !VALIDE.telephone(telv)) {
-      montrer(1);
-      ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
-      err.textContent = 'Vérifiez votre nom, votre email et votre numéro de téléphone tunisien (8 chiffres).';
+    function montrerErreur(msg) {
+      err.textContent = msg;
       err.style.display = '';
+      err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      err.focus({ preventScroll: true });
+    }
+    if (!VALIDE.nom(nom) || !VALIDE.email(email) || !VALIDE.telephone(telv)) {
+      ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
+      montrerErreur('Vérifiez votre nom, votre email et votre numéro de téléphone tunisien (8 chiffres).');
       return;
     }
     if (!VALIDE.npv(document.getElementById('npv').value)) {
@@ -435,13 +418,11 @@
       return;
     }
     if (!document.getElementById('consent').checked) {
-      err.textContent = 'Merci de cocher la case de consentement pour que nous puissions vous recontacter.';
-      err.style.display = '';
+      montrerErreur('Merci de cocher la case de consentement pour que nous puissions vous recontacter.');
       return;
     }
     if (Date.now() - startedAt < 3000) {
-      err.textContent = 'Merci de prendre quelques secondes pour vérifier vos informations avant l\'envoi.';
-      err.style.display = '';
+      montrerErreur('Merci de prendre quelques secondes pour vérifier vos informations avant l\'envoi.');
       return;
     }
 
@@ -477,8 +458,9 @@
     }).catch(function () {
       btn.disabled = false;
       btn.textContent = 'Envoyer ma demande d\'accès';
-      err.textContent = 'L\'envoi n\'a pas abouti. Réessayez dans un instant, ou contactez-nous directement sur WhatsApp.';
+      err.innerHTML = 'L\'envoi n\'a pas abouti. Réessayez dans un instant, ou <a href="https://wa.me/21600000000" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline">contactez-nous directement sur WhatsApp</a>.';
       err.style.display = '';
+      err.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   });
 </script>

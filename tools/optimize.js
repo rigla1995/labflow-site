@@ -15,7 +15,7 @@ const MAX_KO = 120;
 const DISPLAY_W = {
   'dashboard.png': 1100,
   'portail-catalogue.png': 1100,
-  'kpi-marge.png': 420,
+  'kpi-marge.png': 224, // taille CSS native du crop (dpr 2) → @2x = 448, un vrai 2:1
   'ventes-canaux.png': 640,
   'stock-valeur.png': 720,
   'ft-arbre.png': 460,
