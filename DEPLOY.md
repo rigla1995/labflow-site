@@ -3,10 +3,22 @@
 Site statique servi par nginx (Dockerfile inclus). Décision actée : **vitrine sur `labflow-tn.com`**, application déplacée sur **`app.labflow-tn.com`** (l'API reste sur `api.labflow-tn.com`).
 
 ## 1. Coolify — nouvelle application « labflow-site »
-1. Coolify → + New Resource → Application → ce dépôt GitHub (`labflow-site`), branche `main`.
+1. Coolify → + New Resource → Application → dépôt GitHub `rigla1995/labflow-site`, branche `main`.
 2. Build pack : **Dockerfile** (à la racine). Port exposé : **80**.
 3. Domaine : `labflow-tn.com` (+ `www.labflow-tn.com` si souhaité, avec redirection www → apex).
-4. Activer le webhook de déploiement sur push `main` (comme les 2 autres apps).
+
+### Déploiement automatique sur push (webhook)
+Deux cas selon la façon dont le dépôt est branché :
+- **Cas A — source « GitHub App » (recommandé, comme les 2 apps existantes)** : à la création, choisir la même
+  source GithubApp que `fiche-technique-frontend`. Si `labflow-site` n'apparaît pas dans la liste : GitHub →
+  Settings → Applications → l'app Coolify → Repository access → ajouter `labflow-site`. Avec cette source, le
+  déploiement auto sur push est natif — rien d'autre à faire.
+- **Cas B — dépôt ajouté par URL publique/deploy key** : Coolify → l'application → onglet **Webhooks** → copier
+  l'URL de webhook (+ définir un secret). Puis GitHub → repo `labflow-site` → Settings → Webhooks → Add webhook :
+  Payload URL = l'URL copiée, Content type = `application/json`, Secret = le même, événement = **Just the push
+  event**. Vérifier ensuite dans l'onglet Webhooks de GitHub que le ping est vert.
+
+Test : modifier un fichier, push sur `main` → l'app doit se redéployer seule dans Coolify.
 
 ## 2. Coolify — déplacer l'application client sur app.
 1. Application existante `fiche-technique-frontend` → Domains : remplacer `labflow-tn.com` par **`app.labflow-tn.com`**.
