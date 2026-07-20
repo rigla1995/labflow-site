@@ -65,7 +65,10 @@
       <a href="index.html#vos-donnees">Vos données</a>
       <a href="index.html#faq">FAQ</a>
     </div>
-    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div style="display:flex; align-items:center; gap:10px">
+      <a class="btn small" href="demande-acces.html">Demander un accès</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -123,13 +126,21 @@
 </div>
 </main>
 
-<!-- Footer standard. D1 : le lien vers /tarifs.html est CONSERVÉ (page gardée).
-     Aucune page ne se lie elle-même. -->
+<!-- Pas de bouton WhatsApp flottant sur les pages légales : décision
+     explicite, pour ne pas poser un canal commercial par-dessus un texte
+     de référence. Les 4 autres pages le portent. -->
+
+<!-- ══ PIED DE PAGE COMMUN ══
+     Bloc IDENTIQUE sur les 6 pages + 404.html : 5 entrées, ordre figé. La page
+     courante GARDE son entrée et porte aria-current="page" — l'omettre créait
+     six compositions différentes selon la page, et privait merci.html du lien
+     « Demande d'accès ». Toute modification se répercute sur les 7 fichiers.
+     D1 : le lien vers /tarifs.html est CONSERVÉ (page gardée). -->
 <footer>
   <div class="container foot">
     <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
     <div>
-      <a href="index.html">Accueil</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="demande-acces.html">Demande d'accès</a><a href="mentions-legales.html">Mentions légales</a>
+      <a href="index.html">Accueil</a><a href="demande-acces.html">Demande d'accès</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html" aria-current="page">Confidentialité</a>
     </div>
   </div>
 </footer>

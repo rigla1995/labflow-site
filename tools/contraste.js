@@ -97,6 +97,13 @@ const REGLES = [
   ['⛔ --trait / lin (décor seul)',      T.trait, T.lin, 0],
   ['⛔ --trait-fort / lin (décor porteur)', T.traitFort, T.lin, 0],
   ['⛔ blanc / #25D366 (motive .btn-outline)', T.surface, '#25D366', 0],
+  // --focus-anneau = rgba(99,102,241,.35). Composité sur blanc il donne ≈ #C4C5FA,
+  // soit ~1,4:1 : il ne PEUT PAS servir d'unique indicateur de focus (1.4.11).
+  // Il est resté hors radar tant qu'aucune règle ne le nommait — d'où cette
+  // ligne. Seuil 0 : c'est un halo décoratif, l'indicateur conforme est
+  // l'outline --focus posée en focus-visible (cf. demande-acces.html).
+  ['⛔ --focus-anneau composité / blanc (halo seul)', voile(T.indigo, 0.65, [255, 255, 255]), T.surface, 0,
+    'halo décoratif — l’indicateur conforme est l’outline --focus'],
   // Combinaison à NE PAS créer : --rouge-cout tombe à 4,47:1 sur --surface-2.
   // Aucun composant ne la produit aujourd'hui (surface-2 ne porte que --encre
   // et --encre-2). Surveillée ici pour qu'un futur .chiffre--cout posé dans une

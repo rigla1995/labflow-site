@@ -75,9 +75,18 @@
     font-size: 0.95rem; font-family: inherit; background: var(--surface); color: var(--encre);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
-  .champ:focus, .f-row select:focus, .f-row textarea:focus { outline: none; border-color: var(--indigo-lien); box-shadow: var(--focus-anneau); }
+  /* L'anneau --focus-anneau (rgba indigo à 35 %) plafonne à ~1,4:1 sur blanc :
+     très en dessous des 3:1 exigés par WCAG 1.4.11. Il est CONSERVÉ comme
+     halo décoratif, mais l'outline n'est plus supprimé — c'est lui qui porte
+     l'indicateur de focus conforme. */
+  .champ:focus, .f-row select:focus, .f-row textarea:focus { border-color: var(--indigo-lien); box-shadow: var(--focus-anneau); }
+  .champ:focus-visible, .f-row select:focus-visible, .f-row textarea:focus-visible {
+    outline: 2px solid var(--focus); outline-offset: 2px;
+  }
   .f-row.valide .champ { border-color: var(--vert-marge-fort); }
-  .f-row.valide::after { content: '✓'; position: absolute; right: 13px; top: 37px; color: var(--vert-marge-fort); font-weight: 800; }
+  /* top calculé et non codé en dur : à 37 px le ✓ se désalignait dès que le
+     libellé du champ passait sur deux lignes (mobile étroit). */
+  .f-row.valide::after { content: '✓'; position: absolute; right: 13px; top: calc(1.4em + 11px); color: var(--vert-marge-fort); font-weight: 800; }
   .f-row.invalide .champ { border-color: var(--erreur); }
   .f-row.invalide .erreur-msg { display: block; }
   .tel-groupe { display: flex; }
@@ -96,15 +105,22 @@
   .f-radio button.on { border-color: transparent; background: var(--grad-marque-texte); color: #fff; }
   .compteur { font-family: var(--font-mono); font-size: 0.72rem; color: var(--encre-2); text-align: right; margin-top: 2px; }
   .nav-etapes { display: flex; gap: 14px; align-items: center; margin-top: 18px; }
-  .btn-retour { background: none; border: 0; color: var(--encre-2); font-weight: 650; font-size: 0.92rem; cursor: pointer; padding: 10px 6px; }
+  /* 44 px de haut : consigne interne de cible tactile (le minimum AA de 24 px
+     était déjà tenu, la consigne maison ne l'était pas). */
+  .btn-retour { background: none; border: 0; color: var(--encre-2); font-weight: 650; font-size: 0.92rem; cursor: pointer; padding: 13px 10px; min-height: 44px; }
   .btn-retour:hover { color: var(--indigo-lien); }
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+  /* [aria-disabled] et non :disabled : un bouton réellement disabled sort du
+     parcours de tabulation et n'expose AUCUNE raison de son inactivité. */
+  .btn:disabled, .btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
   .consent-court { display: flex; gap: 10px; align-items: flex-start; font-size: 0.83rem; margin: 14px 0 4px; }
-  .consent-court input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--indigo-lien); }
+  .consent-court input { margin-top: 3px; width: 20px; height: 20px; accent-color: var(--indigo-lien); }
   /* Classe DÉDIÉE : « legal » est pris par v3.css §15 (gabarit des pages légales,
      padding 140px) — la réutiliser ici déformerait le repli du formulaire. */
   details.detail-legal { border: 0; background: none; padding: 0; margin-bottom: 10px; }
-  details.detail-legal summary { font-size: 0.78rem; color: var(--encre-2); font-weight: 600; padding: 4px 0; min-height: 0; }
+  /* min-height 32 et non 0 : à 0 la cible tombait à ~23 px, sous le minimum
+     AA de 24×24 px (WCAG 2.5.8). 32 px reste compatible avec la contrainte
+     « chaque étape tient dans la vue ». */
+  details.detail-legal summary { font-size: 0.78rem; color: var(--encre-2); font-weight: 600; padding: 8px 0; min-height: 32px; }
   details.detail-legal summary::after { position: static; display: inline; transform: none; margin-left: 6px; font-size: 1rem; }
   details.detail-legal[open] summary::after { transform: rotate(45deg); }
   details.detail-legal p { font-size: 0.76rem; color: var(--encre-2); background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; padding: 12px 14px; max-width: none; }
@@ -216,13 +232,17 @@
             <label for="nom">Nom complet *</label>
             <input class="champ" type="text" id="nom" name="nom" autocomplete="name" required maxlength="150" aria-describedby="nom-aide nom-err">
             <span class="aide" id="nom-aide">Prénom et nom, tels que vous souhaitez être contacté — 2 caractères minimum.</span>
-            <span class="erreur-msg" id="nom-err" aria-live="polite">Entrez au moins 2 caractères.</span>
+            <!-- §7.6.4 d — le libellé vit dans data-msg, PAS dans le DOM : une
+                 région aria-live ne se déclenche que sur mutation de contenu,
+                 jamais sur un simple changement de display. Le texte est
+                 injecté par valider(). -->
+            <span class="erreur-msg" id="nom-err" aria-live="polite" data-msg="Entrez au moins 2 caractères."></span>
           </div>
           <div class="f-row" data-champ="email">
             <label for="email">Email *</label>
             <input class="champ" type="email" id="email" name="email" autocomplete="email" required maxlength="255" inputmode="email" aria-describedby="email-aide email-err">
             <span class="aide" id="email-aide">Format&nbsp;: nom@domaine.tn — c'est à cette adresse que votre conseiller vous répond.</span>
-            <span class="erreur-msg" id="email-err" aria-live="polite">Cet email n'a pas un format valide (ex.&nbsp;: sami@monlabo.tn).</span>
+            <span class="erreur-msg" id="email-err" aria-live="polite" data-msg="Cet email n'a pas un format valide (ex. : sami@monlabo.tn)."></span>
           </div>
           <div class="f-row" data-champ="telephone">
             <label for="telephone">Téléphone *</label>
@@ -231,11 +251,14 @@
               <input class="champ" type="tel" id="telephone" name="telephone" autocomplete="tel-national" required placeholder="22 345 678" inputmode="numeric" maxlength="10" aria-describedby="tel-aide tel-err">
             </div>
             <span class="aide" id="tel-aide">8 chiffres, commençant par 2, 5, 7 ou 9 — votre conseiller vous joint par appel ou WhatsApp.</span>
-            <span class="erreur-msg" id="tel-err" aria-live="polite">Numéro tunisien attendu&nbsp;: 8 chiffres commençant par 2, 5, 7 ou 9.</span>
+            <span class="erreur-msg" id="tel-err" aria-live="polite" data-msg="Numéro tunisien attendu : 8 chiffres commençant par 2, 5, 7 ou 9."></span>
           </div>
 
           <div class="nav-etapes">
-            <button type="button" class="btn" id="btn-continuer" disabled>Continuer →</button>
+            <!-- aria-disabled et NON disabled : un bouton disabled sort du parcours
+                 de tabulation et n'expose aucune raison. Ici il reste atteignable,
+                 et le clic renvoie le focus sur le premier champ fautif. -->
+            <button type="button" class="btn" id="btn-continuer" aria-disabled="true">Continuer →</button>
             <span class="aide" style="margin:0">Étape 2&nbsp;: votre activité (30 secondes)</span>
           </div>
         </section>
@@ -247,7 +270,7 @@
           <div class="f-2col">
             <div class="f-row">
               <label for="ville">Ville</label>
-              <input class="champ" type="text" id="ville" name="ville" maxlength="100">
+              <input class="champ" type="text" id="ville" name="ville" maxlength="100" autocomplete="address-level2">
               <span class="aide">La ville de votre activité principale.</span>
             </div>
             <div class="f-row">
@@ -270,7 +293,7 @@
               <!-- §7.6.4 b — l'erreur n'avait ni id ni référence : invisible pour un lecteur d'écran. -->
               <input class="champ" type="number" id="npv" name="npv" min="0" max="50" inputmode="numeric" aria-describedby="npv-aide npv-err">
               <span class="aide" id="npv-aide">De 0 (dépôt seul) à 50.</span>
-              <span class="erreur-msg" id="npv-err" aria-live="polite">Entrez un nombre entre 0 et 50.</span>
+              <span class="erreur-msg" id="npv-err" aria-live="polite" data-msg="Entrez un nombre entre 0 et 50."></span>
             </div>
             <div class="f-row">
               <label id="lbl-labo">Un laboratoire de production&nbsp;?</label>
@@ -357,11 +380,16 @@
   </aside>
 </div>
 
+<!-- ══ PIED DE PAGE COMMUN ══
+     Bloc IDENTIQUE sur les 6 pages + 404.html : 5 entrées, ordre figé. La page
+     courante GARDE son entrée et porte aria-current="page" — l'omettre créait
+     six compositions différentes selon la page, et privait merci.html du lien
+     « Demande d'accès ». Toute modification se répercute sur les 7 fichiers. -->
 <footer style="margin-top:0">
   <div class="container foot">
     <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
     <div>
-      <a href="index.html">Accueil</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+      <a href="index.html">Accueil</a><a href="demande-acces.html" aria-current="page">Demande d'accès</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
     </div>
   </div>
 </footer>
@@ -371,6 +399,11 @@
 
 <script>
   var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
+  /* Le scroll-behavior:auto posé en reduced-motion par v3.css NE s'applique PAS
+     à un behavior:'smooth' passé en JS — l'option JS l'emporte. Ce drapeau est
+     le seul moyen de respecter la préférence sur le seul mouvement scripté de
+     cette page. */
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var startedAt = Date.now();
   var labo = null, b2b = null;
 
@@ -407,6 +440,16 @@
     npv: function (v) { if (v === '') return true; var n = Number(v); return Number.isInteger(n) && n >= 0 && n <= 50; },
   };
   function rowOf(id) { return document.querySelector('.f-row[data-champ="' + id + '"]'); }
+  /* §7.6.4 d — le message d'erreur est ÉCRIT dans le DOM au moment où il
+     devient pertinent, et effacé quand il ne l'est plus. Faire seulement
+     varier son display ne déclenche jamais la région aria-live : l'erreur
+     s'affichait à l'écran sans être annoncée. */
+  function majMessage(row) {
+    var el = row.querySelector('.erreur-msg');
+    if (!el) return;
+    var attendu = row.classList.contains('invalide') ? (el.dataset.msg || '') : '';
+    if (el.textContent !== attendu) el.textContent = attendu;
+  }
   function valider(id, silencieux) {
     var el = document.getElementById(id);
     var ok = VALIDE[id](el.value);
@@ -420,6 +463,7 @@
       row.classList.remove('invalide');
       el.setAttribute('aria-invalid', 'false');
     }
+    majMessage(row);
     return ok;
   }
   ['nom', 'email', 'telephone', 'npv'].forEach(function (id) {
@@ -449,7 +493,9 @@
     var ok = VALIDE.nom(document.getElementById('nom').value)
       && VALIDE.email(document.getElementById('email').value)
       && VALIDE.telephone(tel.value);
-    document.getElementById('btn-continuer').disabled = !ok;
+    /* aria-disabled : le bouton reste tabulable et annonçable. Le blocage réel
+       est dans son gestionnaire de clic (§7.6.4 e). */
+    document.getElementById('btn-continuer').setAttribute('aria-disabled', ok ? 'false' : 'true');
     return ok;
   }
   var LIBELLE_ETAPE = { 1: 'Étape 1 sur 2 : vos coordonnées', 2: 'Étape 2 sur 2 : votre activité' };
@@ -463,15 +509,31 @@
   }
   document.getElementById('btn-continuer').addEventListener('click', function () {
     ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
-    if (majContinuer()) montrer(2);
+    if (majContinuer()) { montrer(2); return; }
+    /* Plutôt que de ne rien faire : on emmène l'utilisateur au premier champ
+       fautif. Sans cela, un utilisateur clavier atteignait la fin de l'étape 1
+       sans comprendre ce qui le bloquait. */
+    var fautif = ['nom', 'email', 'telephone'].filter(function (id) { return !VALIDE[id](document.getElementById(id).value); })[0];
+    if (fautif) document.getElementById(fautif).focus({ preventScroll: true });
   });
-  document.getElementById('btn-retour').addEventListener('click', function () { montrer(1); });
+  document.getElementById('btn-retour').addEventListener('click', function () {
+    montrer(1);
+    /* Le focus était sur #btn-retour, qui vit DANS #step2 : le masquer
+       renvoyait le focus sur <body>, sans annonce (WCAG 2.4.3). */
+    document.getElementById('nom').focus({ preventScroll: true });
+  });
 
   /* ── Boutons oui/non ── */
+  /* Le déclic est autorisé : ces deux questions sont FACULTATIVES, et sans lui
+     l'utilisateur ne pouvait plus revenir à « non répondu » après un premier
+     clic. Re-cliquer le bouton actif remet la valeur à null — ce que le
+     backend accepte (aLabo / interetB2b sont nullables). */
   function wireRadio(id, set) {
     document.querySelectorAll('#' + id + ' button').forEach(function (b) {
       b.addEventListener('click', function () {
+        var deja = b.getAttribute('aria-pressed') === 'true';
         document.querySelectorAll('#' + id + ' button').forEach(function (x) { x.classList.remove('on'); x.setAttribute('aria-pressed', 'false'); });
+        if (deja) { set(null); return; }
         b.classList.add('on');
         b.setAttribute('aria-pressed', 'true');
         set(b.getAttribute('data-v') === 'oui');
@@ -495,7 +557,7 @@
        bien que vider le style en ligne rendait le bandeau au repos — il ne
        s'est jamais affiché depuis la V2. Bug hérité, corrigé ici. */
     err.style.display = 'block';
-    err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    err.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'center' });
     err.focus({ preventScroll: true });
   }
   function lienWa(libelle) {

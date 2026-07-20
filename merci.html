@@ -50,9 +50,12 @@
 </svg>
 
 <!-- ══ NAVIGATION ══
-     Mêmes 4 entrées, même ordre, même markup que l'accueil et que
-     demande-acces.html. Seul le CTA « Demander un accès » est retiré : le
-     visiteur vient précisément de l'envoyer. -->
+     Mêmes 4 entrées, même ordre, même markup ET MÊME CTA que l'accueil et que
+     demande-acces.html. Le CTA avait été retiré ici au motif que le visiteur
+     vient de l'envoyer : le résultat était une barre différente sur 3 pages
+     sur 6, visible dès le premier clic. La cohérence du chrome l'emporte —
+     le lien reste utile (seconde demande, autre point de vente, arrivée
+     directe sur cette URL). -->
 <nav class="top scrolled" id="topnav">
   <div class="nav-inner">
     <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
@@ -62,7 +65,10 @@
       <a href="index.html#vos-donnees">Vos données</a>
       <a href="index.html#faq">FAQ</a>
     </div>
-    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div style="display:flex; align-items:center; gap:10px">
+      <a class="btn small" href="demande-acces.html">Demander un accès</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -76,6 +82,11 @@
       <!-- Les trois tuiles reprennent mot pour mot le bloc « #apres » de
            l'accueil et le volet nuit de demande-acces.html. Aucun délai chiffré
            tant que la notification admin n'est pas commandée (D5 / §6.2.6). -->
+      <!-- h2 intercalé : après le <h1> ci-dessus, les tuiles ouvraient
+           directement en h3 — seule rupture de hiérarchie de titres du site.
+           Il est en sr-only plutôt que visible pour ne pas changer la page :
+           passer les trois h3 en h2 les ferait rendre à la taille --t-h2. -->
+      <h2 class="sr-only">Ce qui se passe maintenant</h2>
       <div style="text-align:left; display:flex; flex-direction:column; gap:14px;">
         <div class="tuile"><h3>Un conseiller vous rappelle</h3><p>Un humain. Il écoute votre organisation&nbsp;: points de vente, laboratoire, vente aux professionnels.</p></div>
         <div class="tuile"><h3>Ensuite</h3><p>Il vous montre LabFlow en conditions réelles, sur des cas comme les vôtres — en français, en dinars.</p></div>
@@ -85,7 +96,7 @@
       <div style="margin-top:38px; display:flex; flex-direction:column; align-items:center; gap:16px;">
         <button type="button" class="btn-lecture" id="ouvrir-demo">
           <span class="btn-lecture__triangle" aria-hidden="true"><svg><use href="#ic-play"/></svg></span>
-          Voir la démonstration · 1 min 30
+          Voir la démonstration · 1 min 19
           <span class="poids">4 Mo, chargée au clic</span>
         </button>
         <p style="color:var(--encre-2); font-size:var(--t-petit); margin:0">En attendant votre conseiller, voici LabFlow en fonctionnement.</p>
@@ -97,11 +108,16 @@
   </section>
 </main>
 
+<!-- ══ PIED DE PAGE COMMUN ══
+     Bloc IDENTIQUE sur les 6 pages + 404.html : 5 entrées, ordre figé. La page
+     courante GARDE son entrée et porte aria-current="page" — l'omettre créait
+     six compositions différentes selon la page, et privait merci.html du lien
+     « Demande d'accès ». Toute modification se répercute sur les 7 fichiers. -->
 <footer>
   <div class="container foot">
     <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
     <div>
-      <a href="index.html">Accueil</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+      <a href="index.html">Accueil</a><a href="demande-acces.html">Demande d'accès</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
     </div>
   </div>
 </footer>
@@ -111,20 +127,48 @@
 <div class="demo-modale" id="demo-modale" role="dialog" aria-modal="true" aria-label="Démonstration de LabFlow" hidden>
   <button type="button" class="demo-fermer" id="fermer-demo" aria-label="Fermer la démonstration">✕</button>
   <div class="demo-cadre">
-    <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg?v=2">
-      <source src="assets/video/demo-60s-son.mp4?v=2" type="video/mp4">
+    <!-- <track> OBLIGATOIRE (WCAG 1.2.2, niveau A) : la vidéo est sonorisée.
+         Elle ne porte aucun commentaire parlé — la piste restitue donc le texte
+         à l'écran et ce que montre chaque plan. Le repli en toutes lettres
+         juste en dessous couvre 1.2.3. Bloc jumeau de celui d'index.html. -->
+    <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg?v=3">
+      <source src="assets/video/demo-60s-son.mp4?v=3" type="video/mp4">
+      <track kind="captions" src="assets/video/demo-60s-son.fr.vtt?v=3" srclang="fr" label="Français" default>
     </video>
     <!-- Chapitrage : data-t = ceil(entrée du plan + FONDU), FONDU = 0,45 s.
          Valeurs identiques à celles d'index.html — les modifier ici seul
-         désynchroniserait les deux lecteurs. -->
+         désynchroniserait les deux lecteurs.
+         RECALCULÉS le 20/07/2026 après tools/video/recouper.js (89,80 → 78,80 s). -->
     <div class="chapitres">
       <button type="button" class="chapitre" data-t="5" aria-label="Lire à partir de 0 min 5 — Tableau de bord"><span class="tc">0:05</span> Tableau de bord</button>
       <button type="button" class="chapitre" data-t="16" aria-label="Lire à partir de 0 min 16 — Stock valorisé"><span class="tc">0:16</span> Stock valorisé</button>
-      <button type="button" class="chapitre" data-t="42" aria-label="Lire à partir de 0 min 42 — Fiche technique du mille-feuille"><span class="tc">0:42</span> Fiche technique du mille-feuille</button>
-      <button type="button" class="chapitre" data-t="58" aria-label="Lire à partir de 0 min 58 — Transferts du labo"><span class="tc">0:58</span> Transferts du labo</button>
-      <button type="button" class="chapitre" data-t="74" aria-label="Lire à partir de 1 min 14 — L'espace de votre client pro"><span class="tc">1:14</span> L'espace de votre client pro</button>
-      <button type="button" class="chapitre" data-t="80" aria-label="Lire à partir de 1 min 20 — Commandes et facture"><span class="tc">1:20</span> Commandes et facture</button>
+      <button type="button" class="chapitre" data-t="37" aria-label="Lire à partir de 0 min 37 — Fiche technique du mille-feuille"><span class="tc">0:37</span> Fiche technique du mille-feuille</button>
+      <button type="button" class="chapitre" data-t="47" aria-label="Lire à partir de 0 min 47 — Transferts du labo"><span class="tc">0:47</span> Transferts du labo</button>
+      <button type="button" class="chapitre" data-t="63" aria-label="Lire à partir de 1 min 3 — L'espace de votre client pro"><span class="tc">1:03</span> L'espace de votre client pro</button>
+      <button type="button" class="chapitre" data-t="69" aria-label="Lire à partir de 1 min 9 — Commandes et facture"><span class="tc">1:09</span> Commandes et facture</button>
     </div>
+    <details class="transcription">
+      <summary>Lire la transcription de la démonstration</summary>
+      <p>La démonstration ne comporte aucun commentaire parlé&nbsp;: la bande-son est une nappe musicale. Voici, dans l'ordre, ce que montre chaque plan.</p>
+      <ol>
+        <li><b>0:00</b> — Carton d'ouverture&nbsp;: «&nbsp;Tout votre labo. Un seul système.&nbsp;»</li>
+        <li><b>0:04</b> — Le tableau de bord&nbsp;: chiffre d'affaires, marge brute, marge après commissions, pertes, sur la période choisie.</li>
+        <li><b>0:09</b> — Carton&nbsp;: «&nbsp;Vous savez faire. Mais savez-vous ce que ça vous rapporte&nbsp;?&nbsp;»</li>
+        <li><b>0:15</b> — Le stock du jour valorisé&nbsp;: quantité, coût HT et TTC, article par article.</li>
+        <li><b>0:21</b> — L'historique d'approvisionnement exporté en Excel&nbsp;: date, ingrédient, quantité, prix, TVA, fournisseur, référence de facture.</li>
+        <li><b>0:26</b> — Carton&nbsp;: «&nbsp;De la matière première au produit vendu.&nbsp;»</li>
+        <li><b>0:29</b> — Le catalogue des produits, chacun avec sa composition et son coût réel.</li>
+        <li><b>0:37</b> — La fiche technique du mille-feuille&nbsp;: la recette descend jusqu'aux sous-recettes, au choix en Dernier Prix ou en Prix Moyen Pondéré.</li>
+        <li><b>0:42</b> — Carton&nbsp;: «&nbsp;Chaque transfert est valorisé, tracé, facturé.&nbsp;»</li>
+        <li><b>0:47</b> — L'historique des transferts du laboratoire vers les points de vente, chaque ligne valorisée au coût réel.</li>
+        <li><b>0:53</b> — Le même historique exporté en Excel, avec le logo de l'entreprise sur le fichier.</li>
+        <li><b>0:58</b> — Carton&nbsp;: vos clients professionnels commandent seuls, à leurs tarifs négociés.</li>
+        <li><b>1:03</b> — Le catalogue tel que le voit un client professionnel&nbsp;: ses tarifs, ses quantités, son panier.</li>
+        <li><b>1:08</b> — Le suivi des ventes aux professionnels&nbsp;: chaque commande, son état, sa facture.</li>
+        <li><b>1:13</b> — Carton de clôture&nbsp;: «&nbsp;Votre système vous attend.&nbsp;»</li>
+      </ol>
+      <p>Tous les écrans proviennent du compte de démonstration Dar Yasmine.</p>
+    </details>
   </div>
 </div>
 
@@ -151,11 +195,14 @@ if (burger) {
   if (!modale) return;
   var dernierFocus = null;
   function focusables() {
-    return Array.prototype.slice.call(modale.querySelectorAll('button, video[controls]'))
+    return Array.prototype.slice.call(modale.querySelectorAll('button, summary, video[controls]'))
       .filter(function (e) { return e.offsetParent !== null || e === video; });
   }
   function ouvre(t) {
-    dernierFocus = document.activeElement;
+    /* dernierFocus est posé par l'appelant (bouton d'ouverture ou chapitre).
+       L'écraser ici par document.activeElement faisait perdre le retour de
+       focus dès que l'ouverture ne venait pas d'un clic souris. */
+    if (!dernierFocus) dernierFocus = document.activeElement;
     modale.hidden = false;
     document.body.style.overflow = 'hidden';
     if (typeof t === 'number') { try { video.currentTime = t; } catch (e) {} }
@@ -167,6 +214,7 @@ if (burger) {
     modale.hidden = true;
     document.body.style.overflow = '';
     if (dernierFocus) dernierFocus.focus();
+    dernierFocus = null;
   }
   var ouvrir = document.getElementById('ouvrir-demo');
   if (ouvrir) ouvrir.addEventListener('click', function () { dernierFocus = ouvrir; ouvre(); });

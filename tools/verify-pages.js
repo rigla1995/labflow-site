@@ -29,9 +29,11 @@ const PAGES = [
 // Le canonical ne concerne PAS 404.html (§3.3 / §6.1 du brief).
 const SANS_CANONICAL = ['/404.html'];
 const BASE = 'http://localhost:8322';
-// §9.4 — durée réelle de assets/video/demo-60s-son.mp4, mesurée à 89,80 s.
+// §9.4 — durée réelle de assets/video/demo-60s-son.mp4, mesurée à 78,80 s
+// depuis le recoupage du 20/07/2026 (tools/video/recouper.js : retrait des plans
+// 05-principe et 16-excel-fiche, clôture refaite sans « Réponse sous 24 h »).
 // Toute remontée de la vidéo invalide les 6 data-t des chapitres.
-const DUREE_VIDEO_ATTENDUE = 89.8;
+const DUREE_VIDEO_ATTENDUE = 78.8;
 const BUDGET_PREMIERE_VUE = 500;     // Ko, §13.6
 const MENTION_DEMO = 'Compte de démonstration Dar Yasmine';
 

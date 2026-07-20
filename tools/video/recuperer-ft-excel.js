@@ -1,16 +1,40 @@
 /**
- * Récupère une VRAIE fiche technique au format Excel depuis l'application
- * (mille-feuille du compte de démonstration) → assets/files/fiche-technique-exemple.xlsx
+ * ⛔ NEUTRALISÉ — NE PAS RELANCER EN L'ÉTAT (décision client D5, 20/07/2026).
  *
- * Elle sert à la fois de troisième export filmé dans la vidéo et de fichier de
- * preuve téléchargeable sur le site.
+ * Ce script récupérait une fiche technique Excel depuis l'application
+ * (mille-feuille du compte de démonstration) vers
+ * assets/files/fiche-technique-exemple.xlsx.
+ *
+ * Le fichier produit est FAUX : 5 ingrédients sur 9 y ressortent à 0 dinar
+ * (12 cellules <v>0</v> dans xl/worksheets/sheet1.xml), parce que le compte de
+ * démonstration n'a pas de prix sur ces articles. D5 ordonne de ne l'exposer
+ * nulle part — il a été retiré du dépôt (`git rm`), la section preuve est
+ * passée à 3 tuiles, et le plan qui le filmait a été coupé du montage
+ * (tools/video/recouper.js).
+ *
+ * Le laisser exécutable, c'était garantir sa réapparition à la prochaine
+ * régénération d'actifs. Pour le remettre en service il faut D'ABORD valoriser
+ * les articles manquants sur le compte Dar Yasmine, PUIS retirer la garde
+ * ci-dessous et vérifier le fichier obtenu cellule par cellule.
+ *
+ * La sortie est en outre redirigée hors de assets/ : même relancé de force, le
+ * script ne peut plus republier le fichier sur le site.
  */
 const fs = require('fs');
 const path = require('path');
 
+if (!process.env.LABFLOW_FT_EXCEL_VERIFIEE) {
+  console.error('⛔ Script neutralisé (D5) : le fichier produit contient des lignes à 0 DT.');
+  console.error('   Corriger les prix sur le compte de démonstration, puis relancer avec');
+  console.error('   LABFLOW_FT_EXCEL_VERIFIEE=1 — et vérifier le résultat cellule par cellule.');
+  process.exit(1);
+}
+
 const API = 'http://localhost:3000';
 const CLIENT = { email: 'demo@dar-yasmine.tn', password: 'DemoVitrine2026!' };
-const DST = path.join(__dirname, '..', '..', 'assets', 'files', 'fiche-technique-exemple.xlsx');
+// Sortie HORS de assets/ : le Dockerfile embarque `assets` en entier, écrire
+// là remettrait le fichier en ligne à /assets/files/…
+const DST = path.join(__dirname, 'check', 'fiche-technique-exemple.xlsx');
 
 (async () => {
   const r = await fetch(`${API}/auth/login`, {

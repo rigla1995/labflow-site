@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Combien coûte LabFlow ? — ce qui compose votre devis</title>
 <!-- ≤ 155 caractères (critère §12 Lot 5) : la version longue (271 car.) était
-     tronquée en SERP au milieu de l'énumération. Le détail reste dans la page. -->
+     tronquée dans les résultats Google au milieu de l'énumération. Le détail
+     reste dans la page. -->
 <meta name="description" content="Il n'y a pas de prix unique : votre devis se compose à partir de votre organisation réelle. Voici ce qui le fait varier, et ce qui est compris.">
 <meta property="og:title" content="Combien coûte LabFlow ?">
 <meta property="og:description" content="Pas de prix unique, parce qu'il serait faux pour presque tout le monde. Voici ce qui compose un devis LabFlow. Demandez un accès : un conseiller vous rappelle.">
@@ -81,8 +82,13 @@
   </div>
 </nav>
 
-<!-- ══ EN-TÊTE ══ -->
-<header class="hero" id="top" style="padding-bottom:20px">
+<!-- ══ EN-TÊTE ══
+     Le <main> englobe l'en-tête et toutes les sections jusqu'à la FAQ coût :
+     sans lui, un lecteur d'écran n'a aucun repère « contenu principal » et le
+     lien d'évitement pointait sur un <header>. tabindex="-1" est requis pour
+     que Safari déplace réellement le focus sur la cible du lien. -->
+<main id="top" tabindex="-1">
+<header class="hero" style="padding-bottom:20px">
   <div class="container">
     <div class="eyebrow"><i></i>Le devis — en dinars tunisiens</div>
     <h1 style="max-width:16ch">Combien coûte LabFlow&nbsp;?</h1>
@@ -210,6 +216,7 @@
     <p class="sec-intro rev" style="margin-top:26px">Les autres questions — comment ça marche, qui saisit, ce que voient vos gérants — sont réunies ici&nbsp;: <a href="index.html#faq">la FAQ complète</a>.</p>
   </div>
 </section>
+</main>
 
 <!-- ══ CTA FINAL (zone nuit) ══ -->
 <div class="zone-nuit cta-final" data-zone="nuit" id="cta">
@@ -234,6 +241,11 @@
   </div>
 </div>
 
+<!-- ══ PIED DE PAGE COMMUN ══
+     Bloc IDENTIQUE sur les 6 pages + 404.html : 5 entrées, ordre figé. La page
+     courante GARDE son entrée et porte aria-current="page" — l'omettre créait
+     six compositions différentes selon la page, et privait merci.html du lien
+     « Demande d'accès ». Toute modification se répercute sur les 7 fichiers. -->
 <footer>
   <div class="container foot">
     <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>

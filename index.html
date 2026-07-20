@@ -90,8 +90,13 @@
   </div>
 </nav>
 
-<!-- ══ SECTION 1 — HERO ══ -->
-<header class="hero" id="top">
+<!-- ══ SECTION 1 — HERO ══
+     Le <main> englobe le hero et toutes les sections jusqu'à la FAQ : sans lui,
+     un lecteur d'écran n'a aucun repère « contenu principal » et le lien
+     d'évitement pointait sur un <header>. tabindex="-1" est requis pour que
+     Safari déplace réellement le focus sur la cible du lien. -->
+<main id="top" tabindex="-1">
+<header class="hero">
   <div class="container hero-grid">
     <div>
       <div class="eyebrow"><i></i>Logiciel de gestion des achats, du stock et des ventes — conçu en Tunisie</div>
@@ -102,7 +107,7 @@
         <a class="btn" href="demande-acces.html">Demander un accès</a>
         <button type="button" class="btn-lecture" id="ouvrir-demo">
           <span class="btn-lecture__triangle" aria-hidden="true"><svg><use href="#ic-play"/></svg></span>
-          Voir la démo · 1 min 30
+          Voir la démo · 1 min 19
           <span class="poids">4 Mo, chargée au clic</span>
         </button>
       </div>
@@ -175,16 +180,23 @@
     <p class="sec-intro rev">Ce n'est pas un résumé&nbsp;: jusqu'à six onglets — vous n'avez que ceux qui correspondent à votre configuration — chacun répondant à une question précise, sur la période que vous choisissez. <strong>Les indicateurs de la vue d'ensemble sont comparés à la même période d'avant</strong>, pour que vous voyiez tout de suite si ça monte ou si ça descend.</p>
 
     <!-- Citations littérales de l'interface : les libellés et leurs emoji sont
-         ceux de l'application. Les pastilles ne sont PAS cliquables. -->
+         ceux de l'application. Les pastilles ne sont PAS cliquables.
+         Chaque emoji est aria-hidden : lu à voix haute, « graphique à barres
+         Vue d'ensemble » parasite l'énoncé sans rien apporter. -->
     <div class="rev">
-      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill onglet-pill--actif">📊 Vue d'ensemble</span> Où j'en suis, tout compris&nbsp;?</p>
-      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill">💰 Ventes &amp; marges</span> Qu'est-ce qui me reste, canal par canal&nbsp;?</p>
-      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill">📦 Achats &amp; stock</span> Combien j'ai acheté, et à qui&nbsp;?</p>
+      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill onglet-pill--actif"><span aria-hidden="true">📊</span> Vue d'ensemble</span> Où j'en suis, tout compris&nbsp;?</p>
+      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill"><span aria-hidden="true">💰</span> Ventes &amp; marges</span> Qu'est-ce qui me reste, canal par canal&nbsp;?</p>
+      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill"><span aria-hidden="true">📦</span> Achats &amp; stock</span> Combien j'ai acheté, et à qui&nbsp;?</p>
       <details>
         <summary>Voir les six onglets</summary>
-        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill">🗑️ Pertes</span> Combien la casse m'a coûté&nbsp;?</p>
-        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill">🧪 Labo</span> Mon labo produit-il au bon coût&nbsp;?</p>
-        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap"><span class="onglet-pill">🤝 Acheteurs (B2B)</span> Mes clients pros, ils pèsent combien&nbsp;?</p>
+        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill"><span aria-hidden="true">🗑️</span> Pertes</span> Combien la casse m'a coûté&nbsp;?</p>
+        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill"><span aria-hidden="true">🧪</span> Labo</span> Mon labo produit-il au bon coût&nbsp;?</p>
+        <!-- « B2B » brut est proscrit par la table §11.4 au profit de « vos clients
+             professionnels ». EXCEPTION ASSUMÉE ici : c'est le libellé littéral de
+             l'onglet dans l'application (ClientDashboard.tsx, { key: 'acheteurs',
+             icon: '🤝', label: 'Acheteurs (B2B)' }), et ce bloc cite l'interface.
+             La glose qui suit la pastille dit, elle, « clients pros ». -->
+        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap"><span class="onglet-pill"><span aria-hidden="true">🤝</span> Acheteurs (B2B)</span> Mes clients pros, ils pèsent combien&nbsp;?</p>
       </details>
     </div>
 
@@ -233,18 +245,29 @@
     <!-- D5 — Les valeurs "après hausse" de la V2 (2,290 DT/kg ; 66,7 %) sont FAUSSES :
          2,290 n'apparaît dans aucune ligne d'export-excel-exemple.xlsx, et 66,7 % était la
          marge brute globale du compte, pas la marge d'un croissant. Elles sont RETIREES.
-         Les montants "après" restent à recalculer sur le compte Dar Yasmine avant mise en ligne. -->
+         Les montants "après" restent à recalculer sur le compte Dar Yasmine avant mise en ligne.
+
+         Les DEUX montants qui subsistent sont des valeurs ACTUELLES, pas des résultats de
+         recalcul, et chacun est attesté par un fichier publié dans #preuves :
+           • 2,037 DT/kg — farine pâtissière, prix unitaire TTC, présent dans
+             export-excel-exemple.xlsx (xl/worksheets/sheet1.xml).
+           • 1,375 DT   — croissant au beurre, valorisé au coût réel, présent dans
+             export-transferts-exemple.xlsx (les transferts sont valorisés à ce que la
+             marchandise a coûté : c'est bien le coût de revient du croissant).
+         Ils sont étiquetés « aujourd'hui » et NE SONT PLUS animés en count-up : une
+         animation « 0 → valeur » mettait en scène un recalcul qui n'a pas eu lieu et
+         faisait lire deux chiffres d'AVANT comme des chiffres d'APRÈS. -->
     <div class="cascade" id="cascade">
       <div class="tuile maillon" data-m="1">
-        <div class="etiquette">Le prix que vous payez</div>
-        <div class="valeur"><span class="apres dt" data-count="0|2.037|3">2,037</span> <span style="font-size:0.6em">DT/kg</span></div>
+        <div class="etiquette">Le prix que vous payez aujourd'hui</div>
+        <div class="valeur"><span class="valeur-actuelle dt">2,037</span> <span style="font-size:0.6em">DT/kg</span></div>
         <div class="detail">Vous saisissez la livraison. C'est le seul geste.</div>
       </div>
       <div class="chevron" aria-hidden="true">→</div>
       <div class="tuile maillon" data-m="2">
-        <div class="etiquette">Le coût de votre croissant</div>
-        <div class="valeur"><span class="apres dt" data-count="0|1.375|3">1,375</span> <span style="font-size:0.6em">DT</span></div>
-        <div class="detail">La recette est recalculée le soir même, sans que vous la rouvriez.</div>
+        <div class="etiquette">Ce que votre croissant vous coûte aujourd'hui</div>
+        <div class="valeur"><span class="valeur-actuelle dt">1,375</span> <span style="font-size:0.6em">DT</span></div>
+        <div class="detail">La recette est recalculée automatiquement, sans que vous la rouvriez.</div>
       </div>
       <div class="chevron" aria-hidden="true">→</div>
       <div class="tuile maillon" data-m="3">
@@ -389,9 +412,10 @@
       <p class="sec-intro" style="margin-top:8px">Pour chaque produit, LabFlow vous sort la fiche complète&nbsp;: la recette avec ses sous-recettes, le coût de chaque composant, le coût total — un fichier Excel par point de vente ou par labo. Le fichier vous donne le prix retenu pour chaque composant, ligne par ligne&nbsp;: vous voyez d'un coup d'œil ce qui est valorisé et ce qui ne l'est pas encore.</p>
     </div>
 
-    <!-- (e) Le rappel vidéo -->
+    <!-- (e) Le rappel vidéo — data-t recalculé après le recoupage de la
+         démonstration (tools/video/recouper.js) : 0:42 → 0:37. -->
     <p class="sec-intro rev" style="margin-top:34px">Vous préférez voir&nbsp;? La fiche technique du mille-feuille, en mouvement, à
-      <button type="button" class="lien-ghost js-chapitre" data-t="42" style="background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline" aria-label="Lire à partir de 0 min 42 — Fiche technique du mille-feuille">0:42 de la démonstration</button>
+      <button type="button" class="lien-ghost js-chapitre" data-t="37" style="background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline" aria-label="Lire à partir de 0 min 37 — Fiche technique du mille-feuille">0:37 de la démonstration</button>
     </p>
 
     <p class="mention-demo" style="margin-top:40px">Cet espace fait partie des options que l'on active selon votre configuration&nbsp;; on en parle lors du premier échange.</p>
@@ -416,6 +440,11 @@
         <h3>Vers vos clients pros</h3>
         <p class="sec-intro" style="margin-top:8px"><em>Pour que ce que vous vendez aux professionnels soit vrai.</em></p>
         <p class="sec-intro">Vos clients professionnels — un hôtel, une épicerie fine, un autre restaurant — commandent seuls sur leur propre espace, à leurs tarifs négociés, à l'heure qui les arrange. Vous suivez chaque commande en quatre étapes&nbsp;: en attente, expédiée, livrée — annulée si besoin.</p>
+        <!-- La mention d'option porte sur CE bloc seul : les transferts labo →
+             points de vente, colonne de gauche, viennent avec le laboratoire et
+             ne sont pas optionnels. Placée en bas de section, elle laissait lire
+             l'inverse. -->
+        <p class="mention-demo" style="margin-top:14px">Cet espace fait partie des options que l'on active selon votre configuration&nbsp;; on en parle lors du premier échange.</p>
       </div>
     </div>
 
@@ -455,8 +484,6 @@
       </picture>
       <figcaption>Les quatre états d'une commande, du dépôt à la livraison. Compte de démonstration Dar Yasmine.</figcaption>
     </figure>
-
-    <p class="mention-demo rev" style="margin-top:34px">Cet espace fait partie des options que l'on active selon votre configuration&nbsp;; on en parle lors du premier échange.</p>
   </div>
 </section>
 
@@ -522,7 +549,7 @@
     <p class="rev" style="margin-top:26px">
       <button type="button" class="btn-lecture" id="ouvrir-demo-2">
         <span class="btn-lecture__triangle" aria-hidden="true"><svg><use href="#ic-play"/></svg></span>
-        Voir la démo · 1 min 30
+        Voir la démo · 1 min 19
         <span class="poids">4 Mo, chargée au clic</span>
       </button>
     </p>
@@ -531,7 +558,9 @@
       <svg class="ico" aria-hidden="true"><use href="#ic-ampoule"/></svg>
       <span>Toutes les captures de ce site sortent d'un compte de démonstration réel, montants en dinars. Aucun chiffre client inventé.</span>
     </div>
-    <div class="partenaires-row" id="partenaires" style="display:none" aria-label="Ils utilisent LabFlow"></div>
+    <!-- role="group" : un aria-label posé sur un <div> nu est ignoré par la
+         plupart des lecteurs d'écran. -->
+    <div class="partenaires-row" id="partenaires" style="display:none" role="group" aria-label="Ils utilisent LabFlow"></div>
   </div>
 </section>
 
@@ -594,8 +623,12 @@
     <h2 class="rev">Si vous achetez, stockez et vendez.</h2>
     <p class="sec-intro rev">Un plat, un gâteau, un sandwich, une découpe — ou simplement un article que vous revendez tel quel&nbsp;: si vous achetez de la marchandise, que vous la stockez et que vous la vendez, LabFlow tient vos comptes. <strong>Et si vous la transformez avant de la vendre</strong>, il vous donne en plus le prix de revient exact de ce que vous fabriquez.</p>
     <p class="sec-intro rev">LabFlow est né dans les métiers de bouche, là où le calcul de marge est le plus exigeant — c'est ce qui le rend précis partout ailleurs. Et plus largement, il s'adresse à tout commerce qui achète, stocke et vend.</p>
-    <div class="metier-pills rev" aria-label="Métiers couverts par LabFlow">
-      <span>Restaurant</span><span>Café &amp; salon de thé</span><span>Boulangerie &amp; pâtisserie</span><span>Boucherie</span><span>Traiteur</span><span>Labo &amp; dépôt</span><span>Autre métier de la transformation</span>
+    <!-- « Exemples de » et non « couverts par » : la liste illustre, elle
+         n'affirme pas une couverture. Dernière pastille ouverte au commerce
+         sans transformation, sinon elle refermait la porte que D2 vient
+         d'ouvrir. Aucune verticale non alimentaire n'est nommée (D2). -->
+    <div class="metier-pills rev" role="group" aria-label="Exemples de métiers">
+      <span>Restaurant</span><span>Café &amp; salon de thé</span><span>Boulangerie &amp; pâtisserie</span><span>Boucherie</span><span>Traiteur</span><span>Labo &amp; dépôt</span><span>Autre commerce qui achète et revend</span>
     </div>
   </div>
 </section>
@@ -677,6 +710,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <!-- ══ SECTION 15 — CTA FINAL (nuit 3) ══ -->
 <div class="zone-nuit cta-final" data-zone="nuit" id="cta">
@@ -702,11 +736,16 @@
   </div>
 </div>
 
+<!-- ══ PIED DE PAGE COMMUN ══
+     Bloc IDENTIQUE sur les 6 pages + 404.html : 5 entrées, ordre figé. La page
+     courante GARDE son entrée et porte aria-current="page" — l'omettre créait
+     six compositions différentes selon la page, et privait merci.html du lien
+     « Demande d'accès ». Toute modification se répercute sur les 7 fichiers. -->
 <footer>
   <div class="container foot">
     <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
     <div>
-      <a href="demande-acces.html">Demande d'accès</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+      <a href="index.html" aria-current="page">Accueil</a><a href="demande-acces.html">Demande d'accès</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
     </div>
   </div>
 </footer>
@@ -718,19 +757,50 @@
     <!-- MP4 d'abord : sur cette vidéo, le H.264 est plus léger que le VP9
          (4,0 Mo contre 6,3), et le fichier doit se télécharger vite — Cloudflare
          met la vidéo en cache et ne répond pas aux requêtes partielles. -->
-    <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg?v=2">
-      <source src="assets/video/demo-60s-son.mp4?v=2" type="video/mp4">
+    <!-- <track> OBLIGATOIRE (WCAG 1.2.2, niveau A) : la vidéo est sonorisée.
+         Elle ne porte aucun commentaire parlé — la piste restitue donc le texte
+         à l'écran et ce que montre chaque plan. Le repli en toutes lettres
+         juste en dessous couvre 1.2.3 (alternative textuelle au visuel). -->
+    <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg?v=3">
+      <source src="assets/video/demo-60s-son.mp4?v=3" type="video/mp4">
+      <track kind="captions" src="assets/video/demo-60s-son.fr.vtt?v=3" srclang="fr" label="Français" default>
     </video>
     <!-- Chapitrage : data-t = ceil(entrée du plan + FONDU), FONDU = 0,45 s.
-         Toute remontée de la vidéo impose de recalculer les six valeurs. -->
+         Toute remontée de la vidéo impose de recalculer les six valeurs.
+         RECALCULÉS le 20/07/2026 après tools/video/recouper.js (89,80 → 78,80 s,
+         deux plans retirés) : 42→37, 58→47, 74→63, 80→69. Les deux premiers
+         chapitres précèdent la première coupe et sont donc inchangés.
+         Valeurs jumelles de celles de merci.html — les deux doivent bouger ensemble. -->
     <div class="chapitres">
       <button type="button" class="chapitre" data-t="5" aria-label="Lire à partir de 0 min 5 — Tableau de bord"><span class="tc">0:05</span> Tableau de bord</button>
       <button type="button" class="chapitre" data-t="16" aria-label="Lire à partir de 0 min 16 — Stock valorisé"><span class="tc">0:16</span> Stock valorisé</button>
-      <button type="button" class="chapitre" data-t="42" aria-label="Lire à partir de 0 min 42 — Fiche technique du mille-feuille"><span class="tc">0:42</span> Fiche technique du mille-feuille</button>
-      <button type="button" class="chapitre" data-t="58" aria-label="Lire à partir de 0 min 58 — Transferts du labo"><span class="tc">0:58</span> Transferts du labo</button>
-      <button type="button" class="chapitre" data-t="74" aria-label="Lire à partir de 1 min 14 — L'espace de votre client pro"><span class="tc">1:14</span> L'espace de votre client pro</button>
-      <button type="button" class="chapitre" data-t="80" aria-label="Lire à partir de 1 min 20 — Commandes et facture"><span class="tc">1:20</span> Commandes et facture</button>
+      <button type="button" class="chapitre" data-t="37" aria-label="Lire à partir de 0 min 37 — Fiche technique du mille-feuille"><span class="tc">0:37</span> Fiche technique du mille-feuille</button>
+      <button type="button" class="chapitre" data-t="47" aria-label="Lire à partir de 0 min 47 — Transferts du labo"><span class="tc">0:47</span> Transferts du labo</button>
+      <button type="button" class="chapitre" data-t="63" aria-label="Lire à partir de 1 min 3 — L'espace de votre client pro"><span class="tc">1:03</span> L'espace de votre client pro</button>
+      <button type="button" class="chapitre" data-t="69" aria-label="Lire à partir de 1 min 9 — Commandes et facture"><span class="tc">1:09</span> Commandes et facture</button>
     </div>
+    <details class="transcription">
+      <summary>Lire la transcription de la démonstration</summary>
+      <p>La démonstration ne comporte aucun commentaire parlé&nbsp;: la bande-son est une nappe musicale. Voici, dans l'ordre, ce que montre chaque plan.</p>
+      <ol>
+        <li><b>0:00</b> — Carton d'ouverture&nbsp;: «&nbsp;Tout votre labo. Un seul système.&nbsp;»</li>
+        <li><b>0:04</b> — Le tableau de bord&nbsp;: chiffre d'affaires, marge brute, marge après commissions, pertes, sur la période choisie.</li>
+        <li><b>0:09</b> — Carton&nbsp;: «&nbsp;Vous savez faire. Mais savez-vous ce que ça vous rapporte&nbsp;?&nbsp;»</li>
+        <li><b>0:15</b> — Le stock du jour valorisé&nbsp;: quantité, coût HT et TTC, article par article.</li>
+        <li><b>0:21</b> — L'historique d'approvisionnement exporté en Excel&nbsp;: date, ingrédient, quantité, prix, TVA, fournisseur, référence de facture.</li>
+        <li><b>0:26</b> — Carton&nbsp;: «&nbsp;De la matière première au produit vendu.&nbsp;»</li>
+        <li><b>0:29</b> — Le catalogue des produits, chacun avec sa composition et son coût réel.</li>
+        <li><b>0:37</b> — La fiche technique du mille-feuille&nbsp;: la recette descend jusqu'aux sous-recettes, au choix en Dernier Prix ou en Prix Moyen Pondéré.</li>
+        <li><b>0:42</b> — Carton&nbsp;: «&nbsp;Chaque transfert est valorisé, tracé, facturé.&nbsp;»</li>
+        <li><b>0:47</b> — L'historique des transferts du laboratoire vers les points de vente, chaque ligne valorisée au coût réel.</li>
+        <li><b>0:53</b> — Le même historique exporté en Excel, avec le logo de l'entreprise sur le fichier.</li>
+        <li><b>0:58</b> — Carton&nbsp;: vos clients professionnels commandent seuls, à leurs tarifs négociés.</li>
+        <li><b>1:03</b> — Le catalogue tel que le voit un client professionnel&nbsp;: ses tarifs, ses quantités, son panier.</li>
+        <li><b>1:08</b> — Le suivi des ventes aux professionnels&nbsp;: chaque commande, son état, sa facture.</li>
+        <li><b>1:13</b> — Carton de clôture&nbsp;: «&nbsp;Votre système vous attend.&nbsp;»</li>
+      </ol>
+      <p>Tous les écrans proviennent du compte de démonstration Dar Yasmine.</p>
+    </details>
   </div>
 </div>
 
@@ -834,12 +904,25 @@ addEventListener('scroll', function () {
   if (!modale) return;
   var dernierFocus = null;
   function focusables() {
-    return Array.prototype.slice.call(modale.querySelectorAll('button, video[controls]'))
+    return Array.prototype.slice.call(modale.querySelectorAll('button, summary, video[controls]'))
       .filter(function (e) { return e.offsetParent !== null || e === video; });
   }
+  /* Le reste de la page passe en `inert` pendant l'ouverture : le piégeage du
+     focus par Tab ne suffit pas (survol, lecteur d'écran en mode virtuel,
+     retour depuis la barre d'URL — activeElement vaut alors <body>). */
+  function inerte(on) {
+    document.querySelectorAll('body > *').forEach(function (n) {
+      if (n === modale || n.tagName === 'SCRIPT') return;
+      n.inert = on;
+    });
+  }
   function ouvre(t) {
-    dernierFocus = document.activeElement;
+    /* dernierFocus est posé par l'appelant (bouton d'ouverture ou chapitre).
+       L'écraser ici par document.activeElement faisait perdre le retour de
+       focus dès que l'ouverture ne venait pas d'un clic souris. */
+    if (!dernierFocus) dernierFocus = document.activeElement;
     modale.hidden = false;
+    inerte(true);
     document.body.style.overflow = 'hidden';
     if (typeof t === 'number') { try { video.currentTime = t; } catch (e) {} }
     video.play().catch(function () {});
@@ -848,8 +931,10 @@ addEventListener('scroll', function () {
   function ferme() {
     video.pause();
     modale.hidden = true;
+    inerte(false);
     document.body.style.overflow = '';
     if (dernierFocus) dernierFocus.focus();
+    dernierFocus = null;
   }
   ['ouvrir-demo', 'ouvrir-demo-2'].forEach(function (id) {
     var b = document.getElementById(id);
@@ -864,6 +949,9 @@ addEventListener('scroll', function () {
     var f = focusables();
     if (!f.length) return;
     var premier = f[0], dernier = f[f.length - 1];
+    /* Filet : si le focus a fui hors de la modale, on le ramène au lieu de
+       laisser Tab repartir dans la page de fond. */
+    if (!modale.contains(document.activeElement)) { e.preventDefault(); premier.focus(); return; }
     if (e.shiftKey && document.activeElement === premier) { e.preventDefault(); dernier.focus(); }
     else if (!e.shiftKey && document.activeElement === dernier) { e.preventDefault(); premier.focus(); }
   });
@@ -939,7 +1027,11 @@ if (location.port !== '8322') {
     list.forEach(function (p) {
       var d = document.createElement('div');
       d.className = 'plogo';
-      d.innerHTML = '<img src="' + p.logo + '" alt="' + p.nom.replace(/"/g, '&quot;') + '" style="max-height:40px; max-width:120px; object-fit:contain"><span>' + p.nom.replace(/</g, '&lt;') + '</span>';
+      /* width/height OBLIGATOIRES : seule <img> du site insérée après coup,
+         donc seule source possible de décalage de mise en page (CLS). */
+      d.innerHTML = '<img src="' + p.logo + '" alt="' + p.nom.replace(/"/g, '&quot;') + '"'
+        + ' width="120" height="40" loading="lazy" decoding="async"'
+        + ' style="max-height:40px; max-width:120px; object-fit:contain"><span>' + p.nom.replace(/</g, '&lt;') + '</span>';
       row.appendChild(d);
     });
     row.style.display = '';

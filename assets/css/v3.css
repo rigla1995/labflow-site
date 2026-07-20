@@ -128,7 +128,10 @@
    2. BASE
    ============================================================ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+/* scroll-padding-bottom : .sticky-cta est fixée en bas sous 900 px. Sans cette
+   réserve, un lien atteint au clavier en bas de fenêtre se retrouve DERRIÈRE
+   la barre — l'élément focalisé doit rester visible (WCAG 2.4.11). */
+html { scroll-behavior: smooth; scroll-padding-top: 76px; scroll-padding-bottom: 84px; }
 body {
   font-family: var(--font-corps);
   font-size: var(--t-corps);
@@ -548,7 +551,9 @@ section { padding: var(--sec-y) 0; }
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
 }
 .demo-modale[hidden] { display: none; }
-.demo-cadre { width: 100%; max-width: 1080px; }
+/* max-height + overflow : la transcription dépliée peut dépasser la fenêtre.
+   C'est le cadre qui défile, la modale reste centrée. */
+.demo-cadre { width: 100%; max-width: 1080px; max-height: 100%; overflow-y: auto; }
 .demo-cadre video {
   width: 100%; border-radius: 14px; display: block; background: #000;
   box-shadow: 0 30px 80px rgba(0,0,0,.6);
@@ -578,6 +583,20 @@ section { padding: var(--sec-y) 0; }
 .chapitre:hover { border-color: var(--focus-nuit); }
 .chapitre.en-cours { background: var(--surface-nuit); border-color: var(--focus-nuit); }
 .chapitre.en-cours .tc { color: var(--texte-nuit); }
+
+/* Transcription de la démonstration — alternative textuelle exigée par
+   WCAG 1.2.3, la vidéo ne portant aucun commentaire parlé. Repliée par
+   défaut : elle ne doit pas concurrencer le lecteur. */
+.transcription { margin-top: var(--e-2); border: 0; background: none; padding: 0; }
+.transcription summary {
+  color: var(--texte-nuit); font-size: .86rem; font-weight: 650;
+  min-height: 44px; padding: var(--e-1) 30px var(--e-1) 0;
+}
+.transcription summary::after { color: var(--focus-nuit); }
+.transcription > p, .transcription li { color: var(--texte-nuit-2); font-size: .84rem; max-width: 74ch; }
+.transcription ol { margin: var(--e-1) 0; padding-left: 1.4em; }
+.transcription li { margin-bottom: 6px; }
+.transcription li b { color: var(--texte-nuit); font-family: var(--font-mono); font-size: .78rem; }
 
 /* ============================================================
    10. CASCADE (Le principe)
@@ -701,6 +720,15 @@ section { padding: var(--sec-y) 0; }
   font-size: var(--t-petit); color: var(--encre-2); max-width: 720px;
 }
 .encart-honnete .ico { width: 20px; height: 20px; flex: none; fill: var(--encre-2); margin-top: 2px; }
+
+/* Renvoi vers tarifs.html depuis #devis. La classe existait dans le HTML sans
+   aucune règle : le lien se fondait dans un paragraphe courant, alors que
+   c'est le SEUL chemin éditorial vers la page (D1 — elle ne doit jamais
+   devenir orpheline). Encadré pour qu'il se voie. */
+.lien-tarifs {
+  background: var(--surface-2); border: 1px solid var(--trait);
+  border-radius: var(--r-shot); padding: 16px 20px; max-width: 720px;
+}
 
 /* Carrousel partenaires — masqué par le JS si la liste revient vide */
 .partenaires-row { display: flex; gap: 34px; flex-wrap: wrap; align-items: center; margin-top: 40px; }
