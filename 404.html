@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page introuvable | LabFlow</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/v3.css">
+</head>
+<body>
+
+<!-- Bloc <defs> du logo : copie conforme de merci.html (requis par <use href="#lf-logo">) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
+    <symbol id="lf-losange" viewBox="0 0 52 52">
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
+      <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
+      <g transform="translate(26,26) rotate(45)" fill="#fff">
+        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/><rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
+        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
+        <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
+      </g>
+    </symbol>
+    <symbol id="lf-logo" viewBox="0 0 192 52">
+      <use href="#lf-losange" width="52" height="52"/>
+      <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="saut-contenu" href="#contenu">Aller au contenu</a>
+
+<nav class="top scrolled">
+  <div class="nav-inner">
+    <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
+    <a class="btn small" href="demande-acces.html">Demander un accès</a>
+  </div>
+</nav>
+
+<main id="contenu">
+  <section class="container" style="padding-top:148px; max-width:720px">
+    <span class="kicker">Erreur 404</span>
+    <h1>Cette page n’existe pas (ou plus).</h1>
+    <p class="sec-intro">
+      Le lien que vous avez suivi est peut-être ancien, ou l’adresse comporte une faute de frappe.
+      Si vous cherchiez nos tarifs&nbsp;: il n’y a pas de prix affiché sur ce site, et
+      <a href="tarifs.html">voici pourquoi</a>.
+    </p>
+
+    <div class="hero-ctas">
+      <a class="btn" href="demande-acces.html">Demander un accès</a>
+      <a class="btn-outline" href="tarifs.html">Comprendre notre façon de chiffrer</a>
+    </div>
+
+    <p style="margin-top:var(--e-5); color:var(--encre-2); font-size:var(--t-petit)">
+      Vous cherchiez autre chose&nbsp;?
+      <a href="index.html">L’accueil</a>,
+      <a href="index.html#fonctionnalites">le fonctionnement de LabFlow</a>
+      ou <a href="index.html#faq">les questions fréquentes</a>.
+      Vous pouvez aussi nous laisser vos coordonnées&nbsp;: on vous rappelle.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
+    <div>
+      <a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="index.html#faq">FAQ</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
