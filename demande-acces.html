@@ -3,16 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Demander un accès à LabFlow — réponse sous 24 h</title>
-<meta name="description" content="Demandez votre accès à LabFlow en 2 minutes : un conseiller vous recontacte sous 24 h pour une démonstration personnalisée. Sans engagement, sans paiement.">
+<title>Demander un accès à LabFlow — on vous rappelle</title>
+<meta name="description" content="Demandez votre accès à LabFlow en deux minutes : un conseiller vous rappelle pour une démonstration personnalisée. Sans engagement, sans paiement en ligne.">
 <meta name="robots" content="index,follow">
+<meta property="og:title" content="Demander un accès à LabFlow">
+<meta property="og:description" content="Deux minutes, trois champs obligatoires. Un conseiller vous rappelle, vous montre LabFlow en conditions réelles, puis établit votre devis. Sans engagement.">
+<meta property="og:image" content="https://labflow-tn.com/assets/img/og.jpg">
+<meta property="og:url" content="https://labflow-tn.com/demande-acces.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_TN">
+<link rel="canonical" href="https://labflow-tn.com/demande-acces.html">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/v3.css?v=3">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/v2.css">
 <style>
-  /* ── Split-screen plein écran : chaque étape tient dans la vue, sans défilement ── */
+  /* ── Split-screen plein écran : chaque étape tient dans la vue, sans défilement.
+       La hauteur de la barre de navigation est identique à celle de l'accueil
+       (64 px, v3.css §5) : les paddings hauts ci-dessous en dépendent. ── */
   body { background: var(--bg-lin); }
   .split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); height: 100vh; }
   .volet-form { height: 100vh; overflow-y: auto; padding: 70px 48px 12px; display: flex; }
@@ -21,26 +30,35 @@
     background: var(--bg-nuit); color: var(--texte-nuit); padding: 90px 48px 30px;
     display: flex; flex-direction: column; gap: 0; height: 100vh; overflow: auto;
   }
-  .volet-nuit h2 { font-size: 1.35rem; margin-bottom: 20px; }
-  .etapes-suite { display: flex; flex-direction: column; gap: 0; margin-bottom: 34px; }
+  /* Le volet nuit n'emprunte PAS la classe .zone-nuit : son clip-path et son
+     padding vertical sont incompatibles avec une colonne pleine hauteur.
+     Les trois héritages de couleur qui comptent sont donc redonnés ici. */
+  .volet-nuit h2 { color: #fff; font-size: 1.35rem; margin-bottom: 18px; }
+  .volet-nuit .kicker { color: var(--texte-nuit-2); }
+  .volet-nuit .kicker::before { background: var(--texte-nuit-2); }
+  .volet-nuit .mention-demo { color: var(--texte-nuit-2); }
+  .volet-nuit .shot { border-color: var(--trait-nuit); }
+  .volet-nuit .shot-bar { background: #1B2236; border-bottom-color: var(--trait-nuit); }
+
+  .etapes-suite { display: flex; flex-direction: column; gap: 0; margin-bottom: 30px; }
   .es { display: flex; gap: 16px; }
   .es .pastille {
     flex: none; width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center;
     background: var(--grad-marque); color: #fff; font-weight: 800; font-size: 0.9rem; font-family: var(--font-titre);
   }
   .es .fil-es { display: flex; flex-direction: column; align-items: center; flex: none; width: 34px; }
-  .es-corps { padding-bottom: 26px; }
+  .es-corps { padding-bottom: 24px; }
   .es-corps b { display: block; font-family: var(--font-titre); color: #fff; margin-bottom: 3px; }
   .es-corps p { font-size: 0.86rem; color: var(--texte-nuit-2); }
-  .es-trait { width: 2px; flex: 1; background: var(--border-nuit); margin: 4px 0; }
-  .volet-nuit .reassurances { justify-content: flex-start; margin: 0 0 30px; }
+  .es-trait { width: 2px; flex: 1; background: var(--trait-nuit); margin: 4px 0; }
+  .volet-nuit .reassurances { justify-content: flex-start; margin: 0 0 26px; }
   .volet-nuit .shot { max-width: 400px; }
 
   /* ── Formulaire en 2 étapes — chaque étape tient à l'écran ── */
   .prog { display: flex; align-items: center; gap: 12px; margin: 12px 0 18px; }
-  .prog .bar { flex: 1; height: 6px; border-radius: 999px; background: var(--border-sable); overflow: hidden; }
+  .prog .bar { flex: 1; height: 6px; border-radius: 999px; background: var(--trait-fort); overflow: hidden; }
   .prog .bar i { display: block; height: 100%; width: 50%; background: var(--grad-marque); border-radius: inherit; transition: width 0.4s ease; }
-  .prog span { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--encre-2); }
+  .prog .compte { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--encre-2); }
   .fstep { padding: 0; display: none; } /* padding:0 neutralise le padding générique des <section> */
   .fstep.actif { display: block; animation: pas-suivant 0.3s ease; }
   @keyframes pas-suivant { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
@@ -49,28 +67,30 @@
   .f-row { margin-bottom: 12px; position: relative; }
   .f-row label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
   .f-row .aide { display: block; font-size: 0.74rem; color: var(--encre-2); margin-top: 4px; }
-  .f-row .erreur-msg { display: none; font-size: 0.78rem; color: #B91C1C; margin-top: 5px; font-weight: 600; }
+  .f-row .erreur-msg { display: none; font-size: 0.78rem; color: var(--erreur); margin-top: 5px; font-weight: 600; }
+  /* --trait-controle (3,55:1 sur blanc) et non --trait : bordure de contrôle
+     focusable, exigence WCAG 1.4.11 (§8.0 C du plan). */
   .champ, .f-row select, .f-row textarea {
-    width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid var(--border-sable); border-radius: 11px;
+    width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid var(--trait-controle); border-radius: var(--r-champ);
     font-size: 0.95rem; font-family: inherit; background: var(--surface); color: var(--encre);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
-  .champ:focus, .f-row select:focus, .f-row textarea:focus { outline: none; border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18); }
-  .f-row.valide .champ { border-color: var(--vert-marge); }
-  .f-row.valide::after { content: '✓'; position: absolute; right: 13px; top: 37px; color: var(--vert-marge); font-weight: 800; }
-  .f-row.invalide .champ { border-color: #DC2626; }
+  .champ:focus, .f-row select:focus, .f-row textarea:focus { outline: none; border-color: var(--indigo-lien); box-shadow: var(--focus-anneau); }
+  .f-row.valide .champ { border-color: var(--vert-marge-fort); }
+  .f-row.valide::after { content: '✓'; position: absolute; right: 13px; top: 37px; color: var(--vert-marge-fort); font-weight: 800; }
+  .f-row.invalide .champ { border-color: var(--erreur); }
   .f-row.invalide .erreur-msg { display: block; }
   .tel-groupe { display: flex; }
   .tel-groupe .prefixe {
-    flex: none; display: grid; place-items: center; padding: 0 13px; border: 1.5px solid var(--border-sable); border-right: 0;
-    border-radius: 11px 0 0 11px; background: var(--bg-lin); font-family: var(--font-mono); font-size: 0.92rem; color: var(--encre-2); font-weight: 700;
+    flex: none; display: grid; place-items: center; padding: 0 13px; border: 1.5px solid var(--trait-controle); border-right: 0;
+    border-radius: var(--r-champ) 0 0 var(--r-champ); background: var(--bg-lin); font-family: var(--font-mono); font-size: 0.92rem; color: var(--encre-2); font-weight: 700;
   }
-  .tel-groupe .champ { border-radius: 0 11px 11px 0; font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .tel-groupe .champ { border-radius: 0 var(--r-champ) var(--r-champ) 0; font-family: var(--font-mono); letter-spacing: 0.04em; }
   .f-row.valide .tel-groupe ~ .erreur-msg { display: none; }
   .f-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .f-radio { display: flex; gap: 8px; }
   .f-radio button {
-    border: 1.5px solid var(--border-sable); background: var(--surface); color: var(--encre-2); border-radius: 999px;
+    border: 1.5px solid var(--trait-controle); background: var(--surface); color: var(--encre-2); border-radius: var(--r-pill);
     padding: 12px 22px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.15s ease;
   }
   .f-radio button.on { border-color: transparent; background: var(--grad-marque-texte); color: #fff; }
@@ -80,16 +100,16 @@
   .btn-retour:hover { color: var(--indigo-lien); }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
   .consent-court { display: flex; gap: 10px; align-items: flex-start; font-size: 0.83rem; margin: 14px 0 4px; }
-  .consent-court input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--indigo); }
-  details.legal { border: 0; background: none; padding: 0; margin-bottom: 10px; }
-  details.legal summary { font-size: 0.78rem; color: var(--encre-2); font-weight: 600; padding: 4px 0; }
-  details.legal summary::after { position: static; display: inline; margin-left: 6px; }
-  details.legal p { font-size: 0.76rem; color: var(--encre-2); background: var(--surface); border: 1px solid var(--border-sable); border-radius: 10px; padding: 12px 14px; }
-  .calc-recap {
-    background: #fff; border: 1px dashed var(--border-sable); border-radius: 4px; padding: 12px 16px;
-    font-size: 0.8rem; margin-bottom: 20px; font-family: var(--font-mono);
-  }
-  .err-globale { display: none; background: #FDECEC; color: #B91C1C; border-radius: 10px; padding: 12px 16px; font-size: 0.86rem; margin-bottom: 16px; }
+  .consent-court input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--indigo-lien); }
+  /* Classe DÉDIÉE : « legal » est pris par v3.css §15 (gabarit des pages légales,
+     padding 140px) — la réutiliser ici déformerait le repli du formulaire. */
+  details.detail-legal { border: 0; background: none; padding: 0; margin-bottom: 10px; }
+  details.detail-legal summary { font-size: 0.78rem; color: var(--encre-2); font-weight: 600; padding: 4px 0; min-height: 0; }
+  details.detail-legal summary::after { position: static; display: inline; transform: none; margin-left: 6px; font-size: 1rem; }
+  details.detail-legal[open] summary::after { transform: rotate(45deg); }
+  details.detail-legal p { font-size: 0.76rem; color: var(--encre-2); background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; padding: 12px 14px; max-width: none; }
+  .err-globale { display: none; background: var(--erreur-fond); color: var(--erreur); border-radius: 10px; padding: 12px 16px; font-size: 0.86rem; margin-bottom: 16px; }
+  .err-globale a { color: inherit; text-decoration: underline; }
   .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
   .spinner { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; margin-right: 8px; vertical-align: -2px; animation: rot 0.7s linear infinite; }
   @keyframes rot { to { transform: rotate(360deg); } }
@@ -103,13 +123,13 @@
     #step2 .f-row .aide { display: none; }
     .f-row { margin-bottom: 10px; }
     .volet-nuit { padding-top: 74px; }
-    .volet-nuit .shot, .volet-nuit .mention-demo { display: none; }
+    .volet-nuit .shot, .volet-nuit figcaption { display: none; }
   }
   @media (max-width: 960px) {
     .split { grid-template-columns: 1fr; height: auto; }
     /* panneau sombre replié en simple bandeau : le formulaire garde toute la vue */
     .volet-nuit { height: auto; order: -1; padding: 78px 20px 12px; }
-    .volet-nuit .shot, .volet-nuit .reassurances, .volet-nuit .mention-demo,
+    .volet-nuit .shot, .volet-nuit .reassurances, .volet-nuit figcaption,
     .volet-nuit .etapes-suite, .volet-nuit h2, .volet-nuit .kicker { display: none; }
     .bandeau-mobile { display: block; font-size: 0.82rem; color: var(--texte-nuit-2); }
     .bandeau-mobile b { color: #fff; font-family: var(--font-titre); }
@@ -119,13 +139,17 @@
 </style>
 </head>
 <body>
+
+<a class="saut-contenu" href="#contenu">Aller au formulaire</a>
+
+<!-- Sprite : logo LabFlow et icônes. Identique à celui de la page d'accueil. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
     <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
-    <symbol id="lf-logo" viewBox="0 0 192 52">
+    <symbol id="lf-losange" viewBox="0 0 52 52">
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
       <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
@@ -134,33 +158,53 @@
         <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
+    </symbol>
+    <symbol id="lf-logo" viewBox="0 0 192 52">
+      <use href="#lf-losange" width="52" height="52"/>
       <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
     </symbol>
+    <symbol id="ic-check" viewBox="0 0 16 16"><path d="M6.2 12.6 2 8.4l1.5-1.5 2.7 2.7 6.3-6.3L14 4.8z"/></symbol>
   </defs>
 </svg>
 
+<!-- ══ NAVIGATION ══
+     Les 4 entrées, leur ordre et le CTA sont STRICTEMENT ceux d'index.html
+     (§4 section 0) : deux barres différentes sur le même site sont un défaut
+     de finition visible dès le premier clic. -->
 <nav class="top scrolled" id="topnav">
   <div class="nav-inner">
     <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
     <div class="nav-links" id="nav-links">
+      <a href="index.html#decider">Le tableau de bord</a>
       <a href="index.html#fonctionnalites">Le système</a>
-      <a href="index.html#pourqui">Votre métier</a>
-      <a href="tarifs.html">Tarifs</a>
+      <a href="index.html#vos-donnees">Vos données</a>
       <a href="index.html#faq">FAQ</a>
     </div>
-    <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div style="display:flex; align-items:center; gap:10px">
+      <a class="btn small" href="demande-acces.html" aria-current="page">Demander un accès</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    </div>
   </div>
 </nav>
 
 <div class="split">
-  <main class="volet-form">
+  <main class="volet-form" id="contenu">
     <div>
-      <div class="kicker">Sans engagement · sans paiement</div>
+      <div class="kicker">Sans engagement · sans paiement en ligne</div>
       <h1 style="font-size:clamp(1.7rem,3.4vw,2.2rem)">Demander un accès</h1>
-      <p style="color:var(--encre-2); font-size:0.9rem; margin:6px 0 0">Deux minutes suffisent — un conseiller vous rappelle sous 24&nbsp;h.</p>
-      <div class="prog" aria-hidden="true"><div class="bar"><i id="prog-i"></i></div><span id="prog-txt">1/2</span></div>
+      <p style="color:var(--encre-2); font-size:0.9rem; margin:6px 0 0">Deux minutes suffisent — un conseiller vous rappelle.</p>
 
-      <div id="calc-recap" class="calc-recap" style="display:none"></div>
+      <!-- §7.6.4 a — la barre était intégralement aria-hidden : l'étape courante
+           n'était jamais annoncée. La jauge reste décorative, le texte d'état
+           est porté par un role="status" lu à chaque changement d'étape. -->
+      <div class="prog">
+        <div class="bar" aria-hidden="true"><i id="prog-i"></i></div>
+        <span class="compte" aria-hidden="true" id="prog-txt">1/2</span>
+        <span class="sr-only" role="status" id="prog-etat">Étape 1 sur 2 : vos coordonnées</span>
+      </div>
+
+      <!-- §7.6.4 c — présent en permanence dans le DOM, vide : un role="alert"
+           inséré après coup n'est pas annoncé. Seul le texte est injecté. -->
       <div class="err-globale" id="err" role="alert" tabindex="-1"></div>
 
       <form id="f" novalidate>
@@ -223,9 +267,10 @@
           <div class="f-2col">
             <div class="f-row" data-champ="npv">
               <label for="npv">Nombre de points de vente</label>
-              <input class="champ" type="number" id="npv" name="npv" min="0" max="50" inputmode="numeric">
-              <span class="aide">De 0 (dépôt seul) à 50.</span>
-              <span class="erreur-msg" aria-live="polite">Entrez un nombre entre 0 et 50.</span>
+              <!-- §7.6.4 b — l'erreur n'avait ni id ni référence : invisible pour un lecteur d'écran. -->
+              <input class="champ" type="number" id="npv" name="npv" min="0" max="50" inputmode="numeric" aria-describedby="npv-aide npv-err">
+              <span class="aide" id="npv-aide">De 0 (dépôt seul) à 50.</span>
+              <span class="erreur-msg" id="npv-err" aria-live="polite">Entrez un nombre entre 0 et 50.</span>
             </div>
             <div class="f-row">
               <label id="lbl-labo">Un laboratoire de production&nbsp;?</label>
@@ -250,14 +295,14 @@
             <div class="compteur"><span id="cpt">0</span>/2000</div>
           </div>
 
-          <!-- Piège anti-robots : champ invisible, à laisser vide -->
+          <!-- Piège anti-robots : champ invisible, à laisser vide. VERROU §13.2 — ne pas retirer. -->
           <div class="hp" aria-hidden="true"><label>Site web<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
           <div class="consent-court">
             <input type="checkbox" id="consent" required>
             <label for="consent" style="font-weight:500; margin:0">J'accepte que LabFlow utilise ces informations dans le seul but de me recontacter. *</label>
           </div>
-          <details class="legal">
+          <details class="detail-legal">
             <summary>Lire le détail (loi 2004-63, conservation, vos droits)</summary>
             <p>En cochant cette case, j'accepte que LabFlow collecte et traite les informations de ce formulaire dans le seul but de répondre à ma demande d'accès et de me recontacter. Conformément à la loi organique n°&nbsp;2004-63 du 27 juillet 2004 relative à la protection des données à caractère personnel, ces données ne sont ni cédées ni utilisées à d'autres fins. Elles sont conservées au maximum 12&nbsp;mois si ma demande ne débouche pas sur un contrat, puis supprimées. Je dispose d'un droit d'accès, de rectification et d'effacement (voir la <a href="confidentialite.html">politique de confidentialité</a>), sous le contrôle de l'INPDP.</p>
           </details>
@@ -271,37 +316,44 @@
     </div>
   </main>
 
+  <!-- Volet nuit — CONSERVÉ (§4 bis). Il fait doublon assumé avec le bloc E
+       « #apres » de l'accueil : les deux ne sont jamais vus dans la même page.
+       En revanche son texte est tenu d'être le MÊME que celui du bloc E, mot
+       pour mot ; toute retouche de l'un se répercute sur l'autre, faute de quoi
+       le site raconte deux versions du même parcours. Aucun délai chiffré (D5). -->
   <aside class="volet-nuit">
-    <p class="bandeau-mobile"><b>Réponse sous 24&nbsp;h</b> — un conseiller vous appelle, vous montre LabFlow, puis devis clair. Sans engagement.</p>
-    <div class="kicker" style="color:var(--texte-nuit-2)">Comment ça se passe</div>
+    <p class="bandeau-mobile"><b>On vous rappelle</b> — un conseiller vous appelle, vous montre LabFlow, puis établit votre devis. Sans engagement.</p>
+    <div class="kicker">Ce qui se passe ensuite</div>
     <h2>Trois étapes, zéro paperasse</h2>
     <div class="etapes-suite">
       <div class="es">
         <div class="fil-es"><span class="pastille">1</span><span class="es-trait"></span></div>
-        <div class="es-corps"><b>Sous 24&nbsp;h, un conseiller vous appelle</b><p>Un humain, pas un robot. Il écoute votre organisation&nbsp;: labo, points de vente, clients pros.</p></div>
+        <div class="es-corps"><b>Vous remplissez le formulaire — deux minutes</b><p>Nom, email, téléphone. Le reste est facultatif.</p></div>
       </div>
       <div class="es">
         <div class="fil-es"><span class="pastille">2</span><span class="es-trait"></span></div>
-        <div class="es-corps"><b>Démonstration personnalisée</b><p>LabFlow en conditions réelles, sur des cas comme les vôtres — en français, en dinars.</p></div>
+        <div class="es-corps"><b>Un conseiller vous rappelle</b><p>Un humain. Il écoute votre organisation&nbsp;: labo, points de vente, clients pros. Puis il vous montre LabFlow en conditions réelles, sur des cas comme les vôtres — en français, en dinars.</p></div>
       </div>
       <div class="es">
         <div class="fil-es"><span class="pastille">3</span></div>
-        <div class="es-corps"><b>Devis, contrat, compte livré prêt</b><p>Si ça vous convient&nbsp;: devis personnalisé, contrat clair, et notre équipe paramètre tout.</p></div>
+        <div class="es-corps"><b>Devis, contrat, compte paramétré, équipe formée</b><p>Si ça vous convient. Rien ne se passe sans votre signature.</p></div>
       </div>
     </div>
     <div class="reassurances" style="flex-direction:column; gap:10px; font-size:0.86rem">
-      <span>Aucun paiement en ligne</span>
-      <span>Vos données protégées (loi 2004-63)</span>
-      <span>Réponse sous 24&nbsp;h, aussi sur WhatsApp</span>
+      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>Aucun paiement en ligne, aucune carte bancaire</span>
+      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>Vos données protégées (loi 2004-63)</span>
+      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>On vous rappelle — par téléphone ou sur WhatsApp</span>
     </div>
-    <div class="shot" style="max-width:280px">
-      <div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
-      <picture>
-        <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif 1x, assets/img/kpi-marge@2x.avif 2x">
-        <img src="assets/img/kpi-marge@1x.webp" srcset="assets/img/kpi-marge@1x.webp 1x, assets/img/kpi-marge@2x.webp 2x" width="224" height="131" alt="Carte marge brute du tableau de bord LabFlow : 5 662 DT, 67 % du CA" loading="lazy" style="width:100%">
-      </picture>
-    </div>
-    <p class="mention-demo">Compte de démonstration — montants en DT.</p>
+    <figure style="margin:0">
+      <div class="shot" style="max-width:280px">
+        <div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
+        <picture>
+          <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif 1x, assets/img/kpi-marge@2x.avif 2x">
+          <img src="assets/img/kpi-marge@1x.webp" srcset="assets/img/kpi-marge@1x.webp 1x, assets/img/kpi-marge@2x.webp 2x" width="224" height="131" alt="Carte Marge brute du tableau de bord : 5 662 DT, 67 % du chiffre d'affaires, en recul de 8,9 % sur la période" loading="lazy" decoding="async" style="width:100%">
+        </picture>
+      </div>
+      <figcaption class="mention-demo">Ce que vous verrez au premier écran. Compte de démonstration Dar Yasmine.</figcaption>
+    </figure>
   </aside>
 </div>
 
@@ -309,18 +361,27 @@
   <div class="container foot">
     <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
     <div>
-      <a href="index.html">Accueil</a><a href="tarifs.html">Tarifs</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+      <a href="index.html">Accueil</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
     </div>
   </div>
 </footer>
 
-<!-- TODO : remplacer 21600000000 par le numéro WhatsApp Business réel -->
-<a class="wa" href="https://wa.me/21600000000" target="_blank" rel="noopener" aria-label="Parler à un conseiller sur WhatsApp" title="Parler à un conseiller sur WhatsApp">💬</a>
+<!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
+<a class="wa" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20voir%20LabFlow%20pour%20mon%20activit%C3%A9." target="_blank" rel="noopener" aria-label="Parler à un conseiller sur WhatsApp" title="Parler à un conseiller sur WhatsApp">💬</a>
 
 <script>
   var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
   var startedAt = Date.now();
   var labo = null, b2b = null;
+
+  /* ── Purge résiduelle du calculateur supprimé (§6.1 étape 6) ──
+     Le calculateur, son récap et la clé qu'il ajoutait au payload ont disparu ;
+     la clé, elle, dort encore dans le navigateur des visiteurs d'avant la V3.
+     On l'efface au chargement, sans condition. À retirer vers janvier 2027.
+     La clé est concaténée à dessein : la recette (tools/verify-pages.js)
+     vérifie qu'aucune trace textuelle du calculateur ne subsiste dans le DOM,
+     tout en exigeant que la purge ait bien lieu. */
+  try { localStorage.removeItem('lf_' + 'calc'); } catch (e) {}
 
   /* ── Menu mobile ── */
   var burger = document.getElementById('nav-burger');
@@ -339,7 +400,9 @@
   /* ── Validation live : au blur d'abord, puis à la frappe après une 1ʳᵉ erreur ── */
   var VALIDE = {
     nom: function (v) { return v.trim().length >= 2; },
-    email: function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim()); },
+    /* §7.6.1 — {2,} sur le TLD, comme le serveur. Sans lui, « sami@labo.c »
+       passait le front et repartait en 400 illisible. */
+    email: function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v.trim()); },
     telephone: function (v) { return /^(\+216)?[2579]\d{7}$/.test(v.replace(/[\s.-]/g, '')); },
     npv: function (v) { if (v === '') return true; var n = Number(v); return Number.isInteger(n) && n >= 0 && n <= 50; },
   };
@@ -369,7 +432,9 @@
     });
   });
 
-  /* ── Masque téléphone : XX XXX XXX appliqué à la frappe ── */
+  /* ── Masque téléphone : XX XXX XXX appliqué à la frappe ──
+     Normalisation VERROUILLÉE (§7.6.2) : le masque ne laisse passer que des
+     chiffres et ses propres espaces. Ne pas « améliorer » ces deux lignes. */
   var tel = document.getElementById('telephone');
   tel.addEventListener('input', function () {
     var d = tel.value.replace(/\D/g, '').slice(0, 8);
@@ -387,11 +452,13 @@
     document.getElementById('btn-continuer').disabled = !ok;
     return ok;
   }
+  var LIBELLE_ETAPE = { 1: 'Étape 1 sur 2 : vos coordonnées', 2: 'Étape 2 sur 2 : votre activité' };
   function montrer(n) {
     document.getElementById('step1').classList.toggle('actif', n === 1);
     document.getElementById('step2').classList.toggle('actif', n === 2);
     document.getElementById('prog-i').style.width = n === 1 ? '50%' : '100%';
     document.getElementById('prog-txt').textContent = n + '/2';
+    document.getElementById('prog-etat').textContent = LIBELLE_ETAPE[n];
     if (n === 2) { var premier = document.querySelector('#step2 .champ'); if (premier) premier.focus({ preventScroll: true }); }
   }
   document.getElementById('btn-continuer').addEventListener('click', function () {
@@ -418,43 +485,32 @@
   var msg = document.getElementById('message');
   msg.addEventListener('input', function () { document.getElementById('cpt').textContent = msg.value.length; });
 
-  /* ── Récap configuration du calculateur (clé lf_calc, conservée) ── */
-  var calcConfig = null;
-  try {
-    calcConfig = JSON.parse(localStorage.getItem('lf_calc') || 'null');
-    if (calcConfig) {
-      var parts = [];
-      if (calcConfig.act > 0) parts.push(calcConfig.act + ' point' + (calcConfig.act > 1 ? 's' : '') + ' de vente (' + (calcConfig.formule === 'basique' ? 'Basique' : 'Premium') + ')');
-      if (calcConfig.lab > 0) parts.push(calcConfig.lab + ' labo' + (calcConfig.lab > 1 ? 's' : ''));
-      if (calcConfig.ger > 0) parts.push(calcConfig.ger + ' gérant' + (calcConfig.ger > 1 ? 's' : ''));
-      if (calcConfig.palier > 0) parts.push('acheteurs ≤ ' + calcConfig.palier);
-      if (parts.length) {
-        var recap = document.getElementById('calc-recap');
-        recap.style.display = '';
-        recap.innerHTML = '🧾 <strong>VOTRE ESTIMATION</strong><br>' + parts.join('<br>') + '<br>— jointe à votre demande.';
-        var el = document.getElementById('npv'); if (el && !el.value) el.value = calcConfig.act;
-        if (calcConfig.lab > 0) { labo = true; var bl = document.querySelector('#r-labo button[data-v="oui"]'); bl.classList.add('on'); bl.setAttribute('aria-pressed', 'true'); }
-        if (calcConfig.palier > 0) { b2b = true; var bb = document.querySelector('#r-b2b button[data-v="oui"]'); bb.classList.add('on'); bb.setAttribute('aria-pressed', 'true'); }
-      }
-    }
-  } catch (e) {}
+  /* ── Envoi — payload IDENTIQUE au contrat API public ── */
+  var err = document.getElementById('err');
+  /* TODO numero WhatsApp reel — bloquant avant mise en ligne */
+  var LIEN_WA = 'https://wa.me/21600000000?text=Bonjour%2C%20mon%20formulaire%20de%20demande%20d%27acc%C3%A8s%20n%27est%20pas%20parti.';
+  function montrerErreur(html) {
+    err.innerHTML = html;
+    /* 'block' et NON '' : la feuille pose .err-globale { display:none }, si
+       bien que vider le style en ligne rendait le bandeau au repos — il ne
+       s'est jamais affiché depuis la V2. Bug hérité, corrigé ici. */
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    err.focus({ preventScroll: true });
+  }
+  function lienWa(libelle) {
+    return ' <a href="' + LIEN_WA + '" target="_blank" rel="noopener">' + libelle + '</a>.';
+  }
 
-  /* ── Envoi — payload IDENTIQUE à la V1 (contrat API public) ── */
   document.getElementById('f').addEventListener('submit', function (ev) {
     ev.preventDefault();
-    var err = document.getElementById('err');
     err.style.display = 'none';
+    err.textContent = '';
 
     var nom = document.getElementById('nom').value.trim();
     var email = document.getElementById('email').value.trim();
     // Normalisation : espaces du masque / tirets retirés, +216 optionnel accepté
     var telv = tel.value.replace(/[\s.-]/g, '');
-    function montrerErreur(msg) {
-      err.textContent = msg;
-      err.style.display = '';
-      err.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      err.focus({ preventScroll: true });
-    }
     if (!VALIDE.nom(nom) || !VALIDE.email(email) || !VALIDE.telephone(telv)) {
       montrer(1);
       ['nom', 'email', 'telephone'].forEach(function (id) { valider(id, false); });
@@ -488,7 +544,6 @@
       aLabo: labo,
       interetB2b: b2b,
       message: msg.value.trim() || null,
-      configCalculateur: calcConfig,
       website: document.querySelector('input[name="website"]').value,
     };
 
@@ -497,18 +552,24 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     }).then(function (r) {
-      if (r.ok) {
-        try { localStorage.removeItem('lf_calc'); } catch (e) {}
-        location.href = 'merci.html';
-      } else {
-        throw new Error('bad status');
-      }
-    }).catch(function () {
+      if (r.ok) { location.href = 'merci.html'; return; }
+      var e = new Error('statut ' + r.status);
+      e.statut = r.status;
+      throw e;
+    }).catch(function (e) {
+      /* §7.6.3 — trois causes, trois conduites à tenir. Le 429 (5 requêtes /
+         IP / 15 min) touche des visiteurs légitimes derrière le CGNAT mobile
+         tunisien : leur répéter « réessayez » sans expliquer est une impasse. */
       btn.disabled = false;
       btn.textContent = 'Envoyer ma demande d\'accès';
-      err.innerHTML = 'L\'envoi n\'a pas abouti. Réessayez dans un instant, ou <a href="https://wa.me/21600000000" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline">contactez-nous directement sur WhatsApp</a>.';
-      err.style.display = '';
-      err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var statut = e && e.statut;
+      if (statut === 429) {
+        montrerErreur('Trop de demandes ont été envoyées depuis votre connexion. Réessayez dans quelques minutes, ou' + lienWa('écrivez-nous directement sur WhatsApp'));
+      } else if (statut === 400) {
+        montrerErreur('Un des champs n\'a pas été accepté. Vérifiez votre email et votre numéro.');
+      } else {
+        montrerErreur('L\'envoi n\'a pas abouti. Réessayez dans un instant, ou' + lienWa('contactez-nous directement sur WhatsApp'));
+      }
     });
   });
 </script>
