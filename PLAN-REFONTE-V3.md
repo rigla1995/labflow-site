@@ -2,6 +2,50 @@
 
 > Document de référence unique pour l'implémentation de la V3.
 > Rédigé le 20/07/2026. Remplace `PLAN-REFONTE-V2.md` pour tout ce qui concerne la V3, mais **ne l'annule pas** : le §6 « Verrous » de la V2 reste valable, sauf les deux verrous explicitement levés ici (§13.3).
+>
+> ⚠️ **LIRE LE §0.4 EN PREMIER.** Le client a tranché deux arbitrages le 20/07/2026 **après** la rédaction de ce plan. Ses décisions priment sur le corps du document partout où elles le contredisent — en particulier sur le sort de `tarifs.html` (§3.1, §3.3, §6.1) et sur le périmètre métier (§14.5).
+
+---
+
+## 0.4 DÉCISIONS CLIENT DU 20/07/2026 — PRIMENT SUR LE RESTE DU PLAN
+
+### D1 — `tarifs.html` est CONSERVÉE, pas supprimée
+
+Le plan prévoyait sa suppression + deux 301 (§3.1, §3.3, §6.1). **Le client a tranché l'inverse** : l'URL `/tarifs.html` est conservée, avec une page **entièrement réécrite**, titrée « Combien coûte LabFlow ? », **sans un seul montant, sans calculateur**. Motif : c'est la meilleure position organique du site, et la page qui capte les visiteurs les plus proches de l'achat.
+
+**Ce qui devient caduc** : le `git rm`, la modification du `COPY` du `Dockerfile` (§3.5), les deux redirections 301 (§3.3), le retrait de l'entrée du `sitemap.xml` (§3.4), l'étape 0 du §6.1.
+**Ce qui reste intégralement valable** : tout le retrait des **montants**, du **calculateur**, de la clé `lf_calc`, de l'appel à `GET /api/public/tarifs-reference` et des attributs `[data-ob]` — y compris sur la nouvelle `tarifs.html`.
+**Conséquence à ne pas manquer** : la nav garde ses 4 entrées du §4 section 0, mais `tarifs.html` doit être **reliée depuis la section `#devis` de l'accueil et depuis le pied de page des 6 pages**. Une URL conservée mais orpheline se désindexe — on perdrait la position qu'on cherchait précisément à garder.
+
+### D2 — Périmètre métier ÉLARGI, formulation vérifiée dans le code
+
+Le §14.5 proposait « les métiers qui transforment » et jugeait « tout type de commerce » infondé. **Fact-check refait dans le code applicatif : le socle est réellement agnostique.** Aucune contrainte alimentaire au schéma (zéro `allergenes`/`dlc`/`peremption` dans les 175 migrations) ; le filtrage par domaine métier a été **supprimé en migration 086** (`DROP TABLE ingredient_domaines`, `ALTER TABLE categories DROP COLUMN domaine_id`) ; les unités sont des **étiquettes opaques sans aucune conversion** (« pièce » fonctionne comme « kg ») ; la vente d'un article brut sans recette est un **flux de première classe** (`article_type IN ('produit','ingredient')`, marge sur le PMP d'achat) ; la formule Basique est littéralement « Stock + Ventes d'articles, sans Espace Produit » (migration 164). Le vocabulaire recette/portion/labo est **confiné à l'Espace Produit**, verrouillé en Basique — la sidebar elle-même est neutre.
+
+**Formulation retenue, à décliner sur tout le site :**
+
+> Vous achetez, vous stockez, vous vendez. LabFlow gère cette chaîne pour n'importe quel type d'article — vos familles, vos catégories, vos unités, au kilo, au litre ou à la pièce. Rien n'est imposé.
+> **Et si vous transformez ce que vous vendez**, LabFlow va plus loin : le prix de revient exact d'un produit fabriqué, votre atelier de production, et quel produit vous rapporte vraiment.
+> *Né dans les métiers de bouche, là où le calcul de marge est le plus exigeant. C'est ce qui le rend précis partout ailleurs.*
+
+La structure « **et si** vous transformez » est impérative : la transformation garde sa section vedette, mais devient un **plus** et non un **prérequis**.
+
+**Ajouts à la liste noire du §11.2 :**
+- Ne **jamais nommer** une verticale non alimentaire (téléphonie, prêt-à-porter, quincaillerie, cosmétique…). Rien n'est outillé spécifiquement pour elles.
+- Ne **jamais promettre** : code-barres, scan, SKU, numéro de série, IMEI, garantie, numéro de lot, date de péremption, caisse/TPV, fidélité, boutique en ligne. **Vérifié : zéro occurrence dans les deux repos.**
+- Ne pas écrire « adapté à tous les commerces » sans la nuance ci-dessus.
+- Le `#pourqui` garde ses métiers de bouche mais s'ouvre — « et plus largement tout commerce qui achète, stocke et vend » — **sans lister de verticale**.
+
+**Deux réserves produit signalées au client (hors périmètre du site) :**
+1. Le KPI **« 🍔 Food cost »** est affiché à **tout le monde**, non masquable, seuil rouge à 40 % en dur (`ClientDashboard.tsx:460, 473, 496, 505, 514` · `dashboardV2Widgets.tsx:277` · `dashboardV2Controller.js:291`). Un revendeur non alimentaire le verrait **en permanence en rouge**. Renommage en « Coût matière » + seuil configurable = ~6 lignes, meilleur rapport effort/effet du produit.
+2. **Aucun code-barres, SKU ni numéro de série** nulle part. Seul vrai trou fonctionnel pour le commerce de détail.
+
+### D3 — Numéro WhatsApp : non fourni
+
+Le placeholder `wa.me/21600000000` reste en place, assorti d'un commentaire HTML `<!-- TODO numéro WhatsApp réel — bloquant avant mise en ligne -->` à chaque occurrence. **Aucun numéro n'a été inventé.** Le §14.1 reste bloquant de lancement.
+
+### D4 — Livraison
+
+Le client valide à la fin. Travail sur la branche **`feat/refonte-v3`**, commits locaux, **aucun push, aucun merge vers `main`, aucun déploiement**.
 
 ---
 
@@ -30,6 +74,7 @@ Le 1,02 Mo est le poids de `assets/img/` sur le disque, tous formats et toutes d
 
 ### 0.3 Comment lire ce document
 
+- **Le §0.4 prime sur tout le reste** : ce sont les décisions prises par le client après la rédaction. En cas de contradiction avec le corps du plan, c'est le §0.4 qui gagne.
 - Les §1 à §5 sont le **quoi** (stratégie, direction, contenu). Les §6 à §10 sont le **comment** (procédures, specs). Les §11 à §14 sont les **garde-fous**. La §15 est le **journal des arbitrages déjà tranchés** — la lire avant de rouvrir un débat que ce plan a déjà clos.
 - Le §12 est le plan d'exécution : **c'est par là qu'on commence à coder**, dans l'ordre des lots.
 - Toute phrase encadrée par « **verrou** » ou listée au §11.2 / §13 ne se réécrit pas sans revalidation. Un rédacteur qui « améliore » une de ces phrases produit une contre-vérité produit.
