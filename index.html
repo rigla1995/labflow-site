@@ -343,8 +343,10 @@
 <div class="demo-modale" id="demo-modale" role="dialog" aria-modal="true" aria-label="Démonstration de LabFlow" hidden>
   <button type="button" class="demo-fermer" id="fermer-demo" aria-label="Fermer la démonstration">✕</button>
   <div class="demo-cadre">
+    <!-- MP4 d'abord : sur cette vidéo, le H.264 est plus léger que le VP9
+         (4,0 Mo contre 6,3), et le fichier doit se télécharger vite — Cloudflare
+         met la vidéo en cache et ne répond pas aux requêtes partielles. -->
     <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg">
-      <source src="assets/video/demo-60s-son.webm" type="video/webm">
       <source src="assets/video/demo-60s-son.mp4" type="video/mp4">
     </video>
   </div>

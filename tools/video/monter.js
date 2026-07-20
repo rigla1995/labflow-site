@@ -106,16 +106,20 @@ const duree = (f) => {
   const totale = cumul;
   console.log(`\n⏱  Durée finale : ${totale.toFixed(1)} s`);
 
+  // 1280×720 et CRF 29 : Cloudflare met le fichier en cache et NE répond PAS aux
+  // requêtes partielles (pas de 206), donc le navigateur doit tout télécharger
+  // avant de pouvoir se déplacer dans la vidéo — chaque mégaoctet économisé rend
+  // ce déplacement utilisable plus tôt. La lisibilité reste bonne à cette taille.
   const mp4 = path.join(OUT, 'demo-60s.mp4');
-  ff(['-y', ...entrees, '-filter_complex', filtre, '-map', '[v]',
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '25', '-pix_fmt', 'yuv420p',
+  ff(['-y', ...entrees, '-filter_complex', `${filtre};[v]scale=1280:720[vs]`, '-map', '[vs]',
+    '-c:v', 'libx264', '-preset', 'veryslow', '-crf', '29', '-pix_fmt', 'yuv420p',
     '-movflags', '+faststart', '-an', mp4]);
   console.log(`🎞  demo-60s.mp4 — ${Math.round(fs.statSync(mp4).size / 1024)} Ko`);
 
   // WebM VP9 : plus léger, servi en premier aux navigateurs qui le gèrent
   const webm = path.join(OUT, 'demo-60s.webm');
-  ff(['-y', '-i', mp4, '-c:v', 'libvpx-vp9', '-crf', '36', '-b:v', '0',
-    '-row-mt', '1', '-cpu-used', '2', '-an', webm]);
+  ff(['-y', '-i', mp4, '-c:v', 'libvpx-vp9', '-crf', '40', '-b:v', '0',
+    '-row-mt', '1', '-cpu-used', '1', '-an', webm]);
   console.log(`🎞  demo-60s.webm — ${Math.round(fs.statSync(webm).size / 1024)} Ko`);
 
   // ── Extrait pour le HERO du site ───────────────────────────────────────────
