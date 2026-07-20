@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const PORT = Number(process.env.PORT) || 8322;
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
   '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
@@ -45,4 +46,5 @@ http.createServer((req, res) => {
 
   res.writeHead(200, { 'Content-Type': type, 'Content-Length': taille, 'Accept-Ranges': 'bytes' });
   fs.createReadStream(file).pipe(res);
-}).listen(8322, () => console.log('site on http://localhost:8322'));
+// Port surchargeable : permet de lancer deux aperçus en parallèle sans conflit.
+}).listen(PORT, () => console.log(`site on http://localhost:${PORT}`));

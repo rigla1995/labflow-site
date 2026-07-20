@@ -528,6 +528,9 @@ section { padding: var(--sec-y) 0; }
   content: ''; position: absolute; inset: -26px; z-index: -1; border-radius: 30px;
   background: radial-gradient(60% 60% at 50% 45%, rgba(99, 102, 241, .16), transparent 75%);
 }
+/* Le bouton pause se positionne sur ce cadre, et non sur la <figure> entière :
+   sinon son `bottom` tombe sur la légende et masque la fin du texte. */
+.hero-video-cadre { position: relative; display: block; border-radius: 12px; overflow: hidden; }
 .hero-shot video { display: block; width: 100%; height: auto; background: var(--surface-2); }
 
 /* Bouton pause — WCAG 2.2.2, obligatoire sur toute boucle auto de plus de 5 s */

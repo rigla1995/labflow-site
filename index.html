@@ -118,17 +118,21 @@
         <!-- Écrans réels en mouvement. L'image d'attente s'affiche
              instantanément, la vidéo prend le relais une fois chargée (et ne
              démarre pas du tout en « animations réduites »). -->
-        <video id="hero-video" muted loop playsinline preload="none"
-               poster="assets/video/demo-hero-poster.webp?v=2"
-               width="1100" height="618"
-               aria-label="Démonstration de LabFlow : tableau de bord, catalogue de produits transformés, stock valorisé">
-          <source src="assets/video/demo-hero.webm" type="video/webm">
-          <source src="assets/video/demo-hero.mp4" type="video/mp4">
-        </video>
-        <button type="button" class="video-pause" id="hero-pause"
-                aria-pressed="false" aria-label="Mettre la démonstration en pause">
-          <svg aria-hidden="true"><use href="#ic-pause"/></svg>
-        </button>
+        <!-- Le bouton pause est ancré sur CE conteneur, pas sur la <figure> :
+             sinon son `bottom` le pose sur la légende et tronque le texte. -->
+        <div class="hero-video-cadre">
+          <video id="hero-video" muted loop playsinline preload="none"
+                 poster="assets/video/demo-hero-poster.webp?v=2"
+                 width="1100" height="618"
+                 aria-label="Démonstration de LabFlow : tableau de bord, catalogue de produits transformés, stock valorisé">
+            <source src="assets/video/demo-hero.webm" type="video/webm">
+            <source src="assets/video/demo-hero.mp4" type="video/mp4">
+          </video>
+          <button type="button" class="video-pause" id="hero-pause"
+                  aria-pressed="false" aria-label="Mettre la démonstration en pause">
+            <svg aria-hidden="true"><use href="#ic-pause"/></svg>
+          </button>
+        </div>
         <div class="hero-kpi" style="max-width:224px; margin-top:14px">
           <picture>
             <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif 1x, assets/img/kpi-marge@2x.avif 2x">
