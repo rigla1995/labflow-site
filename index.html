@@ -131,11 +131,11 @@
              gauche. L'image d'attente s'affiche instantanément, la vidéo prend le
              relais une fois chargée (et ne démarre pas en « animations réduites »). -->
         <video id="hero-video" muted loop playsinline preload="none"
-               poster="assets/video/demo-hero-poster.webp"
+               poster="assets/video/demo-hero-poster.webp?v=2"
                width="1100" height="619"
                aria-label="Démonstration de LabFlow : tableau de bord, produits et stock valorisé">
-          <source src="assets/video/demo-hero.webm" type="video/webm">
-          <source src="assets/video/demo-hero.mp4" type="video/mp4">
+          <source src="assets/video/demo-hero.webm?v=2" type="video/webm">
+          <source src="assets/video/demo-hero.mp4?v=2" type="video/mp4">
         </video>
       </div>
       <p class="mention-demo" style="margin-top:10px; display:flex; align-items:center; gap:14px; flex-wrap:wrap">
@@ -346,8 +346,8 @@
     <!-- MP4 d'abord : sur cette vidéo, le H.264 est plus léger que le VP9
          (4,0 Mo contre 6,3), et le fichier doit se télécharger vite — Cloudflare
          met la vidéo en cache et ne répond pas aux requêtes partielles. -->
-    <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg">
-      <source src="assets/video/demo-60s-son.mp4" type="video/mp4">
+    <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg?v=2">
+      <source src="assets/video/demo-60s-son.mp4?v=2" type="video/mp4">
     </video>
   </div>
 </div>
