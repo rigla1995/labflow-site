@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation — vidéo de démonstration LabFlow</title>
+<style>
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('../../assets/fonts/bricolage-grotesque-latin.woff2') format('woff2'); font-weight: 200 800; font-display: swap; }
+  :root { --nuit:#101322; --surf:#151B2E; --bord:#232B42; --txt:#E8EAF2; --txt2:#9AA3C7; --grad:linear-gradient(135deg,#0EA5E9,#6366F1,#A855F7); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--nuit); color:var(--txt); font-family:system-ui,-apple-system,sans-serif; padding:38px 24px 70px; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  h1 { font-family:'Bricolage Grotesque',system-ui,sans-serif; font-size:2.1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:6px; }
+  .sous { color:var(--txt2); margin-bottom:26px; }
+  video { width:100%; border-radius:14px; display:block; background:#000; box-shadow:0 24px 70px rgba(0,0,0,.5); }
+  .meta { display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 30px; }
+  .chip { background:var(--surf); border:1px solid var(--bord); border-radius:999px; padding:7px 15px; font-size:.82rem; color:var(--txt2); }
+  .chip b { color:var(--txt); }
+  h2 { font-family:'Bricolage Grotesque',system-ui,sans-serif; font-size:1.15rem; margin:34px 0 12px; }
+  table { width:100%; border-collapse:collapse; font-size:.88rem; }
+  th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--bord); }
+  th { color:var(--txt2); font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; }
+  td:first-child { font-family:ui-monospace,monospace; color:#FFB454; white-space:nowrap; }
+  .hero-box { background:var(--surf); border:1px solid var(--bord); border-radius:14px; padding:18px; margin-top:14px; }
+  .hero-box video { max-width:460px; }
+  .note { background:var(--surf); border:1px solid var(--bord); border-left:3px solid #FFB454; border-radius:10px; padding:14px 18px; color:var(--txt2); font-size:.88rem; margin-top:16px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Vidéo de démonstration — à valider</h1>
+  <p class="sous">Écrans réels du compte de démonstration « Dar Yasmine », avec la musique que vous avez fournie. Montez le son.</p>
+
+  <video src="../../assets/video/demo-60s-son.mp4" poster="../../assets/video/demo-poster.jpg" controls preload="metadata"></video>
+  <div class="meta">
+    <span class="chip"><b>89,8 s</b></span>
+    <span class="chip">MP4 <b>6,4 Mo</b></span>
+    <span class="chip">WebM <b>7,0 Mo</b></span>
+    <span class="chip">1440 × 810 · <b>30 i/s</b></span>
+    <span class="chip">Son <b>normalisé</b>, sans saturation</span>
+  </div>
+
+  <h2>Déroulé</h2>
+  <p style="color:var(--txt2); font-size:.85rem; margin-bottom:10px">Chaque écran de l'application est suivi de l'export Excel qu'il produit.</p>
+  <table>
+    <thead><tr><th>Temps</th><th>Séquence</th><th>Ce qu'on voit</th></tr></thead>
+    <tbody>
+      <tr><td>0 – 4 s</td><td>Ouverture</td><td>Logo, « Tout votre labo. Un seul système. »</td></tr>
+      <tr><td>4 – 10 s</td><td>Tableau de bord</td><td>CA 8 455 DT, marge 67 %, food cost 33 %, courbe du mois</td></tr>
+      <tr><td>10 – 15 s</td><td>Le problème</td><td>Les trois post-its (le losange porte le logo)</td></tr>
+      <tr><td>15 – 22 s</td><td>Stock valorisé</td><td>Départ en haut de l'écran, puis descente sur les montants</td></tr>
+      <tr><td>22 – 27 s</td><td><b>→ Excel historique appro</b></td><td>465 enregistrements, bandeau de marque</td></tr>
+      <tr><td>27 – 32 s</td><td>Le principe</td><td>La cascade : prix d'achat → coût de revient → marge</td></tr>
+      <tr><td>32 – 36 s</td><td><b>Vos produits</b></td><td>« De la matière première au produit vendu »</td></tr>
+      <tr><td>36 – 42 s</td><td><b>Produits vendables</b></td><td>Le catalogue de production et ses coûts</td></tr>
+      <tr><td>42 – 49 s</td><td>Fiche technique</td><td>Arbre du mille-feuille, coût réel 1,494 DT</td></tr>
+      <tr><td>49 – 54 s</td><td><b>→ Excel fiche technique</b></td><td>Le fichier généré par l'application</td></tr>
+      <tr><td>54 – 58 s</td><td><b>Transferts</b></td><td>« Chaque transfert est valorisé, tracé, facturé »</td></tr>
+      <tr><td>58 – 65 s</td><td>Historique transferts</td><td>Départ en haut : filtres (période, activité, catégorie) puis lignes valorisées</td></tr>
+      <tr><td>65 – 71 s</td><td><b>→ Excel transferts</b></td><td>31 lignes, prêtes pour le comptable</td></tr>
+      <tr><td>71 – 74 s</td><td>Portail</td><td>« Ils commandent seuls. <b>Disponible 24 h/24, 7 j/7.</b> »</td></tr>
+      <tr><td>74 – 80 s</td><td>Portail en action</td><td>Un acheteur reprend sa quantité habituelle, le panier se remplit</td></tr>
+      <tr><td>80 – 85 s</td><td>Commandes B2B</td><td>Détail d'une commande, facture FA-2026-0004 et son suivi</td></tr>
+      <tr><td>85 – 90 s</td><td>Clôture</td><td>« Votre système vous attend » + labflow-tn.com</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note" style="border-left-color:#3DDC97">
+    <b>Les trois fichiers Excel montrés sont de vrais exports.</b> Un navigateur n'ouvre pas un .xlsx : les fichiers produits par l'application ont été relus cellule par cellule et réaffichés à l'identique, aux couleurs de la charte. Rien n'est reconstitué à la main.
+  </div>
+
+  <h2>Extrait court pour l'accueil (11 s, en boucle)</h2>
+  <div class="hero-box">
+    <video src="../../assets/video/demo-hero.mp4" controls muted loop preload="metadata"></video>
+    <p style="color:var(--txt2); font-size:.84rem; margin-top:10px">491 Ko — destiné à tourner en boucle dans le hero, sans bloquer le chargement de la page.</p>
+  </div>
+
+  <div class="note">
+    <b>Avant mise en ligne, deux choses restent possibles :</b> ajouter une musique (fournissez le fichier, je le cale sur le montage) et ajuster n'importe quelle séquence — durée, ordre, texte des cartons, écran filmé. Rien n'est figé : tout est régénérable par script.
+  </div>
+</div>
+</body>
+</html>

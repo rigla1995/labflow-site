@@ -31,6 +31,29 @@
     box-shadow: var(--ombre-douce);
   }
   .metier-pills span::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 3px; background: var(--grad-marque); transform: rotate(45deg); margin-right: 9px; vertical-align: 1px; }
+  /* Vidéo du hero */
+  .hero-shot video { display: block; width: 100%; height: auto; background: #F1EEE7; }
+  .lien-demo {
+    border: 1px solid var(--border-sable); background: var(--surface); color: var(--indigo-lien);
+    font-family: inherit; font-size: 0.78rem; font-weight: 700; border-radius: 999px;
+    padding: 7px 15px; cursor: pointer; white-space: nowrap; transition: border-color .15s ease;
+  }
+  .lien-demo:hover { border-color: var(--indigo); }
+  /* Lecteur plein écran de la démo complète */
+  .demo-modale {
+    position: fixed; inset: 0; z-index: 100; background: rgba(10, 12, 22, 0.92);
+    display: grid; place-items: center; padding: 28px;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .demo-modale[hidden] { display: none; }
+  .demo-cadre { width: 100%; max-width: 1080px; }
+  .demo-cadre video { width: 100%; border-radius: 14px; display: block; background: #000; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+  .demo-fermer {
+    position: absolute; top: 18px; right: 22px; width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--border-nuit); background: var(--surface-nuit); color: var(--texte-nuit);
+    font-size: 1.1rem; cursor: pointer;
+  }
+  .demo-fermer:hover { background: #1B2236; }
   @media (max-width: 900px) {
     .modules-grid { grid-template-columns: 1fr; }
   }
@@ -104,12 +127,21 @@
     <div>
       <div class="shot hero-shot">
         <div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
-        <picture>
-          <source type="image/avif" srcset="assets/img/dashboard@1x.avif 1x, assets/img/dashboard@2x.avif 2x">
-          <img src="assets/img/dashboard@1x.webp" srcset="assets/img/dashboard@1x.webp 1x, assets/img/dashboard@2x.webp 2x" width="1100" height="688" alt="Tableau de bord LabFlow : chiffre d'affaires 8 455 DT, marge brute 67 %, food cost 33 %, valeur du stock — en dinars" fetchpriority="high">
-        </picture>
+        <!-- Écrans réels en mouvement. Muet et sans texte : le titre est déjà à
+             gauche. L'image d'attente s'affiche instantanément, la vidéo prend le
+             relais une fois chargée (et ne démarre pas en « animations réduites »). -->
+        <video id="hero-video" muted loop playsinline preload="none"
+               poster="assets/video/demo-hero-poster.webp"
+               width="1100" height="619"
+               aria-label="Démonstration de LabFlow : tableau de bord, produits et stock valorisé">
+          <source src="assets/video/demo-hero.webm" type="video/webm">
+          <source src="assets/video/demo-hero.mp4" type="video/mp4">
+        </video>
       </div>
-      <p class="mention-demo" style="margin-top:10px">Écran réel du compte de démonstration — montants en DT.</p>
+      <p class="mention-demo" style="margin-top:10px; display:flex; align-items:center; gap:14px; flex-wrap:wrap">
+        <span>Écrans réels du compte de démonstration — montants en DT.</span>
+        <button type="button" class="lien-demo" id="ouvrir-demo">▶ Voir la démo complète (1 min 30)</button>
+      </p>
     </div>
   </div>
 </header>
@@ -307,6 +339,17 @@
   </div>
 </footer>
 
+<!-- Lecteur de la démonstration complète (sonorisée) — chargé seulement à l'ouverture -->
+<div class="demo-modale" id="demo-modale" role="dialog" aria-modal="true" aria-label="Démonstration de LabFlow" hidden>
+  <button type="button" class="demo-fermer" id="fermer-demo" aria-label="Fermer la démonstration">✕</button>
+  <div class="demo-cadre">
+    <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg">
+      <source src="assets/video/demo-60s-son.webm" type="video/webm">
+      <source src="assets/video/demo-60s-son.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+
 <!-- TODO : remplacer 21600000000 par le numéro WhatsApp Business réel -->
 <a class="wa" href="https://wa.me/21600000000" target="_blank" rel="noopener" aria-label="Parler à un conseiller sur WhatsApp" title="Parler à un conseiller sur WhatsApp">💬</a>
 <div class="sticky-cta"><a class="btn" href="demande-acces.html">Demander un accès</a></div>
@@ -340,6 +383,58 @@ addEventListener('scroll', function () { topnav.classList.toggle('scrolled', scr
     topnav.classList.toggle('sombre', on);
   }, { rootMargin: '-32px 0px -94% 0px', threshold: 0 });
   zones.forEach(function (z) { io.observe(z); });
+})();
+
+/* ── Vidéo du hero ──
+   Chargée APRÈS le premier rendu (preload="none" + démarrage différé) : l'image
+   d'attente s'affiche tout de suite, la page ne ralentit pas. Aucune lecture
+   automatique si l'utilisateur a demandé des animations réduites. */
+(function () {
+  var v = document.getElementById('hero-video');
+  if (!v) return;
+  if (RM) { v.setAttribute('controls', ''); return; }
+  var lancer = function () {
+    v.preload = 'auto';
+    v.load();
+    var p = v.play();
+    if (p && p.catch) p.catch(function () { v.setAttribute('controls', ''); });
+  };
+  if (document.readyState === 'complete') setTimeout(lancer, 300);
+  else addEventListener('load', function () { setTimeout(lancer, 300); });
+  // Économie : on met en pause quand la vidéo sort de l'écran
+  new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) { if (v.paused && v.readyState > 2) v.play().catch(function () {}); }
+      else if (!v.paused) v.pause();
+    });
+  }, { threshold: 0.15 }).observe(v);
+})();
+
+/* ── Lecteur de la démo complète ── */
+(function () {
+  var ouvrir = document.getElementById('ouvrir-demo');
+  var modale = document.getElementById('demo-modale');
+  var video = document.getElementById('demo-video');
+  var fermerBtn = document.getElementById('fermer-demo');
+  if (!ouvrir || !modale) return;
+  var dernierFocus = null;
+  function ouvre() {
+    dernierFocus = document.activeElement;
+    modale.hidden = false;
+    document.body.style.overflow = 'hidden';
+    video.play().catch(function () {});
+    fermerBtn.focus();
+  }
+  function ferme() {
+    video.pause();
+    modale.hidden = true;
+    document.body.style.overflow = '';
+    if (dernierFocus) dernierFocus.focus();
+  }
+  ouvrir.addEventListener('click', ouvre);
+  fermerBtn.addEventListener('click', ferme);
+  modale.addEventListener('click', function (e) { if (e.target === modale) ferme(); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modale.hidden) ferme(); });
 })();
 
 /* ── Révélations + cascade (count-up) ── */

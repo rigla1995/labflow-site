@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cartons vidéo LabFlow</title>
+<style>
+  @font-face {
+    font-family: 'Bricolage Grotesque';
+    src: url('../../assets/fonts/bricolage-grotesque-latin.woff2') format('woff2');
+    font-weight: 200 800; font-display: block;
+  }
+  :root {
+    --bg-nuit: #101322; --surface-nuit: #151B2E; --border-nuit: #232B42;
+    --texte-nuit: #E8EAF2; --texte-nuit-2: #9AA3C7;
+    --grad: linear-gradient(135deg, #0EA5E9, #6366F1, #A855F7);
+    --ambre: #FFB454; --vert: #3DDC97;
+    --titre: 'Bricolage Grotesque', system-ui, sans-serif;
+    --mono: ui-monospace, 'Cascadia Mono', Menlo, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1440px; height: 810px; overflow: hidden;
+    background: var(--bg-nuit); color: var(--texte-nuit);
+    font-family: system-ui, sans-serif;
+    display: grid; place-items: center;
+  }
+  /* Trame bento en fond, très discrète */
+  body::before {
+    content: ''; position: fixed; inset: 0; opacity: 0.07; pointer-events: none;
+    background-image: linear-gradient(var(--border-nuit) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border-nuit) 1px, transparent 1px);
+    background-size: 90px 90px;
+    -webkit-mask-image: radial-gradient(70% 70% at 50% 45%, #000, transparent);
+  }
+  .carton { display: none; text-align: center; padding: 0 90px; position: relative; z-index: 1; }
+  .carton.on { display: block; }
+
+  h1 { font-family: var(--titre); font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; color: #fff; }
+  .xxl { font-size: 5.4rem; }
+  .xl { font-size: 4.1rem; }
+  .l { font-size: 3.1rem; }
+  .sous { color: var(--texte-nuit-2); font-size: 1.5rem; margin-top: 22px; line-height: 1.5; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 11px; font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--texte-nuit-2);
+    border: 1px solid var(--border-nuit); border-radius: 999px; padding: 10px 24px; margin-bottom: 32px;
+  }
+  .eyebrow .lf { width: 20px; height: 20px; flex: none; }
+  .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* Logo losange */
+  .losange { width: 108px; height: 108px; margin: 0 auto 34px; display: block; }
+  .losange.sm { width: 68px; height: 68px; margin-bottom: 26px; }
+
+  /* Post-its du carton « problème » */
+  .postits { display: flex; gap: 26px; justify-content: center; margin-top: 46px; }
+  .postit {
+    background: #FFF8E1; color: #57513D; border-radius: 4px 16px 6px 14px;
+    padding: 26px 24px; width: 320px; text-align: left; font-size: 1.08rem; line-height: 1.45;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  }
+  .postit b { display: block; font-family: var(--titre); font-size: 1.25rem; color: #3E3826; margin-bottom: 9px; }
+  .postits .postit:nth-child(1) { transform: rotate(-2.5deg); }
+  .postits .postit:nth-child(2) { transform: rotate(1.6deg) translateY(14px); }
+  .postits .postit:nth-child(3) { transform: rotate(-1deg) translateY(4px); }
+
+  /* Cascade : 3 maillons chaînés */
+  .cascade { display: flex; align-items: stretch; gap: 20px; justify-content: center; margin-top: 54px; }
+  .maillon {
+    background: var(--surface-nuit); border: 1px solid var(--border-nuit); border-radius: 16px;
+    padding: 26px 30px; min-width: 330px; text-align: left;
+  }
+  .maillon .et { font-size: 0.86rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--texte-nuit-2); margin-bottom: 12px; }
+  .maillon .val { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 2.2rem; font-weight: 700; color: #fff; }
+  .maillon .val .avant { color: var(--texte-nuit-2); text-decoration: line-through; text-decoration-thickness: 2px; font-size: 0.62em; margin-right: 12px; }
+  .maillon .det { font-size: 0.98rem; color: var(--texte-nuit-2); margin-top: 10px; }
+  .maillon .dt { color: var(--ambre); }
+  .maillon .pct { color: var(--vert); }
+  .chev { display: grid; place-items: center; color: #6366F1; font-size: 2.1rem; opacity: 0.65; }
+
+  /* Liste de fonctionnalités */
+  .liste { display: flex; gap: 18px; justify-content: center; margin-top: 44px; flex-wrap: wrap; }
+  .item {
+    background: var(--surface-nuit); border: 1px solid var(--border-nuit); border-radius: 14px;
+    padding: 20px 26px; font-size: 1.18rem; font-weight: 650; color: var(--texte-nuit);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .item .p { width: 10px; height: 10px; border-radius: 3px; background: var(--grad); transform: rotate(45deg); flex: none; }
+
+  .cta {
+    display: inline-block; background: var(--grad); color: #fff; font-weight: 800; font-size: 1.5rem;
+    padding: 20px 48px; border-radius: 999px; margin-top: 40px;
+    box-shadow: 0 14px 40px rgba(99,102,241,0.45);
+  }
+  .url { font-family: var(--mono); font-size: 1.35rem; color: var(--texte-nuit-2); margin-top: 30px; letter-spacing: 0.02em; }
+  .reassur { display: flex; gap: 34px; justify-content: center; margin-top: 34px; color: var(--texte-nuit-2); font-size: 1.05rem; }
+  .reassur span::before { content: '✓ '; color: var(--vert); font-weight: 800; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
+    <symbol id="lf-losange" viewBox="0 0 52 52">
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
+      <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
+      <g transform="translate(26,26) rotate(45)" fill="#fff">
+        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/><rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
+        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
+        <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- 1. OUVERTURE -->
+<div class="carton" id="c1">
+  <svg class="losange"><use href="#lf-losange"/></svg>
+  <h1 class="xxl">Tout votre labo.<br>Un seul <span class="grad">système</span>.</h1>
+  <div class="sous">Le logiciel de gestion des métiers de bouche — conçu en Tunisie</div>
+</div>
+
+<!-- 2. PROBLÈME -->
+<div class="carton" id="c2">
+  <div class="eyebrow"><svg class="lf"><use href="#lf-losange"/></svg>Le quotidien sans outil</div>
+  <h1 class="xl">Vous savez faire.<br>Mais savez-vous ce que ça vous rapporte&nbsp;?</h1>
+  <div class="postits">
+    <div class="postit"><b>Les pertes&nbsp;?</b>« Bof, un peu. » Constatées, jamais chiffrées.</div>
+    <div class="postit"><b>Le coût&nbsp;?</b>« Au doigt mouillé. » Vos prix datent de l'an dernier.</div>
+    <div class="postit"><b>Le stock&nbsp;?</b>« Sur Excel… quelque part. » Deux heures le dimanche soir.</div>
+  </div>
+</div>
+
+<!-- 3. LE PRINCIPE (cascade) -->
+<div class="carton" id="c3">
+  <div class="eyebrow"><svg class="lf"><use href="#lf-losange"/></svg>Le principe</div>
+  <h1 class="xl">Touchez un chiffre.<br>Tout le système suit.</h1>
+  <div class="cascade">
+    <div class="maillon">
+      <div class="et">Prix d'achat</div>
+      <div class="val"><span class="avant">1,904</span><span class="dt">2,290</span> <span style="font-size:0.5em">DT/kg</span></div>
+      <div class="det">Farine — nouvel appro saisi</div>
+    </div>
+    <div class="chev">→</div>
+    <div class="maillon">
+      <div class="et">Coût de revient</div>
+      <div class="val"><span class="avant">1,375</span><span class="dt">1,408</span> <span style="font-size:0.5em">DT</span></div>
+      <div class="det">Croissant — recette recalculée</div>
+    </div>
+    <div class="chev">→</div>
+    <div class="maillon">
+      <div class="et">Marge</div>
+      <div class="val"><span class="avant">67,0</span><span class="pct">66,7</span> <span style="font-size:0.5em">%</span></div>
+      <div class="det">Vu le matin même</div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. MODULES -->
+<div class="carton" id="c4">
+  <div class="eyebrow"><svg class="lf"><use href="#lf-losange"/></svg>Du labo aux points de vente</div>
+  <h1 class="xl">Chaque transfert est<br>valorisé, tracé, facturé.</h1>
+  <div class="liste">
+    <div class="item"><span class="p"></span>Stocks &amp; pertes</div>
+    <div class="item"><span class="p"></span>Recettes &amp; production</div>
+    <div class="item"><span class="p"></span>Ventes &amp; marges</div>
+    <div class="item"><span class="p"></span>Commandes pros &amp; factures</div>
+  </div>
+</div>
+
+<!-- 5. PORTAIL -->
+<div class="carton" id="c5">
+  <div class="eyebrow"><svg class="lf"><use href="#lf-losange"/></svg>Vos clients professionnels</div>
+  <h1 class="xl">Ils commandent seuls.<br>Disponible 24&nbsp;h/24, 7&nbsp;j/7.</h1>
+  <div class="sous">Chacun à ses tarifs négociés — la facture fiscale sort toute seule, timbre compris.</div>
+</div>
+
+<!-- 8. PRODUITS TRANSFORMÉS -->
+<div class="carton" id="c8">
+  <div class="eyebrow"><svg class="lf"><use href="#lf-losange"/></svg>Vos produits</div>
+  <h1 class="xl">De la matière première<br>au produit vendu.</h1>
+  <div class="sous">Produits vendables, produits transformés, sous-recettes — chacun avec son coût réel.</div>
+</div>
+
+<!-- 7. EXPORTS EXCEL -->
+<div class="carton" id="c7">
+  <div class="eyebrow"><svg class="lf"><use href="#lf-losange"/></svg>Vos données restent vos données</div>
+  <h1 class="xl">Tout s'exporte en Excel.<br>Avec votre logo dessus.</h1>
+  <div class="sous">Historiques, transferts, fiches techniques — filtrés comme vous voulez, prêts pour votre comptable.</div>
+</div>
+
+<!-- 6. CLÔTURE -->
+<div class="carton" id="c6">
+  <svg class="losange sm"><use href="#lf-losange"/></svg>
+  <h1 class="xl">Votre système vous attend.</h1>
+  <div class="cta">Demander un accès</div>
+  <div class="url">labflow-tn.com</div>
+  <div class="reassur">
+    <span>Réponse sous 24 h</span><span>Démonstration personnalisée</span><span>Compte livré prêt</span>
+  </div>
+</div>
+
+<script>
+  // Le script de tournage appelle window.montrer('c3') pour afficher un carton.
+  window.montrer = (id) => {
+    document.querySelectorAll('.carton').forEach(c => c.classList.remove('on'));
+    document.getElementById(id).classList.add('on');
+    return true;
+  };
+  window.montrer('c1');
+</script>
+</body>
+</html>
