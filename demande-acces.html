@@ -324,7 +324,7 @@
             <div class="f-row" data-champ="npv">
               <label for="npv">Nombre de points de vente</label>
               <!-- §7.6.4 b — l'erreur n'avait ni id ni référence : invisible pour un lecteur d'écran. -->
-              <input class="champ" type="number" id="npv" name="npv" min="0" max="50" inputmode="numeric" aria-describedby="npv-aide npv-err">
+              <input class="champ" type="number" id="npv" name="npv" min="0" max="50" value="0" inputmode="numeric" aria-describedby="npv-aide npv-err">
               <span class="aide" id="npv-aide">De 0 (dépôt seul) à 50.</span>
               <span class="erreur-msg" id="npv-err" aria-live="polite" data-msg="Entrez un nombre entre 0 et 50."></span>
             </div>
@@ -393,25 +393,11 @@
       </div>
     </div>
     <ul class="reassurances">
+      <li><i aria-hidden="true"></i><strong>Votre premier mois d'abonnement est offert.</strong></li>
       <li><i aria-hidden="true"></i>Aucun paiement en ligne, aucune carte bancaire</li>
       <li><i aria-hidden="true"></i>Vos données protégées (loi 2004-63)</li>
       <li><i aria-hidden="true"></i>On vous rappelle — par téléphone ou sur WhatsApp</li>
     </ul>
-    <figure style="margin:0">
-      <div class="ecran compact">
-        <div class="ecran-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com</span></div>
-          <div class="ecran-visu">
-            <picture>
-              <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif?v=2 1x, assets/img/kpi-marge@2x.avif?v=2 2x">
-              <source type="image/webp" srcset="assets/img/kpi-marge@1x.webp?v=2 1x, assets/img/kpi-marge@2x.webp?v=2 2x">
-              <img src="assets/img/kpi-marge@1x.webp?v=2" width="448" height="262" alt="Indicateur de marge brute du tableau de bord LabFlow. Compte de démonstration Dar Yasmine." loading="lazy" decoding="async">
-            </picture>
-          </div>
-        </div>
-      </div>
-      <figcaption class="mention-demo">Ce que vous verrez au premier écran. Compte de démonstration Dar Yasmine.</figcaption>
-    </figure>
   </aside>
 </div>
 
@@ -512,6 +498,37 @@
     });
   });
 
+  /* Point 2 — au blur de l'email valide, on demande au serveur si un compte ou
+     une demande ouverte existe déjà, et on stoppe l'utilisateur si oui.
+     (Le submit revérifie côté serveur : ce check n'est qu'un confort.) */
+  (function () {
+    var emailEl = document.getElementById('email');
+    var emailErr = document.getElementById('email-err');
+    var MSG_FORMAT = emailErr.dataset.msg;
+    function reset() { if (emailExiste !== null) { emailExiste = null; emailErr.dataset.msg = MSG_FORMAT; } }
+    emailEl.addEventListener('input', reset);
+    emailEl.addEventListener('blur', function () {
+      var v = emailEl.value.trim();
+      reset();
+      if (!VALIDE.email(v)) return;
+      fetch(API + '/api/public/verifier-email?email=' + encodeURIComponent(v))
+        .then(function (r) { return r.ok ? r.json() : { existe: false }; })
+        .then(function (d) {
+          if (!d || !d.existe) return;
+          emailExiste = d.raison;
+          emailErr.dataset.msg = d.raison === 'compte'
+            ? 'Cet email a déjà un compte LabFlow — connectez-vous, ou contactez-nous si besoin.'
+            : 'Une demande est déjà en cours pour cet email : un conseiller vous recontacte, inutile de la renvoyer.';
+          var row = rowOf('email');
+          row.classList.add('invalide'); row.classList.remove('valide');
+          emailEl.setAttribute('aria-invalid', 'true');
+          majMessage(row);
+          majContinuer();
+        })
+        .catch(function () { /* API injoignable : on ne bloque pas, le submit tranchera */ });
+    });
+  })();
+
   /* ── Masque téléphone : XX XXX XXX appliqué à la frappe ──
      Normalisation VERROUILLÉE (§7.6.2) : le masque ne laisse passer que des
      chiffres et ses propres espaces. Ne pas « améliorer » ces deux lignes. */
@@ -525,9 +542,12 @@
   });
 
   /* ── Étapes : chaque vue tient à l'écran, aucune ne défile ── */
+  // Point 2 — un email déjà connu (compte ou demande en cours) bloque l'étape 1.
+  var emailExiste = null; // null | 'compte' | 'demande'
   function majContinuer() {
     var ok = VALIDE.nom(document.getElementById('nom').value)
       && VALIDE.email(document.getElementById('email').value)
+      && !emailExiste
       && VALIDE.telephone(tel.value);
     /* aria-disabled : le bouton reste tabulable et annonçable. Le blocage réel
        est dans son gestionnaire de clic (§7.6.4 e). */
@@ -637,7 +657,7 @@
       telephone: telv,
       ville: document.getElementById('ville').value.trim() || null,
       typeActivite: document.getElementById('type').value || null,
-      nbPointsVente: document.getElementById('npv').value !== '' ? Number(document.getElementById('npv').value) : null,
+      nbPointsVente: document.getElementById('npv').value !== '' ? Number(document.getElementById('npv').value) : 0,
       aLabo: labo,
       interetB2b: b2b,
       message: msg.value.trim() || null,
@@ -650,6 +670,12 @@
       body: JSON.stringify(body),
     }).then(function (r) {
       if (r.ok) { location.href = 'merci.html'; return; }
+      if (r.status === 409) {
+        // email déjà connu (compte ou demande) — on lit le code pour le bon message
+        return r.json().catch(function () { return {}; }).then(function (d) {
+          var e = new Error('conflit'); e.statut = 409; e.code = d && d.code; throw e;
+        });
+      }
       var e = new Error('statut ' + r.status);
       e.statut = r.status;
       throw e;
@@ -660,7 +686,11 @@
       btn.disabled = false;
       btn.textContent = 'Envoyer ma demande d\'accès';
       var statut = e && e.statut;
-      if (statut === 429) {
+      if (statut === 409) {
+        montrerErreur(e.code === 'COMPTE_EXISTANT'
+          ? 'Cet email a déjà un compte LabFlow. Connectez-vous, ou' + lienWa('contactez-nous sur WhatsApp')
+          : 'Une demande est déjà en cours pour cet email — un conseiller vous recontacte. Inutile de la renvoyer.');
+      } else if (statut === 429) {
         montrerErreur('Trop de demandes ont été envoyées depuis votre connexion. Réessayez dans quelques minutes, ou' + lienWa('écrivez-nous directement sur WhatsApp'));
       } else if (statut === 400) {
         montrerErreur('Un des champs n\'a pas été accepté. Vérifiez votre email et votre numéro.');
