@@ -35,8 +35,10 @@ const T = {
   nuit: '#04050B', nuit2: '#080A14',
   // Texte
   blanc: '#F7F8FC', gris: '#A6ACC4', grisFonce: '#767D96',
-  // Arrêts du dégradé (décoratifs : lumière, halos, filets — jamais du texte)
+  // Arrêts du dégradé CLAIR --grad (décoratifs : lumière, halos, filets — jamais du texte)
   ciel: '#0EA5E9', indigo: '#6366F1', violet: '#A855F7',
+  // Arrêts du dégradé ASSOMBRI --grad-btn (surfaces qui PORTENT du texte blanc)
+  cielBtn: '#0A78AB', indigoBtn: '#4F46E5', violetBtn: '#8B33D4',
   // États
   ok: '#5AD07A', erreur: '#FCA5A5',
   // Indicateur de focus (:focus-visible → outline #A5B4FC ; littéral, non tokenisé)
@@ -80,15 +82,14 @@ const REGLES = [
   ['focus #A5B4FC / --nuit',           T.focus, T.nuit, 3],
   ['focus #A5B4FC / --nuit-2',         T.focus, T.nuit2, 3],
 
-  // ── Réalités SOUS-AA du thème VALIDÉ (client, maquette-nuit.html) ──────────
-  //    Mesurées et documentées, seuil 0 (informatif) : le design est verrouillé
-  //    et hors du périmètre de cet outillage. NE PAS « corriger » en douce ici —
-  //    ce sont des arbitrages produit/accessibilité qui reviennent à un humain.
-  //    Le bouton primaire .btn pose du #fff sur le dégradé BRUT (aucun voile) :
-  //    au stop clair (ciel) le texte tombe à 2,77:1, sous le 4,5:1 exigé.
-  ['⚠ btn #fff / dégradé ciel',   '#FFFFFF', T.ciel,   0, '2,77:1 < 4,5 — sous AA, thème validé, à arbitrer'],
-  ['⚠ btn #fff / dégradé indigo', '#FFFFFF', T.indigo, 0, '4,47:1 < 4,5 — sous AA, thème validé, à arbitrer'],
-  ['⚠ btn #fff / dégradé violet', '#FFFFFF', T.violet, 0, '3,96:1 < 4,5 — sous AA, thème validé, à arbitrer'],
+  // ── Boutons et pastilles : #fff sur le dégradé ASSOMBRI --grad-btn ─────────
+  //    Le --grad clair échouait l'AA sous le texte (ciel 2,77:1). --grad-btn
+  //    (stops assombris) est appliqué aux SEULES surfaces porteuses de texte
+  //    (.btn, .regard.moi .tag, .progression .pas.actif .puce, .f-radio button.on,
+  //    .es .pastille) et doit tenir 4,5:1 à CHAQUE arrêt. Le pire cas = le ciel.
+  ['btn #fff / --grad-btn ciel',   '#FFFFFF', T.cielBtn,   4.5],
+  ['btn #fff / --grad-btn indigo', '#FFFFFF', T.indigoBtn, 4.5],
+  ['btn #fff / --grad-btn violet', '#FFFFFF', T.violetBtn, 4.5],
   //    --trait-controle est un blanc à .22 : ~1,9:1 sur le noir. Il n'est PAS
   //    l'indicateur de focus conforme (c'est l'outline #A5B4FC, ~10:1 ci-dessus).
   ['⚠ --trait-controle comp / --nuit',   traitC,  T.nuit,  0, 'bord translucide ~1,85:1 — focus conforme = outline #A5B4FC'],
