@@ -163,8 +163,8 @@ async function saveBinary(token, urlPath, file) {
 
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-gpu', '--lang=fr-FR', '--force-device-scale-factor=2'],
-    defaultViewport: { width: 1440, height: 900, deviceScaleFactor: 2 },
+    args: ['--no-sandbox', '--disable-gpu', '--lang=fr-FR', '--force-device-scale-factor=3'],
+    defaultViewport: { width: 1440, height: 900, deviceScaleFactor: 3 },
   });
 
   // ── Côté client Dar Yasmine ────────────────────────────────────────────────
@@ -177,7 +177,7 @@ async function saveBinary(token, urlPath, file) {
 
   // Tous les crops suivants : viewport HAUT, sinon les zones sous la ligne de
   // flottaison ne sont pas peintes par le compositeur et sortent en blanc.
-  await page.setViewport({ width: 1440, height: 2400, deviceScaleFactor: 2 });
+  await page.setViewport({ width: 1440, height: 2400, deviceScaleFactor: 3 });
   await page.reload({ waitUntil: 'domcontentloaded' });
   await waitForData(page, { needle: '%' });
   await shootClip(
@@ -328,7 +328,7 @@ async function saveBinary(token, urlPath, file) {
   // ── Portail acheteur ───────────────────────────────────────────────────────
   const ctx = await browser.createBrowserContext();
   const pp = await ctx.newPage();
-  await pp.setViewport({ width: 1440, height: 900, deviceScaleFactor: 2 });
+  await pp.setViewport({ width: 1440, height: 900, deviceScaleFactor: 3 });
   await login(pp, ACHETEUR);
   await pp.goto(`${FRONT}/portail`, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await waitForData(pp);
