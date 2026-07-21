@@ -12,17 +12,18 @@ const OUT = path.join(__dirname, '..', 'assets', 'img');
 const MAX_KO = 120;
 
 // Largeur d'affichage cible (CSS px) par capture — @1x = cette largeur, @2x = le double.
+// Sources désormais capturées en dpr 3 : on peut viser des @2x plus larges pour
+// rester net sur écrans rétina (dpr 2-3, notamment mobile) et sous le léger zoom
+// d'affichage des cartes de la section 2. @2x plafonné à la largeur réelle du crop.
 const DISPLAY_W = {
   'dashboard.png': 1100,
-  'portail-catalogue.png': 1100,
-  'kpi-marge.png': 224, // taille CSS native du crop (dpr 2) → @2x = 448, un vrai 2:1
-  'ventes-canaux.png': 640,
-  'stock-valeur.png': 720,
-  'ft-arbre.png': 460,
-  'production-deduction.png': 720,
-  'commandes-table.png': 760,
-  'stepper.png': 560,
-  'facture-timbre.png': 360,
+  'kpi-marge.png': 336,        // source ~672px (224 CSS ×3) → @2x = 672, plein
+  'ventes-canaux.png': 700,
+  'stock-valeur.png': 900,     // zoomée dans la carte → source large indispensable
+  'ft-arbre.png': 520,
+  'commandes-table.png': 820,
+  'stepper.png': 600,
+  'facture-timbre.png': 720,   // ruban large et fin, affiché ~700px
 };
 
 async function encode(input, outPath, format, width) {
