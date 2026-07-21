@@ -15,7 +15,7 @@
 <link rel="canonical" href="https://labflow-tn.com/">
 <link rel="preload" as="image" href="assets/video/demo-hero-poster.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/v4.css?v=4">
+<link rel="stylesheet" href="assets/css/v4.css?v=5">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -65,6 +65,7 @@
       <a href="#suivre">Ce que ça suit</a>
       <a href="#recette">Prix de revient</a>
       <a href="#pros">Clients pros</a>
+      <a href="#migration">Migration</a>
       <a href="#donnees">Vos données</a>
     </div>
     <div class="nav-droite">
@@ -79,6 +80,7 @@
   <a href="#suivre">Ce que ça suit</a>
   <a href="#recette">Prix de revient</a>
   <a href="#pros">Clients pros</a>
+  <a href="#migration">Migration</a>
   <a href="#donnees">Vos données</a>
   <a class="btn mm-cta" href="demande-acces.html">Demander un accès</a>
 </div>
@@ -146,47 +148,24 @@
       <p>Le stock, le coût réel et la marge se recalculent au moment où vous enregistrez.
          Pas de tableur à tenir le soir, pas de double saisie.</p>
     </div>
-    <div class="constellation">
-      <article class="carte reveal">
-        <div class="carte-visu">
-          <picture>
-            <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif?v=2 1x, assets/img/kpi-marge@2x.avif?v=2 2x">
-            <source type="image/webp" srcset="assets/img/kpi-marge@1x.webp?v=2 1x, assets/img/kpi-marge@2x.webp?v=2 2x">
-            <img src="assets/img/kpi-marge@1x.webp?v=2"
-                 alt="Indicateur de marge brute dans LabFlow. Compte de démonstration Dar Yasmine."
-                 loading="lazy" width="448" height="262">
-          </picture>
+    <div class="cadre-visu ecran-plein reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran">
+        <div class="ecran-in">
+          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Tableau de bord</span></div>
+          <div class="ecran-visu">
+            <picture>
+              <source type="image/avif" srcset="assets/img/ecran-dashboard@1x.avif 1x, assets/img/ecran-dashboard@2x.avif 2x">
+              <source type="image/webp" srcset="assets/img/ecran-dashboard@1x.webp 1x, assets/img/ecran-dashboard@2x.webp 2x">
+              <img src="assets/img/ecran-dashboard@1x.webp"
+                   alt="Tableau de bord LabFlow : chiffre d'affaires, marge brute, food cost, pertes, valeur du stock et ventes aux professionnels réunis sur un seul écran. Compte de démonstration Dar Yasmine."
+                   loading="lazy" width="640" height="461">
+            </picture>
+          </div>
         </div>
-        <h3>Votre marge</h3>
-        <p>Ce que vous gagnez vraiment, une fois les achats déduits.</p>
-      </article>
-      <article class="carte reveal d1">
-        <div class="carte-visu z-stock">
-          <picture>
-            <source type="image/avif" srcset="assets/img/stock-valeur@1x.avif?v=2 1x, assets/img/stock-valeur@2x.avif?v=2 2x">
-            <source type="image/webp" srcset="assets/img/stock-valeur@1x.webp?v=2 1x, assets/img/stock-valeur@2x.webp?v=2 2x">
-            <img src="assets/img/stock-valeur@1x.webp?v=2"
-                 alt="Stock valorisé article par article dans LabFlow. Compte de démonstration Dar Yasmine."
-                 loading="lazy" width="1440" height="748">
-          </picture>
-        </div>
-        <h3>Votre stock</h3>
-        <p>Ce qu'il reste, et combien ça vaut, article par article.</p>
-      </article>
-      <article class="carte reveal d2">
-        <div class="carte-visu z-ventes">
-          <picture>
-            <source type="image/avif" srcset="assets/img/ventes-canaux@1x.avif?v=2 1x, assets/img/ventes-canaux@2x.avif?v=2 2x">
-            <source type="image/webp" srcset="assets/img/ventes-canaux@1x.webp?v=2 1x, assets/img/ventes-canaux@2x.webp?v=2 2x">
-            <img src="assets/img/ventes-canaux@1x.webp?v=2"
-                 alt="Répartition des ventes par canal dans LabFlow. Compte de démonstration Dar Yasmine."
-                 loading="lazy" width="1280" height="442">
-          </picture>
-        </div>
-        <h3>Vos ventes</h3>
-        <p>Sur place, à emporter, clients pros : d'où vient l'argent.</p>
-      </article>
+      </div>
     </div>
+    <p class="legende centre reveal d1">Marge · Stock · Ventes · Pertes — recalculés à chaque saisie. Compte de démonstration Dar Yasmine.</p>
   </div>
 </section>
 
@@ -209,14 +188,14 @@
       <div class="lueur" aria-hidden="true"></div>
       <div class="ecran compact">
         <div class="ecran-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Fiche technique — Mille-feuille</span></div>
+          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Espace Produits</span></div>
           <div class="ecran-visu">
             <picture>
-              <source type="image/avif" srcset="assets/img/ft-arbre@1x.avif?v=2 1x, assets/img/ft-arbre@2x.avif?v=2 2x">
-              <source type="image/webp" srcset="assets/img/ft-arbre@1x.webp?v=2 1x, assets/img/ft-arbre@2x.webp?v=2 2x">
-              <img src="assets/img/ft-arbre@1x.webp?v=2"
-                   alt="Arbre de recette LabFlow : composition et coût de chaque composant du mille-feuille. Compte de démonstration Dar Yasmine."
-                   loading="lazy" width="460" height="486">
+              <source type="image/avif" srcset="assets/img/ecran-ft@1x.avif 1x, assets/img/ecran-ft@2x.avif 2x">
+              <source type="image/webp" srcset="assets/img/ecran-ft@1x.webp 1x, assets/img/ecran-ft@2x.webp 2x">
+              <img src="assets/img/ecran-ft@1x.webp"
+                   alt="Espace Produits LabFlow avec la composition du mille-feuille : pâte feuilletée, crème pâtissière et sous-recettes avec leurs quantités et leur coût. Compte de démonstration Dar Yasmine."
+                   loading="lazy" width="640" height="451">
             </picture>
           </div>
         </div>
@@ -245,25 +224,16 @@
       <div class="lueur" aria-hidden="true"></div>
       <div class="ecran compact">
         <div class="ecran-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Commandes des clients pros</span></div>
+          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Commandes des clients pros</span></div>
           <div class="ecran-visu">
             <picture>
-              <source type="image/avif" srcset="assets/img/commandes-table@1x.avif?v=2 1x, assets/img/commandes-table@2x.avif?v=2 2x">
-              <source type="image/webp" srcset="assets/img/commandes-table@1x.webp?v=2 1x, assets/img/commandes-table@2x.webp?v=2 2x">
-              <img src="assets/img/commandes-table@1x.webp?v=2"
-                   alt="Tableau des commandes des clients professionnels et leur état, dans LabFlow. Compte de démonstration Dar Yasmine."
-                   loading="lazy" width="760" height="287">
+              <source type="image/avif" srcset="assets/img/ecran-commandes@1x.avif 1x, assets/img/ecran-commandes@2x.avif 2x">
+              <source type="image/webp" srcset="assets/img/ecran-commandes@1x.webp 1x, assets/img/ecran-commandes@2x.webp 2x">
+              <img src="assets/img/ecran-commandes@1x.webp"
+                   alt="Écran des commandes des clients professionnels dans LabFlow : dates, acheteurs, statuts de la commande et factures FA-2026. Compte de démonstration Dar Yasmine."
+                   loading="lazy" width="640" height="477">
             </picture>
           </div>
-        </div>
-      </div>
-      <div class="medaillon" aria-hidden="true">
-        <div class="medaillon-in">
-          <picture>
-            <source type="image/avif" srcset="assets/img/stepper@1x.avif?v=2 1x, assets/img/stepper@2x.avif?v=2 2x">
-            <source type="image/webp" srcset="assets/img/stepper@1x.webp?v=2 1x, assets/img/stepper@2x.webp?v=2 2x">
-            <img src="assets/img/stepper@1x.webp?v=2" alt="" loading="lazy" width="1120" height="292">
-          </picture>
         </div>
       </div>
     </div>
@@ -280,16 +250,21 @@
         <p>TVA calculée, numérotation à la suite, timbre fiscal posé : la facture sort
            prête pour votre client et pour votre comptable. Rien à recompter à la main.</p>
       </div>
-      <div class="ruban reveal d1">
-        <div class="ruban-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Facture — pied de page</span></div>
-          <picture>
-            <source type="image/avif" srcset="assets/img/facture-timbre@1x.avif?v=2 1x, assets/img/facture-timbre@2x.avif?v=2 2x">
-            <source type="image/webp" srcset="assets/img/facture-timbre@1x.webp?v=2 1x, assets/img/facture-timbre@2x.webp?v=2 2x">
-            <img src="assets/img/facture-timbre@1x.webp?v=2"
-                 alt="Pied d'une facture LabFlow : total HT, TVA, timbre fiscal et total TTC. Compte de démonstration Dar Yasmine."
-                 width="360" height="42">
-          </picture>
+      <div class="ecran-doc reveal d1">
+        <div class="lueur" aria-hidden="true"></div>
+        <div class="ecran">
+          <div class="ecran-in">
+            <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Facture PDF</span></div>
+            <div class="ecran-visu">
+              <picture>
+                <source type="image/avif" srcset="assets/img/ecran-facture@1x.avif 1x, assets/img/ecran-facture@2x.avif 2x">
+                <source type="image/webp" srcset="assets/img/ecran-facture@1x.webp 1x, assets/img/ecran-facture@2x.webp 2x">
+                <img src="assets/img/ecran-facture@1x.webp"
+                     alt="Facture PDF LabFlow complète : émetteur Dar Yasmine, client, détail des lignes, Total HT, TVA, timbre fiscal 1,000 DT et Net à payer 256,088 DT. Compte de démonstration Dar Yasmine."
+                     loading="lazy" width="640" height="670">
+              </picture>
+            </div>
+          </div>
         </div>
       </div>
       <p class="legende reveal d1">Le total HT, la TVA, le timbre fiscal et le total TTC — sur chaque facture. Compte de démonstration Dar Yasmine.</p>
@@ -297,7 +272,44 @@
   </div>
 </section>
 
-<!-- ══ 6 · VOS DONNÉES ══ -->
+<!-- ══ 6 · MIGRATION — DÉMARRAGE RAPIDE ══ -->
+<section id="migration" class="sombre-2">
+  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
+  <div class="container duo">
+    <div class="duo-texte reveal">
+      <span class="oeil">Migration — <b>démarrage rapide</b></span>
+      <h2>Vous partez d'Excel&nbsp;?<br>LabFlow aussi.</h2>
+      <p>Téléchargez notre modèle Excel, remplissez vos articles — jusqu'à 1 000 en une fois.
+         LabFlow les crée d'un coup, avec leurs unités, catégories et familles, aussitôt
+         disponibles dans tous vos points de vente.</p>
+      <ul class="liste">
+        <li><i aria-hidden="true"></i>Notre modèle Excel : quatre colonnes, rien à paramétrer</li>
+        <li><i aria-hidden="true"></i>Unités, catégories et familles créées automatiquement</li>
+        <li><i aria-hidden="true"></i>Jusqu'à 1 000 articles par fichier</li>
+      </ul>
+      <a class="btn" href="demande-acces.html">Demander un accès</a>
+    </div>
+    <div class="cadre-visu duo-visu reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran compact">
+        <div class="ecran-in">
+          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Ajout dynamique</span></div>
+          <div class="ecran-visu">
+            <picture>
+              <source type="image/avif" srcset="assets/img/ecran-import-succes@1x.avif 1x, assets/img/ecran-import-succes@2x.avif 2x">
+              <source type="image/webp" srcset="assets/img/ecran-import-succes@1x.webp 1x, assets/img/ecran-import-succes@2x.webp 2x">
+              <img src="assets/img/ecran-import-succes@1x.webp"
+                   alt="Écran d'import LabFlow après un import réussi : bandeau « Import terminé — 6 lignes traitées », compteurs 6 articles, 4 catégories et 1 famille créés, et le détail ligne par ligne. Compte de démonstration Dar Yasmine."
+                   loading="lazy" width="640" height="508">
+            </picture>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7 · VOS DONNÉES ══ -->
 <section id="donnees" class="sombre-2">
   <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
   <div class="container">
@@ -335,7 +347,7 @@
 
 </main>
 
-<!-- ══ 7 · CTA FINAL ══ -->
+<!-- ══ 8 · CTA FINAL ══ -->
 <section class="final" id="final">
   <div class="hero-aurore" aria-hidden="true"></div>
   <div class="container">
