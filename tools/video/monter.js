@@ -32,11 +32,16 @@ const PLAN = [
   { f: '03-probleme', carton: true },
   { f: '06-stock' },               // depuis le haut de l'écran, en descendant
   { f: '17b-excel-appro' },        // … et son export d'historique
-  { f: '05-principe', carton: true },
+  // ⛔ D5 — deux plans RETIRÉS du montage, ne pas les remettre :
+  //    '05-principe'    projetait la cascade 1,904→2,290 · 1,375→1,408 ·
+  //                     67,0→66,7, dont les valeurs "après" sont fausses et ont
+  //                     été retirées de index.html ;
+  //    '16-excel-fiche' filmait fiche-technique-exemple.xlsx, fichier faux
+  //                     supprimé du dépôt.
+  //    Les séquences sources restent dans seq/ mais ne sont plus assemblées.
   { f: '13-produits-intro', carton: true },
   { f: '13b-produits' },           // produits vendables / transformés
   { f: '08-fiche-technique' },
-  { f: '16-excel-fiche' },         // … et sa fiche technique en Excel
   { f: '07-transferts-intro', carton: true },
   { f: '15-transferts' },          // depuis le haut : filtres puis lignes valorisées
   { f: '17-excel-transferts' },    // … et son export

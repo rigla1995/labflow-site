@@ -3,15 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tarifs LabFlow — logiciel de gestion en dinars pour commerces alimentaires en Tunisie</title>
-<meta name="description" content="Tarifs de référence LabFlow en dinars tunisiens : point de vente dès 150 DT/mois, labo + points de vente, dépôt B2B dès 210 DT/mois. Estimez votre mensualité en 1 minute.">
+<title>Combien coûte LabFlow ? — ce qui compose votre devis</title>
+<!-- ≤ 155 caractères : au-delà, Google tronque. Aucun terme « ERP ». -->
+<meta name="description" content="Il n'y a pas de prix unique : votre devis se compose à partir de votre organisation réelle. Voici ce qui le fait varier, et ce qui est compris.">
+<meta property="og:title" content="Combien coûte LabFlow ?">
+<meta property="og:description" content="Pas de prix unique, parce qu'il serait faux pour presque tout le monde. Voici ce qui compose un devis LabFlow. Demandez un accès : un conseiller vous rappelle.">
+<meta property="og:image" content="https://labflow-tn.com/assets/img/og.jpg">
+<meta property="og:url" content="https://labflow-tn.com/tarifs.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_TN">
+<link rel="canonical" href="https://labflow-tn.com/tarifs.html">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/v4.css?v=4">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/v2.css">
 </head>
 <body>
+
+<a class="saut-contenu" href="#top">Aller au contenu</a>
+
+<!-- ══ SPRITE : logo LabFlow + icônes (repris du thème validé) ══ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
@@ -28,301 +40,207 @@
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
     </symbol>
-    <symbol id="lf-logo" viewBox="0 0 192 52">
-      <use href="#lf-losange" width="52" height="52"/>
-      <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
-    </symbol>
+    <symbol id="ic-wa" viewBox="0 0 20 20"><path d="M10 1a9 9 0 0 0-7.7 13.6L1 19l4.5-1.2A9 9 0 1 0 10 1zm0 2a7 7 0 1 1-3.6 13l-.3-.2-2.2.6.6-2.1-.2-.4A7 7 0 0 1 10 3zm-3 3.6c-.2 0-.5.1-.7.4-.3.3-.8.8-.8 1.9s.9 2.2 1 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.6-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a5.7 5.7 0 0 1-2.8-2.5c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></symbol>
+    <symbol id="ic-fleche" viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
 
-<nav class="top scrolled" id="topnav">
-  <div class="nav-inner">
-    <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
-    <div class="nav-links" id="nav-links">
-      <a href="index.html#fonctionnalites">Le système</a>
-      <a href="index.html#pourqui">Votre métier</a>
-      <a href="tarifs.html" aria-current="page">Tarifs</a>
-      <a href="index.html#faq">FAQ</a>
+<!-- ══ NAVIGATION ══ Même markup que l'accueil (thème Nuit). Les liens de
+     rubrique pointent vers les ancres de l'accueil. -->
+<nav class="nav" id="nav">
+  <div class="container nav-in">
+    <a class="marque" href="index.html" aria-label="LabFlow — accueil">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
+    </a>
+    <div class="nav-liens">
+      <a href="index.html#suivre">Ce que ça suit</a>
+      <a href="index.html#recette">Prix de revient</a>
+      <a href="index.html#pros">Clients pros</a>
+      <a href="index.html#donnees">Vos données</a>
     </div>
-    <div style="display:flex; align-items:center; gap:10px">
-      <a class="btn small" href="demande-acces.html">Demander un accès</a>
-      <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div class="nav-droite">
+      <a class="btn petit" href="demande-acces.html">Demander un accès</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
     </div>
   </div>
 </nav>
 
-<header class="hero" style="padding:140px 0 30px">
+<!-- ══ MENU MOBILE ══ -->
+<div class="menu-mobile" id="menu-mobile">
+  <a href="index.html#suivre">Ce que ça suit</a>
+  <a href="index.html#recette">Prix de revient</a>
+  <a href="index.html#pros">Clients pros</a>
+  <a href="index.html#donnees">Vos données</a>
+  <a class="btn mm-cta" href="demande-acces.html">Demander un accès</a>
+</div>
+
+<main id="top">
+
+<!-- ══ HERO ══ Version texte (pas de capture) : c'est une page d'explication. -->
+<header class="hero" style="padding-bottom:44px">
+  <div class="hero-aurore" aria-hidden="true"></div>
   <div class="container">
-    <div class="eyebrow"><i></i>Tarifs de référence — en dinars tunisiens</div>
-    <h1 style="max-width:20ch; font-size:clamp(2.2rem,5vw,3.6rem)">Des tarifs qui s'assemblent comme le système</h1>
-    <p class="sub" style="color:var(--encre-2); font-size:1.1rem; max-width:640px; margin-top:16px">Chaque commerce est différent&nbsp;: votre mensualité est composée à partir de votre configuration réelle — points de vente, laboratoire, acheteurs professionnels. Vous payez pour ce que vous utilisez, rien de plus.</p>
+    <div class="hero-in">
+      <div class="pastille reveal"><i></i>Le devis — en dinars tunisiens</div>
+      <h1 class="reveal d1">Combien coûte<br><span class="clair">LabFlow</span>&nbsp;?</h1>
+      <p class="sous reveal d2">Il n'y a pas de prix unique — il serait faux pour presque tout le monde.
+         Votre devis se compose sur votre organisation réelle. Voici ce qui le fait varier,
+         sans formulaire à remplir pour le savoir.</p>
+      <div class="hero-ctas reveal d3">
+        <a class="btn" href="demande-acces.html">Demander un accès</a>
+        <a class="btn-fantome" href="https://wa.me/21654183189?text=Bonjour%2C%20je%20voudrais%20un%20devis%20LabFlow%20pour%20mon%20activit%C3%A9." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Demander un devis sur WhatsApp</a>
+      </div>
+      <p class="rappel reveal d3">Un conseiller vous rappelle. Aucun paiement en ligne.</p>
+    </div>
   </div>
 </header>
 
-<section id="tarifs" style="padding-top:40px">
+<!-- ══ CE QUI FAIT VARIER VOTRE DEVIS ══ -->
+<section id="varie" class="sombre-2">
+  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
   <div class="container">
-    <h2 class="sr-only">Trois configurations types</h2>
-    <div class="packs">
-      <div class="tuile pack">
-        <h3>Point de vente</h3>
-        <div class="prix">dès 150 <small>DT/mois</small></div>
-        <p>Restaurant, café, boutique… sans laboratoire.</p>
-        <ul>
-          <li>Stock quotidien valorisé et ventes</li>
-          <li>Pertes chiffrées, inventaires, historiques Excel</li>
-          <li>Formule Premium (+ fiches techniques et production)&nbsp;: dès 200 DT</li>
-          <li>Dégressif&nbsp;: −20&nbsp;% le 2ᵉ point de vente, −40&nbsp;% dès le 3ᵉ</li>
-        </ul>
-      </div>
-      <div class="tuile pack vedette">
-        <h3>Labo &amp; points de vente <span style="font-size:0.66rem; vertical-align:middle; background:var(--grad-marque-texte); border-radius:999px; padding:3px 10px; margin-left:6px">Le plus choisi</span></h3>
-        <div class="prix">ex. 440 <small>DT/mois — 1 labo + 2 points de vente</small></div>
-        <p>Labo ou cuisine centrale + points de vente.</p>
-        <ul>
-          <li>Labo à 160 DT/mois, tous vos points de vente à −30&nbsp;%</li>
-          <li>Production, coûts de revient, transferts valorisés</li>
-          <li>Fiches techniques incluses dès qu'il y a un labo</li>
-          <li>Option portail acheteurs B2B</li>
-        </ul>
-      </div>
-      <div class="tuile pack">
-        <h3>Dépôt B2B</h3>
-        <div class="prix">dès 210 <small>DT/mois — labo + 10 acheteurs</small></div>
-        <p>Labo seul, vente 100&nbsp;% professionnelle.</p>
-        <ul>
-          <li>Production et stock labo</li>
-          <li>Carnet d'acheteurs + portail de commande</li>
-          <li>Factures fiscales automatiques, timbre compris</li>
-          <li>Paliers&nbsp;: 10 = 50 DT · 20 = 90 DT · 50 = 150 DT · 100 = 220 DT</li>
-        </ul>
-      </div>
+    <div class="chapeau centre reveal">
+      <span class="oeil">Sur mesure — <b>pas de forfait</b></span>
+      <h2>De quoi dépend<br>votre devis&nbsp;?</h2>
+      <p>Votre abonnement est mensuel. Quatre éléments le composent — et une option,
+         si vous voulez les recettes sans laboratoire. Rien d'autre.</p>
     </div>
+    <div class="constellation">
+      <article class="carte reveal">
+        <h3>Vos points de vente</h3>
+        <p>Chaque restaurant, café ou boutique a son stock, ses ventes, sa marge. Plus vous en avez, moins chaque site pèse.</p>
+      </article>
+      <article class="carte reveal d1">
+        <h3>Votre laboratoire</h3>
+        <p>L'atelier ou la cuisine centrale qui produit pour vos points de vente. Il débloque la production et les fiches techniques.</p>
+      </article>
+      <article class="carte reveal d2">
+        <h3>Vos gérants</h3>
+        <p>Chaque gérant a son propre accès, limité aux sites que vous lui confiez. Vous gardez la vue d'ensemble.</p>
+      </article>
+      <article class="carte reveal">
+        <h3>Vos clients professionnels</h3>
+        <p>Le portail où ils commandent seuls, à leurs tarifs, se dimensionne selon votre carnet d'acheteurs. Il suppose un laboratoire.</p>
+      </article>
+      <article class="carte reveal d1">
+        <h3>Les recettes sans laboratoire</h3>
+        <p>Comprises dès qu'il y a un laboratoire. Sinon, elles s'ajoutent à votre configuration si vous les voulez quand même.</p>
+      </article>
+    </div>
+    <p class="cloison-note reveal d2">Ce qui n'est pas dans votre configuration n'est pas dans votre facture — et réciproquement.</p>
+  </div>
+</section>
 
-    <div class="calc-zone" id="calculateur">
-      <div class="calc-controles">
-        <h2 style="font-size:1.4rem; margin-bottom:6px">Estimer mon tarif en 1 minute</h2>
-        <p style="color:var(--encre-2); font-size:0.92rem; margin-bottom:22px">Composez votre configuration — le ticket s'imprime en direct, en dinars.</p>
-        <div class="rangee">
-          <span class="lbl">Points de vente</span>
-          <div class="pas-a-pas"><button type="button" aria-label="Retirer un point de vente" onclick="chg('act',-1)">−</button><b id="v-act">1</b><button type="button" aria-label="Ajouter un point de vente" onclick="chg('act',1)">+</button></div>
-          <div class="aide">Restaurant, café, boutique… 0 = dépôt 100&nbsp;% B2B</div>
-        </div>
-        <div class="rangee" id="row-formule">
-          <span class="lbl">Formule des points de vente</span>
-          <div class="seg"><button type="button" id="f-basique" onclick="setFormule('basique')">Basique — 150 DT</button><button type="button" id="f-premium" class="on" onclick="setFormule('premium')">Premium — 200 DT</button></div>
-          <div class="aide" id="hint-formule">Premium ajoute fiches techniques et production</div>
-        </div>
-        <div class="rangee">
-          <span class="lbl">Laboratoires / cuisines centrales</span>
-          <div class="pas-a-pas"><button type="button" aria-label="Retirer un laboratoire" onclick="chg('lab',-1)">−</button><b id="v-lab">0</b><button type="button" aria-label="Ajouter un laboratoire" onclick="chg('lab',1)">+</button></div>
-          <div class="aide">Le labo passe tous vos points de vente à −30&nbsp;% et inclut les fiches techniques</div>
-        </div>
-        <div class="rangee">
-          <span class="lbl">Gérants supplémentaires</span>
-          <div class="pas-a-pas"><button type="button" aria-label="Retirer un gérant" onclick="chg('ger',-1)">−</button><b id="v-ger">0</b><button type="button" aria-label="Ajouter un gérant" onclick="chg('ger',1)">+</button></div>
-          <div class="aide">Comptes délégués à périmètre limité</div>
-        </div>
-        <div class="rangee">
-          <span class="lbl">Acheteurs professionnels (portail B2B)</span>
-          <div class="seg" id="seg-ach">
-            <button type="button" data-p="0" class="on" onclick="setPalier(0)">Sans</button>
-            <button type="button" data-p="10" onclick="setPalier(10)">≤ 10</button>
-            <button type="button" data-p="20" onclick="setPalier(20)">≤ 20</button>
-            <button type="button" data-p="50" onclick="setPalier(50)">≤ 50</button>
-            <button type="button" data-p="100" onclick="setPalier(100)">≤ 100</button>
-          </div>
-          <div class="aide" id="hint-ach">Nécessite au moins un laboratoire</div>
-        </div>
-      </div>
-      <div>
-        <div class="ticket" id="ticket">
-          <div class="tk-titre">LABFLOW</div>
-          <div class="tk-sous">estimation mensuelle — tarifs de référence</div>
-          <hr class="tk-sep">
-          <div id="calc-warn" style="display:none; font-size:0.82rem; color:var(--encre-2)"></div>
-          <div id="calc-ok">
-            <div id="detail"></div>
-            <hr class="tk-sep">
-            <div class="tk-total" role="status" aria-live="polite"><span>TOTAL / MOIS</span><span><span class="dt" id="total">—</span> <small>DT</small></span></div>
-            <div class="tk-note" id="ob"></div>
-            <div class="tk-note">Tarifs de référence en dinars tunisiens — devis personnalisé établi au contrat.</div>
-          </div>
-          <a class="btn" id="calc-go" href="demande-acces.html">Demander un accès avec cette config</a>
-        </div>
-      </div>
+<!-- ══ CE QUI EST COMPRIS DANS TOUS LES CAS ══ -->
+<section id="compris">
+  <div class="container">
+    <div class="chapeau centre reveal">
+      <span class="oeil">Le socle — <b>dans tous les comptes</b></span>
+      <h2>Ce qui est compris,<br>quelle que soit la taille.</h2>
+    </div>
+    <!-- Panneau de verre : mêmes tokens que le thème (aucun composant nouveau). -->
+    <div class="reveal d1" style="max-width:640px;margin-inline:auto;padding:28px 30px;border-radius:var(--r-m);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.018));border:1px solid var(--trait)">
+      <ul class="liste" style="margin-bottom:0">
+        <li><i aria-hidden="true"></i>Le stock de chaque site, valorisé en dinars, jour après jour</li>
+        <li><i aria-hidden="true"></i>Les pertes chiffrées et les inventaires</li>
+        <li><i aria-hidden="true"></i>Les ventes et la marge réelle, canal par canal</li>
+        <li><i aria-hidden="true"></i>Les fournisseurs et l'historique de vos approvisionnements</li>
+        <li><i aria-hidden="true"></i>Les historiques filtrables, exportables en Excel à votre logo</li>
+        <li><i aria-hidden="true"></i>Les factures en PDF</li>
+        <li><i aria-hidden="true"></i>Le manuel intégré, et une équipe qui répond en français</li>
+      </ul>
+    </div>
+    <p class="cloison-note reveal d1">Les fiches techniques, les sous-recettes et la production sont comprises dès qu'il y a un laboratoire.</p>
+  </div>
+</section>
+
+<!-- ══ LA MISE EN ROUTE ══ -->
+<section id="mise-en-route" class="sombre-2">
+  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
+  <div class="container">
+    <div class="chapeau centre reveal">
+      <span class="oeil">La mise en route — <b>clé en main</b></span>
+      <h2>Vous démarrez sur un compte<br>déjà prêt, pas une page blanche.</h2>
+      <p>Pas d'inscription en ligne : notre équipe paramètre votre compte avec vous —
+         points de vente, catalogue repris de vos fichiers Excel, fournisseurs, tarifs —
+         puis forme votre équipe. Ce service est facturé une seule fois, à part de l'abonnement ;
+         son montant figure sur votre devis.</p>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="container" style="max-width:820px">
-    <div class="kicker">La mise en route</div>
-    <h2>Un démarrage clé en main, pas un logiciel livré vide</h2>
-    <p class="sec-intro" style="max-width:none; margin-bottom:18px">Chez LabFlow, il n'y a pas d'inscription en ligne ni de compte à configurer tout seul. Notre équipe paramètre votre compte avec vous&nbsp;: vos points de vente, votre catalogue d'articles (import Excel massif avec modèle fourni), vos fournisseurs, vos tarifs. Puis nous formons votre équipe à l'outil. Le jour du lancement, vous recevez un compte prêt à l'emploi, pas une page blanche.</p>
-    <div class="encart-honnete" style="max-width:none">💡<span>Ce service de démarrage est facturé <strong>une seule fois</strong>&nbsp;: à partir de <strong><span data-ob="sans">500</span>&nbsp;DT</strong>, ou <strong><span data-ob="avec">700</span>&nbsp;DT</strong> avec laboratoire.</span></div>
-  </div>
-</section>
+</main>
 
-<section style="padding-top:0">
+<!-- ══ DEMANDE D'ACCÈS (CTA final) ══ -->
+<section class="final" id="final">
+  <div class="hero-aurore" aria-hidden="true"></div>
   <div class="container">
-    <div class="kicker">Vos questions sur les prix</div>
-    <h2>FAQ tarifs</h2>
-    <div class="faq-themes" style="margin-top:30px">
-      <details><summary>Pourquoi n'affichez-vous pas un prix fixe unique&nbsp;?</summary><p>Parce qu'un forfait unique serait injuste. Une boutique seule paierait pour des modules qu'elle n'utilise pas, et un atelier avec trois points de vente serait à l'étroit. Votre mensualité est composée à partir de votre configuration réelle, avec les tarifs de référence affichés ici. Le montant exact figure dans votre devis, établi au contrat après un échange avec un conseiller.</p></details>
-      <details><summary>Puis-je changer de configuration en cours de route&nbsp;?</summary><p>Oui. Vous ouvrez un deuxième point de vente, vous ajoutez un laboratoire, vos acheteurs professionnels passent de 10 à 20&nbsp;: votre configuration évolue avec votre activité. Votre contrat est simplement mis à jour et votre mensualité ajustée selon les mêmes tarifs de référence.</p></details>
-      <details><summary>Y a-t-il un engagement&nbsp;?</summary><p>Demander un accès et assister à la démonstration ne vous engagent à rien. Si vous décidez de continuer, les conditions de durée sont écrites noir sur blanc dans votre contrat, signé électroniquement, et discutées avec votre conseiller avant toute signature. Aucune surprise.</p></details>
-      <details><summary>Que couvrent les frais de démarrage&nbsp;?</summary><p>C'est un service, facturé une seule fois&nbsp;: le paramétrage complet de votre compte (points de vente, labo, catalogue d'articles importé depuis votre fichier Excel, fournisseurs, tarifs) et la formation de votre équipe. Vous démarrez sur un compte prêt à l'emploi, avec vos vraies données. À partir de <span data-ob="sans">500</span>&nbsp;DT, ou <span data-ob="avec">700</span>&nbsp;DT avec laboratoire.</p></details>
-      <details><summary>Proposez-vous un essai gratuit&nbsp;?</summary><p>Non, et c'est un choix assumé&nbsp;: un outil de gestion livré vide ne montre rien d'utile. À la place, vous voyez d'abord LabFlow en images, puis un conseiller vous fait une démonstration personnalisée sur des cas proches de votre quotidien. C'est gratuit et sans engagement. Ensuite, grâce au démarrage clé en main, vous commencez directement avec un compte configuré pour vous.</p></details>
+    <div class="final-in reveal">
+      <h2>Un devis clair, en dinars,<br>sur votre configuration à vous.</h2>
+      <p>Racontez-nous vos points de vente, votre labo, vos clients pros.
+         Un conseiller vous rappelle — un humain, pas un robot.</p>
+      <div class="final-ctas">
+        <a class="btn" href="demande-acces.html">Demander un accès<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
+        <a class="btn-fantome" href="https://wa.me/21654183189?text=Bonjour%2C%20je%20voudrais%20un%20devis%20LabFlow%20pour%20mon%20activit%C3%A9." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
+      </div>
+      <p class="rappel">Devis établi après un échange. Aucun paiement en ligne, aucune carte bancaire.</p>
     </div>
   </div>
 </section>
 
-<div class="zone-nuit cta-final" data-zone="nuit" id="cta">
-  <div class="fond-bento" aria-hidden="true"></div>
+<!-- ══ PIED DE PAGE COMMUN ══ Bloc identique sur toutes les pages ; la page
+     courante garde son entrée et porte aria-current="page". D1 : le lien vers
+     tarifs.html est CONSERVÉ. -->
+<footer class="pied">
   <div class="container">
-    <svg style="width:56px;height:56px;margin:0 auto 20px;display:block" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
-    <h2>Un devis clair, en dinars, sous 24&nbsp;h</h2>
-    <p class="sous">Demandez un accès&nbsp;: un conseiller vous recontacte pour composer votre configuration et vous remettre un devis précis. Rien ne se passe sans votre signature.</p>
-    <a class="btn" href="demande-acces.html" style="font-size:1.05rem; padding:16px 34px">Demander un accès</a>
-  </div>
-</div>
-
-<footer>
-  <div class="container foot">
-    <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
-    <div>
-      <a href="index.html">Accueil</a><a href="demande-acces.html">Demande d'accès</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+    <div class="marque">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
     </div>
+    <nav class="pied-liens" aria-label="Pied de page">
+      <a href="index.html">Accueil</a>
+      <a href="demande-acces.html">Demande d'accès</a>
+      <a href="tarifs.html" aria-current="page">Combien coûte LabFlow&nbsp;?</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>Conçu en Tunisie 🇹🇳</p>
   </div>
 </footer>
-<div class="sticky-cta"><a class="btn" href="demande-acces.html">Demander un accès</a></div>
 
 <script>
+(function(){
   var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ── Menu mobile ── */
-  var burger = document.getElementById('nav-burger');
-  if (burger) {
-    var liens = document.getElementById('nav-links');
-    burger.addEventListener('click', function () {
-      var ouvert = liens.classList.toggle('ouvert');
-      burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
-      burger.textContent = ouvert ? '✕' : '☰';
-    });
-    liens.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') { liens.classList.remove('ouvert'); burger.setAttribute('aria-expanded', 'false'); burger.textContent = '☰'; }
-    });
-  }
+  /* Barre : verre dépoli dès qu'on quitte le haut (identique à l'accueil). */
+  var nav = document.getElementById('nav');
+  function auDefilement(){ nav.classList.toggle('colle', window.scrollY > 24); }
+  auDefilement();
+  window.addEventListener('scroll', auDefilement, {passive:true});
 
-  var state = { act: 1, formule: 'premium', lab: 0, ger: 0, palier: 0 };
-  var PRIX = { basique: 150, premium: 200, labo: 160, gerant: 80, paliers: { 0: 0, 10: 50, 20: 90, 50: 150, 100: 220 } };
-  var REM = { r2: 20, r3: 40, rl: 30 };
-  var OB = { sans: 500, avec: 700 };
-
-  function chg(k, d) {
-    if (k === 'act') state.act = Math.max(0, Math.min(6, state.act + d));
-    if (k === 'lab') state.lab = Math.max(0, Math.min(3, state.lab + d));
-    if (k === 'ger') state.ger = Math.max(0, Math.min(6, state.ger + d));
-    if (state.lab === 0) state.palier = 0;
-    render();
-  }
-  function setFormule(f) { state.formule = f; render(); }
-  function setPalier(p) { if (state.lab === 0 && p > 0) return; state.palier = p; render(); }
-
-  function coutActivites() {
-    var base = state.formule === 'basique' ? PRIX.basique : PRIX.premium;
-    var n = state.act;
-    if (n === 0) return 0;
-    if (state.lab > 0) return Math.round(n * base * (1 - REM.rl / 100));
-    var t = base;
-    if (n >= 2) t += base * (1 - REM.r2 / 100);
-    if (n >= 3) t += (n - 2) * base * (1 - REM.r3 / 100);
-    return Math.round(t);
-  }
-
-  var totalPrec = null;
-  function render() {
-    document.getElementById('v-act').textContent = state.act;
-    document.getElementById('v-lab').textContent = state.lab;
-    document.getElementById('v-ger').textContent = state.ger;
-    document.getElementById('row-formule').style.display = state.act > 0 ? '' : 'none';
-    document.getElementById('f-basique').classList.toggle('on', state.formule === 'basique');
-    document.getElementById('f-premium').classList.toggle('on', state.formule === 'premium');
-    document.getElementById('f-basique').textContent = 'Basique — ' + PRIX.basique + ' DT';
-    document.getElementById('f-premium').textContent = 'Premium — ' + PRIX.premium + ' DT';
-    document.getElementById('hint-formule').textContent = (state.lab > 0 && state.formule === 'basique')
-      ? 'Avec un labo, les fiches techniques sont incluses même en Basique'
-      : 'Premium ajoute fiches techniques et production';
-    document.getElementById('f-basique').setAttribute('aria-pressed', state.formule === 'basique');
-    document.getElementById('f-premium').setAttribute('aria-pressed', state.formule === 'premium');
-    document.querySelectorAll('#seg-ach button').forEach(function (b) {
-      var p = parseInt(b.getAttribute('data-p'), 10);
-      b.disabled = state.lab === 0 && p > 0;
-      b.classList.toggle('on', p === state.palier);
-      b.setAttribute('aria-pressed', p === state.palier);
-    });
-    document.getElementById('hint-ach').textContent = state.lab === 0 ? 'Nécessite au moins un laboratoire' : 'Palier selon la taille de votre carnet';
-
-    var warn = document.getElementById('calc-warn');
-    var ok = document.getElementById('calc-ok');
-    if (state.act === 0 && (state.lab === 0 || state.palier === 0)) {
-      warn.style.display = '';
-      warn.textContent = 'Un compte sans point de vente est un dépôt 100 % B2B : ajoutez un laboratoire et un palier d\'acheteurs pour voir votre estimation.';
-      ok.style.display = 'none';
-      return;
-    }
-    warn.style.display = 'none';
-    ok.style.display = '';
-
-    var a = coutActivites();
-    var l = state.lab * PRIX.labo;
-    var g = state.ger * PRIX.gerant;
-    var b = PRIX.paliers[state.palier] || 0;
-    var total = a + l + g + b;
-
-    var lignes = [];
-    if (state.act > 0) lignes.push(['Points de vente ×' + state.act + ' (' + (state.formule === 'basique' ? 'Basique' : 'Premium') + (state.lab > 0 ? ', −' + REM.rl + ' %' : '') + ')', a]);
-    if (state.lab > 0) lignes.push(['Laboratoire' + (state.lab > 1 ? 's' : '') + ' ×' + state.lab, l]);
-    if (state.ger > 0) lignes.push(['Gérants ×' + state.ger, g]);
-    if (b > 0) lignes.push(['Portail acheteurs (≤ ' + state.palier + ')', b]);
-    document.getElementById('detail').innerHTML = lignes.map(function (x) {
-      return '<div class="tk-ligne"><span>' + x[0] + '</span><b>' + x[1].toLocaleString('fr-FR') + ' DT</b></div>';
-    }).join('');
-    document.getElementById('total').textContent = total.toLocaleString('fr-FR');
-    document.getElementById('ob').textContent = 'Mise en route (une seule fois) : à partir de ' + (state.lab > 0 ? OB.avec : OB.sans) + ' DT — paramétrage + formation.';
-
-    if (totalPrec !== null && totalPrec !== total && !RM) {
-      var tk = document.getElementById('ticket');
-      tk.classList.remove('reimpression');
-      void tk.offsetWidth;
-      tk.classList.add('reimpression');
-    }
-    totalPrec = total;
-  }
-  render();
-
-  var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
-  fetch(API + '/api/public/tarifs-reference').then(function (r) { return r.ok ? r.json() : null; }).then(function (t) {
-    if (!t) return;
-    if (t.prix_base_activite_basique) PRIX.basique = Number(t.prix_base_activite_basique);
-    if (t.prix_base_activite_premium) PRIX.premium = Number(t.prix_base_activite_premium);
-    if (t.labo_sup_mensuel) PRIX.labo = Number(t.labo_sup_mensuel);
-    if (t.gerant_sup_mensuel) PRIX.gerant = Number(t.gerant_sup_mensuel);
-    if (t.remise_2eme_sans_labo != null) REM.r2 = Number(t.remise_2eme_sans_labo);
-    if (t.remise_3eme_plus_sans_labo != null) REM.r3 = Number(t.remise_3eme_plus_sans_labo);
-    if (t.remise_avec_labo != null) REM.rl = Number(t.remise_avec_labo);
-    if (t.onboarding_sans_labo) OB.sans = Number(t.onboarding_sans_labo);
-    if (t.onboarding_avec_labo) OB.avec = Number(t.onboarding_avec_labo);
-    [10, 20, 50, 100].forEach(function (p) { if (t['acheteurs_palier_' + p]) PRIX.paliers[p] = Number(t['acheteurs_palier_' + p]); });
-    // aligne la prose statique (encart + FAQ) sur les tarifs runtime
-    document.querySelectorAll('[data-ob="sans"]').forEach(function (el) { el.textContent = OB.sans.toLocaleString('fr-FR'); });
-    document.querySelectorAll('[data-ob="avec"]').forEach(function (el) { el.textContent = OB.avec.toLocaleString('fr-FR'); });
-    render();
-  }).catch(function () {});
-
-  document.getElementById('calc-go').addEventListener('click', function () {
-    try { localStorage.setItem('lf_calc', JSON.stringify(state)); } catch (e) {}
+  /* Menu mobile. */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu-mobile');
+  function fermerMenu(){ document.body.classList.remove('menu-ouvert'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){
+    var ouvert = document.body.classList.toggle('menu-ouvert');
+    burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
   });
+  menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') fermerMenu(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fermerMenu(); });
+
+  /* Révélation progressive (un seul observateur). */
+  var cibles = document.querySelectorAll('.reveal');
+  if(RM || !('IntersectionObserver' in window)){
+    cibles.forEach(function(el){ el.classList.add('vu'); });
+  } else {
+    var obs = new IntersectionObserver(function(entrees){
+      entrees.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    cibles.forEach(function(el){ obs.observe(el); });
+  }
+})();
 </script>
 </body>
 </html>

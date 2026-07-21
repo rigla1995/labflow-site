@@ -1,0 +1,83 @@
+WEBVTT
+Kind: captions
+Language: fr
+
+NOTE
+Démonstration LabFlow — 1 min 19. La bande-son est une nappe musicale : la vidéo
+ne contient AUCUN commentaire parlé. Ces sous-titres restituent donc le texte
+affiché à l'écran et ce que montre chaque plan (WCAG 1.2.2 et 1.2.3).
+Repères calés sur assets/video/demo-60s-son.mp4 après recoupage
+(tools/video/recouper.js) — durée 78,80 s. Toute nouvelle coupe les invalide.
+
+1
+00:00:00.000 --> 00:00:04.050
+[Musique, aucune parole]
+Tout votre labo. Un seul système.
+
+2
+00:00:04.050 --> 00:00:09.600
+Le tableau de bord : chiffre d'affaires, marge brute,
+marge après commissions, pertes, sur la période choisie.
+
+3
+00:00:09.600 --> 00:00:15.150
+« Vous savez faire. Mais savez-vous ce que ça vous rapporte ? »
+Les pertes, le coût, le stock — constatés, jamais chiffrés.
+
+4
+00:00:15.150 --> 00:00:21.700
+Le stock du jour, valorisé : quantité, coût HT et TTC,
+article par article, catégorie par catégorie.
+
+5
+00:00:21.700 --> 00:00:26.750
+L'historique des approvisionnements exporté en Excel :
+date, ingrédient, quantité, prix, TVA, fournisseur, référence de facture.
+
+6
+00:00:26.750 --> 00:00:29.850
+De la matière première au produit vendu.
+Produits vendables, produits transformés, sous-recettes.
+
+7
+00:00:29.850 --> 00:00:35.900
+Le catalogue des produits : chacun avec sa composition
+et son coût réel.
+
+8
+00:00:35.900 --> 00:00:42.950
+La fiche technique du mille-feuille : la recette descend
+jusqu'aux sous-recettes, au choix en Dernier Prix ou en Prix Moyen Pondéré.
+
+9
+00:00:42.950 --> 00:00:46.050
+Chaque transfert est valorisé, tracé, facturé.
+
+10
+00:00:46.050 --> 00:00:53.100
+L'historique des transferts du laboratoire vers les points de vente,
+chaque ligne valorisée au coût réel.
+
+11
+00:00:53.100 --> 00:00:58.650
+Le même historique exporté en Excel,
+avec le logo de l'entreprise sur le fichier.
+
+12
+00:00:58.650 --> 00:01:01.700
+Vos clients professionnels commandent seuls, à leurs tarifs négociés.
+
+13
+00:01:01.700 --> 00:01:08.250
+Le catalogue tel que le voit un client professionnel :
+ses tarifs à lui, ses quantités, son panier.
+
+14
+00:01:08.250 --> 00:01:13.750
+Le suivi des ventes aux professionnels : chaque commande,
+son état, sa facture.
+
+15
+00:01:13.750 --> 00:01:18.800
+Votre système vous attend. labflow-tn.com
+Rappel par un conseiller · Démonstration personnalisée · Compte livré prêt

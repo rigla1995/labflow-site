@@ -4,62 +4,240 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Merci — votre demande est bien arrivée | LabFlow</title>
+<meta name="description" content="Votre demande d'accès à LabFlow est arrivée. Un conseiller vous rappelle. En attendant, regardez la démonstration.">
+<!-- noindex CONSERVÉ : page d'après-conversion, hors sitemap. -->
 <meta name="robots" content="noindex">
+<meta property="og:title" content="Merci — votre demande est bien arrivée">
+<meta property="og:description" content="Un conseiller vous rappelle pour comprendre votre activité, puis vous montre LabFlow en conditions réelles. Sans engagement.">
+<meta property="og:image" content="https://labflow-tn.com/assets/img/og.jpg">
+<meta property="og:url" content="https://labflow-tn.com/merci.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_TN">
+<link rel="canonical" href="https://labflow-tn.com/merci.html">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/v4.css?v=4">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/v2.css">
+<style>
+  /* ══ Page merci — thème « Nuit & Lumière » (v4), version courte ══ */
+  .remerciement{position:relative;overflow:hidden;padding:150px 0 100px;text-align:center}
+  .remerciement .halo{
+    position:absolute;top:-160px;left:50%;transform:translateX(-50%);
+    width:min(900px,92vw);height:520px;z-index:0;pointer-events:none;
+    background:var(--grad);opacity:.28;filter:blur(120px);border-radius:50%;
+  }
+  .remerciement .dedans{position:relative;z-index:1;max-width:640px;margin-inline:auto}
+  .losange-xl{width:60px;height:60px;margin:0 auto 22px;display:block;filter:drop-shadow(0 0 18px rgba(99,102,241,.6))}
+  .remerciement h1{font-size:clamp(30px,5vw,46px);line-height:1.08;font-weight:600;letter-spacing:-.03em;margin-bottom:16px}
+  .remerciement .intro{color:var(--gris);font-weight:300;font-size:clamp(15.5px,1.8vw,18px);max-width:56ch;margin:0 auto 40px;line-height:1.62}
+
+  .etapes-merci{display:grid;gap:14px;text-align:left;margin-bottom:40px}
+  .tuile{
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.018));
+    border:1px solid var(--trait);border-radius:var(--r-m);padding:20px 22px;
+  }
+  .tuile h3{font-size:17px;font-weight:600;margin-bottom:6px;letter-spacing:-.01em}
+  .tuile p{font-size:14.5px;color:var(--gris);font-weight:300;line-height:1.55}
+
+  .apres-actions{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .apres-actions .note{color:var(--gris);font-size:13.5px;font-weight:300;margin:0}
+  .lien-ghost{color:#A5B4FC;border-bottom:1px solid rgba(165,180,252,.4);font-size:14px;padding-bottom:1px}
+  .lien-ghost:hover{color:#C7D0FF}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  @media (max-width:760px){ .remerciement{padding:120px 0 72px} }
+</style>
 </head>
 <body>
+
+<a class="saut-contenu" href="#contenu">Aller au contenu</a>
+
+<!-- ══ SPRITE : logo LabFlow + icône lecture ══ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="52%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
-    <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
+    <clipPath id="lf-clip">
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/>
+    </clipPath>
     <symbol id="lf-losange" viewBox="0 0 52 52">
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
       <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
       <g transform="translate(26,26) rotate(45)" fill="#fff">
-        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/><rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
-        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
+        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/>
+        <rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
+        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/>
+        <rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
     </symbol>
-    <symbol id="lf-logo" viewBox="0 0 192 52">
-      <use href="#lf-losange" width="52" height="52"/>
-      <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
-    </symbol>
+    <symbol id="ic-play" viewBox="0 0 12 14"><path d="M0 0v14l12-7z"/></symbol>
   </defs>
 </svg>
 
-<nav class="top scrolled">
-  <div class="nav-inner">
-    <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
+<!-- ══ NAVIGATION ══ Chrome identique à index.html et demande-acces.html. -->
+<nav class="nav colle" id="nav">
+  <div class="container nav-in">
+    <a class="marque" href="index.html" aria-label="LabFlow — accueil">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
+    </a>
+    <div class="nav-liens">
+      <a href="index.html#suivre">Ce que ça suit</a>
+      <a href="index.html#recette">Prix de revient</a>
+      <a href="index.html#pros">Clients pros</a>
+      <a href="index.html#donnees">Vos données</a>
+    </div>
+    <div class="nav-droite">
+      <a class="btn petit" href="demande-acces.html">Demander un accès</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
+    </div>
   </div>
 </nav>
 
-<section style="padding:150px 0 100px; text-align:center;">
-  <div class="container" style="max-width:640px">
-    <svg style="width:64px;height:64px;margin:0 auto 20px;display:block" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
-    <h1 style="font-size:clamp(1.9rem,4.5vw,2.6rem); margin-bottom:14px;">Merci, votre demande est bien arrivée</h1>
-    <p style="color:var(--encre-2); max-width:56ch; margin:0 auto 38px;">Votre demande d'accès a été transmise à notre équipe. Vous n'avez rien d'autre à faire&nbsp;: c'est nous qui revenons vers vous, par téléphone ou WhatsApp, au moment qui vous arrange.</p>
-    <div style="text-align:left; display:flex; flex-direction:column; gap:14px;">
-      <div class="tuile"><h3>⏱ Sous 24&nbsp;h</h3><p>Un conseiller vous contacte pour comprendre votre activité — points de vente, laboratoire, vente aux professionnels.</p></div>
-      <div class="tuile"><h3>🖥 Ensuite</h3><p>Une démonstration personnalisée de LabFlow, sur des cas concrets proches de votre quotidien.</p></div>
-      <div class="tuile"><h3>🤝 Et surtout</h3><p>Aucun engagement. Vous décidez librement, avec un devis clair en dinars si vous souhaitez continuer.</p></div>
-    </div>
-    <a class="btn" href="index.html" style="margin-top:38px; display:inline-block;">Retour à l'accueil</a>
-  </div>
-</section>
+<!-- ══ MENU MOBILE ══ -->
+<div class="menu-mobile" id="menu-mobile">
+  <a href="index.html#suivre">Ce que ça suit</a>
+  <a href="index.html#recette">Prix de revient</a>
+  <a href="index.html#pros">Clients pros</a>
+  <a href="index.html#donnees">Vos données</a>
+  <a class="btn mm-cta" href="demande-acces.html">Demander un accès</a>
+</div>
 
-<footer>
-  <div class="container foot">
-    <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
-    <div><a href="index.html">Accueil</a><a href="tarifs.html">Tarifs</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a></div>
+<main id="contenu">
+  <section class="remerciement">
+    <div class="halo" aria-hidden="true"></div>
+    <div class="container">
+      <div class="dedans">
+        <svg class="losange-xl" viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+        <h1>Merci, votre demande<br>est bien arrivée.</h1>
+        <p class="intro">Votre demande d'accès a été transmise à notre équipe. Vous n'avez rien d'autre à faire&nbsp;: c'est nous qui revenons vers vous, par téléphone ou WhatsApp, au moment qui vous arrange.</p>
+
+        <!-- Les trois tuiles reprennent mot pour mot le CTA final de l'accueil et
+             le volet nuit de demande-acces.html. Aucun délai chiffré (D5). -->
+        <h2 class="sr-only">Ce qui se passe maintenant</h2>
+        <div class="etapes-merci">
+          <div class="tuile"><h3>Un conseiller vous rappelle</h3><p>Un humain. Il écoute votre organisation&nbsp;: points de vente, laboratoire, vente aux professionnels.</p></div>
+          <div class="tuile"><h3>Ensuite</h3><p>Il vous montre LabFlow en conditions réelles, sur des cas comme les vôtres — en français, en dinars.</p></div>
+          <div class="tuile"><h3>Et surtout</h3><p>Aucun engagement. Vous décidez librement, avec un devis clair en dinars si vous souhaitez continuer. Rien ne se passe sans votre signature.</p></div>
+        </div>
+
+        <div class="apres-actions">
+          <button type="button" class="voir-demo" id="ouvrir-demo">
+            <span class="lecture" aria-hidden="true"><svg viewBox="0 0 12 14"><use href="#ic-play"/></svg></span>
+            Voir la démonstration <span class="duree">(1 min 19 · 4 Mo, chargée au clic)</span>
+          </button>
+          <p class="note">En attendant votre conseiller, voici LabFlow en fonctionnement.</p>
+          <p style="margin:0"><a class="lien-ghost" href="https://wa.me/21654183189?text=Bonjour%2C%20je%20viens%20d%27envoyer%20ma%20demande%20d%27acc%C3%A8s%20et%20je%20voudrais%20pr%C3%A9ciser%20un%20point." target="_blank" rel="noopener">Un point à préciser tout de suite&nbsp;? Écrivez-nous sur WhatsApp</a></p>
+          <p style="margin:0"><a class="lien-ghost" href="index.html">Retour à l'accueil</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══ PIED DE PAGE COMMUN ══ 5 entrées, ordre figé. -->
+<footer class="pied">
+  <div class="container">
+    <div class="marque">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
+    </div>
+    <nav class="pied-liens" aria-label="Pied de page">
+      <a href="index.html">Accueil</a>
+      <a href="demande-acces.html">Demande d'accès</a>
+      <a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>Conçu en Tunisie 🇹🇳</p>
   </div>
 </footer>
+
+<!-- ══ MODALE VIDÉO : démonstration complète (sonorisée) ══
+     Chargée seulement à l'ouverture (preload="none"). Markup et JS repris tel
+     quel d'index.html. <track> obligatoire (WCAG 1.2.2). -->
+<div class="demo-modale" id="demo-modale" role="dialog" aria-modal="true" aria-label="Démonstration de LabFlow" hidden>
+  <div class="demo-cadre">
+    <button type="button" class="demo-fermer" id="fermer-demo" aria-label="Fermer la démonstration">✕</button>
+    <video id="demo-video" controls playsinline preload="none" width="1280" height="720" poster="assets/video/demo-poster.jpg">
+      <source src="assets/video/demo-60s-son.mp4" type="video/mp4">
+      <track kind="captions" src="assets/video/demo-60s-son.fr.vtt" srclang="fr" label="Français" default>
+    </video>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ── Navigation : burger + menu mobile (identique à index.html) ── */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu-mobile');
+  if (burger && menu) {
+    function fermerMenu(){ document.body.classList.remove('menu-ouvert'); burger.setAttribute('aria-expanded','false'); }
+    burger.addEventListener('click', function(){
+      var ouvert = document.body.classList.toggle('menu-ouvert');
+      burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+    });
+    menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') fermerMenu(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fermerMenu(); });
+  }
+
+  /* ── Modale vidéo : démo complète, focus piégé (repris d'index.html) ── */
+  (function(){
+    var modale = document.getElementById('demo-modale');
+    var video = document.getElementById('demo-video');
+    var fermerBtn = document.getElementById('fermer-demo');
+    var ouvreBtn = document.getElementById('ouvrir-demo');
+    if(!modale || !ouvreBtn) return;
+    var dernierFocus = null;
+    function focusables(){
+      return Array.prototype.slice.call(modale.querySelectorAll('button, video[controls]'))
+        .filter(function(e){ return e.offsetParent !== null || e === video; });
+    }
+    /* Le reste de la page passe en `inert` : le piégeage par Tab ne suffit pas
+       (survol, lecteur d'écran virtuel, retour depuis la barre d'URL). */
+    function inerte(on){
+      document.querySelectorAll('body > *').forEach(function(n){
+        if(n === modale || n.tagName === 'SCRIPT') return;
+        n.inert = on;
+      });
+    }
+    function ouvre(){
+      dernierFocus = document.activeElement;
+      modale.hidden = false; inerte(true);
+      document.body.style.overflow = 'hidden';
+      video.play().catch(function(){});
+      fermerBtn.focus();
+    }
+    function ferme(){
+      video.pause();
+      modale.hidden = true; inerte(false);
+      document.body.style.overflow = '';
+      if(dernierFocus) dernierFocus.focus();
+      dernierFocus = null;
+    }
+    ouvreBtn.addEventListener('click', ouvre);
+    fermerBtn.addEventListener('click', ferme);
+    modale.addEventListener('click', function(e){ if(e.target === modale) ferme(); });
+    addEventListener('keydown', function(e){
+      if(modale.hidden) return;
+      if(e.key === 'Escape'){ ferme(); return; }
+      if(e.key !== 'Tab') return;
+      var f = focusables(); if(!f.length) return;
+      var premier = f[0], dernier = f[f.length - 1];
+      if(!modale.contains(document.activeElement)){ e.preventDefault(); premier.focus(); return; }
+      if(e.shiftKey && document.activeElement === premier){ e.preventDefault(); dernier.focus(); }
+      else if(!e.shiftKey && document.activeElement === dernier){ e.preventDefault(); premier.focus(); }
+    });
+  })();
+})();
+</script>
 </body>
 </html>

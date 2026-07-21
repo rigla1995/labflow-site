@@ -341,8 +341,11 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
   // l'application (cf. excel-en-html.js) et on filme leur contenu, à l'identique.
   const xls = await browser.newPage();
   await xls.setViewport({ width: W, height: H });
+  // ⛔ '16-excel-fiche' (fiche-technique-exemple) est RETIRÉ — D5 : le fichier
+  //    source est faux (5 ingrédients sur 9 à 0 DT) et a été supprimé du dépôt.
+  //    Ne pas le remettre sans avoir d'abord valorisé les articles manquants
+  //    sur le compte de démonstration. Cf. tools/video/recuperer-ft-excel.js.
   const exports = [
-    ['16-excel-fiche', 'fiche-technique-exemple', 5500],
     ['17-excel-transferts', 'export-transferts-exemple', 6000],
     ['17b-excel-appro', 'export-excel-exemple', 5500],
   ].filter(([n]) => aTourner(n));

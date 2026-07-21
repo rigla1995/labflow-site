@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  3 URLs indexables. tarifs.html est CONSERVÉE (décision client D1) : c'est la
+  meilleure position organique du site, on ne la retire pas du sitemap.
+  Les 3 autres pages en sont volontairement absentes : merci.html,
+  mentions-legales.html et confidentialite.html sont en noindex, et 404.html est
+  un filet technique.
+  lastmod = date du push de la refonte V3, à réactualiser à chaque mise en ligne :
+  c'est le signal le plus direct dont dispose Googlebot pour prioriser un recrawl.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://labflow-tn.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://labflow-tn.com/tarifs.html</loc><priority>0.9</priority></url>
-  <url><loc>https://labflow-tn.com/demande-acces.html</loc><priority>0.9</priority></url>
+  <url>
+    <loc>https://labflow-tn.com/</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://labflow-tn.com/demande-acces.html</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://labflow-tn.com/tarifs.html</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
