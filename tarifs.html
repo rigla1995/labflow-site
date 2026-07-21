@@ -4,9 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Combien coûte LabFlow ? — ce qui compose votre devis</title>
-<!-- ≤ 155 caractères (critère §12 Lot 5) : la version longue (271 car.) était
-     tronquée dans les résultats Google au milieu de l'énumération. Le détail
-     reste dans la page. -->
+<!-- ≤ 155 caractères : au-delà, Google tronque. Aucun terme « ERP ». -->
 <meta name="description" content="Il n'y a pas de prix unique : votre devis se compose à partir de votre organisation réelle. Voici ce qui le fait varier, et ce qui est compris.">
 <meta property="og:title" content="Combien coûte LabFlow ?">
 <meta property="og:description" content="Pas de prix unique, parce qu'il serait faux pour presque tout le monde. Voici ce qui compose un devis LabFlow. Demandez un accès : un conseiller vous rappelle.">
@@ -16,7 +14,7 @@
 <meta property="og:locale" content="fr_TN">
 <link rel="canonical" href="https://labflow-tn.com/tarifs.html">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/v3.css?v=3">
+<link rel="stylesheet" href="assets/css/v4.css?v=4">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -25,295 +23,226 @@
 
 <a class="saut-contenu" href="#top">Aller au contenu</a>
 
-<!-- Sprite : logo LabFlow et icônes. Identique à celui de la page d'accueil.
-     Les ✓ ne sont jamais des caractères générés ni des emoji. -->
+<!-- ══ SPRITE : logo LabFlow + icônes (repris du thème validé) ══ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0ea5e9"/>
-      <stop offset="52%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#a855f7"/>
+      <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
-    <clipPath id="lf-clip">
-      <rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/>
-    </clipPath>
+    <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
     <symbol id="lf-losange" viewBox="0 0 52 52">
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
       <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
       <g transform="translate(26,26) rotate(45)" fill="#fff">
-        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/>
-        <rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
-        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/>
-        <rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
+        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/><rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
+        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
     </symbol>
-    <symbol id="lf-logo" viewBox="0 0 192 52">
-      <use href="#lf-losange" width="52" height="52"/>
-      <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
-    </symbol>
-    <symbol id="ic-check" viewBox="0 0 16 16"><path d="M6.2 12.6 2 8.4l1.5-1.5 2.7 2.7 6.3-6.3L14 4.8z"/></symbol>
     <symbol id="ic-wa" viewBox="0 0 20 20"><path d="M10 1a9 9 0 0 0-7.7 13.6L1 19l4.5-1.2A9 9 0 1 0 10 1zm0 2a7 7 0 1 1-3.6 13l-.3-.2-2.2.6.6-2.1-.2-.4A7 7 0 0 1 10 3zm-3 3.6c-.2 0-.5.1-.7.4-.3.3-.8.8-.8 1.9s.9 2.2 1 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.6-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a5.7 5.7 0 0 1-2.8-2.5c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></symbol>
-    <symbol id="ic-ampoule" viewBox="0 0 20 20"><path d="M10 1a6 6 0 0 0-3.5 10.9c.4.3.6.7.7 1.1l.2 1h5.2l.2-1c.1-.4.3-.8.7-1.1A6 6 0 0 0 10 1zM7.6 15.5h4.8v1.2H7.6zm.6 2.4h3.6a1.8 1.8 0 0 1-3.6 0z"/></symbol>
+    <symbol id="ic-fleche" viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
 
-<div class="barre-progression" id="progression" aria-hidden="true"></div>
-
-<!-- ══ NAVIGATION STICKY ══
-     Mêmes 4 entrées que la page d'accueil, dans le même ordre. Elles pointent
-     vers les ancres de index.html puisque nous sommes sur une page séparée.
-     « Tarifs » n'est pas une entrée de nav : cette page est reliée depuis
-     #devis, depuis la FAQ de l'accueil et depuis le pied de page des 6 pages. -->
-<nav class="top" id="topnav">
-  <div class="nav-inner">
-    <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
-    <div class="nav-links" id="nav-links">
-      <a href="index.html#decider">Le tableau de bord</a>
-      <a href="index.html#fonctionnalites">Le système</a>
-      <a href="index.html#vos-donnees">Vos données</a>
-      <a href="index.html#faq">FAQ</a>
+<!-- ══ NAVIGATION ══ Même markup que l'accueil (thème Nuit). Les liens de
+     rubrique pointent vers les ancres de l'accueil. -->
+<nav class="nav" id="nav">
+  <div class="container nav-in">
+    <a class="marque" href="index.html" aria-label="LabFlow — accueil">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
+    </a>
+    <div class="nav-liens">
+      <a href="index.html#suivre">Ce que ça suit</a>
+      <a href="index.html#recette">Prix de revient</a>
+      <a href="index.html#pros">Clients pros</a>
+      <a href="index.html#donnees">Vos données</a>
     </div>
-    <div style="display:flex; align-items:center; gap:10px">
-      <a class="btn small" href="demande-acces.html">Demander un accès</a>
-      <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div class="nav-droite">
+      <a class="btn petit" href="demande-acces.html">Demander un accès</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
     </div>
   </div>
 </nav>
 
-<!-- ══ EN-TÊTE ══
-     Le <main> englobe l'en-tête et toutes les sections jusqu'à la FAQ coût :
-     sans lui, un lecteur d'écran n'a aucun repère « contenu principal » et le
-     lien d'évitement pointait sur un <header>. tabindex="-1" est requis pour
-     que Safari déplace réellement le focus sur la cible du lien. -->
-<main id="top" tabindex="-1">
-<header class="hero" style="padding-bottom:20px">
+<!-- ══ MENU MOBILE ══ -->
+<div class="menu-mobile" id="menu-mobile">
+  <a href="index.html#suivre">Ce que ça suit</a>
+  <a href="index.html#recette">Prix de revient</a>
+  <a href="index.html#pros">Clients pros</a>
+  <a href="index.html#donnees">Vos données</a>
+  <a class="btn mm-cta" href="demande-acces.html">Demander un accès</a>
+</div>
+
+<main id="top">
+
+<!-- ══ HERO ══ Version texte (pas de capture) : c'est une page d'explication. -->
+<header class="hero" style="padding-bottom:44px">
+  <div class="hero-aurore" aria-hidden="true"></div>
   <div class="container">
-    <div class="eyebrow"><i></i>Le devis — en dinars tunisiens</div>
-    <h1 style="max-width:16ch">Combien coûte LabFlow&nbsp;?</h1>
-    <p class="sub" style="max-width:660px">Il n'y a pas de prix affiché sur ce site, et ce n'est pas une pudeur commerciale&nbsp;: un montant unique serait faux pour presque tout le monde. Une boutique seule paierait pour des modules qu'elle n'ouvrira jamais&nbsp;; un atelier avec trois points de vente serait à l'étroit. Votre devis se compose à partir de votre organisation réelle. Cette page vous dit exactement ce qui le fait varier — sans vous faire remplir un formulaire pour le savoir.</p>
-    <div class="hero-ctas" style="margin-top:26px">
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
-      <!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-      <a class="btn-outline btn-outline--wa" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20un%20devis%20LabFlow%20pour%20mon%20activit%C3%A9."
-         target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#ic-wa"/></svg>Demander un devis sur WhatsApp</a>
+    <div class="hero-in">
+      <div class="pastille reveal"><i></i>Le devis — en dinars tunisiens</div>
+      <h1 class="reveal d1">Combien coûte<br><span class="clair">LabFlow</span>&nbsp;?</h1>
+      <p class="sous reveal d2">Il n'y a pas de prix unique — il serait faux pour presque tout le monde.
+         Votre devis se compose sur votre organisation réelle. Voici ce qui le fait varier,
+         sans formulaire à remplir pour le savoir.</p>
+      <div class="hero-ctas reveal d3">
+        <a class="btn" href="demande-acces.html">Demander un accès</a>
+        <!-- TODO numéro WhatsApp réel — bloquant avant mise en ligne -->
+        <a class="btn-fantome" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20un%20devis%20LabFlow%20pour%20mon%20activit%C3%A9." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Demander un devis sur WhatsApp</a>
+      </div>
+      <p class="rappel reveal d3">Un conseiller vous rappelle. Aucun paiement en ligne.</p>
     </div>
-    <p class="mention-demo" style="margin-top:18px; max-width:520px">Un conseiller vous rappelle — un humain, pas un robot. Devis établi après un échange — aucun paiement en ligne, aucune carte bancaire.</p>
   </div>
 </header>
 
 <!-- ══ CE QUI FAIT VARIER VOTRE DEVIS ══ -->
-<section id="ce-qui-varie">
+<section id="varie" class="sombre-2">
+  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
   <div class="container">
-    <div class="kicker rev">Ce qui fait varier votre devis</div>
-    <h2 class="rev">Quatre éléments — et une option, si vous voulez les recettes sans laboratoire</h2>
-    <p class="sec-intro rev">Votre abonnement est mensuel. Il se compose de ce que vous ouvrez réellement, et de rien d'autre. Voici les cinq questions que votre conseiller vous posera.</p>
-
-    <div class="modules-grid" style="margin-top:34px">
-      <div class="tuile module-card rev">
+    <div class="chapeau centre reveal">
+      <span class="oeil">Sur mesure — <b>pas de forfait</b></span>
+      <h2>De quoi dépend<br>votre devis&nbsp;?</h2>
+      <p>Votre abonnement est mensuel. Quatre éléments le composent — et une option,
+         si vous voulez les recettes sans laboratoire. Rien d'autre.</p>
+    </div>
+    <div class="constellation">
+      <article class="carte reveal">
         <h3>Vos points de vente</h3>
-        <p>Restaurant, café, boutique, kiosque&nbsp;: chaque site a son stock, ses ventes et sa marge. Plus vous en avez, moins chaque site supplémentaire pèse.</p>
-      </div>
-      <div class="tuile module-card rev">
+        <p>Chaque restaurant, café ou boutique a son stock, ses ventes, sa marge. Plus vous en avez, moins chaque site pèse.</p>
+      </article>
+      <article class="carte reveal d1">
         <h3>Votre laboratoire</h3>
-        <p>Un atelier ou une cuisine centrale qui produit pour vos points de vente. C'est lui qui débloque la production, les fiches techniques avec sous-recettes et les transferts valorisés.</p>
-      </div>
-      <div class="tuile module-card rev">
+        <p>L'atelier ou la cuisine centrale qui produit pour vos points de vente. Il débloque la production et les fiches techniques.</p>
+      </article>
+      <article class="carte reveal d2">
         <h3>Vos gérants</h3>
-        <p>Chaque gérant dispose de son propre accès, limité aux sites que vous lui confiez. Vous gardez la vue d'ensemble.</p>
-      </div>
-      <div class="tuile module-card rev">
+        <p>Chaque gérant a son propre accès, limité aux sites que vous lui confiez. Vous gardez la vue d'ensemble.</p>
+      </article>
+      <article class="carte reveal">
         <h3>Vos clients professionnels</h3>
-        <p>Le portail sur lequel ils commandent seuls, à leurs tarifs négociés, se dimensionne selon la taille de votre carnet d'acheteurs. Il suppose un laboratoire.</p>
-      </div>
-      <div class="tuile module-card rev">
+        <p>Le portail où ils commandent seuls, à leurs tarifs, se dimensionne selon votre carnet d'acheteurs. Il suppose un laboratoire.</p>
+      </article>
+      <article class="carte reveal d1">
         <h3>Les recettes sans laboratoire</h3>
-        <p>Les fiches techniques, les sous-recettes et le coût de revient sont compris dès qu'il y a un laboratoire. Si vous n'en avez pas et que vous les voulez quand même, elles s'ajoutent à votre configuration.</p>
-      </div>
+        <p>Comprises dès qu'il y a un laboratoire. Sinon, elles s'ajoutent à votre configuration si vous les voulez quand même.</p>
+      </article>
     </div>
-
-    <div class="encart-honnete rev" style="margin-top:30px">
-      <svg class="ico" aria-hidden="true"><use href="#ic-ampoule"/></svg>
-      <span>Nous écrivons cette liste noir sur blanc pour une raison précise&nbsp;: personne ne doit découvrir après signature qu'une partie du système lui est fermée. Ce qui n'est pas dans votre configuration n'est pas dans votre facture — et réciproquement.</span>
-    </div>
+    <p class="cloison-note reveal d2">Ce qui n'est pas dans votre configuration n'est pas dans votre facture — et réciproquement.</p>
   </div>
 </section>
 
 <!-- ══ CE QUI EST COMPRIS DANS TOUS LES CAS ══ -->
-<section id="compris" style="padding-top:0">
+<section id="compris">
   <div class="container">
-    <div class="kicker rev">Ce qui est compris</div>
-    <h2 class="rev">Le socle, il est dans tous les comptes</h2>
-    <p class="sec-intro rev">Quelle que soit la taille de votre configuration, vous avez&nbsp;:</p>
-    <div class="tuile rev" style="padding:30px; margin-top:22px">
-      <ul style="margin:0; padding-left:22px; line-height:1.85">
-        <li>Le stock de chaque site, valorisé en dinars, jour après jour.</li>
-        <li>Les pertes chiffrées et les inventaires.</li>
-        <li>Les ventes et la marge réelle, canal par canal.</li>
-        <li>Les fournisseurs et l'historique de vos approvisionnements.</li>
-        <li>Tous les historiques filtrables et exportables en Excel, avec le logo de votre entreprise sur chaque fichier.</li>
-        <li>Les factures en PDF.</li>
-        <li>Le manuel intégré, et une équipe qui répond en français.</li>
+    <div class="chapeau centre reveal">
+      <span class="oeil">Le socle — <b>dans tous les comptes</b></span>
+      <h2>Ce qui est compris,<br>quelle que soit la taille.</h2>
+    </div>
+    <!-- Panneau de verre : mêmes tokens que le thème (aucun composant nouveau). -->
+    <div class="reveal d1" style="max-width:640px;margin-inline:auto;padding:28px 30px;border-radius:var(--r-m);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.018));border:1px solid var(--trait)">
+      <ul class="liste" style="margin-bottom:0">
+        <li><i aria-hidden="true"></i>Le stock de chaque site, valorisé en dinars, jour après jour</li>
+        <li><i aria-hidden="true"></i>Les pertes chiffrées et les inventaires</li>
+        <li><i aria-hidden="true"></i>Les ventes et la marge réelle, canal par canal</li>
+        <li><i aria-hidden="true"></i>Les fournisseurs et l'historique de vos approvisionnements</li>
+        <li><i aria-hidden="true"></i>Les historiques filtrables, exportables en Excel à votre logo</li>
+        <li><i aria-hidden="true"></i>Les factures en PDF</li>
+        <li><i aria-hidden="true"></i>Le manuel intégré, et une équipe qui répond en français</li>
       </ul>
     </div>
-    <p class="sec-intro rev" style="margin-top:22px">Les fiches techniques, les sous-recettes et la production sont comprises dès qu'il y a un laboratoire.</p>
-    <p class="sec-intro rev">Et si vous voulez voir à quoi ressemble tout cela à l'écran, avant même de parler d'argent&nbsp;: <a href="index.html#fonctionnalites">le système, écran par écran</a>.</p>
+    <p class="cloison-note reveal d1">Les fiches techniques, les sous-recettes et la production sont comprises dès qu'il y a un laboratoire.</p>
   </div>
 </section>
 
 <!-- ══ LA MISE EN ROUTE ══ -->
-<section id="mise-en-route" style="padding-top:0">
+<section id="mise-en-route" class="sombre-2">
+  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
   <div class="container">
-    <div class="kicker rev">La mise en route</div>
-    <h2 class="rev">Un démarrage clé en main, pas un logiciel livré vide</h2>
-    <p class="sec-intro rev">Il n'y a pas d'inscription en ligne, et pas de compte à configurer tout seul. Notre équipe paramètre le vôtre avec vous&nbsp;: vos points de vente, votre catalogue d'articles — importé en une fois depuis un fichier Excel, modèle fourni —, vos fournisseurs, vos tarifs. Puis nous formons votre équipe. Le jour du lancement, vous ouvrez un compte prêt à travailler, pas une page blanche.</p>
-    <p class="sec-intro rev">Ce service est facturé <strong>une seule fois</strong>, à part de l'abonnement mensuel. Son montant figure sur votre devis, et il dépend de la même chose que le reste&nbsp;: le nombre de sites à paramétrer, la présence d'un laboratoire, le volume de votre catalogue.</p>
+    <div class="chapeau centre reveal">
+      <span class="oeil">La mise en route — <b>clé en main</b></span>
+      <h2>Vous démarrez sur un compte<br>déjà prêt, pas une page blanche.</h2>
+      <p>Pas d'inscription en ligne : notre équipe paramètre votre compte avec vous —
+         points de vente, catalogue repris de vos fichiers Excel, fournisseurs, tarifs —
+         puis forme votre équipe. Ce service est facturé une seule fois, à part de l'abonnement ;
+         son montant figure sur votre devis.</p>
+    </div>
   </div>
 </section>
 
-<!-- ══ CE QUI SE PASSE APRÈS LA DEMANDE D'ACCÈS (zone nuit) ══ -->
-<div class="zone-nuit" data-zone="nuit" id="apres">
-  <div class="container">
-    <div class="kicker rev">Les trois étapes</div>
-    <h2 class="rev">Ce qui se passe si vous demandez un accès</h2>
-    <div class="modules-grid" style="margin-top:32px">
-      <div class="tuile rev">
-        <h3>1. Vous remplissez le formulaire — deux minutes</h3>
-        <p>Nom, email, téléphone. Le reste est facultatif.</p>
-      </div>
-      <div class="tuile rev">
-        <h3>2. Un conseiller vous rappelle</h3>
-        <p>Un humain. Il écoute votre organisation&nbsp;: labo, points de vente, clients pros. Puis il vous montre LabFlow en conditions réelles, sur des cas comme les vôtres — en français, en dinars.</p>
-      </div>
-      <div class="tuile rev">
-        <h3>3. Devis, contrat, compte paramétré, équipe formée</h3>
-        <p>Si ça vous convient. Rien ne se passe sans votre signature.</p>
-      </div>
-    </div>
-    <p class="sec-intro rev" style="margin-top:26px">La démonstration est gratuite et ne vous engage à rien. C'est à ce moment-là, et pas avant, que vous recevez un montant&nbsp;: celui de votre configuration, pas celui d'un forfait moyen.</p>
-    <div class="rev" style="margin-top:26px; display:flex; gap:14px; flex-wrap:wrap">
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
-      <!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-      <a class="btn-outline btn-outline--nuit btn-outline--wa" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20un%20devis%20LabFlow%20pour%20mon%20activit%C3%A9."
-         target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
-    </div>
-  </div>
-</div>
-
-<!-- ══ FAQ COÛT, ENGAGEMENT, MISE EN ROUTE ══ -->
-<section id="faq-cout">
-  <div class="container">
-    <div class="kicker rev">Vos questions sur le coût</div>
-    <h2 class="rev">Cinq réponses franches</h2>
-    <div class="faq-themes" style="margin-top:30px">
-      <details class="rev"><summary>Pourquoi n'affichez-vous pas un prix&nbsp;?</summary><p>Parce qu'il n'y a pas de prix unique. Votre abonnement est mensuel et se compose selon vos points de vente, votre laboratoire, vos gérants et la taille de votre carnet de clients professionnels. À cela s'ajoute la mise en route, facturée une seule fois. Un conseiller établit votre devis après un échange — c'est gratuit, et ça ne vous engage à rien.</p></details>
-      <details class="rev"><summary>Puis-je changer de configuration en cours de route&nbsp;?</summary><p>Oui. Vous ouvrez un deuxième point de vente, vous ajoutez un laboratoire, votre carnet d'acheteurs s'agrandit&nbsp;: votre contrat est mis à jour et votre abonnement ajusté en conséquence.</p></details>
-      <details class="rev"><summary>Suis-je engagé sur la durée&nbsp;?</summary><p>L'abonnement est mensuel. Les conditions précises — durée, préavis — sont écrites noir sur blanc dans votre contrat, signé électroniquement, et discutées avec votre conseiller avant toute mise en route. Demander un accès et assister à la démonstration ne vous engagent à rien.</p></details>
-      <details class="rev"><summary>Que couvre la mise en route&nbsp;?</summary><p>C'est un service, facturé une seule fois&nbsp;: le paramétrage complet de votre compte — points de vente, laboratoire, catalogue d'articles importé depuis votre fichier Excel, fournisseurs, tarifs — et la formation de votre équipe. Vous démarrez sur un compte prêt à travailler, avec vos vraies données. Son montant figure sur votre devis.</p></details>
-      <details class="rev"><summary>Y a-t-il un essai gratuit&nbsp;?</summary><p>Non — et c'est volontaire. Un outil de gestion livré vide ne montre rien d'utile. À la place, vous voyez d'abord LabFlow en images sur ce site, puis un conseiller vous fait une démonstration personnalisée sur des cas proches de votre quotidien. Ensuite, grâce au démarrage clé en main, vous commencez directement sur un compte configuré pour vous.</p></details>
-    </div>
-    <p class="sec-intro rev" style="margin-top:26px">Les autres questions — comment ça marche, qui saisit, ce que voient vos gérants — sont réunies ici&nbsp;: <a href="index.html#faq">la FAQ complète</a>.</p>
-  </div>
-</section>
 </main>
 
-<!-- ══ CTA FINAL (zone nuit) ══ -->
-<div class="zone-nuit cta-final" data-zone="nuit" id="cta">
-  <div class="fond-bento" aria-hidden="true"></div>
+<!-- ══ DEMANDE D'ACCÈS (CTA final) ══ -->
+<section class="final" id="final">
+  <div class="hero-aurore" aria-hidden="true"></div>
   <div class="container">
-    <svg style="width:64px;height:64px;margin:0 auto 22px;display:block" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
-    <h2 class="rev">Un devis clair, en dinars, sur votre configuration à vous.</h2>
-    <p class="sous rev">Racontez-nous vos points de vente, votre labo, vos clients pros. Un conseiller vous rappelle — un humain, pas un robot.</p>
-    <div class="rev" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap">
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
-      <!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-      <a class="btn-outline btn-outline--nuit btn-outline--wa"
-         href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20demander%20un%20acc%C3%A8s%20%C3%A0%20LabFlow."
-         target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
-    </div>
-    <p class="sous rev" style="margin-top:22px">Devis établi après un échange — aucun paiement en ligne, aucune carte bancaire.</p>
-    <div class="reassurances rev">
-      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>Rappel par un conseiller</span>
-      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>Démonstration personnalisée</span>
-      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>Compte livré prêt à travailler</span>
+    <div class="final-in reveal">
+      <h2>Un devis clair, en dinars,<br>sur votre configuration à vous.</h2>
+      <p>Racontez-nous vos points de vente, votre labo, vos clients pros.
+         Un conseiller vous rappelle — un humain, pas un robot.</p>
+      <div class="final-ctas">
+        <a class="btn" href="demande-acces.html">Demander un accès<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
+        <!-- TODO numéro WhatsApp réel — bloquant avant mise en ligne -->
+        <a class="btn-fantome" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20un%20devis%20LabFlow%20pour%20mon%20activit%C3%A9." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
+      </div>
+      <p class="rappel">Devis établi après un échange. Aucun paiement en ligne, aucune carte bancaire.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ══ PIED DE PAGE COMMUN ══
-     Bloc IDENTIQUE sur les 6 pages + 404.html : 5 entrées, ordre figé. La page
-     courante GARDE son entrée et porte aria-current="page" — l'omettre créait
-     six compositions différentes selon la page, et privait merci.html du lien
-     « Demande d'accès ». Toute modification se répercute sur les 7 fichiers. -->
-<footer>
-  <div class="container foot">
-    <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
-    <div>
-      <a href="index.html">Accueil</a><a href="demande-acces.html">Demande d'accès</a><a href="tarifs.html" aria-current="page">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+<!-- ══ PIED DE PAGE COMMUN ══ Bloc identique sur toutes les pages ; la page
+     courante garde son entrée et porte aria-current="page". D1 : le lien vers
+     tarifs.html est CONSERVÉ. -->
+<footer class="pied">
+  <div class="container">
+    <div class="marque">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
     </div>
+    <nav class="pied-liens" aria-label="Pied de page">
+      <a href="index.html">Accueil</a>
+      <a href="demande-acces.html">Demande d'accès</a>
+      <a href="tarifs.html" aria-current="page">Combien coûte LabFlow&nbsp;?</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>Conçu en Tunisie 🇹🇳</p>
   </div>
 </footer>
 
-<!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-<a class="wa" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20un%20devis%20LabFlow%20pour%20mon%20activit%C3%A9."
-   target="_blank" rel="noopener"
-   aria-label="Parler à un conseiller sur WhatsApp" title="Parler à un conseiller sur WhatsApp">💬</a>
-
-<div class="sticky-cta">
-  <a class="btn" href="demande-acces.html">Demander un accès · on vous rappelle</a>
-  <!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-  <a class="btn-outline btn-outline--wa" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20un%20devis%20LabFlow%20pour%20mon%20activit%C3%A9."
-     target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp"><svg class="ico" aria-hidden="true"><use href="#ic-wa"/></svg></a>
-</div>
-
 <script>
-var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function(){
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ── Menu mobile ── */
-var burger = document.getElementById('nav-burger');
-if (burger) {
-  var liens = document.getElementById('nav-links');
-  burger.addEventListener('click', function () {
-    var ouvert = liens.classList.toggle('ouvert');
+  /* Barre : verre dépoli dès qu'on quitte le haut (identique à l'accueil). */
+  var nav = document.getElementById('nav');
+  function auDefilement(){ nav.classList.toggle('colle', window.scrollY > 24); }
+  auDefilement();
+  window.addEventListener('scroll', auDefilement, {passive:true});
+
+  /* Menu mobile. */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu-mobile');
+  function fermerMenu(){ document.body.classList.remove('menu-ouvert'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){
+    var ouvert = document.body.classList.toggle('menu-ouvert');
     burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
-    burger.textContent = ouvert ? '✕' : '☰';
   });
-  liens.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') { liens.classList.remove('ouvert'); burger.setAttribute('aria-expanded', 'false'); burger.textContent = '☰'; }
-  });
-}
+  menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') fermerMenu(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fermerMenu(); });
 
-/* ── Header : trait au scroll + bascule sombre sur les zones nuit ── */
-var topnav = document.getElementById('topnav');
-var barre = document.getElementById('progression');
-addEventListener('scroll', function () {
-  topnav.classList.toggle('scrolled', scrollY > 8);
-  if (barre) {
-    var h = document.documentElement.scrollHeight - innerHeight;
-    barre.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, scrollY / h) : 0) + ')';
+  /* Révélation progressive (un seul observateur). */
+  var cibles = document.querySelectorAll('.reveal');
+  if(RM || !('IntersectionObserver' in window)){
+    cibles.forEach(function(el){ el.classList.add('vu'); });
+  } else {
+    var obs = new IntersectionObserver(function(entrees){
+      entrees.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    cibles.forEach(function(el){ obs.observe(el); });
   }
-}, { passive: true });
-(function () {
-  var zones = document.querySelectorAll('[data-zone="nuit"]');
-  var etats = new Map();
-  var ioNuit = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { etats.set(e.target, e.isIntersecting); });
-    var on = false; etats.forEach(function (v) { if (v) on = true; });
-    topnav.classList.toggle('sombre', on);
-  }, { rootMargin: '-32px 0px -94% 0px', threshold: 0 });
-  zones.forEach(function (z) { ioNuit.observe(z); });
 })();
-
-/* ── Révélations au défilement ── */
-var io = new IntersectionObserver(function (es) {
-  es.forEach(function (e) {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('in');
-    io.unobserve(e.target);
-  });
-}, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
-document.querySelectorAll('.rev').forEach(function (el) { io.observe(el); });
 </script>
 </body>
 </html>

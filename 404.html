@@ -5,15 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page introuvable | LabFlow</title>
 <meta name="robots" content="noindex">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/v4.css?v=4">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/v3.css?v=3">
 </head>
 <body>
 
-<!-- Bloc <defs> du logo : copie conforme de merci.html (requis par <use href="#lf-logo">) -->
+<a class="saut-contenu" href="#contenu">Aller au contenu</a>
+
+<!-- ══ SPRITE : logo LabFlow (repris du thème validé) ══ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
@@ -30,58 +32,53 @@
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
     </symbol>
-    <symbol id="lf-logo" viewBox="0 0 192 52">
-      <use href="#lf-losange" width="52" height="52"/>
-      <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
-    </symbol>
   </defs>
 </svg>
 
-<a class="saut-contenu" href="#contenu">Aller au contenu</a>
-
-<nav class="top scrolled">
-  <div class="nav-inner">
-    <a class="logo" href="index.html" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
-    <a class="btn small" href="demande-acces.html">Demander un accès</a>
+<!-- ══ NAVIGATION ══ Barre allégée : logo + un seul CTA. -->
+<nav class="nav colle" id="nav">
+  <div class="container nav-in">
+    <a class="marque" href="index.html" aria-label="LabFlow — accueil">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
+    </a>
+    <div class="nav-droite">
+      <!-- display:inline-flex en ligne : bat la règle .nav-droite .btn{display:none} du mode mobile,
+           pour que l'en-tête de la page 404 garde une action (pas de burger sur cette page allégée). -->
+      <a class="btn petit" href="demande-acces.html" style="display:inline-flex">Demander un accès</a>
+    </div>
   </div>
 </nav>
 
-<main id="contenu">
-  <section class="container" style="padding-top:148px; max-width:720px">
-    <span class="kicker">Erreur 404</span>
-    <h1>Cette page n’existe pas (ou plus).</h1>
-    <p class="sec-intro">
-      Le lien que vous avez suivi est peut-être ancien, ou l’adresse comporte une faute de frappe.
-      Si vous cherchiez nos tarifs&nbsp;: il n’y a pas de prix affiché sur ce site, et
-      <a href="tarifs.html">voici pourquoi</a>.
-    </p>
-
-    <div class="hero-ctas">
+<main class="contenu" id="contenu">
+<div class="container">
+  <div class="prose" style="text-align:center">
+    <span class="oeil">Erreur 404</span>
+    <h1>Cette page n'existe pas (ou plus).</h1>
+    <p>Le lien que vous avez suivi est peut-être ancien, ou l'adresse comporte une faute de frappe. Si vous cherchiez nos tarifs&nbsp;: il n'y a pas de prix affiché sur ce site, et <a href="tarifs.html">voici pourquoi</a>.</p>
+    <div class="hero-ctas" style="margin-top:32px">
       <a class="btn" href="demande-acces.html">Demander un accès</a>
-      <a class="btn-outline" href="tarifs.html">Comprendre notre façon de chiffrer</a>
+      <a class="btn-fantome" href="index.html">Retour à l'accueil</a>
     </div>
-
-    <p style="margin-top:var(--e-5); color:var(--encre-2); font-size:var(--t-petit)">
-      Vous cherchiez autre chose&nbsp;?
-      <a href="index.html">L’accueil</a>,
-      <a href="index.html#fonctionnalites">le fonctionnement de LabFlow</a>
-      ou <a href="index.html#faq">les questions fréquentes</a>.
-      Vous pouvez aussi nous laisser vos coordonnées&nbsp;: on vous rappelle.
-    </p>
-  </section>
+  </div>
+</div>
 </main>
 
-<!-- ══ PIED DE PAGE COMMUN ══
-     Bloc IDENTIQUE sur les 6 pages + 404.html : 5 entrées, ordre figé. La page
-     courante GARDE son entrée et porte aria-current="page" — l'omettre créait
-     six compositions différentes selon la page, et privait merci.html du lien
-     « Demande d'accès ». Toute modification se répercute sur les 7 fichiers. -->
-<footer>
-  <div class="container foot">
-    <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
-    <div>
-      <a href="index.html">Accueil</a><a href="demande-acces.html">Demande d'accès</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+<!-- ══ PIED DE PAGE COMMUN ══ D1 : le lien vers tarifs.html est CONSERVÉ. -->
+<footer class="pied">
+  <div class="container">
+    <div class="marque">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
     </div>
+    <nav class="pied-liens" aria-label="Pied de page">
+      <a href="index.html">Accueil</a>
+      <a href="demande-acces.html">Demande d'accès</a>
+      <a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>Conçu en Tunisie 🇹🇳</p>
   </div>
 </footer>
 

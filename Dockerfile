@@ -12,7 +12,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # 6 pages + 404.html (filet d'erreur, servie par error_page) + robots + sitemap.
 COPY index.html tarifs.html demande-acces.html merci.html mentions-legales.html confidentialite.html 404.html robots.txt sitemap.xml /usr/share/nginx/html/
 
-# assets/ : css (v3.css seule — v2.css supprimée), fonts, img, files, video.
+# assets/ : css (v4.css seule — v2.css et v3.css supprimées), fonts, img, files, video.
 COPY assets /usr/share/nginx/html/assets
 
 EXPOSE 80

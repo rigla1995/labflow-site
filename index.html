@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LabFlow — Achats, stock, ventes et marges, un seul système</title>
-<!-- ≤ 155 caractères (critère §12 Lot 5) : au-delà, Google tronque. -->
-<meta name="description" content="Vous achetez, vous stockez, vous vendez : LabFlow rassemble tout dans un seul système. Vous saisissez une fois, le stock et votre marge suivent.">
-<meta property="og:title" content="Vous savez ce que vous vendez. Savez-vous ce que vous gagnez ?">
-<meta property="og:description" content="Un tableau de bord, six façons de savoir où vous en êtes. Écrans réels, chiffres réels. Demandez un accès : un conseiller vous rappelle.">
+<title>LabFlow — Tout votre commerce dans un seul écran</title>
+<!-- ≤ 155 caractères : au-delà, Google tronque. Aucun terme « ERP ». -->
+<meta name="description" content="Vous achetez, vous stockez, vous vendez : LabFlow suit le stock, les coûts et la marge à votre place. Une seule saisie, et tout se met à jour.">
+<meta property="og:title" content="Tout votre commerce dans un seul écran">
+<meta property="og:description" content="LabFlow suit le stock, les coûts et la marge à votre place. Demandez un accès : un conseiller vous rappelle.">
 <meta property="og:image" content="https://labflow-tn.com/assets/img/og.jpg">
 <meta property="og:url" content="https://labflow-tn.com/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_TN">
 <link rel="canonical" href="https://labflow-tn.com/">
-<link rel="preload" as="image" href="assets/video/demo-hero-poster.webp?v=2" fetchpriority="high">
+<link rel="preload" as="image" href="assets/video/demo-hero-poster.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/v3.css?v=3">
+<link rel="stylesheet" href="assets/css/v4.css?v=4">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -24,17 +24,10 @@
 
 <a class="saut-contenu" href="#top">Aller au contenu</a>
 
-<!-- Sprite : logo LabFlow (repris du composant LabFlowLogo de l'application),
-     dégradés partagés et icônes. Les ✓ et ▶ ne sont JAMAIS des caractères
-     générés ni des emoji : ils passent par ces <symbol>. -->
+<!-- ══ SPRITE : logo LabFlow + icônes (repris tel quel du thème validé) ══ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0ea5e9"/>
-      <stop offset="52%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#a855f7"/>
-    </linearGradient>
-    <linearGradient id="grad-trait" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#0ea5e9"/>
       <stop offset="52%" stop-color="#6366f1"/>
       <stop offset="100%" stop-color="#a855f7"/>
@@ -54,77 +47,77 @@
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
     </symbol>
-    <symbol id="lf-logo" viewBox="0 0 192 52">
-      <use href="#lf-losange" width="52" height="52"/>
-      <text x="62" y="26" font-family="'Bricolage Grotesque', 'Work Sans', system-ui, sans-serif" font-size="22" font-weight="400" letter-spacing="1.2" dominant-baseline="middle"><tspan fill="var(--logo-lab)" font-weight="700">Lab</tspan><tspan fill="var(--logo-flow)">Flow</tspan></text>
-    </symbol>
-    <symbol id="ic-check" viewBox="0 0 16 16"><path d="M6.2 12.6 2 8.4l1.5-1.5 2.7 2.7 6.3-6.3L14 4.8z"/></symbol>
+    <symbol id="ic-wa" viewBox="0 0 20 20"><path d="M10 1a9 9 0 0 0-7.7 13.6L1 19l4.5-1.2A9 9 0 1 0 10 1zm0 2a7 7 0 1 1-3.6 13l-.3-.2-2.2.6.6-2.1-.2-.4A7 7 0 0 1 10 3zm-3 3.6c-.2 0-.5.1-.7.4-.3.3-.8.8-.8 1.9s.9 2.2 1 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.6-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a5.7 5.7 0 0 1-2.8-2.5c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></symbol>
+    <symbol id="ic-fleche" viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="ic-play" viewBox="0 0 12 14"><path d="M0 0v14l12-7z"/></symbol>
     <symbol id="ic-pause" viewBox="0 0 12 14"><path d="M0 0h4v14H0zM8 0h4v14H8z"/></symbol>
-    <symbol id="ic-wa" viewBox="0 0 20 20"><path d="M10 1a9 9 0 0 0-7.7 13.6L1 19l4.5-1.2A9 9 0 1 0 10 1zm0 2a7 7 0 1 1-3.6 13l-.3-.2-2.2.6.6-2.1-.2-.4A7 7 0 0 1 10 3zm-3 3.6c-.2 0-.5.1-.7.4-.3.3-.8.8-.8 1.9s.9 2.2 1 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.6-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a5.7 5.7 0 0 1-2.8-2.5c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></symbol>
-    <symbol id="ic-ampoule" viewBox="0 0 20 20"><path d="M10 1a6 6 0 0 0-3.5 10.9c.4.3.6.7.7 1.1l.2 1h5.2l.2-1c.1-.4.3-.8.7-1.1A6 6 0 0 0 10 1zM7.6 15.5h4.8v1.2H7.6zm.6 2.4h3.6a1.8 1.8 0 0 1-3.6 0z"/></symbol>
   </defs>
 </svg>
 
-<div class="barre-progression" id="progression" aria-hidden="true"></div>
-
-<!-- ══ SECTION 0 — NAVIGATION STICKY ══
-     4 entrées, dans l'ordre d'apparition de leurs cibles dans le DOM :
-     #decider (§3) → #fonctionnalites (§5) → #vos-donnees (§11) → #faq (§14).
-     « Tarifs » n'est pas dans la nav (4 entrées) : tarifs.html est reliée
-     depuis #devis, depuis la FAQ et depuis le pied de page — l'URL ne doit
-     jamais devenir orpheline. -->
-<nav class="top" id="topnav">
-  <div class="nav-inner">
-    <a class="logo" href="#top" aria-label="LabFlow — accueil"><svg class="lf-mark" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg></a>
-    <div class="nav-links" id="nav-links">
-      <a href="#decider">Le tableau de bord</a>
-      <a href="#fonctionnalites">Le système</a>
-      <a href="#vos-donnees">Vos données</a>
-      <a href="#faq">FAQ</a>
+<!-- ══ NAVIGATION ══ -->
+<nav class="nav" id="nav">
+  <div class="container nav-in">
+    <a class="marque" href="#top" aria-label="LabFlow — accueil">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
+    </a>
+    <div class="nav-liens">
+      <a href="#suivre">Ce que ça suit</a>
+      <a href="#recette">Prix de revient</a>
+      <a href="#pros">Clients pros</a>
+      <a href="#donnees">Vos données</a>
     </div>
-    <div style="display:flex; align-items:center; gap:10px">
-      <a class="btn small" href="demande-acces.html">Demander un accès</a>
-      <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div class="nav-droite">
+      <a class="btn petit" href="demande-acces.html">Demander un accès</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
     </div>
   </div>
 </nav>
 
-<!-- ══ SECTION 1 — HERO ══
-     Le <main> englobe le hero et toutes les sections jusqu'à la FAQ : sans lui,
-     un lecteur d'écran n'a aucun repère « contenu principal » et le lien
-     d'évitement pointait sur un <header>. tabindex="-1" est requis pour que
-     Safari déplace réellement le focus sur la cible du lien. -->
-<main id="top" tabindex="-1">
+<!-- ══ MENU MOBILE ══ -->
+<div class="menu-mobile" id="menu-mobile">
+  <a href="#suivre">Ce que ça suit</a>
+  <a href="#recette">Prix de revient</a>
+  <a href="#pros">Clients pros</a>
+  <a href="#donnees">Vos données</a>
+  <a class="btn mm-cta" href="demande-acces.html">Demander un accès</a>
+</div>
+
+<main id="top">
+
+<!-- ══ 1 · HERO ══ -->
 <header class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="eyebrow"><i></i>Logiciel de gestion des achats, du stock et des ventes — conçu en Tunisie</div>
-      <h1>Vous savez ce que vous vendez.<br>
-      Savez-vous ce que vous <span class="souligne">gagnez<svg viewBox="0 0 320 28" aria-hidden="true"><path d="M6 20 C 80 26, 150 10, 314 16" pathLength="320"/></svg></span>&nbsp;?</h1>
-      <p class="sub">Vous achetez, vous stockez, vous vendez. LabFlow gère cette chaîne pour n'importe quel type d'article — vos familles, vos catégories, vos unités, au kilo, au litre ou à la pièce. Rien n'est imposé. Vous saisissez une fois&nbsp;: le stock, vos coûts et votre marge se mettent à jour tout seuls.</p>
-      <div class="hero-ctas">
+  <div class="hero-aurore" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-in">
+      <div class="pastille reveal"><i></i>Achats · Stock · Ventes · Marges</div>
+      <h1 class="reveal d1">Tout votre commerce<br>dans <span class="clair">un seul écran</span>.</h1>
+      <p class="sous reveal d2">
+        Vous achetez, vous stockez, vous vendez. LabFlow suit le stock,
+        les coûts et la marge à votre place. Une seule saisie.
+      </p>
+      <div class="hero-ctas reveal d3">
         <a class="btn" href="demande-acces.html">Demander un accès</a>
-        <button type="button" class="btn-lecture" id="ouvrir-demo">
-          <span class="btn-lecture__triangle" aria-hidden="true"><svg><use href="#ic-play"/></svg></span>
-          Voir la démo · 1 min 19
-          <span class="poids">4 Mo, chargée au clic</span>
-        </button>
+        <!-- TODO numéro WhatsApp réel — bloquant avant mise en ligne -->
+        <a class="btn-fantome" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20demander%20un%20acc%C3%A8s%20%C3%A0%20LabFlow." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
       </div>
-      <p class="mention-demo" style="margin-top:18px; max-width:480px">Un conseiller vous rappelle — un humain, pas un robot. Devis établi après un échange — aucun paiement en ligne, aucune carte bancaire.</p>
+      <p class="rappel reveal d3">Un conseiller vous rappelle.</p>
     </div>
-    <div>
-      <figure class="shot hero-shot">
-        <!-- Écrans réels en mouvement. L'image d'attente s'affiche
+  </div>
+  <div class="container scene">
+    <div class="scene-lueur" aria-hidden="true"></div>
+    <div class="scene-lueur serree" aria-hidden="true"></div>
+    <div class="ecran reveal d3">
+      <div class="ecran-in">
+        <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Tableau de bord</span></div>
+        <!-- Boucle vidéo dans le cadre « écran allumé » : l'affiche s'affiche
              instantanément, la vidéo prend le relais une fois chargée (et ne
              démarre pas du tout en « animations réduites »). -->
-        <!-- Le bouton pause est ancré sur CE conteneur, pas sur la <figure> :
-             sinon son `bottom` le pose sur la légende et tronque le texte. -->
-        <div class="hero-video-cadre">
+        <div class="ecran-video fondu-bas">
           <video id="hero-video" muted loop playsinline preload="none"
-                 poster="assets/video/demo-hero-poster.webp?v=2"
+                 poster="assets/video/demo-hero-poster.webp"
                  width="1100" height="618"
-                 aria-label="Démonstration de LabFlow : tableau de bord, catalogue de produits transformés, stock valorisé">
+                 aria-label="Démonstration de LabFlow : tableau de bord, stock valorisé et ventes. Compte de démonstration Dar Yasmine.">
             <source src="assets/video/demo-hero.webm" type="video/webm">
             <source src="assets/video/demo-hero.mp4" type="video/mp4">
           </video>
@@ -133,914 +126,406 @@
             <svg aria-hidden="true"><use href="#ic-pause"/></svg>
           </button>
         </div>
-        <div class="hero-kpi" style="max-width:224px; margin-top:14px">
-          <picture>
-            <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif 1x, assets/img/kpi-marge@2x.avif 2x">
-            <img src="assets/img/kpi-marge@1x.webp"
-                 srcset="assets/img/kpi-marge@1x.webp 1x, assets/img/kpi-marge@2x.webp 2x"
-                 width="224" height="131"
-                 alt="Carte Marge brute du tableau de bord : 5 662 DT, 67 % du chiffre d'affaires, en recul de 8,9 % sur la période"
-                 loading="lazy" decoding="async">
-          </picture>
-        </div>
-        <figcaption>Ce mois-ci, la marge a reculé de 8,9 %. Le savoir le 19 du mois, c'est encore pouvoir agir. Compte de démonstration Dar Yasmine.</figcaption>
-      </figure>
-      <p class="mention-demo">Tableau de bord, catalogue de produits, stock valorisé — écrans réels du compte de démonstration, montants en DT.</p>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <button type="button" class="voir-demo reveal" id="ouvrir-demo">
+        <span class="lecture" aria-hidden="true"><svg viewBox="0 0 12 14"><use href="#ic-play"/></svg></span>
+        Voir la démo <span class="duree">(1 min 19)</span>
+      </button>
     </div>
   </div>
 </header>
 
-<!-- ══ SECTION 2 — TROIS QUESTIONS (nuit 1) ══ -->
-<div class="zone-nuit" data-zone="nuit" id="le-probleme">
+<!-- ══ 2 · UNE SAISIE, TOUT SUIT ══ -->
+<section id="suivre" class="sombre-2">
+  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
   <div class="container">
-    <div class="kicker rev">Le point de départ</div>
-    <h2 class="rev">Trois questions que vous vous posez. Trois réponses que personne ne vous donne.</h2>
-    <div class="preuves-grid">
-      <div class="tuile fiche-question fiche-question--vide rev">
-        <span class="chiffre-etiquette">01</span>
-        <span class="tiret" aria-hidden="true">—</span>
-        <p><em>«&nbsp;Est-ce que ce produit me rapporte encore, au prix d'achat d'aujourd'hui&nbsp;?&nbsp;»</em></p>
-      </div>
-      <div class="tuile fiche-question fiche-question--vide rev rev-2">
-        <span class="chiffre-etiquette">02</span>
-        <span class="tiret" aria-hidden="true">—</span>
-        <p><em>«&nbsp;Combien vaut ce qu'il y a dans mes réserves, ce matin&nbsp;?&nbsp;»</em></p>
-      </div>
-      <div class="tuile fiche-question fiche-question--vide rev rev-3">
-        <span class="chiffre-etiquette">03</span>
-        <span class="tiret" aria-hidden="true">—</span>
-        <p><em>«&nbsp;Qu'est-ce que mon atelier a réellement envoyé en boutique ce mois-ci&nbsp;?&nbsp;»</em></p>
-      </div>
+    <div class="chapeau centre reveal">
+      <span class="oeil">Le principe — <b>une seule saisie</b></span>
+      <h2>Vous entrez l'achat.<br>Le reste se met à jour seul.</h2>
+      <p>Le stock, le coût réel et la marge se recalculent au moment où vous enregistrez.
+         Pas de tableur à tenir le soir, pas de double saisie.</p>
     </div>
-    <p class="rev" style="margin-top:34px; color:var(--texte-nuit-2); max-width:560px">Le cahier, l'Excel et la calculette savent additionner. Ils ne savent pas répondre.</p>
-  </div>
-</div>
-
-<!-- ══ SECTION 3 — LE TABLEAU DE BORD ══ -->
-<section id="decider">
-  <div class="container">
-    <div class="kicker rev">La réponse</div>
-    <h2 class="rev">Un écran, jusqu'à six façons de savoir où vous en êtes.</h2>
-    <p class="sec-intro rev">Ce n'est pas un résumé&nbsp;: jusqu'à six onglets — vous n'avez que ceux qui correspondent à votre configuration — chacun répondant à une question précise, sur la période que vous choisissez. <strong>Les indicateurs de la vue d'ensemble sont comparés à la même période d'avant</strong>, pour que vous voyiez tout de suite si ça monte ou si ça descend.</p>
-
-    <!-- Citations littérales de l'interface : les libellés et leurs emoji sont
-         ceux de l'application. Les pastilles ne sont PAS cliquables.
-         Chaque emoji est aria-hidden : lu à voix haute, « graphique à barres
-         Vue d'ensemble » parasite l'énoncé sans rien apporter. -->
-    <div class="rev">
-      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill onglet-pill--actif"><span aria-hidden="true">📊</span> Vue d'ensemble</span> Où j'en suis, tout compris&nbsp;?</p>
-      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill"><span aria-hidden="true">💰</span> Ventes &amp; marges</span> Qu'est-ce qui me reste, canal par canal&nbsp;?</p>
-      <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill"><span aria-hidden="true">📦</span> Achats &amp; stock</span> Combien j'ai acheté, et à qui&nbsp;?</p>
-      <details>
-        <summary>Voir les six onglets</summary>
-        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill"><span aria-hidden="true">🗑️</span> Pertes</span> Combien la casse m'a coûté&nbsp;?</p>
-        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px"><span class="onglet-pill"><span aria-hidden="true">🧪</span> Labo</span> Mon labo produit-il au bon coût&nbsp;?</p>
-        <!-- « B2B » brut est proscrit par la table §11.4 au profit de « vos clients
-             professionnels ». EXCEPTION ASSUMÉE ici : c'est le libellé littéral de
-             l'onglet dans l'application (ClientDashboard.tsx, { key: 'acheteurs',
-             icon: '🤝', label: 'Acheteurs (B2B)' }), et ce bloc cite l'interface.
-             La glose qui suit la pastille dit, elle, « clients pros ». -->
-        <p style="display:flex; align-items:center; gap:12px; flex-wrap:wrap"><span class="onglet-pill"><span aria-hidden="true">🤝</span> Acheteurs (B2B)</span> Mes clients pros, ils pèsent combien&nbsp;?</p>
-      </details>
-    </div>
-
-    <p class="sec-intro rev" style="margin-top:26px">Vos canaux de vente et les commissions de vos livreurs se paramètrent une fois&nbsp;; <strong>sur vos ventes en livraison, elles sont ensuite déduites automatiquement de la marge.</strong></p>
-    <p class="sec-intro rev">Le tableau de bord regroupe par catégorie et par fournisseur. Le détail article par article, c'est dans le stock et les historiques — juste en dessous.</p>
-
-    <p class="shot-legende rev">app.labflow-tn.com › Tableau de bord</p>
-    <figure class="shot annote rev" style="--pastille-x:52%; --pastille-y:34%">
-      <div class="shot-bar"><i></i><i></i><i></i><span class="url">app.labflow-tn.com</span></div>
-      <picture>
-        <source type="image/avif" srcset="assets/img/dashboard@1x.avif 1x, assets/img/dashboard@2x.avif 2x">
-        <img src="assets/img/dashboard@1x.webp"
-             srcset="assets/img/dashboard@1x.webp 1x, assets/img/dashboard@2x.webp 2x"
-             width="1100" height="688"
-             alt="Tableau de bord : chiffre d'affaires, marge brute, marge après commissions, marge nette, pertes et food cost sur la période choisie"
-             loading="lazy" decoding="async">
-      </picture>
-      <span class="annote__pastille" aria-hidden="true">1</span>
-      <figcaption>① Marge après commissions — les livreurs sont déjà déduits. Compte de démonstration Dar Yasmine.</figcaption>
-    </figure>
-
-    <!-- TODO D5 : les 3 valeurs de .kpi-rangee sont à transcrire depuis assets/img/dashboard@2x.avif
-         (food cost, marge après commissions, valeur de stock) — aucun chiffre inventé. Bloc masqué tant que non fait. -->
-
-    <figure class="shot--nu annote rev" style="margin-top:44px; max-width:640px">
-      <picture>
-        <source type="image/avif" srcset="assets/img/ventes-canaux@1x.avif 1x, assets/img/ventes-canaux@2x.avif 2x">
-        <img src="assets/img/ventes-canaux@1x.webp"
-             srcset="assets/img/ventes-canaux@1x.webp 1x, assets/img/ventes-canaux@2x.webp 2x"
-             width="640" height="221"
-             alt="Répartition du chiffre d'affaires par canal de vente"
-             loading="lazy" decoding="async">
-      </picture>
-      <figcaption>Ce que rapporte chaque canal de vente, une fois les commissions déduites. Compte de démonstration Dar Yasmine.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ══ SECTION 4 — D'OÙ VIENT LE CHIFFRE (nuit 2) ══ -->
-<div class="zone-nuit" data-zone="nuit" id="principe">
-  <div class="container">
-    <div class="kicker rev">Le principe</div>
-    <h2 class="rev">Touchez un chiffre. Tout le système suit.</h2>
-    <p class="sec-intro rev">C'est toute l'idée de LabFlow. Sur le compte de démonstration, la farine pâtissière a été payée <strong>2,037 DT le kilo, taxes comprises</strong>, à la dernière livraison. Le jour où votre fournisseur augmente, vous saisissez la nouvelle livraison — et vous ne faites rien d'autre. Voici ce qui se recalcule tout seul.</p>
-
-    <!-- D5 — Les valeurs "après hausse" de la V2 (2,290 DT/kg ; 66,7 %) sont FAUSSES :
-         2,290 n'apparaît dans aucune ligne d'export-excel-exemple.xlsx, et 66,7 % était la
-         marge brute globale du compte, pas la marge d'un croissant. Elles sont RETIREES.
-         Les montants "après" restent à recalculer sur le compte Dar Yasmine avant mise en ligne.
-
-         Les DEUX montants qui subsistent sont des valeurs ACTUELLES, pas des résultats de
-         recalcul, et chacun est attesté par un fichier publié dans #preuves :
-           • 2,037 DT/kg — farine pâtissière, prix unitaire TTC, présent dans
-             export-excel-exemple.xlsx (xl/worksheets/sheet1.xml).
-           • 1,375 DT   — croissant au beurre, valorisé au coût réel, présent dans
-             export-transferts-exemple.xlsx (les transferts sont valorisés à ce que la
-             marchandise a coûté : c'est bien le coût de revient du croissant).
-         Ils sont étiquetés « aujourd'hui » et NE SONT PLUS animés en count-up : une
-         animation « 0 → valeur » mettait en scène un recalcul qui n'a pas eu lieu et
-         faisait lire deux chiffres d'AVANT comme des chiffres d'APRÈS. -->
-    <div class="cascade" id="cascade">
-      <div class="tuile maillon" data-m="1">
-        <div class="etiquette">Le prix que vous payez aujourd'hui</div>
-        <div class="valeur"><span class="valeur-actuelle dt">2,037</span> <span style="font-size:0.6em">DT/kg</span></div>
-        <div class="detail">Vous saisissez la livraison. C'est le seul geste.</div>
-      </div>
-      <div class="chevron" aria-hidden="true">→</div>
-      <div class="tuile maillon" data-m="2">
-        <div class="etiquette">Ce que votre croissant vous coûte aujourd'hui</div>
-        <div class="valeur"><span class="valeur-actuelle dt">1,375</span> <span style="font-size:0.6em">DT</span></div>
-        <div class="detail">La recette est recalculée automatiquement, sans que vous la rouvriez.</div>
-      </div>
-      <div class="chevron" aria-hidden="true">→</div>
-      <div class="tuile maillon" data-m="3">
-        <div class="etiquette">Ce qu'il vous reste sur un croissant</div>
-        <div class="valeur valeur--texte">↻ recalculé</div>
-        <div class="detail">Visible le matin même sur votre tableau de bord, avant le coup de feu.</div>
-      </div>
-    </div>
-    <p class="rev" style="margin-top:34px; color:var(--texte-nuit-2); max-width:560px">Fini la calculette, le cahier et les prix qui datent de l'an dernier&nbsp;: le système fait les comptes, vous prenez les décisions.</p>
-  </div>
-</div>
-
-<!-- ══ SECTION 5 — LE SYSTÈME / CE QUI ENTRE ══ -->
-<section id="fonctionnalites">
-  <div class="container">
-    <div class="kicker rev">Le système</div>
-    <h2 class="rev">Du sac de farine à la facture client&nbsp;: un seul système.</h2>
-    <p class="sec-intro rev">Chaque espace existe pour une raison&nbsp;: rendre un chiffre juste. LabFlow ne vous impose ni familles d'articles, ni catégories, ni unités — vous déclarez les vôtres, au kilo, au litre ou à la pièce. Les écrans ci-dessous sont réels, issus du compte de démonstration.</p>
-
-    <!-- Rangée 1 — le stock article par article -->
-    <div class="plomberie-rangee">
-      <div class="rev">
-        <h3>Chaque article a son seuil. La ligne passe en rouge avant la rupture.</h3>
-        <p class="sec-intro" style="margin-top:8px"><em>Cet espace existe pour que la valeur de votre stock soit vraie.</em></p>
-        <p class="sec-intro">Vous fixez le minimum à ne pas descendre pour chaque article&nbsp;: le logiciel passe la ligne en rouge avant que vous en manquiez. Et pour n'importe quel article — la farine, le beurre, la viande hachée — vous sortez son historique d'entrées et de sorties, avec le prix payé et le fournisseur.</p>
-        <p style="display:flex; gap:20px; flex-wrap:wrap; margin-top:10px">
-          <span class="seuil seuil--ok">au-dessus du seuil</span>
-          <span class="seuil seuil--alerte">proche du seuil</span>
-          <span class="seuil seuil--rupture">seuil atteint</span>
-        </p>
-      </div>
-      <div class="rev rev-2">
-        <p class="shot-legende">app.labflow-tn.com › Espace Activités › Stock</p>
-        <figure class="shot--nu annote" style="--pastille-x:64%; --pastille-y:26%">
+    <div class="constellation">
+      <article class="carte reveal">
+        <div class="carte-visu">
+          <picture>
+            <source type="image/avif" srcset="assets/img/kpi-marge@1x.avif 1x, assets/img/kpi-marge@2x.avif 2x">
+            <source type="image/webp" srcset="assets/img/kpi-marge@1x.webp 1x, assets/img/kpi-marge@2x.webp 2x">
+            <img src="assets/img/kpi-marge@1x.webp"
+                 alt="Indicateur de marge brute dans LabFlow. Compte de démonstration Dar Yasmine."
+                 loading="lazy" width="448" height="262">
+          </picture>
+        </div>
+        <h3>Votre marge</h3>
+        <p>Ce que vous gagnez vraiment, une fois les achats déduits.</p>
+      </article>
+      <article class="carte reveal d1">
+        <div class="carte-visu z-stock">
           <picture>
             <source type="image/avif" srcset="assets/img/stock-valeur@1x.avif 1x, assets/img/stock-valeur@2x.avif 2x">
+            <source type="image/webp" srcset="assets/img/stock-valeur@1x.webp 1x, assets/img/stock-valeur@2x.webp 2x">
             <img src="assets/img/stock-valeur@1x.webp"
-                 srcset="assets/img/stock-valeur@1x.webp 1x, assets/img/stock-valeur@2x.webp 2x"
-                 width="720" height="374"
-                 alt="Stock du jour valorisé : stock actuel, coût total HT et TTC par article"
-                 loading="lazy" decoding="async">
+                 alt="Stock valorisé article par article dans LabFlow. Compte de démonstration Dar Yasmine."
+                 loading="lazy" width="1440" height="748">
           </picture>
-          <span class="annote__pastille" aria-hidden="true">1</span>
-          <figcaption>① la colonne Coût TTC — c'est elle qui alimente la marge du tableau de bord. Compte de démonstration Dar Yasmine.</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <p class="sec-intro rev" style="margin-top:-18px"><strong>Et ce qui part à la poubelle&nbsp;?</strong> La casse, les invendus, un produit qui a tourné&nbsp;: vous les sortez du stock en indiquant le motif. Ils sont chiffrés au prix que vous les avez payés, et ils apparaissent dans l'onglet Pertes de votre tableau de bord.</p>
-
-    <!-- Rangée 1 bis — l'inventaire. Placée AVANT les fournisseurs : l'encadré
-         PMP du §6 s'appuie sur la notion d'inventaire, qui doit être introduite
-         avant. Aucune image. -->
-    <div class="rev" style="margin:56px 0">
-      <h3>Vous comptez vos réserves. Le logiciel repart de ce que vous avez compté.</h3>
-      <p class="sec-intro" style="margin-top:8px"><em>Cet espace existe pour que la moyenne de vos prix d'achat reste juste.</em></p>
-      <p class="sec-intro">Quand vous faites votre inventaire, vous saisissez ce que vous avez réellement en stock. LabFlow recale les quantités — et la moyenne de vos prix d'achat repart de là. C'est pour ça que le coût de vos produits ne traîne pas des prix vieux de six mois.</p>
-    </div>
-
-    <!-- Rangée 2 — les fournisseurs. AUCUNE capture : /client/fournisseurs
-         n'existe pas dans le repo. Bloc texte assumé, adossé à la tuile XLSX. -->
-    <div class="rev">
-      <h3>Vos fournisseurs, et ce que vous leur avez acheté</h3>
-      <p class="sec-intro" style="margin-top:8px">Un même fournisseur peut livrer plusieurs de vos points de vente et votre labo&nbsp;: vous le créez une fois. Vous retrouvez à tout moment l'historique de ce que vous lui avez pris, à quel prix. <a href="#preuves">Ouvrez l'export d'historique&nbsp;: il porte le fournisseur et la référence de facture, ligne par ligne.</a></p>
+        </div>
+        <h3>Votre stock</h3>
+        <p>Ce qu'il reste, et combien ça vaut, article par article.</p>
+      </article>
+      <article class="carte reveal d2">
+        <div class="carte-visu z-ventes">
+          <picture>
+            <source type="image/avif" srcset="assets/img/ventes-canaux@1x.avif 1x, assets/img/ventes-canaux@2x.avif 2x">
+            <source type="image/webp" srcset="assets/img/ventes-canaux@1x.webp 1x, assets/img/ventes-canaux@2x.webp 2x">
+            <img src="assets/img/ventes-canaux@1x.webp"
+                 alt="Répartition des ventes par canal dans LabFlow. Compte de démonstration Dar Yasmine."
+                 loading="lazy" width="1280" height="442">
+          </picture>
+        </div>
+        <h3>Vos ventes</h3>
+        <p>Sur place, à emporter, clients pros : d'où vient l'argent.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ══ SECTION 6 — LES PRODUITS TRANSFORMÉS (nuit cœur) ★ ══ -->
-<div class="zone-nuit zone-nuit--coeur" data-zone="nuit" id="recettes">
-  <div class="container">
-    <div class="kicker rev">Ce que les tableurs ne savent pas faire</div>
-    <h2 class="rev">Ce croissant, il vous coûte exactement combien&nbsp;?</h2>
-    <p class="sec-intro rev">Tout ce qui précède fonctionne sans rien transformer&nbsp;: vous achetez, vous stockez, vous vendez, et vos marges sont justes. <strong>Et si vous transformez ce que vous vendez, LabFlow va plus loin</strong> — le prix de revient exact d'un produit fabriqué, votre atelier de production, et quel produit vous rapporte vraiment. C'est né dans les métiers de bouche, là où le calcul de marge est le plus exigeant. C'est ce qui le rend précis partout ailleurs.</p>
-
-    <!-- (a) La question et la recette -->
-    <div class="plomberie-rangee" style="margin-top:56px">
-      <div class="rev">
-        <h3>Votre recette peut contenir d'autres recettes</h3>
-        <p class="sec-intro" style="margin-top:8px">La pâte feuilletée entre dans le mille-feuille, la crème pâtissière aussi. LabFlow descend jusqu'au dernier ingrédient et vous donne le coût réel du produit fini, recalculé dès que vous saisissez une nouvelle livraison.</p>
-      </div>
-      <div class="rev rev-2">
-        <p class="shot-legende">app.labflow-tn.com › Espace Produits › Produits Valorisés › Fiche Technique</p>
-        <figure class="shot--nu annote" style="max-width:460px">
-          <picture>
-            <source type="image/avif" srcset="assets/img/ft-arbre@1x.avif 1x, assets/img/ft-arbre@2x.avif 2x">
-            <img src="assets/img/ft-arbre@1x.webp"
-                 srcset="assets/img/ft-arbre@1x.webp 1x, assets/img/ft-arbre@2x.webp 2x"
-                 width="460" height="486"
-                 alt="Fiche technique du mille-feuille : arbre de recette avec ses sous-recettes et le coût de chaque composant"
-                 loading="lazy" decoding="async">
-          </picture>
-          <figcaption>L'arbre de recette du mille-feuille, sous-recettes comprises, avec le coût de chaque composant. Compte de démonstration Dar Yasmine.</figcaption>
-        </figure>
-      </div>
+<!-- ══ 3 · PRIX DE REVIENT ══ -->
+<section id="recette">
+  <div class="container duo">
+    <div class="duo-texte reveal">
+      <span class="oeil">Si vous transformez — <b>recettes</b></span>
+      <h2>Combien vous coûte<br>ce que vous fabriquez&nbsp;?</h2>
+      <p>Composez la recette une fois. LabFlow additionne le coût réel de chaque
+         ingrédient et vous dit ce que le produit fini vous coûte, aujourd'hui.</p>
+      <ul class="liste">
+        <li><i aria-hidden="true"></i>Le coût suit vos derniers prix d'achat</li>
+        <li><i aria-hidden="true"></i>Une recette peut en contenir une autre</li>
+        <li><i aria-hidden="true"></i>Produire déduit les ingrédients du stock</li>
+      </ul>
+      <a class="btn" href="demande-acces.html">Demander un accès</a>
     </div>
-
-    <!-- (b) L'encadré DP / PMP -->
-    <div class="tuile rev" style="margin:56px 0; padding:30px">
-      <h3>Deux façons de compter ce qu'un ingrédient vous a coûté</h3>
-      <p style="margin-top:10px">Vous avez acheté de la farine trois fois ce mois-ci, à trois prix différents. Pour calculer ce que vous coûte un croissant, LabFlow sait compter de deux manières.</p>
-      <div class="modules-grid" style="margin-top:26px">
-        <div>
-          <h3 style="font-size:1.05rem">Au prix de votre dernier achat</h3>
-          <p style="margin-top:6px">On prend le prix de la dernière livraison, celle d'hier. C'est la façon la plus proche de ce que vous paieriez si vous rachetiez aujourd'hui. <em>(Dans le logiciel&nbsp;: DP, pour Dernier Prix.)</em></p>
-        </div>
-        <div>
-          <h3 style="font-size:1.05rem">À la moyenne de vos achats</h3>
-          <p style="margin-top:6px">On fait la moyenne de ce que vous avez payé <strong>depuis votre dernier inventaire</strong> — et les grosses livraisons pèsent plus lourd dans la moyenne que les petites. C'est la façon la plus proche de ce qu'il y a réellement dans vos réserves. <em>(Dans le logiciel&nbsp;: PMP, pour Prix Moyen Pondéré.)</em></p>
+    <div class="cadre-visu duo-visu reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran compact">
+        <div class="ecran-in">
+          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Fiche technique — Mille-feuille</span></div>
+          <div class="ecran-visu">
+            <picture>
+              <source type="image/avif" srcset="assets/img/ft-arbre@1x.avif 1x, assets/img/ft-arbre@2x.avif 2x">
+              <source type="image/webp" srcset="assets/img/ft-arbre@1x.webp 1x, assets/img/ft-arbre@2x.webp 2x">
+              <img src="assets/img/ft-arbre@1x.webp"
+                   alt="Arbre de recette LabFlow : composition et coût de chaque composant du mille-feuille. Compte de démonstration Dar Yasmine."
+                   loading="lazy" width="460" height="486">
+            </picture>
+          </div>
         </div>
       </div>
-      <p style="margin-top:22px"><strong>Vous choisissez l'une, l'autre, ou les deux côte à côte dans le même fichier Excel — au moment de sortir la fiche technique.</strong> Partout ailleurs dans le logiciel, c'est la moyenne qui s'applique.</p>
-      <p style="margin-top:10px">Les deux comptent en prix payé, taxes comprises.</p>
     </div>
-    <p class="sec-intro rev" style="margin-top:-30px"><strong>Si un article n'a pas encore de prix dans un point de vente, LabFlow reprend celui du laboratoire qui l'approvisionne.</strong></p>
-
-    <!-- (c) La production qui déduit -->
-    <div class="plomberie-rangee plomberie-rangee--inverse" style="margin-top:56px">
-      <div class="rev">
-        <h3>Vous lancez une production. Les ingrédients partent tout seuls du stock.</h3>
-        <p class="sec-intro" style="margin-top:8px">Vous lancez une production de tartes aux amandes&nbsp;: les amandes, le chocolat de couverture et le sucre glace sortent du stock au poids exact de la recette, sans que personne ne les décompte à la main.</p>
-      </div>
-      <div class="rev rev-2">
-        <figure class="shot--nu annote" style="--pastille-x:8%; --pastille-y:72%">
-          <picture>
-            <source type="image/avif" srcset="assets/img/production-deduction@1x.avif 1x, assets/img/production-deduction@2x.avif 2x">
-            <img src="assets/img/production-deduction@1x.webp"
-                 srcset="assets/img/production-deduction@1x.webp 1x, assets/img/production-deduction@2x.webp 2x"
-                 width="720" height="382"
-                 alt="Historique des mouvements de stock : les quantités retirées par une production apparaissent en négatif"
-                 loading="lazy" decoding="async">
-          </picture>
-          <span class="annote__pastille" aria-hidden="true">1</span>
-          <figcaption>① ces quantités en négatif, c'est la production qui les a retirées du stock au poids de la recette — personne n'a eu à les calculer. Compte de démonstration Dar Yasmine.</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <!-- (d) La fiche technique -->
-    <div class="rev" style="margin-top:56px">
-      <h3>La fiche technique de chaque produit, en un clic</h3>
-      <p class="sec-intro" style="margin-top:8px">Pour chaque produit, LabFlow vous sort la fiche complète&nbsp;: la recette avec ses sous-recettes, le coût de chaque composant, le coût total — un fichier Excel par point de vente ou par labo. Le fichier vous donne le prix retenu pour chaque composant, ligne par ligne&nbsp;: vous voyez d'un coup d'œil ce qui est valorisé et ce qui ne l'est pas encore.</p>
-    </div>
-
-    <!-- (e) Le rappel vidéo — data-t recalculé après le recoupage de la
-         démonstration (tools/video/recouper.js) : 0:42 → 0:37. -->
-    <p class="sec-intro rev" style="margin-top:34px">Vous préférez voir&nbsp;? La fiche technique du mille-feuille, en mouvement, à
-      <button type="button" class="lien-ghost js-chapitre" data-t="37" style="background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline" aria-label="Lire à partir de 0 min 37 — Fiche technique du mille-feuille">0:37 de la démonstration</button>
-    </p>
-
-    <p class="mention-demo" style="margin-top:40px">Cet espace fait partie des options que l'on active selon votre configuration&nbsp;; on en parle lors du premier échange.</p>
-    <!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-    <p class="rev"><a class="lien-ghost" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20voir%20comment%20LabFlow%20calcule%20le%20co%C3%BBt%20de%20mes%20recettes." target="_blank" rel="noopener">Poser une question sur WhatsApp</a></p>
-  </div>
-</div>
-
-<!-- ══ SECTION 7 — CE QUI SORT ══ -->
-<section id="sorties">
-  <div class="container">
-    <div class="kicker rev">Les deux sorties</div>
-    <h2 class="rev">Deux sorties, un seul stock.</h2>
-    <div class="plomberie-rangee" style="margin-top:44px; align-items:start">
-      <div class="rev">
-        <h3>Vers vos points de vente</h3>
-        <p class="sec-intro" style="margin-top:8px"><em>Pour que les sorties de votre labo soient vraies.</em></p>
-        <p class="sec-intro">Votre cuisine centrale envoie 30 mille-feuilles au salon de thé&nbsp;: la marchandise sort du stock du labo et entre dans celui du point de vente, valorisée à ce qu'elle vous a réellement coûté. Vous voyez tout de suite l'écart entre ce que vous avez payé les matières et ce que vaut la marchandise transférée.</p>
-        <p class="sec-intro">Le sens est labo → points de vente. <a href="#preuves">Le fichier des transferts est téléchargeable plus bas.</a></p>
-      </div>
-      <div class="rev rev-2">
-        <h3>Vers vos clients pros</h3>
-        <p class="sec-intro" style="margin-top:8px"><em>Pour que ce que vous vendez aux professionnels soit vrai.</em></p>
-        <p class="sec-intro">Vos clients professionnels — un hôtel, une épicerie fine, un autre restaurant — commandent seuls sur leur propre espace, à leurs tarifs négociés, à l'heure qui les arrange. Vous suivez chaque commande en quatre étapes&nbsp;: en attente, expédiée, livrée — annulée si besoin.</p>
-        <!-- La mention d'option porte sur CE bloc seul : les transferts labo →
-             points de vente, colonne de gauche, viennent avec le laboratoire et
-             ne sont pas optionnels. Placée en bas de section, elle laissait lire
-             l'inverse. -->
-        <p class="mention-demo" style="margin-top:14px">Cet espace fait partie des options que l'on active selon votre configuration&nbsp;; on en parle lors du premier échange.</p>
-      </div>
-    </div>
-
-    <p class="shot-legende rev" style="margin-top:34px">Vue de votre client professionnel</p>
-    <figure class="shot--nu annote rev">
-      <picture>
-        <source type="image/avif" srcset="assets/img/portail-catalogue@1x.avif 1x, assets/img/portail-catalogue@2x.avif 2x">
-        <img src="assets/img/portail-catalogue@1x.webp"
-             srcset="assets/img/portail-catalogue@1x.webp 1x, assets/img/portail-catalogue@2x.webp 2x"
-             width="1100" height="688"
-             alt="Espace de commande d'un client professionnel : son catalogue à ses tarifs négociés"
-             loading="lazy" decoding="async">
-      </picture>
-      <figcaption>Le catalogue tel que le voit votre client professionnel, à ses tarifs négociés. Compte de démonstration Dar Yasmine.</figcaption>
-    </figure>
-
-    <figure class="shot--nu annote rev" style="margin-top:34px; max-width:760px">
-      <picture>
-        <source type="image/avif" srcset="assets/img/commandes-table@1x.avif 1x, assets/img/commandes-table@2x.avif 2x">
-        <img src="assets/img/commandes-table@1x.webp"
-             srcset="assets/img/commandes-table@1x.webp 1x, assets/img/commandes-table@2x.webp 2x"
-             width="760" height="287"
-             alt="Liste des commandes de vos clients professionnels, avec leur état"
-             loading="lazy" decoding="async">
-      </picture>
-      <figcaption>Vos commandes pros et leur état, de la réception à la livraison. Compte de démonstration Dar Yasmine.</figcaption>
-    </figure>
-
-    <figure class="shot--nu annote rev" style="margin-top:34px; max-width:560px">
-      <picture>
-        <source type="image/avif" srcset="assets/img/stepper@1x.avif 1x, assets/img/stepper@2x.avif 2x">
-        <img src="assets/img/stepper@1x.webp"
-             srcset="assets/img/stepper@1x.webp 1x, assets/img/stepper@2x.webp 2x"
-             width="560" height="146"
-             alt="Les quatre états d'une commande : en attente, expédiée, livrée, annulée"
-             loading="lazy" decoding="async">
-      </picture>
-      <figcaption>Les quatre états d'une commande, du dépôt à la livraison. Compte de démonstration Dar Yasmine.</figcaption>
-    </figure>
   </div>
 </section>
 
-<!-- ══ SECTION 8 — LES FACTURES ══ -->
+<!-- ══ 4 · CLIENTS PROS ══ -->
+<section id="pros" class="sombre-2">
+  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
+  <div class="container duo inverse">
+    <div class="duo-texte reveal d1">
+      <span class="oeil">Vente aux professionnels — <b>portail</b></span>
+      <h2>Vos clients pros<br>commandent seuls.</h2>
+      <p>Chaque client professionnel a son espace, à ses tarifs. Il commande quand
+         il veut, sans vous appeler. Vous suivez chaque commande, de la réception à la livraison.</p>
+      <ul class="liste">
+        <li><i aria-hidden="true"></i>Reçue → préparée → expédiée → livrée</li>
+        <li><i aria-hidden="true"></i>Chaque client voit ses propres tarifs</li>
+        <li><i aria-hidden="true"></i>La facture part avec la commande</li>
+      </ul>
+      <a class="btn" href="demande-acces.html">Demander un accès</a>
+    </div>
+    <div class="cadre-visu duo-visu reveal">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran compact">
+        <div class="ecran-in">
+          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Commandes des clients pros</span></div>
+          <div class="ecran-visu">
+            <picture>
+              <source type="image/avif" srcset="assets/img/commandes-table@1x.avif 1x, assets/img/commandes-table@2x.avif 2x">
+              <source type="image/webp" srcset="assets/img/commandes-table@1x.webp 1x, assets/img/commandes-table@2x.webp 2x">
+              <img src="assets/img/commandes-table@1x.webp"
+                   alt="Tableau des commandes des clients professionnels et leur état, dans LabFlow. Compte de démonstration Dar Yasmine."
+                   loading="lazy" width="760" height="287">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <div class="medaillon" aria-hidden="true">
+        <div class="medaillon-in">
+          <picture>
+            <source type="image/avif" srcset="assets/img/stepper@1x.avif 1x, assets/img/stepper@2x.avif 2x">
+            <source type="image/webp" srcset="assets/img/stepper@1x.webp 1x, assets/img/stepper@2x.webp 2x">
+            <img src="assets/img/stepper@1x.webp" alt="" loading="lazy" width="1120" height="292">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5 · FACTURES ══ -->
 <section id="factures">
   <div class="container">
-    <div class="kicker rev">Les factures</div>
-    <h2 class="rev">Ce que reçoit votre client pro. Ce que vous gardez de vos fournisseurs.</h2>
-    <div class="plomberie-rangee" style="margin-top:44px; align-items:start">
-      <div class="rev">
-        <h3>La facture de votre client pro</h3>
-        <p class="sec-intro" style="margin-top:8px"><strong>Chaque commande expédiée à un client professionnel sort sa facture en PDF</strong>&nbsp;: numérotée à la suite, TVA calculée ligne par ligne, timbre fiscal posé. Votre client la retrouve tout seul dans son espace, vous n'avez rien à renvoyer.</p>
-        <figure class="shot--nu annote" style="max-width:360px">
+    <div class="facture">
+      <div class="chapeau centre reveal">
+        <span class="oeil">Facturation — <b>aux normes tunisiennes</b></span>
+        <h2>La facture part.<br>Le timbre est déjà dessus.</h2>
+        <p>TVA calculée, numérotation à la suite, timbre fiscal posé : la facture sort
+           prête pour votre client et pour votre comptable. Rien à recompter à la main.</p>
+      </div>
+      <div class="ruban reveal d1">
+        <div class="ruban-in">
+          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Facture — pied de page</span></div>
           <picture>
             <source type="image/avif" srcset="assets/img/facture-timbre@1x.avif 1x, assets/img/facture-timbre@2x.avif 2x">
+            <source type="image/webp" srcset="assets/img/facture-timbre@1x.webp 1x, assets/img/facture-timbre@2x.webp 2x">
             <img src="assets/img/facture-timbre@1x.webp"
-                 srcset="assets/img/facture-timbre@1x.webp 1x, assets/img/facture-timbre@2x.webp 2x"
-                 width="360" height="42"
-                 alt="Ligne Timbre fiscal d'une facture client professionnel"
-                 loading="lazy" decoding="async">
+                 alt="Pied d'une facture LabFlow : total HT, TVA, timbre fiscal et total TTC. Compte de démonstration Dar Yasmine."
+                 width="360" height="42">
           </picture>
-          <figcaption>Le timbre fiscal, posé sur la facture sans que vous ayez à y penser. Compte de démonstration Dar Yasmine.</figcaption>
-        </figure>
-        <p class="sec-intro" style="margin-top:14px"><a href="#preuves">Téléchargez une facture complète plus bas.</a></p>
-      </div>
-      <div class="rev rev-2">
-        <h3>Vos achats, regroupés par facture</h3>
-        <p class="sec-intro" style="margin-top:8px">Vous saisissez vos livraisons au fur et à mesure&nbsp;; LabFlow les regroupe par référence de facture et par fournisseur et vous rend un PDF récapitulatif. Vous retrouvez d'un coup ce que vous avez acheté chez ce fournisseur, et à quel prix.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SECTION 9 — LA PREUVE ══ (id au pluriel : ancre de production) -->
-<section id="preuves">
-  <div class="container">
-    <div class="kicker rev">Rien de maquillé</div>
-    <h2 class="rev">Téléchargez les chiffres. Vérifiez-les.</h2>
-    <p class="sec-intro rev">Tout ce que vous voyez sur ce site sort d'un compte de démonstration réel. Ouvrez les fichiers vous-même&nbsp;: c'est exactement ce que LabFlow vous rendra.</p>
-    <div class="preuves-grid">
-      <a class="fichier rev" href="assets/files/facture-acheteur-exemple.pdf" download>
-        <span class="type pdf">PDF</span>
-        <b>Facture d'un client pro</b>
-        <p>TVA ligne à ligne, timbre fiscal, net à payer.</p>
-        <span class="poids">facture-acheteur-exemple.pdf · 10 Ko</span>
-      </a>
-      <a class="fichier rev rev-2" href="assets/files/export-excel-exemple.xlsx" download>
-        <span class="type xls">XLSX</span>
-        <b>Historique d'approvisionnement</b>
-        <p>462 lignes réelles&nbsp;: date, article, quantité, prix HT et TTC, TVA, fournisseur et référence de facture. Les saisies manuelles portent le nom de leur auteur&nbsp;; les mouvements générés par le logiciel — productions, transferts — sont marqués AUTO et n'ont pas d'auteur.</p>
-        <span class="poids">export-excel-exemple.xlsx · 59 Ko</span>
-      </a>
-      <a class="fichier rev rev-3" href="assets/files/export-transferts-exemple.xlsx" download>
-        <span class="type xls">XLSX</span>
-        <b>Transferts du labo</b>
-        <p>28 transferts vers le salon de thé, chacun valorisé.</p>
-        <span class="poids">export-transferts-exemple.xlsx · 25 Ko</span>
-      </a>
-    </div>
-
-    <p class="sec-intro rev" style="margin-top:34px">Les historiques et les fiches techniques s'exportent en Excel. Vos factures sortent en PDF. Le tableau de bord s'exporte aussi en Excel. Depuis le 18 juillet 2026, chaque mouvement porte le nom de la personne qui l'a saisi&nbsp;; les mouvements antérieurs n'ont pas d'auteur enregistré.</p>
-
-    <p class="rev" style="margin-top:26px">
-      <button type="button" class="btn-lecture" id="ouvrir-demo-2">
-        <span class="btn-lecture__triangle" aria-hidden="true"><svg><use href="#ic-play"/></svg></span>
-        Voir la démo · 1 min 19
-        <span class="poids">4 Mo, chargée au clic</span>
-      </button>
-    </p>
-
-    <div class="encart-honnete rev">
-      <svg class="ico" aria-hidden="true"><use href="#ic-ampoule"/></svg>
-      <span>Toutes les captures de ce site sortent d'un compte de démonstration réel, montants en dinars. Aucun chiffre client inventé.</span>
-    </div>
-    <!-- role="group" : un aria-label posé sur un <div> nu est ignoré par la
-         plupart des lecteurs d'écran. -->
-    <div class="partenaires-row" id="partenaires" style="display:none" role="group" aria-label="Ils utilisent LabFlow"></div>
-  </div>
-</section>
-
-<!-- ══ SECTION 10 — CE QUE LABFLOW NE FAIT PAS ══ -->
-<section id="limites">
-  <div class="container">
-    <div class="kicker rev">Les limites</div>
-    <h2 class="rev">Ce que LabFlow ne fait pas.</h2>
-    <div class="modules-grid rev" style="margin-top:34px">
-      <ul style="padding-left:20px">
-        <li>Pas d'application mobile, pas de mode hors ligne</li>
-        <li>Pas de lecture automatique de vos factures fournisseur — vous saisissez, LabFlow regroupe et restitue</li>
-        <li>Pas d'avoirs ni de notes de crédit</li>
-        <li>Pas de relance de paiement ni de télédéclaration</li>
-        <li>Une seule devise&nbsp;: le dinar</li>
-        <li>Les transferts vont du labo vers les points de vente, pas l'inverse</li>
-      </ul>
-      <ul style="padding-left:20px">
-        <li>Pas d'inscription en ligne&nbsp;: votre compte est paramétré avec vous</li>
-        <li>Pas de suivi article par article dans le tableau de bord — il est dans le stock et les historiques</li>
-        <li>Pas de code-barres, pas de scan, pas de numéro de série</li>
-        <li>Pas de caisse enregistreuse, pas de programme de fidélité, pas de boutique en ligne</li>
-        <li>Pas de numéro de lot ni de date de péremption</li>
-      </ul>
-    </div>
-    <p class="sec-intro rev" style="margin-top:26px">Si l'un de ces points est bloquant pour vous, dites-le au premier échange — vous perdrez cinq minutes au lieu de trois mois.</p>
-  </div>
-</section>
-
-<!-- ══ SECTION 11 — VOS DONNÉES ══ -->
-<section id="vos-donnees">
-  <div class="container">
-    <div class="tuile rev" style="padding:34px">
-      <div class="kicker">Qui voit quoi</div>
-      <h2>Trois personnes regardent le même système. Elles ne voient pas la même chose.</h2>
-      <div class="kpi-rangee">
-        <div>
-          <span class="chiffre-etiquette">Vous</span>
-          <p>Tout votre compte&nbsp;: vos points de vente, votre labo, vos achats, vos marges. Vous seul créez les accès des autres.</p>
-        </div>
-        <div>
-          <span class="chiffre-etiquette">Votre gérant</span>
-          <p>Le point de vente ou le labo que vous lui confiez, et rien d'autre — <strong>y compris les chiffres de ce site-là&nbsp;: ses ventes, ses achats, sa marge</strong>. Il ne peut modifier que les lignes qu'il a saisies lui-même.</p>
-        </div>
-        <div>
-          <span class="chiffre-etiquette">Votre client pro</span>
-          <p>Ses commandes et ses tarifs à lui. Jamais les tarifs d'un autre client, jamais vos stocks.</p>
         </div>
       </div>
-      <p class="sec-intro" style="margin-top:26px"><strong>L'accès à vos données est vérifié à chaque demande, du côté du logiciel — pas seulement à l'affichage.</strong></p>
-      <p class="mention-demo">Vos données personnelles sont traitées conformément à la loi tunisienne n°&nbsp;2004-63.</p>
+      <p class="legende reveal d1">Le total HT, la TVA, le timbre fiscal et le total TTC — sur chaque facture. Compte de démonstration Dar Yasmine.</p>
     </div>
   </div>
 </section>
 
-<!-- ══ SECTION 12 — POUR QUI ══ -->
-<section id="pourqui" style="padding-top:0">
+<!-- ══ 6 · VOS DONNÉES ══ -->
+<section id="donnees" class="sombre-2">
+  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
   <div class="container">
-    <div class="kicker rev">Pour qui</div>
-    <h2 class="rev">Si vous achetez, stockez et vendez.</h2>
-    <p class="sec-intro rev">Un plat, un gâteau, un sandwich, une découpe — ou simplement un article que vous revendez tel quel&nbsp;: si vous achetez de la marchandise, que vous la stockez et que vous la vendez, LabFlow tient vos comptes. <strong>Et si vous la transformez avant de la vendre</strong>, il vous donne en plus le prix de revient exact de ce que vous fabriquez.</p>
-    <p class="sec-intro rev">LabFlow est né dans les métiers de bouche, là où le calcul de marge est le plus exigeant — c'est ce qui le rend précis partout ailleurs. Et plus largement, il s'adresse à tout commerce qui achète, stocke et vend.</p>
-    <!-- « Exemples de » et non « couverts par » : la liste illustre, elle
-         n'affirme pas une couverture. Dernière pastille ouverte au commerce
-         sans transformation, sinon elle refermait la porte que D2 vient
-         d'ouvrir. Aucune verticale non alimentaire n'est nommée (D2). -->
-    <div class="metier-pills rev" role="group" aria-label="Exemples de métiers">
-      <span>Restaurant</span><span>Café &amp; salon de thé</span><span>Boulangerie &amp; pâtisserie</span><span>Boucherie</span><span>Traiteur</span><span>Labo &amp; dépôt</span><span>Autre commerce qui achète et revend</span>
+    <div class="chapeau centre reveal">
+      <span class="oeil">Vos données — <b>qui voit quoi</b></span>
+      <h2>Trois personnes, un système.<br>Chacune voit ce qui la regarde.</h2>
+      <p>Vos chiffres sont à vous. Vous décidez qui accède à quoi — et personne ne voit ce que vous ne montrez pas.</p>
+    </div>
+    <div class="trois">
+      <article class="regard moi reveal">
+        <span class="tag">Vous</span>
+        <h3>Tout votre compte</h3>
+        <p>Vos points de vente, votre labo, vos achats, vos marges. Vous seul créez les accès des autres.</p>
+      </article>
+      <article class="regard reveal d1">
+        <span class="tag">Votre gérant</span>
+        <h3>Ce que vous lui confiez</h3>
+        <p>Le point de vente ou le labo que vous lui ouvrez, et rien d'autre. Il saisit sans voir le reste.</p>
+      </article>
+      <article class="regard reveal d2">
+        <span class="tag">Votre client pro</span>
+        <h3>Ses commandes, ses tarifs</h3>
+        <p>Ses commandes et ses prix à lui. Jamais vos stocks, jamais les tarifs d'un autre client.</p>
+      </article>
+    </div>
+    <p class="cloison-note reveal d2">Et vos données restent exportables en Excel quand vous voulez — elles vous appartiennent.</p>
+    <!-- Carrousel de partenaires : masqué tant que GET /api/public/partenaires
+         ne renvoie rien. Contrat inchangé. -->
+    <div class="partenaires reveal d2" id="partenaires" hidden role="group" aria-label="Ils utilisent LabFlow">
+      <p class="partenaires-titre">Ils travaillent déjà avec LabFlow</p>
+      <div class="partenaires-piste" id="partenaires-piste"></div>
     </div>
   </div>
 </section>
 
-<!-- ══ SECTION 13 — LE DEVIS + LE DÉMARRAGE ══ -->
-<section id="devis">
-  <div class="container">
-    <div class="kicker rev">Le devis</div>
-    <h2 class="rev">Vous ne paierez pas ce que vous n'utilisez pas.</h2>
-    <p class="sec-intro rev">Il n'y a pas de prix affiché sur ce site, et ce n'est pas une pudeur commerciale&nbsp;: un montant unique serait faux pour presque tout le monde. Une boutique seule paierait pour des modules qu'elle n'ouvrira jamais&nbsp;; un atelier avec trois points de vente serait à l'étroit. Votre devis se compose à partir de votre organisation réelle. Voici exactement ce qui le fait varier.</p>
-
-    <div class="rev">
-      <h3>Quatre éléments — et une option, si vous voulez les recettes sans laboratoire</h3>
-      <p class="sec-intro" style="margin-top:12px"><strong>Vos points de vente.</strong> Restaurant, café, boutique, kiosque&nbsp;: chaque site a son stock, ses ventes et sa marge. Plus vous en avez, moins chaque site supplémentaire pèse.</p>
-      <p class="sec-intro"><strong>Votre laboratoire.</strong> Un atelier ou une cuisine centrale qui produit pour vos points de vente. C'est lui qui débloque la production, les fiches techniques avec sous-recettes et les transferts valorisés.</p>
-      <p class="sec-intro"><strong>Vos gérants.</strong> Chaque gérant dispose de son propre accès, limité aux sites que vous lui confiez. Vous gardez la vue d'ensemble.</p>
-      <p class="sec-intro"><strong>Vos clients professionnels.</strong> Le portail sur lequel ils commandent seuls, à leurs tarifs négociés, se dimensionne selon la taille de votre carnet d'acheteurs. Il suppose un laboratoire.</p>
-      <p class="sec-intro"><strong>Les recettes sans laboratoire.</strong> Les fiches techniques, les sous-recettes et le coût de revient sont compris dès qu'il y a un laboratoire. Si vous n'en avez pas et que vous les voulez quand même, elles s'ajoutent à votre configuration.</p>
-    </div>
-
-    <div class="rev" style="margin-top:44px">
-      <h3>Le socle, il est dans tous les comptes</h3>
-      <p class="sec-intro" style="margin-top:12px">Le stock de chaque site, valorisé en dinars, jour après jour. Les pertes chiffrées et les inventaires. Les ventes et la marge réelle, canal par canal. Les fournisseurs et l'historique de vos approvisionnements. Tous les historiques filtrables et exportables en Excel, avec le logo de votre entreprise sur chaque fichier. Les factures en PDF. Le manuel intégré, et une équipe qui répond en français.</p>
-      <p class="sec-intro">Les fiches techniques, les sous-recettes et la production sont comprises dès qu'il y a un laboratoire.</p>
-    </div>
-
-    <div class="rev" style="margin-top:44px">
-      <h3>Un démarrage clé en main, pas un logiciel livré vide</h3>
-      <p class="sec-intro" style="margin-top:12px">Il n'y a pas d'inscription en ligne, et pas de compte à configurer tout seul. Notre équipe paramètre le vôtre avec vous&nbsp;: vos points de vente, votre catalogue d'articles — importé en une fois depuis un fichier Excel, modèle fourni —, vos fournisseurs, vos tarifs. Puis nous formons votre équipe. Le jour du lancement, vous ouvrez un compte prêt à travailler, pas une page blanche.</p>
-      <p class="sec-intro">Ce service est facturé <strong>une seule fois</strong>, à part de l'abonnement mensuel. Son montant figure sur votre devis.</p>
-    </div>
-
-    <div class="rev" id="apres" style="margin-top:44px">
-      <h3>Ce qui se passe si vous demandez un accès</h3>
-      <p class="sec-intro" style="margin-top:12px"><strong>1. Vous remplissez le formulaire — deux minutes.</strong> Nom, email, téléphone. Le reste est facultatif.</p>
-      <p class="sec-intro"><strong>2. Un conseiller vous rappelle.</strong> Un humain. Il écoute votre organisation&nbsp;: labo, points de vente, clients pros. Puis il vous montre LabFlow en conditions réelles, sur des cas comme les vôtres — en français, en dinars.</p>
-      <p class="sec-intro"><strong>3. Devis, contrat, compte paramétré, équipe formée.</strong> Si ça vous convient. Rien ne se passe sans votre signature.</p>
-    </div>
-
-    <p class="sec-intro rev lien-tarifs" style="margin-top:44px">Vous voulez comprendre comment se construit le budget, sans passer par le formulaire&nbsp;? <a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a></p>
-
-    <div class="rev" style="margin-top:26px">
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
-      <p class="mention-demo" style="margin-top:14px">Un conseiller vous rappelle — un humain, pas un robot. Devis établi après un échange — aucun paiement en ligne, aucune carte bancaire.</p>
-      <!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-      <p style="margin-top:10px"><a class="lien-ghost" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20savoir%20ce%20que%20donnerait%20LabFlow%20chez%20moi%20et%20recevoir%20un%20devis." target="_blank" rel="noopener">Demander un devis sur WhatsApp</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SECTION 14 — FAQ ══ -->
-<section id="faq" style="padding-top:0">
-  <div class="container">
-    <div class="kicker rev">Questions franches</div>
-    <h2 class="rev">Ce qu'on nous demande avant de signer</h2>
-    <div class="faq-themes">
-      <h3 class="faq-theme-titre">Démarrage</h3>
-      <details class="rev"><summary>Comment se passe la mise en route&nbsp;?</summary><p>Notre équipe paramètre votre compte&nbsp;: sites, catalogue, utilisateurs. Vous recevez un logiciel prêt à travailler, une formation et un manuel intégré. La mise en route est un service facturé une seule fois&nbsp;; son montant figure sur votre devis, établi après un échange avec un conseiller.</p></details>
-      <details class="rev"><summary>Y a-t-il un essai gratuit&nbsp;?</summary><p>Non — et c'est volontaire. Un outil de gestion mal paramétré ne montre rien. Nous vous faisons une démonstration personnalisée sur des cas comme les vôtres, puis votre compte est livré prêt à l'emploi.</p></details>
-      <details class="rev"><summary>Est-ce que je dois tout paramétrer moi-même&nbsp;?</summary><p>Non. Il n'y a pas d'inscription en ligne et pas de compte à configurer tout seul. Notre équipe paramètre le vôtre avec vous&nbsp;: vos points de vente, votre catalogue d'articles — importé en une fois depuis un fichier Excel, modèle fourni —, vos fournisseurs, vos tarifs. Puis nous formons votre équipe.</p></details>
-
-      <h3 class="faq-theme-titre">Fonctionnement</h3>
-      <details class="rev"><summary>Faut-il un labo pour utiliser LabFlow&nbsp;?</summary><p>Non. Un seul point de vente suffit pour les stocks, les ventes et la marge. Le labo ajoute la production, les fiches techniques avec sous-recettes et les transferts valorisés. L'espace de commande de vos clients professionnels, lui, suppose un laboratoire.</p></details>
-      <details class="rev"><summary>Qui saisit, et combien de temps ça prend&nbsp;?</summary><p>Vous, ou la personne à qui vous confiez le point de vente. LabFlow ne lit pas vos factures fournisseur à votre place&nbsp;: à chaque livraison, vous saisissez les lignes reçues, une fois. En échange, vous ne recomptez plus rien — le stock, le coût de vos recettes et votre marge se recalculent tout seuls à partir de cette saisie. C'est le même geste que dans votre cahier, mais fait une seule fois au lieu de trois. Vos gérants peuvent le faire à votre place&nbsp;: chaque ligne porte le nom de la personne qui l'a saisie.</p></details>
-      <details class="rev"><summary>Est-ce que j'ai des rapports&nbsp;?</summary><p>Oui, sous deux formes. Le tableau de bord répond à l'écran, sur la période que vous choisissez&nbsp;: ventes et marges, achats et stock, pertes, labo, clients pros. Et tous vos historiques se filtrent puis s'exportent en Excel, avec le logo de votre entreprise sur chaque fichier. Il n'y a pas de «&nbsp;module Rapports&nbsp;» séparé à ouvrir&nbsp;: les chiffres sont là où vous travaillez.</p></details>
-      <details class="rev"><summary>Le portail de mes clients pros, comment y accèdent-ils&nbsp;?</summary><p>Vous les invitez par email. Chacun se connecte à son espace, voit son catalogue à ses tarifs négociés et commande à l'heure qui l'arrange. Chaque commande est suivie pas à pas.</p></details>
-      <details class="rev"><summary>Puis-je choisir la façon de compter partout&nbsp;?</summary><p>Non. Le choix est au moment de sortir la fiche technique&nbsp;; ailleurs, c'est la moyenne depuis votre dernier inventaire.</p></details>
-      <details class="rev"><summary>Puis-je transférer d'un point de vente à un autre&nbsp;?</summary><p>Non. Les transferts vont du labo vers vos points de vente.</p></details>
-
-      <h3 class="faq-theme-titre">Vos données</h3>
-      <details class="rev"><summary>Et si je veux récupérer mes chiffres&nbsp;?</summary><p>Vos données restent vos données. Tous les historiques — stocks, achats, pertes, ventes, productions, commandes — sont filtrables et exportables en Excel quand vous voulez, avec votre logo sur chaque fichier. Vos factures sortent en PDF.</p></details>
-      <details class="rev"><summary>Mes gérants peuvent-ils avoir un accès limité&nbsp;?</summary><p>Oui. Chaque gérant est affecté aux points de vente ou labos que vous lui confiez et ne voit rien d'autre. Vous gardez la vue d'ensemble.</p></details>
-      <details class="rev"><summary>Depuis quand les saisies portent-elles un nom&nbsp;?</summary><p>Depuis le 18 juillet 2026. Les mouvements plus anciens n'ont pas d'auteur enregistré.</p></details>
-
-      <h3 class="faq-theme-titre">Devis &amp; engagement</h3>
-      <details class="rev"><summary>Combien ça coûte&nbsp;?</summary><p>Il n'y a pas de prix affiché ici parce qu'il n'y a pas de prix unique. Votre abonnement est mensuel et se compose selon vos points de vente, votre laboratoire, vos gérants et la taille de votre carnet de clients professionnels. À cela s'ajoute la mise en route, facturée une seule fois. Un conseiller établit votre devis après un échange — c'est gratuit, et ça ne vous engage à rien. Le détail de ce qui entre dans un devis est expliqué ici&nbsp;: <a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a></p></details>
-      <details class="rev"><summary>Puis-je changer de configuration en cours de route&nbsp;?</summary><p>Oui. Vous ouvrez un deuxième point de vente, vous ajoutez un laboratoire, votre carnet d'acheteurs s'agrandit&nbsp;: votre contrat est mis à jour et votre abonnement ajusté en conséquence.</p></details>
-      <details class="rev"><summary>Suis-je engagé sur la durée&nbsp;?</summary><p>L'abonnement est mensuel. Les conditions précises — durée, préavis — sont écrites noir sur blanc dans votre contrat, avant toute mise en route.</p></details>
-    </div>
-  </div>
-</section>
 </main>
 
-<!-- ══ SECTION 15 — CTA FINAL (nuit 3) ══ -->
-<div class="zone-nuit cta-final" data-zone="nuit" id="cta">
-  <div class="fond-bento" aria-hidden="true"></div>
+<!-- ══ 7 · CTA FINAL ══ -->
+<section class="final" id="final">
+  <div class="hero-aurore" aria-hidden="true"></div>
   <div class="container">
-    <svg style="width:64px;height:64px;margin:0 auto 22px;display:block" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
-    <h2 class="rev">Le prochain chiffre que vous regarderez sera le vôtre.</h2>
-    <p class="sous rev">Racontez-nous vos points de vente, votre labo, vos clients pros. Un conseiller vous répond — un humain, pas un robot.</p>
-    <div class="rev" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap">
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
-      <!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-      <a class="btn-outline btn-outline--nuit btn-outline--wa"
-         href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20demander%20un%20acc%C3%A8s%20%C3%A0%20LabFlow."
-         target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
+    <div class="final-in reveal">
+      <h2>Le prochain chiffre que<br>vous regarderez sera le vôtre.</h2>
+      <p>Racontez-nous votre commerce. Un conseiller vous rappelle, vous montre LabFlow
+         sur vos propres chiffres, et vous repartez avec un compte prêt à l'emploi.</p>
+      <div class="final-ctas">
+        <a class="btn" href="demande-acces.html">Demander un accès<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
+        <!-- TODO numéro WhatsApp réel — bloquant avant mise en ligne -->
+        <a class="btn-fantome" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20demander%20un%20acc%C3%A8s%20%C3%A0%20LabFlow." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
+      </div>
+      <p class="rappel">Réponse rapide, par un humain. Aucun paiement en ligne.</p>
+      <a class="lien-cout" href="tarifs.html">Combien ça coûte&nbsp;?</a>
     </div>
-    <p class="sous rev" style="margin-top:22px">Un conseiller vous rappelle — un humain, pas un robot. Devis établi après un échange — aucun paiement en ligne, aucune carte bancaire.</p>
-    <div class="reassurances rev">
-      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>Rappel par un conseiller</span>
-      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>Démonstration personnalisée</span>
-      <span><svg class="ico" aria-hidden="true"><use href="#ic-check"/></svg>Compte livré prêt à travailler</span>
-    </div>
-    <p class="sous rev" style="margin-top:14px">Aucun paiement en ligne, aucune carte bancaire demandée.</p>
   </div>
-</div>
+</section>
 
-<!-- ══ PIED DE PAGE COMMUN ══
-     Bloc IDENTIQUE sur les 6 pages + 404.html : 5 entrées, ordre figé. La page
-     courante GARDE son entrée et porte aria-current="page" — l'omettre créait
-     six compositions différentes selon la page, et privait merci.html du lien
-     « Demande d'accès ». Toute modification se répercute sur les 7 fichiers. -->
-<footer>
-  <div class="container foot">
-    <div style="display:flex; align-items:center; gap:12px"><svg class="lf-mark small" role="img" aria-label="LabFlow"><use href="#lf-logo"/></svg><span>— Conçu en Tunisie 🇹🇳</span></div>
-    <div>
-      <a href="index.html" aria-current="page">Accueil</a><a href="demande-acces.html">Demande d'accès</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+<footer class="pied">
+  <div class="container">
+    <div class="marque">
+      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
+      <span class="mot"><b>Lab</b><span>Flow</span></span>
     </div>
+    <nav class="pied-liens" aria-label="Pied de page">
+      <a href="index.html" aria-current="page">Accueil</a>
+      <a href="demande-acces.html">Demande d'accès</a>
+      <a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>Conçu en Tunisie 🇹🇳</p>
   </div>
 </footer>
 
-<!-- Lecteur de la démonstration complète (sonorisée) — chargé seulement à l'ouverture -->
+<!-- ══ MODALE VIDÉO : démonstration complète (sonorisée) ══
+     Chargée seulement à l'ouverture (preload="none"). -->
 <div class="demo-modale" id="demo-modale" role="dialog" aria-modal="true" aria-label="Démonstration de LabFlow" hidden>
-  <button type="button" class="demo-fermer" id="fermer-demo" aria-label="Fermer la démonstration">✕</button>
   <div class="demo-cadre">
-    <!-- MP4 d'abord : sur cette vidéo, le H.264 est plus léger que le VP9
-         (4,0 Mo contre 6,3), et le fichier doit se télécharger vite — Cloudflare
-         met la vidéo en cache et ne répond pas aux requêtes partielles. -->
-    <!-- <track> OBLIGATOIRE (WCAG 1.2.2, niveau A) : la vidéo est sonorisée.
-         Elle ne porte aucun commentaire parlé — la piste restitue donc le texte
-         à l'écran et ce que montre chaque plan. Le repli en toutes lettres
-         juste en dessous couvre 1.2.3 (alternative textuelle au visuel). -->
-    <video id="demo-video" controls playsinline preload="none" poster="assets/video/demo-poster.jpg?v=3">
-      <source src="assets/video/demo-60s-son.mp4?v=3" type="video/mp4">
-      <track kind="captions" src="assets/video/demo-60s-son.fr.vtt?v=3" srclang="fr" label="Français" default>
+    <button type="button" class="demo-fermer" id="fermer-demo" aria-label="Fermer la démonstration">✕</button>
+    <!-- MP4 seul : Cloudflare met la vidéo en cache. <track> obligatoire
+         (WCAG 1.2.2) : la piste restitue le texte à l'écran et ce que montre
+         chaque plan. -->
+    <video id="demo-video" controls playsinline preload="none" width="1280" height="720" poster="assets/video/demo-poster.jpg">
+      <source src="assets/video/demo-60s-son.mp4" type="video/mp4">
+      <track kind="captions" src="assets/video/demo-60s-son.fr.vtt" srclang="fr" label="Français" default>
     </video>
-    <!-- Chapitrage : data-t = ceil(entrée du plan + FONDU), FONDU = 0,45 s.
-         Toute remontée de la vidéo impose de recalculer les six valeurs.
-         RECALCULÉS le 20/07/2026 après tools/video/recouper.js (89,80 → 78,80 s,
-         deux plans retirés) : 42→37, 58→47, 74→63, 80→69. Les deux premiers
-         chapitres précèdent la première coupe et sont donc inchangés.
-         Valeurs jumelles de celles de merci.html — les deux doivent bouger ensemble. -->
-    <div class="chapitres">
-      <button type="button" class="chapitre" data-t="5" aria-label="Lire à partir de 0 min 5 — Tableau de bord"><span class="tc">0:05</span> Tableau de bord</button>
-      <button type="button" class="chapitre" data-t="16" aria-label="Lire à partir de 0 min 16 — Stock valorisé"><span class="tc">0:16</span> Stock valorisé</button>
-      <button type="button" class="chapitre" data-t="37" aria-label="Lire à partir de 0 min 37 — Fiche technique du mille-feuille"><span class="tc">0:37</span> Fiche technique du mille-feuille</button>
-      <button type="button" class="chapitre" data-t="47" aria-label="Lire à partir de 0 min 47 — Transferts du labo"><span class="tc">0:47</span> Transferts du labo</button>
-      <button type="button" class="chapitre" data-t="63" aria-label="Lire à partir de 1 min 3 — L'espace de votre client pro"><span class="tc">1:03</span> L'espace de votre client pro</button>
-      <button type="button" class="chapitre" data-t="69" aria-label="Lire à partir de 1 min 9 — Commandes et facture"><span class="tc">1:09</span> Commandes et facture</button>
-    </div>
-    <details class="transcription">
-      <summary>Lire la transcription de la démonstration</summary>
-      <p>La démonstration ne comporte aucun commentaire parlé&nbsp;: la bande-son est une nappe musicale. Voici, dans l'ordre, ce que montre chaque plan.</p>
-      <ol>
-        <li><b>0:00</b> — Carton d'ouverture&nbsp;: «&nbsp;Tout votre labo. Un seul système.&nbsp;»</li>
-        <li><b>0:04</b> — Le tableau de bord&nbsp;: chiffre d'affaires, marge brute, marge après commissions, pertes, sur la période choisie.</li>
-        <li><b>0:09</b> — Carton&nbsp;: «&nbsp;Vous savez faire. Mais savez-vous ce que ça vous rapporte&nbsp;?&nbsp;»</li>
-        <li><b>0:15</b> — Le stock du jour valorisé&nbsp;: quantité, coût HT et TTC, article par article.</li>
-        <li><b>0:21</b> — L'historique d'approvisionnement exporté en Excel&nbsp;: date, ingrédient, quantité, prix, TVA, fournisseur, référence de facture.</li>
-        <li><b>0:26</b> — Carton&nbsp;: «&nbsp;De la matière première au produit vendu.&nbsp;»</li>
-        <li><b>0:29</b> — Le catalogue des produits, chacun avec sa composition et son coût réel.</li>
-        <li><b>0:37</b> — La fiche technique du mille-feuille&nbsp;: la recette descend jusqu'aux sous-recettes, au choix en Dernier Prix ou en Prix Moyen Pondéré.</li>
-        <li><b>0:42</b> — Carton&nbsp;: «&nbsp;Chaque transfert est valorisé, tracé, facturé.&nbsp;»</li>
-        <li><b>0:47</b> — L'historique des transferts du laboratoire vers les points de vente, chaque ligne valorisée au coût réel.</li>
-        <li><b>0:53</b> — Le même historique exporté en Excel, avec le logo de l'entreprise sur le fichier.</li>
-        <li><b>0:58</b> — Carton&nbsp;: vos clients professionnels commandent seuls, à leurs tarifs négociés.</li>
-        <li><b>1:03</b> — Le catalogue tel que le voit un client professionnel&nbsp;: ses tarifs, ses quantités, son panier.</li>
-        <li><b>1:08</b> — Le suivi des ventes aux professionnels&nbsp;: chaque commande, son état, sa facture.</li>
-        <li><b>1:13</b> — Carton de clôture&nbsp;: «&nbsp;Votre système vous attend.&nbsp;»</li>
-      </ol>
-      <p>Tous les écrans proviennent du compte de démonstration Dar Yasmine.</p>
-    </details>
   </div>
 </div>
 
-<!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-<a class="wa" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20voir%20LabFlow%20pour%20mon%20activit%C3%A9."
-   target="_blank" rel="noopener"
-   aria-label="Parler à un conseiller sur WhatsApp" title="Parler à un conseiller sur WhatsApp">💬</a>
-
-<div class="sticky-cta">
-  <a class="btn" href="demande-acces.html">Demander un accès · on vous rappelle</a>
-  <!-- TODO numero WhatsApp reel — bloquant avant mise en ligne -->
-  <a class="btn-outline btn-outline--wa" href="https://wa.me/21600000000?text=Bonjour%2C%20je%20voudrais%20voir%20LabFlow%20pour%20mon%20activit%C3%A9."
-     target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp"><svg class="ico" aria-hidden="true"><use href="#ic-wa"/></svg></a>
-</div>
-
 <script>
-var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function(){
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ── Menu mobile ── */
-var burger = document.getElementById('nav-burger');
-if (burger) {
-  var liens = document.getElementById('nav-links');
-  burger.addEventListener('click', function () {
-    var ouvert = liens.classList.toggle('ouvert');
+  /* ── Barre : verre dépoli dès qu'on quitte le haut ── */
+  var nav = document.getElementById('nav');
+  function auDefilement(){ nav.classList.toggle('colle', window.scrollY > 24); }
+  auDefilement();
+  window.addEventListener('scroll', auDefilement, {passive:true});
+
+  /* ── Menu mobile ── */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu-mobile');
+  function fermerMenu(){ document.body.classList.remove('menu-ouvert'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){
+    var ouvert = document.body.classList.toggle('menu-ouvert');
     burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
-    burger.textContent = ouvert ? '✕' : '☰';
   });
-  liens.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') { liens.classList.remove('ouvert'); burger.setAttribute('aria-expanded', 'false'); burger.textContent = '☰'; }
-  });
-}
+  menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') fermerMenu(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fermerMenu(); });
 
-/* ── Header : trait au scroll + bascule sombre sur les zones nuit ──
-   Mécanique reprise à l'identique de la V2 (Map d'états multi-zones). */
-var topnav = document.getElementById('topnav');
-var barre = document.getElementById('progression');
-addEventListener('scroll', function () {
-  topnav.classList.toggle('scrolled', scrollY > 8);
-  if (barre) {
-    var h = document.documentElement.scrollHeight - innerHeight;
-    barre.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, scrollY / h) : 0) + ')';
+  /* ── Révélation progressive (un seul observateur) ── */
+  var cibles = document.querySelectorAll('.reveal');
+  if(RM || !('IntersectionObserver' in window)){
+    cibles.forEach(function(el){ el.classList.add('vu'); });
+  } else {
+    var obs = new IntersectionObserver(function(entrees){
+      entrees.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    cibles.forEach(function(el){ obs.observe(el); });
   }
-}, { passive: true });
-(function () {
-  var zones = document.querySelectorAll('[data-zone="nuit"]');
-  var etats = new Map();
-  var ioNuit = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { etats.set(e.target, e.isIntersecting); });
-    var on = false; etats.forEach(function (v) { if (v) on = true; });
-    topnav.classList.toggle('sombre', on);
-  }, { rootMargin: '-32px 0px -94% 0px', threshold: 0 });
-  zones.forEach(function (z) { ioNuit.observe(z); });
-})();
 
-/* ── Boucle vidéo du hero ──
-   Chargée APRÈS le premier rendu : l'image d'attente s'affiche tout de suite.
-   Aucune lecture automatique en « animations réduites ». Bouton pause
-   obligatoire (WCAG 2.2.2 : tout mouvement de plus de 5 s doit pouvoir être
-   arrêté). */
-(function () {
-  var v = document.getElementById('hero-video');
-  var pause = document.getElementById('hero-pause');
-  if (!v) return;
-  if (RM) {
-    v.setAttribute('controls', '');
-    if (pause) pause.hidden = true;
-    return;
-  }
-  var arretParUtilisateur = false;
-  var lancer = function () {
-    v.preload = 'auto';
-    v.load();
-    var p = v.play();
-    if (p && p.catch) p.catch(function () { v.setAttribute('controls', ''); });
-  };
-  if (document.readyState === 'complete') setTimeout(lancer, 300);
-  else addEventListener('load', function () { setTimeout(lancer, 300); });
-  if (pause) {
-    pause.addEventListener('click', function () {
-      arretParUtilisateur = !v.paused;
-      if (arretParUtilisateur) { v.pause(); } else { v.play().catch(function () {}); }
-      pause.setAttribute('aria-pressed', arretParUtilisateur ? 'true' : 'false');
-      pause.setAttribute('aria-label', arretParUtilisateur ? 'Reprendre la démonstration' : 'Mettre la démonstration en pause');
-      pause.firstElementChild.firstElementChild.setAttribute('href', arretParUtilisateur ? '#ic-play' : '#ic-pause');
-    });
-  }
-  /* Économie : pause quand la boucle sort de l'écran */
-  new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      if (e.isIntersecting) { if (!arretParUtilisateur && v.paused && v.readyState > 2) v.play().catch(function () {}); }
-      else if (!v.paused) v.pause();
-    });
-  }, { threshold: 0.15 }).observe(v);
-})();
-
-/* ── Lecteur de la démo complète : modale, chapitres, piégeage du focus ── */
-(function () {
-  var modale = document.getElementById('demo-modale');
-  var video = document.getElementById('demo-video');
-  var fermerBtn = document.getElementById('fermer-demo');
-  if (!modale) return;
-  var dernierFocus = null;
-  function focusables() {
-    return Array.prototype.slice.call(modale.querySelectorAll('button, summary, video[controls]'))
-      .filter(function (e) { return e.offsetParent !== null || e === video; });
-  }
-  /* Le reste de la page passe en `inert` pendant l'ouverture : le piégeage du
-     focus par Tab ne suffit pas (survol, lecteur d'écran en mode virtuel,
-     retour depuis la barre d'URL — activeElement vaut alors <body>). */
-  function inerte(on) {
-    document.querySelectorAll('body > *').forEach(function (n) {
-      if (n === modale || n.tagName === 'SCRIPT') return;
-      n.inert = on;
-    });
-  }
-  function ouvre(t) {
-    /* dernierFocus est posé par l'appelant (bouton d'ouverture ou chapitre).
-       L'écraser ici par document.activeElement faisait perdre le retour de
-       focus dès que l'ouverture ne venait pas d'un clic souris. */
-    if (!dernierFocus) dernierFocus = document.activeElement;
-    modale.hidden = false;
-    inerte(true);
-    document.body.style.overflow = 'hidden';
-    if (typeof t === 'number') { try { video.currentTime = t; } catch (e) {} }
-    video.play().catch(function () {});
-    fermerBtn.focus();
-  }
-  function ferme() {
-    video.pause();
-    modale.hidden = true;
-    inerte(false);
-    document.body.style.overflow = '';
-    if (dernierFocus) dernierFocus.focus();
-    dernierFocus = null;
-  }
-  ['ouvrir-demo', 'ouvrir-demo-2'].forEach(function (id) {
-    var b = document.getElementById(id);
-    if (b) b.addEventListener('click', function () { dernierFocus = b; ouvre(); });
-  });
-  fermerBtn.addEventListener('click', ferme);
-  modale.addEventListener('click', function (e) { if (e.target === modale) ferme(); });
-  addEventListener('keydown', function (e) {
-    if (modale.hidden) return;
-    if (e.key === 'Escape') { ferme(); return; }
-    if (e.key !== 'Tab') return;
-    var f = focusables();
-    if (!f.length) return;
-    var premier = f[0], dernier = f[f.length - 1];
-    /* Filet : si le focus a fui hors de la modale, on le ramène au lieu de
-       laisser Tab repartir dans la page de fond. */
-    if (!modale.contains(document.activeElement)) { e.preventDefault(); premier.focus(); return; }
-    if (e.shiftKey && document.activeElement === premier) { e.preventDefault(); dernier.focus(); }
-    else if (!e.shiftKey && document.activeElement === dernier) { e.preventDefault(); premier.focus(); }
-  });
-  /* Chapitres : ceux de la modale ET le rappel de la section Produits transformés */
-  document.querySelectorAll('.chapitre, .js-chapitre').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var t = Number(b.dataset.t) || 0;
-      if (modale.hidden) { dernierFocus = b; ouvre(t); }
-      else { try { video.currentTime = t; } catch (e) {} video.play().catch(function () {}); }
-    });
-  });
-  /* Surlignage du chapitre courant — throttlé à 4 Hz */
-  var dernierTop = 0;
-  video.addEventListener('timeupdate', function () {
-    var now = Date.now();
-    if (now - dernierTop < 250) return;
-    dernierTop = now;
-    var reperes = modale.querySelectorAll('.chapitre');
-    var courant = null;
-    reperes.forEach(function (b) {
-      if (video.currentTime + 0.01 >= Number(b.dataset.t)) courant = b;
-    });
-    reperes.forEach(function (b) { b.classList.toggle('en-cours', b === courant); });
-  });
-})();
-
-/* ── Un seul IntersectionObserver mutualisé : révélations + cascade ── */
-function countUp(el) {
-  var spec = (el.getAttribute('data-count') || '').split('|');
-  var de = parseFloat(spec[0]), a = parseFloat(spec[1]), dec = parseInt(spec[2] || '0', 10);
-  /* Le flag RM est lu AVANT de démarrer : la valeur finale est écrite
-     directement, l'animation n'est pas neutralisée après coup. */
-  if (RM) { el.textContent = a.toFixed(dec).replace('.', ','); return; }
-  var t0 = null;
-  function pas(t) {
-    if (!t0) t0 = t;
-    var p = Math.min(1, (t - t0) / 900);
-    var v = de + (a - de) * (1 - Math.pow(1 - p, 3));
-    el.textContent = v.toFixed(dec).replace('.', ',');
-    if (p < 1) requestAnimationFrame(pas);
-  }
-  requestAnimationFrame(pas);
-}
-var io = new IntersectionObserver(function (es) {
-  es.forEach(function (e) {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('in');
-    io.unobserve(e.target);
-    if (e.target.id === 'cascade') {
-      var ms = e.target.querySelectorAll('.maillon');
-      ms.forEach(function (m, i) {
-        setTimeout(function () {
-          m.classList.add('allume');
-          var c = m.querySelector('[data-count]');
-          if (c) countUp(c);
-        }, RM ? 0 : i * 600);
+  /* ── Boucle vidéo du hero ──
+     Chargée après le premier rendu ; aucune lecture auto en « animations
+     réduites ». Bouton pause obligatoire (WCAG 2.2.2). */
+  (function(){
+    var v = document.getElementById('hero-video');
+    var pause = document.getElementById('hero-pause');
+    if(!v) return;
+    if(RM){ v.setAttribute('controls',''); if(pause) pause.hidden = true; return; }
+    var arret = false;
+    var lancer = function(){
+      v.preload = 'auto'; v.load();
+      var p = v.play();
+      if(p && p.catch) p.catch(function(){ v.setAttribute('controls',''); });
+    };
+    if(document.readyState === 'complete') setTimeout(lancer, 300);
+    else addEventListener('load', function(){ setTimeout(lancer, 300); });
+    if(pause){
+      pause.addEventListener('click', function(){
+        arret = !v.paused;
+        if(arret){ v.pause(); } else { v.play().catch(function(){}); }
+        pause.setAttribute('aria-pressed', arret ? 'true' : 'false');
+        pause.setAttribute('aria-label', arret ? 'Reprendre la démonstration' : 'Mettre la démonstration en pause');
+        pause.firstElementChild.firstElementChild.setAttribute('href', arret ? '#ic-play' : '#ic-pause');
       });
     }
-  });
-}, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
-document.querySelectorAll('.rev, #cascade').forEach(function (el) { io.observe(el); });
+    /* Économie : pause quand la boucle sort de l'écran */
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ if(!arret && v.paused && v.readyState > 2) v.play().catch(function(){}); }
+        else if(!v.paused) v.pause();
+      });
+    }, {threshold:0.15}).observe(v);
+  })();
 
-/* ── Partenaires : rangée statique, masquée si la liste revient vide ──
-   Contrat inchangé : GET /api/public/partenaires.
-   Le port 8322 est celui de tools/serve.js, l'aperçu statique local : aucune
-   API n'y tourne, l'appel serait une requête en échec systématique. */
-var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-  ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
-if (location.port !== '8322') {
-  fetch(API + '/api/public/partenaires').then(function (r) { return r.ok ? r.json() : []; }).then(function (list) {
-    if (!Array.isArray(list) || list.length === 0) return;
-    var row = document.getElementById('partenaires');
-    list.forEach(function (p) {
-      var d = document.createElement('div');
-      d.className = 'plogo';
-      /* width/height OBLIGATOIRES : seule <img> du site insérée après coup,
-         donc seule source possible de décalage de mise en page (CLS). */
-      d.innerHTML = '<img src="' + p.logo + '" alt="' + p.nom.replace(/"/g, '&quot;') + '"'
-        + ' width="120" height="40" loading="lazy" decoding="async"'
-        + ' style="max-height:40px; max-width:120px; object-fit:contain"><span>' + p.nom.replace(/</g, '&lt;') + '</span>';
-      row.appendChild(d);
+  /* ── Modale vidéo : démo complète, focus piégé ── */
+  (function(){
+    var modale = document.getElementById('demo-modale');
+    var video = document.getElementById('demo-video');
+    var fermerBtn = document.getElementById('fermer-demo');
+    var ouvreBtn = document.getElementById('ouvrir-demo');
+    if(!modale || !ouvreBtn) return;
+    var dernierFocus = null;
+    function focusables(){
+      return Array.prototype.slice.call(modale.querySelectorAll('button, video[controls]'))
+        .filter(function(e){ return e.offsetParent !== null || e === video; });
+    }
+    /* Le reste de la page passe en `inert` : le piégeage par Tab ne suffit pas
+       (survol, lecteur d'écran virtuel, retour depuis la barre d'URL). */
+    function inerte(on){
+      document.querySelectorAll('body > *').forEach(function(n){
+        if(n === modale || n.tagName === 'SCRIPT') return;
+        n.inert = on;
+      });
+    }
+    function ouvre(){
+      dernierFocus = document.activeElement;
+      modale.hidden = false; inerte(true);
+      document.body.style.overflow = 'hidden';
+      video.play().catch(function(){});
+      fermerBtn.focus();
+    }
+    function ferme(){
+      video.pause();
+      modale.hidden = true; inerte(false);
+      document.body.style.overflow = '';
+      if(dernierFocus) dernierFocus.focus();
+      dernierFocus = null;
+    }
+    ouvreBtn.addEventListener('click', ouvre);
+    fermerBtn.addEventListener('click', ferme);
+    modale.addEventListener('click', function(e){ if(e.target === modale) ferme(); });
+    addEventListener('keydown', function(e){
+      if(modale.hidden) return;
+      if(e.key === 'Escape'){ ferme(); return; }
+      if(e.key !== 'Tab') return;
+      var f = focusables(); if(!f.length) return;
+      var premier = f[0], dernier = f[f.length - 1];
+      if(!modale.contains(document.activeElement)){ e.preventDefault(); premier.focus(); return; }
+      if(e.shiftKey && document.activeElement === premier){ e.preventDefault(); dernier.focus(); }
+      else if(!e.shiftKey && document.activeElement === dernier){ e.preventDefault(); premier.focus(); }
     });
-    row.style.display = '';
-  }).catch(function () {});
-}
+  })();
+
+  /* ── Partenaires : carrousel défilant, masqué si la liste revient vide ──
+     Contrat inchangé : GET /api/public/partenaires. Le port 8322 est celui de
+     l'aperçu statique local (aucune API n'y tourne) : on n'y appelle rien. */
+  var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:3000' : 'https://api.labflow-tn.com';
+  if(location.port !== '8322'){
+    fetch(API + '/api/public/partenaires').then(function(r){ return r.ok ? r.json() : []; }).then(function(list){
+      if(!Array.isArray(list) || list.length === 0) return;
+      var piste = document.getElementById('partenaires-piste');
+      function logo(p){
+        var d = document.createElement('div');
+        d.className = 'plogo';
+        d.innerHTML = '<img src="' + p.logo + '" alt="' + String(p.nom).replace(/"/g,'&quot;') + '"'
+          + ' width="120" height="38" loading="lazy" decoding="async"><span>'
+          + String(p.nom).replace(/</g,'&lt;') + '</span>';
+        return d;
+      }
+      list.forEach(function(p){ piste.appendChild(logo(p)); });
+      /* Duplication : la piste fait 2× la liste, l'animation -50% boucle sans couture. */
+      list.forEach(function(p){ var c = logo(p); c.setAttribute('aria-hidden','true'); piste.appendChild(c); });
+      document.getElementById('partenaires').hidden = false;
+    }).catch(function(){});
+  }
+})();
 </script>
 </body>
 </html>

@@ -11,16 +11,18 @@
  *    quelques Ko en local n'est pas nécessairement un dépassement en ligne :
  *    vérifier avec `curl -H 'Accept-Encoding: gzip'` avant de conclure.
  *
- * ⚠️ Ce script EST une recette de l'état CIBLE V3. Tant que la refonte n'est pas
- *    terminée il échoue légitimement (v3.css, 404.html, chapitres, figcaptions
- *    n'existent pas encore). Un échec ici = un reste à faire, pas un bug du test.
+ * ⚠️ Ce script vérifie l'état LIVRÉ du thème « Nuit & Lumière » (v4). L'accueil
+ *    n'a plus la structure V3 « Chiffres en main » : plus de chapitres data-t,
+ *    plus de #cascade/data-count, plus de figcaption, plus de v2.css/v3.css. Les
+ *    contrôles ci-dessous suivent index.html actuel (7 sections Nuit) et
+ *    DOIVENT finir à 0 échec.
  */
 const puppeteer = require('puppeteer');
 const contraste = require('./contraste.js');
 
 // 7 entrées : les 6 pages indexables (tarifs.html CONSERVÉE — décision client D1,
 // qui périme la suppression prévue au §3.1/§3.3/§6.1 du plan) + 404.html, qui est
-// noindex et hors sitemap mais doit charger v3.css sans erreur.
+// noindex et hors sitemap mais doit charger v4.css sans erreur.
 // NB : l'énoncé « PAGES à 6 entrées dont 404.html » est un report du plan d'avant D1.
 const PAGES = [
   '/', '/tarifs.html', '/demande-acces.html', '/merci.html',
@@ -32,7 +34,8 @@ const BASE = 'http://localhost:8322';
 // §9.4 — durée réelle de assets/video/demo-60s-son.mp4, mesurée à 78,80 s
 // depuis le recoupage du 20/07/2026 (tools/video/recouper.js : retrait des plans
 // 05-principe et 16-excel-fiche, clôture refaite sans « Réponse sous 24 h »).
-// Toute remontée de la vidéo invalide les 6 data-t des chapitres.
+// Le libellé « (1 min 19) » de l'accueil suppose cette durée : une remontée de
+// la vidéo sans mise à jour du libellé est signalée par le contrôle 3.
 const DUREE_VIDEO_ATTENDUE = 78.8;
 const BUDGET_PREMIERE_VUE = 500;     // Ko, §13.6
 const MENTION_DEMO = 'Compte de démonstration Dar Yasmine';
@@ -105,32 +108,30 @@ const rate = (m) => { echecs.push(m); console.error('   ❌ ' + m); };
       if (!robots || !/noindex/.test(robots)) rate('/404.html : meta robots noindex absente');
     }
 
-    // plus aucune référence à l'ancienne feuille
+    // plus aucune référence aux anciennes feuilles (v2.css ni v3.css) — tout est sur v4.css
     const css = await page.$$eval('link[rel=stylesheet]', (l) => l.map((e) => e.getAttribute('href') || ''));
     if (css.some((h) => h.includes('v2.css'))) rate(`${p} référence encore assets/css/v2.css`);
+    if (css.some((h) => h.includes('v3.css'))) rate(`${p} référence encore assets/css/v3.css`);
 
     await page.close();
   }
 
-  // ── (contrôle 2) Absence de récap fantôme — ASSERTION POSITIVE ────────────
-  // Le motif V2 `$eval('#calc-recap', …).catch(() => 'n/a')` réussissait toujours
-  // une fois le div retiré du DOM : le .catch avalait l'erreur et le test passait
-  // quoi qu'il arrive. Ici, double condition explicite.
-  {
+  // ── (contrôle 2) Aucun résidu de calculateur — D1 ─────────────────────────
+  // Le calculateur (et son récap #calc-recap, et la clé localStorage lf_calc)
+  // a été SUPPRIMÉ : tarifs.html ne chiffre plus rien, demande-acces.html ne
+  // relit plus de panier. On vérifie simplement qu'il n'en reste aucune trace,
+  // sur les deux pages où il vivait. (Plus de test de purge au boot : rien
+  // n'écrit lf_calc, il n'y a donc rien à purger.)
+  for (const p of ['/demande-acces.html', '/tarifs.html']) {
     const page = await browser.newPage();
-    await page.goto(BASE + '/demande-acces.html', { waitUntil: 'domcontentloaded' });
-    await page.evaluate(() => localStorage.setItem('lf_calc', '{"act":2}'));
-    await page.reload({ waitUntil: 'networkidle0' });
+    await page.goto(BASE + p, { waitUntil: 'networkidle0' });
     const etat = await page.evaluate(() => ({
       div: document.getElementById('calc-recap') !== null,
-      cle: localStorage.getItem('lf_calc'),
+      trace: document.documentElement.innerHTML.includes('lf_calc'),
     }));
-    console.log(`\n── récap fantôme : div ${etat.div ? 'PRÉSENT' : 'absent'}, lf_calc = ${JSON.stringify(etat.cle)}`);
-    if (etat.div) rate('#calc-recap subsiste dans demande-acces.html (à supprimer, D1)');
-    if (etat.cle !== null) rate('lf_calc non purgé : ajouter localStorage.removeItem("lf_calc") au boot de demande-acces.html');
-    // aucune trace de calculateur nulle part
-    const traces = await page.evaluate(() => document.documentElement.innerHTML.includes('lf_calc'));
-    if (traces) rate('la chaîne lf_calc subsiste dans le DOM de demande-acces.html');
+    console.log(`── résidu calculateur (${p}) : #calc-recap ${etat.div ? 'PRÉSENT' : 'absent'}, lf_calc ${etat.trace ? 'PRÉSENT' : 'absent'}`);
+    if (etat.div) rate(`#calc-recap subsiste dans ${p} (à supprimer, D1)`);
+    if (etat.trace) rate(`la chaîne lf_calc subsiste dans le DOM de ${p} (D1)`);
     await page.close();
   }
 
@@ -160,7 +161,9 @@ const rate = (m) => { echecs.push(m); console.error('   ❌ ' + m); };
     await page.close();
   }
 
-  // ── (contrôle 3) Durée de la vidéo — détecte une remontée sans MAJ des chapitres
+  // ── (contrôle 3) Durée de la démo modale — la structure Nuit n'a plus de
+  //    chapitres cliquables (data-t) ; on garde le seul fait vérifiable : la
+  //    modale #demo-video sert bien le recoupage à ≈ 78,8 s (« 1 min 19 »).
   {
     const page = await browser.newPage();
     await page.goto(BASE + '/', { waitUntil: 'networkidle0' });
@@ -181,24 +184,28 @@ const rate = (m) => { echecs.push(m); console.error('   ❌ ' + m); };
     } else {
       console.log(`── durée vidéo : ${d.toFixed(2)} s (attendu ≈ ${DUREE_VIDEO_ATTENDUE} s)`);
       if (Math.abs(d - DUREE_VIDEO_ATTENDUE) > 0.6)
-        rate(`durée vidéo dérivée (${d.toFixed(2)} s) : les 6 data-t des chapitres sont à recalculer (§9.4)`);
-      const ts = await page.$$eval('.chapitre', (b) => b.map((e) => Number(e.dataset.t)));
-      if (ts.length !== 6) rate(`6 chapitres attendus, ${ts.length} trouvé(s)`);
-      const hors = ts.filter((t) => !(Number.isFinite(t) && t >= 0 && t < d));
-      if (hors.length) rate(`data-t hors de la durée de la vidéo : ${hors.join(', ')}`);
+        rate(`durée vidéo dérivée (${d.toFixed(2)} s ≠ ${DUREE_VIDEO_ATTENDUE} s) : le libellé « 1 min 19 » de l'accueil n'est plus juste (§9.4)`);
     }
     await page.close();
   }
 
-  // ── (contrôle 6) Chaque figcaption d'index.html porte la mention ──────────
+  // ── (contrôle 6) La mention de démonstration accompagne chaque capture ─────
+  // La structure Nuit n'a plus de <figcaption> : la mention D5 vit dans l'alt de
+  // chaque capture produit (cartes, écrans, ruban de facture) et dans l'aria-label
+  // de la boucle hero. On vérifie que chacune de ces captures la porte, et
+  // qu'aucune capture décorative (medaillon, alt="") n'est comptée à tort.
   {
     const page = await browser.newPage();
     await page.goto(BASE + '/', { waitUntil: 'networkidle0' });
-    const caps = await page.$$eval('figcaption', (f) => f.map((e) => e.textContent.trim()));
-    const manquants = caps.filter((c) => !c.includes(MENTION_DEMO));
-    console.log(`── figcaption : ${caps.length} trouvé(s), ${manquants.length} sans la mention`);
-    manquants.forEach((c) => rate(`figcaption sans mention « ${MENTION_DEMO} » : « ${c.slice(0, 70)}… »`));
-    if (!caps.length) rate('aucun figcaption sur index.html');
+    const alts = await page.$$eval('.carte-visu img, .ecran-visu img, .ruban img',
+      (imgs) => imgs.map((e) => e.getAttribute('alt') || ''));
+    const heroLabel = await page.$eval('#hero-video', (e) => e.getAttribute('aria-label') || '').catch(() => '');
+    const cibles = alts.concat(heroLabel ? [heroLabel] : []);
+    const manquants = cibles.filter((c) => !c.includes(MENTION_DEMO));
+    console.log(`── captures : ${cibles.length} vérifiée(s) (${alts.length} alt + hero), ${manquants.length} sans la mention`);
+    if (!alts.length) rate('aucune capture produit trouvée sur index.html (.carte-visu/.ecran-visu/.ruban)');
+    if (!heroLabel) rate('boucle hero #hero-video sans aria-label');
+    manquants.forEach((c) => rate(`capture sans mention « ${MENTION_DEMO} » : « ${c.slice(0, 70)}… »`));
     await page.close();
   }
 
@@ -208,31 +215,15 @@ const rate = (m) => { echecs.push(m); console.error('   ❌ ' + m); };
     await rm.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
     await rm.setViewport({ width: 1440, height: 900 });
     await rm.goto(BASE + '/', { waitUntil: 'networkidle0' });
-    await rm.evaluate(() => document.getElementById('cascade')?.scrollIntoView());
     await new Promise((r) => setTimeout(r, 800));
 
-    // L'attendu n'est PLUS codé en dur : on le lit dans le DOM.
-    // D5 : la cascade peut légitimement ne porter AUCUN chiffre (montants non
-    // vérifiables → interdits en clair). Zéro nœud n'est donc pas un échec.
-    const noeuds = await rm.$$eval('#cascade [data-count]', (els) =>
-      els.map((e) => ({ lu: e.textContent.trim(), attendu: (e.dataset.count || '').split('|')[1] })));
-    // data-count porte le POINT décimal (« 2.290 ») alors que le count-up rend la
-    // VIRGULE française (« 2,290 »). Comparer les bruts ferait échouer le contrôle
-    // même quand le code est juste : on normalise séparateurs et espaces fines.
-    const norm = (s) => String(s).replace(/[\s  ]/g, '').replace(',', '.');
-    if (!noeuds.length) {
-      console.log('\n── reduced-motion : cascade sans chiffres (conforme D5, aucun montant non vérifié)');
-    } else {
-      console.log('\n── reduced-motion : cascade');
-      noeuds.forEach((n, i) => {
-        const ok = norm(n.lu) === norm(n.attendu);
-        console.log(`   ${ok ? '✓' : '✗'} maillon ${i + 1} : lu « ${n.lu} » / attendu « ${n.attendu} »`);
-        if (!ok) rate(`cascade maillon ${i + 1} : count-up n'a pas posé la valeur finale en reduced-motion`);
-      });
-    }
-    // les révélations doivent être à leur état final
-    const revCachees = await rm.$$eval('.rev', (e) => e.filter((n) => getComputedStyle(n).opacity !== '1').length);
-    if (revCachees) rate(`${revCachees} bloc(s) .rev restent invisibles en reduced-motion`);
+    // La structure Nuit n'a plus de cascade #cascade/data-count. La seule
+    // exigence « animations réduites » qui subsiste sur l'accueil : les blocs
+    // à révélation progressive (.reveal) doivent être à leur état final (opacité
+    // pleine), et la boucle hero ne doit pas se lancer (vérifié juste après).
+    const revCachees = await rm.$$eval('.reveal', (e) => e.filter((n) => getComputedStyle(n).opacity !== '1').length);
+    console.log('\n── reduced-motion : révélations .reveal à l’état final ' + (revCachees ? `(${revCachees} invisibles ✗)` : '✓'));
+    if (revCachees) rate(`${revCachees} bloc(s) .reveal restent invisibles en reduced-motion`);
     // la vidéo hero ne doit pas jouer et doit exposer des contrôles
     const v = await rm.evaluate(() => {
       const el = document.querySelector('.hero video'); if (!el) return null;
@@ -248,7 +239,7 @@ const rate = (m) => { echecs.push(m); console.error('   ❌ ' + m); };
     const { echecs: e, total } = contraste.verifier();
     e.forEach(rate);
     if (!e.length) console.log(`   (${total} règles de contraste vérifiées)`);
-    // + garde anti-dérive : les jetons servis par v3.css doivent être ceux validés
+    // + garde anti-dérive : les jetons servis par v4.css doivent être ceux validés
     contraste.verifierSource().echecs.forEach(rate);
   }
 
