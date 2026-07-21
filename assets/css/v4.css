@@ -17,8 +17,8 @@
      6.  Hero + écran allumé + boucle vidéo + bouton pause
      7.  Sections, chapeaux, titres
      8.  Constellation (3 cartes)
-     9.  Duo (recette / clients pros) + médaillon
-     10. Facture (ruban du timbre)
+     9.  Duo (recette / clients pros)
+     10. Facture (écran document)
      11. Trois regards (cloisonnement)
      12. CTA final
      13. Révélation au défilement
@@ -304,17 +304,17 @@ h2{font-size:clamp(28px,4vw,45px);line-height:1.1;font-weight:600;letter-spacing
 .carte::before{content:'';position:absolute;top:0;left:12%;right:12%;height:1px;background:var(--grad);opacity:0;transition:opacity .45s var(--ease)}
 .carte:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.2);box-shadow:0 26px 60px -24px rgba(99,102,241,.7)}
 .carte:hover::before{opacity:1}
-.carte:hover .carte-visu{box-shadow:0 18px 46px -14px rgba(99,102,241,.85)}
-.carte-visu{
-  position:relative;border-radius:12px;overflow:hidden;margin-bottom:20px;background:#fff;
-  border:1px solid rgba(255,255,255,.14);box-shadow:0 12px 34px -16px rgba(99,102,241,.6);
-  transition:box-shadow .45s var(--ease);height:168px;
-}
-.carte-visu img{display:block;max-width:none;width:calc(100% * var(--z,1));margin-left:var(--x,0);margin-top:var(--y,0);filter:saturate(1.06) brightness(1.02)}
-.carte-visu.z-stock{--z:2.05;--x:-3%;--y:-4%}
-.carte-visu.z-ventes{--z:1.5;--x:-1%;--y:-6%}
 .carte h3{font-size:17.5px;font-weight:600;margin-bottom:7px;letter-spacing:-.01em}
 .carte p{font-size:14.5px;color:var(--gris);font-weight:300;line-height:1.55}
+
+/* ── Écran complet, sans zoom : l'image se voit ENTIÈRE (width:100%, height auto).
+   Aucun --z, aucun transform:scale, aucun object-fit recadrant. ── */
+.ecran-plein{position:relative;max-width:940px;margin-inline:auto;z-index:2}
+.ecran-plein .lueur{width:82%;height:72%;top:8%;left:9%;background:var(--grad);opacity:.5;filter:blur(90px)}
+.ecran-plein .ecran{margin-inline:auto}
+/* Légende générale sous un écran */
+.legende{font-size:13.5px;color:var(--gris-fonce);line-height:1.5}
+.legende.centre{text-align:center;max-width:640px;margin:22px auto 0}
 
 /* ══════════════ 9 · DUO (recette / clients pros) ══════════════ */
 .duo{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
@@ -334,29 +334,14 @@ h2{font-size:clamp(28px,4vw,45px);line-height:1.1;font-weight:600;letter-spacing
 .cadre-visu .lueur{width:80%;height:75%;top:12%;left:10%;background:var(--grad);opacity:.55;filter:blur(85px)}
 .ecran.compact{max-width:none}
 
-/* médaillon flottant (stepper d'états) posé sur l'écran des commandes */
-.medaillon{
-  position:absolute;left:-26px;bottom:-30px;z-index:3;width:min(320px,72%);
-  border-radius:14px;padding:1px;background:linear-gradient(150deg,rgba(255,255,255,.4),rgba(168,85,247,.3));
-  box-shadow:0 24px 60px -20px rgba(0,0,0,.85);
-}
-.medaillon-in{border-radius:13px;overflow:hidden;background:#fff}
-.medaillon img{display:block;width:100%}
-
-/* ══════════════ 10 · FACTURE (ruban du timbre) ══════════════ */
+/* ══════════════ 10 · FACTURE (document PDF entier) ══════════════ */
 .facture{max-width:720px;margin-inline:auto;text-align:center}
-.ruban{
-  position:relative;margin-top:44px;border-radius:16px;padding:1px;
-  background:linear-gradient(120deg,rgba(255,255,255,.34),rgba(99,102,241,.3),rgba(168,85,247,.3));
-  box-shadow:0 30px 80px -30px rgba(99,102,241,.7);
-}
-.ruban::before{content:'';position:absolute;inset:-40px;z-index:-1;background:var(--grad);opacity:.4;filter:blur(90px);border-radius:50%}
-.ruban-in{border-radius:15px;overflow:hidden;background:#fff}
-.ruban-in .ecran-barre{background:#F3F4FA;border-bottom:1px solid #E5E7F0}
-.ruban-in .ecran-barre i{background:#C7CBDA}.ruban-in .ecran-barre i:first-child{background:#A9AEC4}
-.ruban-in .ecran-barre span{color:#8A90A8}
-.ruban img{display:block;width:100%}
-.facture .legende{margin-top:20px;font-size:13.5px;color:var(--gris-fonce)}
+/* La facture est un document portrait : on la borne pour qu'elle ne soit pas
+   démesurée, écran complet et sans zoom (width:100%, height auto). */
+.ecran-doc{position:relative;max-width:470px;margin:44px auto 0;z-index:2}
+.ecran-doc .lueur{width:84%;height:70%;top:10%;left:8%;background:var(--grad);opacity:.5;filter:blur(85px)}
+.ecran-doc .ecran{margin-inline:auto}
+.facture .legende{margin-top:22px}
 
 /* ══════════════ 11 · TROIS REGARDS (cloisonnement) ══════════════ */
 .trois{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -537,13 +522,11 @@ input.champ,select.champ,textarea.champ,
   .nav-droite .btn{display:none}
   .burger{display:flex}
   .trois{grid-template-columns:1fr}
-  .medaillon{position:static;width:min(320px,80%);margin:20px auto 0;left:0;bottom:0}
 }
 @media (max-width:760px){
   .container{padding-inline:20px}
   .hero{padding-top:118px}
   .constellation{grid-template-columns:1fr;gap:18px}
-  .carte-visu{height:180px}
   section{padding:76px 0}
   .final{padding:96px 0}
   .scene{margin-top:52px;padding-bottom:80px}
@@ -551,7 +534,6 @@ input.champ,select.champ,textarea.champ,
   .hero-ctas .btn,.hero-ctas .btn-fantome,.final-ctas .btn,.final-ctas .btn-fantome{justify-content:center}
   /* La boucle reste pleine largeur : à 390 px ses KPI restent lisibles,
      et on évite un recadrage fragile. Le fondu du bas suffit à l'ancrer dans la nuit. */
-  .medaillon{width:min(300px,88%)}
 }
 @media (max-width:420px){
   h1{font-size:36px}
