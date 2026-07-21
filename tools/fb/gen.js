@@ -251,7 +251,10 @@ async function capturesPng() {
   const dir = path.join(KIT, '04-captures');
   fs.mkdirSync(dir, { recursive: true });
   const ecrans = ['ecran-dashboard', 'ecran-ft', 'ecran-commandes', 'ecran-facture',
-    'ecran-stock', 'ecran-ventes', 'ecran-import-avant', 'ecran-import-succes'];
+    'ecran-stock', 'ecran-ventes', 'ecran-import-avant', 'ecran-import-succes',
+    // crops rapprochés (posts « Zoom » et réserves R13-R15)
+    'kpi-marge', 'stock-valeur', 'ventes-canaux', 'ft-arbre', 'commandes-table',
+    'stepper', 'facture-timbre', 'production-deduction'];
   for (const e of ecrans) {
     await sharp(IMG(`${e}@2x.webp`)).png().toFile(path.join(dir, `${e}.png`));
     console.log('✓ 04-captures/' + e + '.png');
@@ -285,6 +288,9 @@ function videoKit() {
   fs.copyFileSync(path.join(SITE, 'assets', 'video', 'demo-60s-son.mp4'),
     path.join(vdir, 'demo-labflow-1min19.mp4'));
   console.log('✓ 02-video/demo-labflow-1min19.mp4 (copie 1280×720)');
+  fs.copyFileSync(path.join(SITE, 'assets', 'video', 'demo-hero.mp4'),
+    path.join(vdir, 'demo-boucle-12s.mp4'));
+  console.log('✓ 02-video/demo-boucle-12s.mp4 (boucle muette, pour P07)');
 
   // Reel 1080×1920 : vidéo centrée un peu haute, logo au-dessus, sous-titres incrustés dessous.
   // ffmpeg tourne avec cwd = 02-video pour référencer le .srt en RELATIF (zéro échappement de « C: »).
