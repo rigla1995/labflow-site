@@ -24,6 +24,9 @@ const EXCEL = (f) => 'file:///' + path.join(__dirname, 'excel', f + '.html').rep
 const LABO_ID = 55; // Cuisine centrale Dar Yasmine (seed)
 const SEQ = path.join(__dirname, 'seq');
 const W = 1440, H = 810, FPS = 30;
+// Suréchantillonnage ×2 : la page est rendue en 1440×810 CSS mais capturée en
+// 2880×1620 (deviceScaleFactor 2) — texte net après l'encodage final descendant.
+const DSF = 2, OW = W * DSF, OH = H * DSF;
 
 const CLIENT = { email: 'demo@dar-yasmine.tn', password: 'DemoVitrine2026!' };
 const ACHETEUR = { email: 'm.khelil.prof+acheteur1@gmail.com', password: 'Portail2026!' };
@@ -38,7 +41,7 @@ async function filmer(page, nom, dureeMs, scenario) {
     frames.push({ data: Buffer.from(f.data, 'base64'), t: f.metadata.timestamp });
     try { await client.send('Page.screencastFrameAck', { sessionId: f.sessionId }); } catch (e) { /* frame tardive */ }
   });
-  await client.send('Page.startScreencast', { format: 'jpeg', quality: 92, everyNthFrame: 1 });
+  await client.send('Page.startScreencast', { format: 'jpeg', quality: 92, everyNthFrame: 1, maxWidth: OW, maxHeight: OH });
   const t0 = Date.now();
   if (scenario) await scenario();
   const reste = dureeMs - (Date.now() - t0);
@@ -67,8 +70,10 @@ async function filmer(page, nom, dureeMs, scenario) {
 const encoder = (dir, out) => new Promise((res, rej) => {
   const p = spawn(ffmpeg, [
     '-y', '-framerate', String(FPS), '-i', path.join(dir, 'f%05d.jpg'),
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '20', '-pix_fmt', 'yuv420p',
-    '-vf', `scale=${W}:${H}`, out,
+    // Intermédiaires quasi-lossless en pleine résolution ×2 : la perte de qualité
+    // ne doit arriver qu'UNE fois, à l'encodage final descendant de monter.js.
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p',
+    '-vf', `scale=${OW}:${OH}`, out,
   ], { stdio: 'ignore' });
   p.on('close', (c) => (c === 0 ? res() : rej(new Error('ffmpeg ' + c))));
 });
@@ -143,7 +148,7 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox', '--disable-gpu', '--lang=fr-FR', `--window-size=${W},${H}`, '--hide-scrollbars'],
-    defaultViewport: { width: W, height: H, deviceScaleFactor: 1 },
+    defaultViewport: { width: W, height: H, deviceScaleFactor: DSF },
   });
 
   // ── CARTONS ────────────────────────────────────────────────────────────────
@@ -158,7 +163,7 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
   ].filter(([n]) => aTourner(n));
 
   const carton = await browser.newPage();
-  await carton.setViewport({ width: W, height: H });
+  await carton.setViewport({ width: W, height: H, deviceScaleFactor: DSF });
   await carton.goto(CARTONS, { waitUntil: 'networkidle0' });
   await carton.evaluate(() => document.fonts.ready);
   await sleep(600);
@@ -172,7 +177,7 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
 
   // ── ÉCRANS CÔTÉ VENDEUR ────────────────────────────────────────────────────
   const app = await browser.newPage();
-  await app.setViewport({ width: W, height: H });
+  await app.setViewport({ width: W, height: H, deviceScaleFactor: DSF });
   await login(app, CLIENT);
 
   // Tableau de bord : on descend doucement sur les KPI puis le graphique
@@ -317,7 +322,7 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
   // ── PORTAIL ACHETEUR ───────────────────────────────────────────────────────
   const ctx = await browser.createBrowserContext();
   const portail = await ctx.newPage();
-  await portail.setViewport({ width: W, height: H });
+  await portail.setViewport({ width: W, height: H, deviceScaleFactor: DSF });
   await login(portail, ACHETEUR);
   await portail.goto(`${FRONT}/portail`, { waitUntil: 'domcontentloaded' });
   await attendreDonnees(portail);
@@ -340,7 +345,7 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
   // Un navigateur n'ouvre pas un .xlsx : on relit les VRAIS fichiers exportés par
   // l'application (cf. excel-en-html.js) et on filme leur contenu, à l'identique.
   const xls = await browser.newPage();
-  await xls.setViewport({ width: W, height: H });
+  await xls.setViewport({ width: W, height: H, deviceScaleFactor: DSF });
   // ⛔ '16-excel-fiche' (fiche-technique-exemple) est RETIRÉ — D5 : le fichier
   //    source est faux (5 ingrédients sur 9 à 0 DT) et a été supprimé du dépôt.
   //    Ne pas le remettre sans avoir d'abord valorisé les articles manquants

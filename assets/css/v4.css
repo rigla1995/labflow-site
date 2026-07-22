@@ -241,7 +241,7 @@ h1 .clair{
 .ecran-barre i:first-child{background:rgba(255,255,255,.26)}
 .ecran-barre span{margin-left:12px;font-size:12px;color:var(--gris-fonce);letter-spacing:.3px}
 .ecran-visu{position:relative;display:block;background:#fff}
-.ecran-visu img{width:100%;display:block;filter:saturate(1.06) brightness(1.02)}
+.ecran-visu img{width:100%;height:auto;display:block;filter:saturate(1.05) contrast(1.03)}
 .fondu-bas img{
   -webkit-mask-image:linear-gradient(180deg,#000 76%,rgba(0,0,0,.5) 92%,transparent 100%);
   mask-image:linear-gradient(180deg,#000 76%,rgba(0,0,0,.5) 92%,transparent 100%);
@@ -310,6 +310,8 @@ h2{font-size:clamp(28px,4vw,45px);line-height:1.1;font-weight:600;letter-spacing
 /* ── Écran complet, sans zoom : l'image se voit ENTIÈRE (width:100%, height auto).
    Aucun --z, aucun transform:scale, aucun object-fit recadrant. ── */
 .ecran-plein{position:relative;max-width:940px;margin-inline:auto;z-index:2}
+/* Variante contenue : cadre moins imposant (l'image @1x 780px s'affiche en 1:1) */
+.ecran-plein.taille-m{max-width:782px}
 .ecran-plein .lueur{width:82%;height:72%;top:8%;left:9%;background:var(--grad);opacity:.5;filter:blur(90px)}
 .ecran-plein .ecran{margin-inline:auto}
 /* Légende générale sous un écran */

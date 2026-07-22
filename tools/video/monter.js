@@ -20,7 +20,10 @@ const ffmpeg = require('ffmpeg-static');
 const SEQ = path.join(__dirname, 'seq');
 const NORM = path.join(SEQ, 'norm');
 const OUT = path.join(__dirname, '..', '..', 'assets', 'video');
-const W = 1440, H = 810, FPS = 30;
+// Chaîne suréchantillonnée : séquences tournées en 2880×1620 (tourner.js, DSF 2),
+// normalisées/assemblées à cette résolution, puis UNE SEULE descente de qualité
+// à l'encodage final (démo 1920×1080, hero 1880 px) → texte net.
+const W = 2880, H = 1620, FPS = 30;
 const FONDU = 0.45; // durée d'un fondu enchaîné, en secondes
 
 // Ordre de montage. `carton: true` = plan fixe → léger zoom avant.
@@ -111,20 +114,19 @@ const duree = (f) => {
   const totale = cumul;
   console.log(`\n⏱  Durée finale : ${totale.toFixed(1)} s`);
 
-  // 1280×720 et CRF 29 : Cloudflare met le fichier en cache et NE répond PAS aux
-  // requêtes partielles (pas de 206), donc le navigateur doit tout télécharger
-  // avant de pouvoir se déplacer dans la vidéo — chaque mégaoctet économisé rend
-  // ce déplacement utilisable plus tôt. La lisibilité reste bonne à cette taille.
+  // 1920×1080 CRF 27 depuis une source ×2 : lisibilité « 4K-clean » dans le
+  // lecteur (~940 px), pour un poids qui reste téléchargeable d'un trait
+  // (Cloudflare ne répond pas aux requêtes partielles — pas de 206).
   const mp4 = path.join(OUT, 'demo-60s.mp4');
-  ff(['-y', ...entrees, '-filter_complex', `${filtre};[v]scale=1280:720[vs]`, '-map', '[vs]',
-    '-c:v', 'libx264', '-preset', 'veryslow', '-crf', '29', '-pix_fmt', 'yuv420p',
+  ff(['-y', ...entrees, '-filter_complex', `${filtre};[v]scale=1920:1080[vs]`, '-map', '[vs]',
+    '-c:v', 'libx264', '-preset', 'veryslow', '-crf', '27', '-pix_fmt', 'yuv420p',
     '-movflags', '+faststart', '-an', mp4]);
   console.log(`🎞  demo-60s.mp4 — ${Math.round(fs.statSync(mp4).size / 1024)} Ko`);
 
   // WebM VP9 : plus léger, servi en premier aux navigateurs qui le gèrent
   const webm = path.join(OUT, 'demo-60s.webm');
-  ff(['-y', '-i', mp4, '-c:v', 'libvpx-vp9', '-crf', '40', '-b:v', '0',
-    '-row-mt', '1', '-cpu-used', '1', '-an', webm]);
+  ff(['-y', '-i', mp4, '-c:v', 'libvpx-vp9', '-crf', '38', '-b:v', '0',
+    '-row-mt', '1', '-cpu-used', '2', '-an', webm]);
   console.log(`🎞  demo-60s.webm — ${Math.round(fs.statSync(webm).size / 1024)} Ko`);
 
   // ── Extrait pour le HERO du site ───────────────────────────────────────────
@@ -135,14 +137,14 @@ const duree = (f) => {
   const heroSrc = HERO.map((f) => path.join(NORM, f + '.mp4')).filter((f) => fs.existsSync(f));
   const heroFiltre = heroSrc.map((_, i) => `[${i}:v]trim=start=1:end=5,setpts=PTS-STARTPTS[h${i}]`).join(';')
     + ';' + heroSrc.map((_, i) => `[h${i}]`).join('') + `concat=n=${heroSrc.length}:v=1:a=0[hv]`;
-  // 1100 px de large suffisent : la vidéo n'est jamais affichée plus grande dans
-  // le hero, et chaque kilo compte sur une connexion mobile.
+  // 1880 px = 2× la largeur d'affichage du hero (~940 px) : rendu Retina parfait,
+  // et le clip reste court (12 s) donc le poids reste raisonnable.
   const heroMp4 = path.join(OUT, 'demo-hero.mp4');
-  ff(['-y', ...heroSrc.flatMap((f) => ['-i', f]), '-filter_complex', `${heroFiltre};[hv]scale=1100:-2[hs]`, '-map', '[hs]',
-    '-c:v', 'libx264', '-preset', 'veryslow', '-crf', '32', '-pix_fmt', 'yuv420p',
+  ff(['-y', ...heroSrc.flatMap((f) => ['-i', f]), '-filter_complex', `${heroFiltre};[hv]scale=1880:-2[hs]`, '-map', '[hs]',
+    '-c:v', 'libx264', '-preset', 'veryslow', '-crf', '28', '-pix_fmt', 'yuv420p',
     '-movflags', '+faststart', '-an', heroMp4]);
   const heroWebm = path.join(OUT, 'demo-hero.webm');
-  ff(['-y', '-i', heroMp4, '-c:v', 'libvpx-vp9', '-crf', '45', '-b:v', '0', '-row-mt', '1', '-cpu-used', '1', '-an', heroWebm]);
+  ff(['-y', '-i', heroMp4, '-c:v', 'libvpx-vp9', '-crf', '42', '-b:v', '0', '-row-mt', '1', '-cpu-used', '2', '-an', heroWebm]);
   console.log(`🎞  demo-hero.mp4 — ${Math.round(fs.statSync(heroMp4).size / 1024)} Ko · .webm — ${Math.round(fs.statSync(heroWebm).size / 1024)} Ko`);
 
   // Image d'attente du hero : la PREMIÈRE image de l'extrait, pour qu'aucun saut
