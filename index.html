@@ -15,12 +15,12 @@
 <link rel="canonical" href="https://labflow-tn.com/">
 <link rel="preload" as="image" href="assets/video/demo-hero-poster.webp?v=6" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/v4.css?v=6">
+<link rel="stylesheet" href="assets/css/v4.css?v=7">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 </head>
-<body>
+<body class="avec-annonce">
 
 <a class="saut-contenu" href="#top">Aller au contenu</a>
 
@@ -54,6 +54,18 @@
   </defs>
 </svg>
 
+<!-- ══ ANNONCE : premier mois offert ══
+     Barre en haut de page, NON fixe (elle défile) : la nav prend le relais dès
+     que .colle s'applique. La promo est réelle et systématique côté app
+     (mensualité du mois de création à 0 DT, verrouillée) — aucune date limite
+     à afficher. Texte blanc sur --grad-btn : AA vérifié par tools/contraste.js. -->
+<a class="annonce" href="demande-acces.html">
+  <span aria-hidden="true">🎁</span>
+  <b>Votre premier mois est offert</b>
+  <span class="annonce-suite">— demandez votre accès</span>
+  <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg>
+</a>
+
 <!-- ══ NAVIGATION ══ -->
 <nav class="nav" id="nav">
   <div class="container nav-in">
@@ -65,8 +77,9 @@
       <a href="#suivre">Ce que ça suit</a>
       <a href="#recette">Prix de revient</a>
       <a href="#pros">Clients pros</a>
+      <a href="#circuit">Tout LabFlow</a>
       <a href="#migration">Migration</a>
-      <a href="#donnees">Vos données</a>
+      <a href="#accompagnement">Accompagnement</a>
     </div>
     <div class="nav-droite">
       <a class="btn petit" href="demande-acces.html">Demander un accès</a>
@@ -80,8 +93,9 @@
   <a href="#suivre">Ce que ça suit</a>
   <a href="#recette">Prix de revient</a>
   <a href="#pros">Clients pros</a>
+  <a href="#circuit">Tout LabFlow</a>
   <a href="#migration">Migration</a>
-  <a href="#donnees">Vos données</a>
+  <a href="#accompagnement">Accompagnement</a>
   <a class="btn mm-cta" href="demande-acces.html">Demander un accès</a>
 </div>
 
@@ -155,9 +169,9 @@
           <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Tableau de bord</span></div>
           <div class="ecran-visu">
             <picture>
-              <source type="image/avif" srcset="assets/img/ecran-dashboard@1x.avif?v=6 1x, assets/img/ecran-dashboard@2x.avif?v=6 2x, assets/img/ecran-dashboard@3x.avif?v=6 3x">
-              <source type="image/webp" srcset="assets/img/ecran-dashboard@1x.webp?v=6 1x, assets/img/ecran-dashboard@2x.webp?v=6 2x, assets/img/ecran-dashboard@3x.webp?v=6 3x">
-              <img src="assets/img/ecran-dashboard@1x.webp?v=6"
+              <source type="image/avif" srcset="assets/img/ecran-dashboard@1x.avif?v=7 1x, assets/img/ecran-dashboard@2x.avif?v=7 2x, assets/img/ecran-dashboard@3x.avif?v=7 3x, assets/img/ecran-dashboard@4x.avif?v=7 4x">
+              <source type="image/webp" srcset="assets/img/ecran-dashboard@1x.webp?v=7 1x, assets/img/ecran-dashboard@2x.webp?v=7 2x, assets/img/ecran-dashboard@3x.webp?v=7 3x, assets/img/ecran-dashboard@4x.webp?v=7 4x">
+              <img src="assets/img/ecran-dashboard@1x.webp?v=7"
                    alt="Tableau de bord LabFlow : chiffre d'affaires, marge brute, food cost, pertes, valeur du stock et ventes aux professionnels réunis sur un seul écran. Compte de démonstration Dar Yasmine."
                    loading="lazy" width="780" height="687">
             </picture>
@@ -191,9 +205,9 @@
           <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Fiche technique · Mille-feuille</span></div>
           <div class="ecran-visu">
             <picture>
-              <source type="image/avif" srcset="assets/img/ecran-ft@1x.avif?v=6 1x, assets/img/ecran-ft@2x.avif?v=6 2x">
-              <source type="image/webp" srcset="assets/img/ecran-ft@1x.webp?v=6 1x, assets/img/ecran-ft@2x.webp?v=6 2x">
-              <img src="assets/img/ecran-ft@1x.webp?v=6"
+              <source type="image/avif" srcset="assets/img/ecran-ft@1x.avif?v=7 1x, assets/img/ecran-ft@2x.avif?v=7 2x, assets/img/ecran-ft@3x.avif?v=7 3x">
+              <source type="image/webp" srcset="assets/img/ecran-ft@1x.webp?v=7 1x, assets/img/ecran-ft@2x.webp?v=7 2x, assets/img/ecran-ft@3x.webp?v=7 3x">
+              <img src="assets/img/ecran-ft@1x.webp?v=7"
                    alt="Fiche technique du mille-feuille en mode FT Stock : composition avec sous-recettes (pâte feuilletée, crème pâtissière), prix issus des approvisionnements, méthode Dernier Prix ou PMP, et coût en temps réel calculé — 1,494 DT. Compte de démonstration Dar Yasmine."
                    loading="lazy" width="900" height="1143">
             </picture>
@@ -204,34 +218,54 @@
   </div>
 </section>
 
-<!-- ══ 4 · CLIENTS PROS ══ -->
+<!-- ══ 4 · CLIENTS PROS + FACTURATION (blocs fusionnés 2026-07-24) ══
+     Un seul récit : la commande arrive par le portail, la facture (TVA,
+     numérotation, timbre fiscal) sort prête. Visuel composé : l'écran des
+     commandes + la facture PDF en carte superposée. -->
 <section id="pros" class="sombre-2">
   <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
   <div class="container duo inverse">
     <div class="duo-texte reveal d1">
-      <span class="oeil">Vente aux professionnels — <b>portail</b></span>
-      <h2>Vos clients pros<br>commandent seuls.</h2>
-      <p>Chaque client professionnel a son espace, à ses tarifs. Il commande quand
-         il veut, sans vous appeler. Vous suivez chaque commande, de la réception à la livraison.</p>
+      <span class="oeil">Clients pros — <b>du portail à la facture</b></span>
+      <h2>Vos clients pros commandent.<br>La facture suit, toute seule.</h2>
+      <p>Chaque client professionnel a son espace, à ses tarifs. Il commande quand il veut,
+         sans vous appeler ; vous suivez la commande jusqu'à la livraison — et la facture
+         sort prête, aux normes tunisiennes.</p>
       <ul class="liste">
         <li><i aria-hidden="true"></i>Reçue → préparée → expédiée → livrée</li>
         <li><i aria-hidden="true"></i>Chaque client voit ses propres tarifs</li>
-        <li><i aria-hidden="true"></i>La facture part avec la commande</li>
+        <li><i aria-hidden="true"></i>TVA, numérotation, timbre fiscal — rien à recompter</li>
       </ul>
       <a class="btn" href="demande-acces.html">Demander un accès</a>
     </div>
-    <div class="cadre-visu duo-visu reveal">
+    <div class="cadre-visu duo-visu compo reveal">
       <div class="lueur" aria-hidden="true"></div>
       <div class="ecran compact">
         <div class="ecran-in">
           <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Ventes acheteurs · commande livrée</span></div>
           <div class="ecran-visu">
             <picture>
-              <source type="image/avif" srcset="assets/img/ecran-commandes@1x.avif?v=6 1x, assets/img/ecran-commandes@2x.avif?v=6 2x">
-              <source type="image/webp" srcset="assets/img/ecran-commandes@1x.webp?v=6 1x, assets/img/ecran-commandes@2x.webp?v=6 2x">
-              <img src="assets/img/ecran-commandes@1x.webp?v=6"
+              <source type="image/avif" srcset="assets/img/ecran-commandes@1x.avif?v=7 1x, assets/img/ecran-commandes@2x.avif?v=7 2x, assets/img/ecran-commandes@3x.avif?v=7 3x, assets/img/ecran-commandes@4x.avif?v=7 4x">
+              <source type="image/webp" srcset="assets/img/ecran-commandes@1x.webp?v=7 1x, assets/img/ecran-commandes@2x.webp?v=7 2x, assets/img/ecran-commandes@3x.webp?v=7 3x, assets/img/ecran-commandes@4x.webp?v=7 4x">
+              <img src="assets/img/ecran-commandes@1x.webp?v=7"
                    alt="Écran Ventes Acheteurs de LabFlow avec le détail d'une commande livrée ouvert par-dessus la liste : lignes commandées, facture FA-2026-0002 avec timbre fiscal (TTC 451,470 DT) et suivi de la commande accompli en trois étapes — en attente, expédiée, livrée. Compte de démonstration Dar Yasmine."
                    loading="lazy" width="900" height="736">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <!-- La facture PDF, posée par-dessus le coin de l'écran : le duo
+           « commande → facture » se lit d'un seul regard. -->
+      <div class="ecran compo-doc" aria-hidden="false">
+        <div class="ecran-in">
+          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Facture PDF</span></div>
+          <div class="ecran-visu">
+            <picture>
+              <source type="image/avif" srcset="assets/img/ecran-facture@1x.avif?v=7 1x, assets/img/ecran-facture@2x.avif?v=7 2x, assets/img/ecran-facture@3x.avif?v=7 3x, assets/img/ecran-facture@4x.avif?v=7 4x">
+              <source type="image/webp" srcset="assets/img/ecran-facture@1x.webp?v=7 1x, assets/img/ecran-facture@2x.webp?v=7 2x, assets/img/ecran-facture@3x.webp?v=7 3x, assets/img/ecran-facture@4x.webp?v=7 4x">
+              <img src="assets/img/ecran-facture@1x.webp?v=7"
+                   alt="Facture PDF LabFlow : émetteur Dar Yasmine, client, détail des lignes, Total HT, TVA, timbre fiscal 1,000 DT et Net à payer 256,088 DT. Compte de démonstration Dar Yasmine."
+                   loading="lazy" width="470" height="412">
             </picture>
           </div>
         </div>
@@ -240,65 +274,93 @@
   </div>
 </section>
 
-<!-- ══ 5 · FACTURES ══ -->
-<section id="factures">
+<!-- ══ 5 · LE CIRCUIT COMPLET (remplace « qui voit quoi », 2026-07-24) ══
+     Objectif : montrer la GLOBALITÉ des fonctionnalités d'un seul regard.
+     Pas de captures ici : les pictos sont ceux des interfaces de l'application
+     (mêmes emojis que la sidebar de l'app — reconnaissables une fois client). -->
+<section id="circuit">
   <div class="container">
-    <div class="facture">
-      <div class="chapeau centre reveal">
-        <span class="oeil">Facturation — <b>aux normes tunisiennes</b></span>
-        <h2>La facture part.<br>Le timbre est déjà dessus.</h2>
-        <p>TVA calculée, numérotation à la suite, timbre fiscal posé : la facture sort
-           prête pour votre client et pour votre comptable. Rien à recompter à la main.</p>
-      </div>
-      <div class="ecran-doc reveal d1">
-        <div class="lueur" aria-hidden="true"></div>
-        <div class="ecran">
-          <div class="ecran-in">
-            <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Facture PDF</span></div>
-            <div class="ecran-visu">
-              <picture>
-                <source type="image/avif" srcset="assets/img/ecran-facture@1x.avif?v=6 1x, assets/img/ecran-facture@2x.avif?v=6 2x, assets/img/ecran-facture@3x.avif?v=6 3x">
-                <source type="image/webp" srcset="assets/img/ecran-facture@1x.webp?v=6 1x, assets/img/ecran-facture@2x.webp?v=6 2x, assets/img/ecran-facture@3x.webp?v=6 3x">
-                <img src="assets/img/ecran-facture@1x.webp?v=6"
-                     alt="Facture PDF LabFlow : émetteur Dar Yasmine, client, détail des lignes, Total HT, TVA, timbre fiscal 1,000 DT et Net à payer 256,088 DT. Compte de démonstration Dar Yasmine."
-                     loading="lazy" width="470" height="412">
-              </picture>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="legende reveal d1">Le total HT, la TVA, le timbre fiscal et le total TTC — sur chaque facture. Compte de démonstration Dar Yasmine.</p>
+    <div class="chapeau centre reveal">
+      <span class="oeil">Vue d'ensemble — <b>tout est relié</b></span>
+      <h2>Un seul système,<br>du fournisseur à la marge.</h2>
+      <p>Chaque module alimente le suivant — les icônes sont celles de l'application.
+         Vous saisissez une fois&nbsp;; LabFlow relie tout, jusqu'au tableau de bord.</p>
     </div>
+    <ol class="flux reveal d1">
+      <li class="flux-etape"><span class="picto" aria-hidden="true">📚</span><b class="flux-nom">Référentiel</b><span class="flux-det">Articles, unités, catégories, familles</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">📦</span><b class="flux-nom">Stock &amp; achats</b><span class="flux-det">Approvisionnements, valeur du stock</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">🍔</span><b class="flux-nom">Recettes &amp; production</b><span class="flux-det">Fiches techniques, coûts réels</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">🛒</span><b class="flux-nom">Ventes</b><span class="flux-det">Comptoir et prestataires de livraison</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">🤝</span><b class="flux-nom">Clients pros</b><span class="flux-det">Portail, commandes, factures</span></li>
+      <li class="flux-etape flux-fin"><span class="picto" aria-hidden="true">📊</span><b class="flux-nom">Marges</b><span class="flux-det">Le tableau de bord conclut</span></li>
+    </ol>
+    <p class="flux-plus reveal d2">
+      <span class="flux-plus-titre">Et tout autour&nbsp;:</span>
+      <span class="puce-module"><span aria-hidden="true">🚚</span> Fournisseurs</span>
+      <span class="puce-module"><span aria-hidden="true">🏭</span> Labo &amp; transferts</span>
+      <span class="puce-module"><span aria-hidden="true">🔢</span> Inventaires</span>
+      <span class="puce-module"><span aria-hidden="true">📉</span> Pertes</span>
+      <span class="puce-module"><span aria-hidden="true">👥</span> Accès gérants</span>
+      <span class="puce-module"><span aria-hidden="true">🧾</span> Factures d'achat</span>
+    </p>
+    <p class="cloison-note reveal d2">Vos chiffres restent à vous — exportables en Excel à tout moment.</p>
   </div>
 </section>
 
-<!-- ══ 6 · MIGRATION — DÉMARRAGE RAPIDE ══ -->
+<!-- ══ 6 · MIGRATION — DÉMARRAGE RAPIDE (enrichi 2026-07-24 : les 3 modèles) ══
+     Colonnes et plafonds RELEVÉS DANS LE CODE (règle de véracité) :
+     articles = Article/Unité/Catégorie/Famille, 1 000 lignes (referentielController) ·
+     fournisseurs = Nom/Téléphone/Adresse, 500 (fournisseurController) ·
+     acheteurs = Nom/Entreprise/Email/Téléphone/Adresse/Matricule fiscal, 500
+     (acheteursController). Ne pas embellir sans re-vérifier. -->
 <section id="migration" class="sombre-2">
   <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
-  <div class="container duo">
-    <div class="duo-texte reveal">
+  <div class="container">
+    <div class="chapeau centre reveal">
       <span class="oeil">Migration — <b>démarrage rapide</b></span>
-      <h2>Vous partez d'Excel&nbsp;?<br>LabFlow aussi.</h2>
-      <p>Téléchargez notre modèle Excel, remplissez vos articles — jusqu'à 1 000 en une fois.
-         LabFlow les crée d'un coup, avec leurs unités, catégories et familles, aussitôt
-         disponibles dans tous vos points de vente.</p>
-      <ul class="liste">
-        <li><i aria-hidden="true"></i>Notre modèle Excel : quatre colonnes, rien à paramétrer</li>
-        <li><i aria-hidden="true"></i>Unités, catégories et familles créées automatiquement</li>
-        <li><i aria-hidden="true"></i>Jusqu'à 1 000 articles par fichier</li>
-      </ul>
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
+      <h2>Vos fichiers Excel<br>deviennent votre compte.</h2>
+      <p>Trois modèles fournis — articles, fournisseurs, clients pros. Vous téléchargez,
+         vous remplissez, vous importez&nbsp;: LabFlow crée tout d'un coup, rien à paramétrer.</p>
     </div>
-    <div class="cadre-visu duo-visu reveal d1">
+    <div class="modeles">
+      <article class="modele reveal">
+        <div class="modele-tete">
+          <span class="picto" aria-hidden="true">🧂</span>
+          <div><h3>Articles</h3><span class="modele-limite">jusqu'à 1&nbsp;000 lignes par fichier</span></div>
+        </div>
+        <p class="modele-colonnes"><span>Article</span><span>Unité</span><span>Catégorie</span><span>Famille</span></p>
+        <p class="modele-note">Créés avec leurs unités, catégories et familles, aussitôt disponibles
+           dans tous vos points de vente.</p>
+      </article>
+      <article class="modele reveal d1">
+        <div class="modele-tete">
+          <span class="picto" aria-hidden="true">🚚</span>
+          <div><h3>Fournisseurs</h3><span class="modele-limite">jusqu'à 500 lignes par fichier</span></div>
+        </div>
+        <p class="modele-colonnes"><span>Nom</span><span>Téléphone</span><span>Adresse</span></p>
+        <p class="modele-note">Affectés d'office à vos points de vente et votre labo — les doublons
+           sont ignorés et signalés.</p>
+      </article>
+      <article class="modele reveal d2">
+        <div class="modele-tete">
+          <span class="picto" aria-hidden="true">🤝</span>
+          <div><h3>Clients pros</h3><span class="modele-limite">jusqu'à 500 lignes par fichier</span></div>
+        </div>
+        <p class="modele-colonnes"><span>Nom</span><span>Entreprise</span><span>Email</span><span>Téléphone</span><span>Adresse</span><span>Matricule fiscal</span></p>
+        <p class="modele-note">Votre carnet d'acheteurs constitué en une fois — il ne reste
+           qu'à les inviter sur leur portail.</p>
+      </article>
+    </div>
+    <div class="cadre-visu ecran-plein taille-m reveal d2">
       <div class="lueur" aria-hidden="true"></div>
-      <div class="ecran compact">
+      <div class="ecran">
         <div class="ecran-in">
           <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Ajout dynamique</span></div>
           <div class="ecran-visu">
             <picture>
-              <source type="image/avif" srcset="assets/img/ecran-import-succes@1x.avif?v=6 1x, assets/img/ecran-import-succes@2x.avif?v=6 2x">
-              <source type="image/webp" srcset="assets/img/ecran-import-succes@1x.webp?v=6 1x, assets/img/ecran-import-succes@2x.webp?v=6 2x">
-              <img src="assets/img/ecran-import-succes@1x.webp?v=6"
+              <source type="image/avif" srcset="assets/img/ecran-import-succes@1x.avif?v=7 1x, assets/img/ecran-import-succes@2x.avif?v=7 2x, assets/img/ecran-import-succes@3x.avif?v=7 3x, assets/img/ecran-import-succes@4x.avif?v=7 4x">
+              <source type="image/webp" srcset="assets/img/ecran-import-succes@1x.webp?v=7 1x, assets/img/ecran-import-succes@2x.webp?v=7 2x, assets/img/ecran-import-succes@3x.webp?v=7 3x, assets/img/ecran-import-succes@4x.webp?v=7 4x">
+              <img src="assets/img/ecran-import-succes@1x.webp?v=7"
                    alt="Écran d'import LabFlow après un import réussi : bandeau « Import terminé — 6 lignes traitées », compteurs 6 articles, 4 catégories et 1 famille créés, et le détail ligne par ligne avec affectation automatique. Compte de démonstration Dar Yasmine."
                    loading="lazy" width="900" height="580">
             </picture>
@@ -306,36 +368,49 @@
         </div>
       </div>
     </div>
+    <p class="legende centre reveal d2">Un modèle rempli, un clic — et le résultat, ligne par ligne. Compte de démonstration Dar Yasmine.</p>
+    <div style="text-align:center;margin-top:34px" class="reveal d2">
+      <a class="btn" href="demande-acces.html">Demander un accès</a>
+    </div>
   </div>
 </section>
 
-<!-- ══ 7 · VOS DONNÉES ══ -->
-<section id="donnees" class="sombre-2">
-  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
+<!-- ══ 7 · ACCOMPAGNEMENT (nouveau 2026-07-24) ══
+     Trois appuis réels — pas de promesse de délai (règle de véracité : jamais
+     de « réponse sous 24 h ») : l'équipe (pas de self-service, un conseiller
+     rappelle, WhatsApp réel), le manuel (bouton d'aide sur chaque page + PDF),
+     l'assistant IA du header de l'app (appuyé sur le manuel). -->
+<section id="accompagnement">
   <div class="container">
     <div class="chapeau centre reveal">
-      <span class="oeil">Vos données — <b>qui voit quoi</b></span>
-      <h2>Trois personnes, un système.<br>Chacune voit ce qui la regarde.</h2>
-      <p>Vos chiffres sont à vous. Vous décidez qui accède à quoi — et personne ne voit ce que vous ne montrez pas.</p>
+      <span class="oeil">Accompagnement — <b>vous n'êtes jamais seul</b></span>
+      <h2>Une équipe, un manuel,<br>un assistant. Les trois vous suivent.</h2>
+      <p>LabFlow ne vous laisse pas seul devant un logiciel&nbsp;: on vous installe,
+         on vous guide, et l'aide vit dans l'application.</p>
     </div>
     <div class="trois">
       <article class="regard moi reveal">
-        <span class="tag">Vous</span>
-        <h3>Tout votre compte</h3>
-        <p>Vos points de vente, votre labo, vos achats, vos marges. Vous seul créez les accès des autres.</p>
+        <span class="picto" aria-hidden="true">👥</span>
+        <span class="tag">Notre équipe</span>
+        <h3>Une mise en route accompagnée</h3>
+        <p>Votre compte est préparé avec vous&nbsp;: un conseiller vous rappelle, met
+           l'essentiel en place et reste joignable sur WhatsApp.</p>
       </article>
       <article class="regard reveal d1">
-        <span class="tag">Votre gérant</span>
-        <h3>Ce que vous lui confiez</h3>
-        <p>Le point de vente ou le labo que vous lui ouvrez, et rien d'autre. Il saisit sans voir le reste.</p>
+        <span class="picto" aria-hidden="true">📖</span>
+        <span class="tag">Le manuel</span>
+        <h3>Chaque écran a sa fiche</h3>
+        <p>Un bouton d'aide sur chaque page ouvre la fiche du manuel qui lui correspond —
+           et le manuel complet se télécharge en PDF.</p>
       </article>
       <article class="regard reveal d2">
-        <span class="tag">Votre client pro</span>
-        <h3>Ses commandes, ses tarifs</h3>
-        <p>Ses commandes et ses prix à lui. Jamais vos stocks, jamais les tarifs d'un autre client.</p>
+        <span class="picto" aria-hidden="true">🤖</span>
+        <span class="tag">Assistant IA</span>
+        <h3>Des réponses dans l'application</h3>
+        <p>Un assistant intégré à la barre de l'application répond à vos questions
+           d'usage, appuyé sur le manuel LabFlow.</p>
       </article>
     </div>
-    <p class="cloison-note reveal d2">Et vos données restent exportables en Excel quand vous voulez — elles vous appartiennent.</p>
     <!-- Carrousel de partenaires : masqué tant que GET /api/public/partenaires
          ne renvoie rien. Contrat inchangé. -->
     <div class="partenaires reveal d2" id="partenaires" hidden role="group" aria-label="Ils utilisent LabFlow">
@@ -355,6 +430,7 @@
       <h2>Le prochain chiffre que<br>vous regarderez sera le vôtre.</h2>
       <p>Racontez-nous votre commerce. Un conseiller vous rappelle, vous montre LabFlow
          sur vos propres chiffres, et vous repartez avec un compte prêt à l'emploi.</p>
+      <p class="offre-finale"><span aria-hidden="true">🎁</span> <b>Votre premier mois est offert.</b></p>
       <div class="final-ctas">
         <a class="btn" href="demande-acces.html">Demander un accès<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
         <a class="btn-fantome" href="https://wa.me/21654183189?text=Bonjour%2C%20je%20voudrais%20demander%20un%20acc%C3%A8s%20%C3%A0%20LabFlow." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
