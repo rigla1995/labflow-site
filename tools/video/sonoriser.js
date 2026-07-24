@@ -71,10 +71,8 @@ ff([
 ]);
 console.log(`🔊 demo-60s-son.mp4 — ${Math.round(fs.statSync(sortieMp4).size / 1024)} Ko`);
 
-const sortieWebm = path.join(OUT, 'demo-60s-son.webm');
-ff(['-y', '-i', sortieMp4, '-c:v', 'libvpx-vp9', '-crf', '36', '-b:v', '0', '-row-mt', '1',
-  '-cpu-used', '2', '-c:a', 'libopus', '-b:a', '96k', sortieWebm]);
-console.log(`🔊 demo-60s-son.webm — ${Math.round(fs.statSync(sortieWebm).size / 1024)} Ko`);
+// (WebM sonorisé retiré 2026-07-24 : le lecteur du site est MP4 seul, et le
+//  VP9 4K coûterait de longues minutes d'encodage pour un fichier inutilisé.)
 
 // Extrait court : même traitement, fondu de sortie plus rapide
 if (fs.existsSync(HERO_MUET)) {

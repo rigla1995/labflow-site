@@ -20,37 +20,31 @@ const ffmpeg = require('ffmpeg-static');
 const SEQ = path.join(__dirname, 'seq');
 const NORM = path.join(SEQ, 'norm');
 const OUT = path.join(__dirname, '..', '..', 'assets', 'video');
-// Chaîne suréchantillonnée : séquences tournées en 2880×1620 (tourner.js, DSF 2),
-// normalisées/assemblées à cette résolution, puis UNE SEULE descente de qualité
-// à l'encodage final (démo 1920×1080, hero 1880 px) → texte net.
-const W = 2880, H = 1620, FPS = 30;
+// Chaîne 4K NATIVE (2026-07-24) : séquences tournées en 3840×2160 (tourner.js,
+// DSF 8/3), normalisées/assemblées à cette résolution, encodage final en 2160p —
+// AUCUNE descente de qualité (demande client : « la vidéo démo en 4K »).
+const W = 3840, H = 2160, FPS = 30;
 const FONDU = 0.45; // durée d'un fondu enchaîné, en secondes
 
-// Ordre de montage. `carton: true` = plan fixe → léger zoom avant.
-// Chaque écran de l'application est immédiatement suivi de l'export Excel qu'il
-// produit : on voit la donnée à l'écran, puis le fichier qu'on en sort.
+// Ordre de montage (refonte 2026-07-24 : migration + accompagnement + IA).
+// `carton: true` = plan fixe → léger zoom avant.
+// ⛔ D5 — plans définitivement RETIRÉS, ne pas les remettre :
+//    '05-principe' (cascade aux valeurs fausses), '16-excel-fiche' (xlsx faux).
 const PLAN = [
   { f: '01-ouverture', carton: true },
   { f: '02-dashboard' },
   { f: '03-probleme', carton: true },
   { f: '06-stock' },               // depuis le haut de l'écran, en descendant
-  { f: '17b-excel-appro' },        // … et son export d'historique
-  // ⛔ D5 — deux plans RETIRÉS du montage, ne pas les remettre :
-  //    '05-principe'    projetait la cascade 1,904→2,290 · 1,375→1,408 ·
-  //                     67,0→66,7, dont les valeurs "après" sont fausses et ont
-  //                     été retirées de index.html ;
-  //    '16-excel-fiche' filmait fiche-technique-exemple.xlsx, fichier faux
-  //                     supprimé du dépôt.
-  //    Les séquences sources restent dans seq/ mais ne sont plus assemblées.
-  { f: '13-produits-intro', carton: true },
-  { f: '13b-produits' },           // produits vendables / transformés
-  { f: '08-fiche-technique' },
-  { f: '07-transferts-intro', carton: true },
-  { f: '15-transferts' },          // depuis le haut : filtres puis lignes valorisées
-  { f: '17-excel-transferts' },    // … et son export
+  { f: '08-fiche-technique' },     // le coût en temps réel
+  { f: '09-production' },          // les lignes AUTO qui déduisent
+  { f: '19-migration-intro', carton: true },
+  { f: '20-migration' },           // vrai import du modèle articles
   { f: '11-portail-intro', carton: true },
   { f: '12-portail' },
   { f: '10-commandes' },           // les commandes B2B viennent après le portail
+  { f: '23-accompagnement-intro', carton: true },
+  { f: '21-manuel' },              // le « ? » puis la fiche du manuel
+  { f: '22-assistant' },           // le guide IA répond en direct
   { f: '18-cloture', carton: true },
 ];
 
@@ -114,26 +108,23 @@ const duree = (f) => {
   const totale = cumul;
   console.log(`\n⏱  Durée finale : ${totale.toFixed(1)} s`);
 
-  // 1920×1080 CRF 27 depuis une source ×2 : lisibilité « 4K-clean » dans le
-  // lecteur (~940 px), pour un poids qui reste téléchargeable d'un trait
-  // (Cloudflare ne répond pas aux requêtes partielles — pas de 206).
+  // 2160p (4K) CRF 29 : le fichier reste en pleine résolution de tournage.
+  // Le lecteur du site affiche ~940 px mais le plein écran / les écrans denses
+  // profitent du 4K. Les Range (206) fonctionnent depuis le fix nginx/CF du
+  // 24/07 — le poids se télécharge par morceaux, le seek marche.
   const mp4 = path.join(OUT, 'demo-60s.mp4');
-  ff(['-y', ...entrees, '-filter_complex', `${filtre};[v]scale=1920:1080[vs]`, '-map', '[vs]',
-    '-c:v', 'libx264', '-preset', 'veryslow', '-crf', '27', '-pix_fmt', 'yuv420p',
+  ff(['-y', ...entrees, '-filter_complex', filtre, '-map', '[v]',
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '29', '-pix_fmt', 'yuv420p',
     '-movflags', '+faststart', '-an', mp4]);
-  console.log(`🎞  demo-60s.mp4 — ${Math.round(fs.statSync(mp4).size / 1024)} Ko`);
-
-  // WebM VP9 : plus léger, servi en premier aux navigateurs qui le gèrent
-  const webm = path.join(OUT, 'demo-60s.webm');
-  ff(['-y', '-i', mp4, '-c:v', 'libvpx-vp9', '-crf', '38', '-b:v', '0',
-    '-row-mt', '1', '-cpu-used', '2', '-an', webm]);
-  console.log(`🎞  demo-60s.webm — ${Math.round(fs.statSync(webm).size / 1024)} Ko`);
+  console.log(`🎞  demo-60s.mp4 (2160p) — ${Math.round(fs.statSync(mp4).size / 1024)} Ko`);
+  // (Le WebM VP9 de la démo complète n'est plus produit : le lecteur du site
+  //  est MP4 seul, et l'encodage VP9 4K coûterait très cher pour rien.)
 
   // ── Extrait pour le HERO du site ───────────────────────────────────────────
   // Uniquement des écrans de l'application, AUCUN carton de titre : la page porte
   // déjà son H1 juste à côté, un second titre dans la vidéo ferait doublon.
   // Muet, sans texte, pensé pour tourner en boucle derrière le discours.
-  const HERO = ['02-dashboard', '13b-produits', '06-stock'];
+  const HERO = ['02-dashboard', '06-stock', '12-portail'];
   const heroSrc = HERO.map((f) => path.join(NORM, f + '.mp4')).filter((f) => fs.existsSync(f));
   const heroFiltre = heroSrc.map((_, i) => `[${i}:v]trim=start=1:end=5,setpts=PTS-STARTPTS[h${i}]`).join(';')
     + ';' + heroSrc.map((_, i) => `[h${i}]`).join('') + `concat=n=${heroSrc.length}:v=1:a=0[hv]`;
