@@ -24,9 +24,10 @@ const EXCEL = (f) => 'file:///' + path.join(__dirname, 'excel', f + '.html').rep
 const LABO_ID = 55; // Cuisine centrale Dar Yasmine (seed)
 const SEQ = path.join(__dirname, 'seq');
 const W = 1440, H = 810, FPS = 30;
-// Suréchantillonnage ×2 : la page est rendue en 1440×810 CSS mais capturée en
-// 2880×1620 (deviceScaleFactor 2) — texte net après l'encodage final descendant.
-const DSF = 2, OW = W * DSF, OH = H * DSF;
+// 4K NATIF (demande client 2026-07-24) : la page est rendue en 1440×810 CSS mais
+// capturée en 3840×2160 (deviceScaleFactor 8/3 ≈ 2,667) — le texte est rasterisé
+// à cette densité, pas agrandi. L'encodage final (monter.js) reste en 2160p.
+const DSF = 8 / 3, OW = Math.round(W * DSF), OH = Math.round(H * DSF);
 
 const CLIENT = { email: 'demo@dar-yasmine.tn', password: 'DemoVitrine2026!' };
 const ACHETEUR = { email: 'm.khelil.prof+acheteur1@gmail.com', password: 'Portail2026!' };
@@ -46,6 +47,11 @@ async function filmer(page, nom, dureeMs, scenario) {
   if (scenario) await scenario();
   const reste = dureeMs - (Date.now() - t0);
   if (reste > 0) await sleep(reste);
+  // Durée EFFECTIVE : si le scénario a dépassé la fenêtre (attente d'un résultat
+  // serveur — import, réponse IA), le plan s'étend au lieu d'être tronqué au
+  // rééchantillonnage (bug vécu : « Import terminé » et la réponse du bot
+  // coupés hors champ le 24/07).
+  const dureeEffMs = Math.max(dureeMs, Date.now() - t0);
   await client.send('Page.stopScreencast');
   await sleep(150);
 
@@ -54,7 +60,7 @@ async function filmer(page, nom, dureeMs, scenario) {
   const dir = path.join(SEQ, 'tmp-' + nom);
   fs.rmSync(dir, { recursive: true, force: true });
   fs.mkdirSync(dir, { recursive: true });
-  const total = Math.round((dureeMs / 1000) * FPS);
+  const total = Math.round((dureeEffMs / 1000) * FPS);
   const base = frames.length ? frames[0].t : 0;
   let idx = 0;
   for (let i = 0; i < total; i++) {
@@ -64,7 +70,7 @@ async function filmer(page, nom, dureeMs, scenario) {
   }
   await encoder(dir, path.join(SEQ, nom + '.mp4'));
   fs.rmSync(dir, { recursive: true, force: true });
-  console.log(`🎬 ${nom} — ${(dureeMs / 1000).toFixed(1)} s (${frames.length} frames brutes → ${total})`);
+  console.log(`🎬 ${nom} — ${(dureeEffMs / 1000).toFixed(1)} s (${frames.length} frames brutes → ${total})`);
 }
 
 const encoder = (dir, out) => new Promise((res, rej) => {
@@ -152,14 +158,16 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
   });
 
   // ── CARTONS ────────────────────────────────────────────────────────────────
+  // Refonte 2026-07-24 : plans retirés du tournage (plus au montage) —
+  // 05-principe (cascade fausse, D5), 07-transferts-intro, 13-produits-intro.
+  // Nouveaux : 19-migration-intro (c9) et 23-accompagnement-intro (c10).
   const plansCartonTous = [
     ['01-ouverture', 'c1', 4500],
-    ['03-probleme', 'c2', 6000],
-    ['05-principe', 'c3', 5500],
-    ['07-transferts-intro', 'c4', 4000],   // ex-« Le système », devenu Transferts
+    ['03-probleme', 'c2', 5500],
+    ['19-migration-intro', 'c9', 4000],
     ['11-portail-intro', 'c5', 3500],
-    ['13-produits-intro', 'c8', 4000],
-    ['18-cloture', 'c6', 5500],
+    ['23-accompagnement-intro', 'c10', 4000],
+    ['18-cloture', 'c6', 6000],
   ].filter(([n]) => aTourner(n));
 
   const carton = await browser.newPage();
@@ -185,10 +193,10 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
   await app.goto(`${FRONT}/client/dashboard`, { waitUntil: 'domcontentloaded' });
   await attendreDonnees(app, '%');
   const yDash = await positionScroll(app);
-  await filmer(app, '02-dashboard', 6000, async () => {
-    await sleep(1200);
-    await defiler(app, yDash, yDash + 400, 3000);
+  await filmer(app, '02-dashboard', 7000, async () => {
     await sleep(1500);
+    await defiler(app, yDash, yDash + 400, 3200);
+    await sleep(1800);
   }); }
 
   // Stock valorisé : on ouvre la catégorie AVANT de filmer, et on démarre le plan
@@ -212,22 +220,8 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
     });
   }
 
-  // Produits vendables / transformés : le catalogue de production, avant d'ouvrir
-  // une fiche technique. On part du haut de l'écran et on descend sur les cartes.
-  if (aTourner('13b-produits')) {
-    await app.goto(`${FRONT}/client/products`, { waitUntil: 'domcontentloaded' });
-    await app.waitForFunction(() => /Produits|Vendable/i.test(document.body.innerText), { timeout: 25000 });
-    await sleep(1800);
-    await app.evaluate(`(() => { const el = ${SCROLLEUR}; if (el) el.scrollTop = 0; else window.scrollTo(0, 0); })()`);
-    await sleep(600);
-    await filmer(app, '13b-produits', 6500, async () => {
-      await sleep(1700);
-      await defiler(app, 0, 620, 3200);
-      await sleep(1400);
-    });
-  }
-
   // Fiche technique du mille-feuille : l'arbre de recette + le coût en temps réel
+  if (aTourner('08-fiche-technique')) {
   await app.goto(`${FRONT}/client/products/valorises`, { waitUntil: 'domcontentloaded' });
   await app.waitForFunction(() => /Mille-feuille/.test(document.body.innerText), { timeout: 25000 });
   await sleep(900);
@@ -258,8 +252,10 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
     });
     await sleep(3400);
   });
+  } // fin 08-fiche-technique
 
   // Production : les lignes AUTO qui déduisent les ingrédients
+  if (aTourner('09-production')) {
   await app.goto(`${FRONT}/client/labo/historique-appro?laboId=55`, { waitUntil: 'domcontentloaded' });
   await app.waitForFunction(() => /Rechercher/.test(document.body.innerText), { timeout: 25000 });
   await app.evaluate(() => {
@@ -276,37 +272,47 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
     await defiler(app, yProd, yProd + 420, 2600);
     await sleep(1300);
   });
+  } // fin 09-production
 
-  // Transferts labo → points de vente : on montre D'ABORD la barre de filtres
-  // (période, activité, article…) puis le résultat filtré. C'est le point que
-  // le client veut voir : on ne subit pas la liste, on l'interroge.
-  if (aTourner('15-transferts')) {
-    await app.goto(`${FRONT}/client/labo/historique-transferts?laboId=${LABO_ID}`, { waitUntil: 'domcontentloaded' });
-    await app.waitForFunction(() => /Rechercher|Filtres|Exporter/i.test(document.body.innerText), { timeout: 25000 });
-    await sleep(900);
-    await app.evaluate(() => {
-      const b = [...document.querySelectorAll('button')].find((x) => /Rechercher/i.test(x.textContent || ''));
-      if (b) b.click();
+  // Migration (2026-07-24) — VRAI import du modèle articles (tools/import-demo.xlsx) :
+  // la page Ajout dynamique, le fichier déposé, « Lancer l'import », puis la carte
+  // « Import terminé » avec ses compteurs. ⚠️ Mutation du compte démo : re-seeder
+  // après le tournage (scripts/seed-demo-vitrine.js côté backend).
+  if (aTourner('20-migration')) {
+    await app.goto(`${FRONT}/client/referentiel/import`, { waitUntil: 'domcontentloaded' });
+    await app.waitForSelector('input[type="file"]', { timeout: 25000 });
+    await sleep(1200);
+    await filmer(app, '20-migration', 9500, async () => {
+      await sleep(2000);                      // la page : modèle à télécharger, consignes
+      const fi = await app.$('input[type="file"]');
+      await fi.uploadFile(path.join(__dirname, '..', 'import-demo.xlsx'));
+      await sleep(1300);
+      await app.evaluate(() => {
+        const b = [...document.querySelectorAll('button')].find((x) => /Lancer l'import/i.test(x.textContent || ''));
+        if (b) b.click();
+      });
+      await app.waitForFunction(() => /Import terminé/i.test(document.body.innerText), { timeout: 20000 }).catch(() => {});
+      await app.evaluate(() => {
+        const el = [...document.querySelectorAll('div,section')].find((e) => /Import terminé/i.test(e.textContent || '') && (e.textContent || '').length < 120);
+        if (el) el.scrollIntoView({ block: 'center' });
+      });
+      await sleep(2600);                      // la carte résultat : compteurs + détail
     });
-    // ⚠️ attendre les DONNÉES, pas un délai : sinon on filme « Chargement… »
-    await attendreDonnees(app);
-    // Départ en haut : titre, puis la barre de filtres, puis les lignes valorisées
-    await app.evaluate(`(() => { const el = ${SCROLLEUR}; if (el) el.scrollTop = 0; else window.scrollTo(0, 0); })()`);
-    await sleep(600);
-    await filmer(app, '15-transferts', 7500, async () => {
-      await sleep(2600);                       // on laisse lire la barre de filtres
-      await defiler(app, 0, 560, 3000);        // puis on descend sur les lignes valorisées
-      await sleep(1500);
-    });
+    console.log('⚠️ Import démo réalisé — re-seeder le compte après le tournage.');
   }
 
-  // Commandes B2B + facture fiscale avec timbre
+  // Commandes B2B + facture fiscale avec timbre.
+  // ⚠️ FINALISATION 23/07 : la table n'affiche PLUS le n° de facture (colonne
+  // TYPE à la place) — ne jamais attendre « FA-2026 » sur la LISTE (il ne vit
+  // que dans la modal détail). Le défaut sans dates montre déjà tout.
+  if (aTourner('10-commandes')) {
   await app.goto(`${FRONT}/client/acheteurs/commandes`, { waitUntil: 'domcontentloaded' });
-  await attendreDonnees(app, 'FA-2026');
+  await attendreDonnees(app);
+  await app.waitForFunction(() => /Livrée/i.test(document.body.innerText), { timeout: 25000 });
   await filmer(app, '10-commandes', 5500, async () => {
     await sleep(1100);
     await app.evaluate(() => {
-      const row = [...document.querySelectorAll('tr')].find((r) => /FA-2026-0004/.test(r.innerText || ''));
+      const row = [...document.querySelectorAll('tr')].find((r) => /Livrée/i.test(r.innerText || '') && !/Annulée/i.test(r.innerText || ''));
       const eye = row && ([...row.querySelectorAll('button')].find((b) => /👁/.test(b.textContent || '')) || row.querySelector('button'));
       if (eye) eye.click();
     });
@@ -317,9 +323,77 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
     });
     await sleep(2000);
   });
+  await app.keyboard.press('Escape').catch(() => {});
+  } // fin 10-commandes
+
+  // Manuel intégré (2026-07-24) : la page Stock avec son bouton « ? », puis la
+  // fiche du manuel correspondante (/client/guide#stock-activites — même URL que
+  // celle qu'ouvre le bouton, dans le même onglet pour rester dans le screencast).
+  if (aTourner('21-manuel')) {
+    await app.goto(`${FRONT}/client/stock`, { waitUntil: 'domcontentloaded' });
+    // pas d'attendreDonnees ici : la page Stock n'affiche AUCUN montant tant
+    // qu'une catégorie n'est pas dépliée — le sujet du plan est l'en-tête et
+    // son bouton « ? », pas les chiffres.
+    await app.waitForFunction(() => /ÉPICERIE|Stock/i.test(document.body.innerText), { timeout: 25000 });
+    await sleep(1200);
+    await app.evaluate(`(() => { const el = ${SCROLLEUR}; if (el) el.scrollTop = 0; else window.scrollTo(0, 0); })()`);
+    await sleep(600);
+    await filmer(app, '21-manuel', 8000, async () => {
+      await sleep(1800);                      // l'écran Stock, le « ? » dans son en-tête
+      await app.goto(`${FRONT}/client/guide#stock-activites`, { waitUntil: 'domcontentloaded' });
+      await app.waitForFunction(() => /manuel|guide/i.test(document.body.innerText), { timeout: 20000 }).catch(() => {});
+      await sleep(1400);
+      const yM = await positionScroll(app);
+      await defiler(app, yM, yM + 420, 2600); // on parcourt la fiche
+      await sleep(1200);
+    });
+  }
+
+  // Assistant IA (2026-07-24) : le bouton 🤖 du header ouvre le guide, on clique
+  // une question proposée, la réponse arrive en direct (moteur IA réel).
+  // ⚠️ Le bouton n'existe que si la mise en route est incomplète : le tournage
+  // de ce plan passe par le levier réversible décrit dans le déroulé (bump
+  // temporaire de abonnement_config.nb_activites) — si le bouton est absent,
+  // le plan est SAUTÉ avec un avertissement, pas d'échec du reste.
+  if (aTourner('22-assistant')) {
+    await app.goto(`${FRONT}/client/dashboard`, { waitUntil: 'domcontentloaded' });
+    await attendreDonnees(app, '%');
+    const botVisible = await app.evaluate(() => {
+      const b = [...document.querySelectorAll('header button, button')].find((x) => /🤖/.test(x.textContent || ''));
+      return !!b;
+    });
+    if (!botVisible) {
+      console.warn('⚠️ 22-assistant SAUTÉ : bouton 🤖 absent (mise en route complète ?). Appliquer le levier puis relancer `node tools/video/tourner.js 22-assistant`.');
+    } else {
+      await filmer(app, '22-assistant', 12000, async () => {
+        await sleep(1200);
+        await app.evaluate(() => {
+          const b = [...document.querySelectorAll('button')].find((x) => /🤖/.test(x.textContent || ''));
+          if (b) b.click();
+        });
+        await sleep(1600);                    // le panneau : progression + questions
+        // on clique la question la plus parlante de l'étape en cours
+        await app.evaluate(() => {
+          const chips = [...document.querySelectorAll('button')].filter((x) => /\?\s*$/.test((x.textContent || '').trim()) && (x.textContent || '').length < 90);
+          const cible = chips.find((x) => /différence|créer/i.test(x.textContent || '')) || chips[0];
+          if (cible) cible.click();
+        });
+        // la réponse (markdown formaté) arrive du moteur IA — on l'attend vraiment,
+        // SCOPÉE AU PANNEAU : « 📍 » existe aussi dans la sidebar de l'app (piège
+        // vécu : le plan se terminait sur l'indicateur de frappe).
+        await app.waitForFunction(() => {
+          const pan = [...document.querySelectorAll('div')].find((d) =>
+            /Assistant IA LabFlow/.test(d.innerText || '') && d.getBoundingClientRect().width < 460);
+          return pan && /Prochaine étape/i.test(pan.innerText || '');
+        }, { timeout: 25000 }).catch(() => {});
+        await sleep(3500);                    // on laisse lire la réponse
+      });
+    }
+  }
   await app.close();
 
   // ── PORTAIL ACHETEUR ───────────────────────────────────────────────────────
+  if (aTourner('12-portail')) {
   const ctx = await browser.createBrowserContext();
   const portail = await ctx.newPage();
   await portail.setViewport({ width: W, height: H, deviceScaleFactor: DSF });
@@ -340,33 +414,13 @@ const aTourner = (nom) => !CIBLE || nom.includes(CIBLE);
   });
   // ⚠️ la commande n'est PAS envoyée — la base de démonstration reste intacte
   await portail.close();
+  } // fin 12-portail
 
-  // ── LES EXPORTS EXCEL ──────────────────────────────────────────────────────
-  // Un navigateur n'ouvre pas un .xlsx : on relit les VRAIS fichiers exportés par
-  // l'application (cf. excel-en-html.js) et on filme leur contenu, à l'identique.
-  const xls = await browser.newPage();
-  await xls.setViewport({ width: W, height: H, deviceScaleFactor: DSF });
-  // ⛔ '16-excel-fiche' (fiche-technique-exemple) est RETIRÉ — D5 : le fichier
-  //    source est faux (5 ingrédients sur 9 à 0 DT) et a été supprimé du dépôt.
-  //    Ne pas le remettre sans avoir d'abord valorisé les articles manquants
-  //    sur le compte de démonstration. Cf. tools/video/recuperer-ft-excel.js.
-  const exports = [
-    ['17-excel-transferts', 'export-transferts-exemple', 6000],
-    ['17b-excel-appro', 'export-excel-exemple', 5500],
-  ].filter(([n]) => aTourner(n));
-  for (const [nom, fichier, duree] of exports) {
-    await xls.goto(EXCEL(fichier), { waitUntil: 'networkidle0' });
-    await sleep(500);
-    await filmer(xls, nom, duree, async () => {
-      await sleep(1500);
-      // léger défilement dans le tableau : on montre qu'il y a de la matière
-      await xls.evaluate(() => window.scrollTo({ top: 0 }));
-      const h = await xls.evaluate(() => Math.max(0, document.body.scrollHeight - window.innerHeight));
-      if (h > 20) await defiler(xls, 0, Math.min(h, 180), 1600);
-      await sleep(900);
-    });
-  }
-  await xls.close();
+  // ── LES EXPORTS EXCEL — RETIRÉS DU MONTAGE 2026-07-24 ─────────────────────
+  // (rythme : la refonte fait entrer migration + manuel + assistant IA dans les
+  // 2 minutes ; la propriété des données reste dite sur le site). Les plans
+  // 17-excel-* peuvent être re-tournés à la demande via l'outillage
+  // excel-en-html.js resté en place.
 
   await browser.close();
   const liste = fs.readdirSync(SEQ).filter((f) => f.endsWith('.mp4')).sort();

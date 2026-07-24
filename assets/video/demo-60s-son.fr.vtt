@@ -3,81 +3,87 @@ Kind: captions
 Language: fr
 
 NOTE
-Démonstration LabFlow — 1 min 19. La bande-son est une nappe musicale : la vidéo
-ne contient AUCUN commentaire parlé. Ces sous-titres restituent donc le texte
-affiché à l'écran et ce que montre chaque plan (WCAG 1.2.2 et 1.2.3).
-Repères calés sur assets/video/demo-60s-son.mp4 après recoupage
-(tools/video/recouper.js) — durée 78,80 s. Toute nouvelle coupe les invalide.
+Démonstration LabFlow — 1 min 30 (montage 2026-07-25, 89,70 s). La bande-son est
+une nappe musicale : la vidéo ne contient AUCUN commentaire parlé. Ces sous-titres
+restituent donc le texte affiché à l'écran et ce que montre chaque plan
+(WCAG 1.2.2 et 1.2.3). Repères = débuts de plans, fondus de 0,45 s déduits
+(durées de tools/video/monter.js). Toute nouvelle coupe les invalide.
 
 1
 00:00:00.000 --> 00:00:04.050
 [Musique, aucune parole]
-Tout votre labo. Un seul système.
+Tout votre commerce. Un seul système. — Le logiciel de gestion des
+métiers de bouche, conçu en Tunisie.
 
 2
-00:00:04.050 --> 00:00:09.600
-Le tableau de bord : chiffre d'affaires, marge brute,
-marge après commissions, pertes, sur la période choisie.
+00:00:04.050 --> 00:00:10.600
+Le tableau de bord Dar Yasmine (compte de démonstration) : chiffre
+d'affaires, marge brute, food cost, pertes, valeur du stock et ventes
+aux professionnels, réunis sur un seul écran.
 
 3
-00:00:09.600 --> 00:00:15.150
-« Vous savez faire. Mais savez-vous ce que ça vous rapporte ? »
-Les pertes, le coût, le stock — constatés, jamais chiffrés.
+00:00:10.600 --> 00:00:15.650
+Vous savez faire. Mais savez-vous ce que ça vous rapporte ? — Pertes
+constatées jamais chiffrées, coûts au doigt mouillé, stock sur Excel.
 
 4
-00:00:15.150 --> 00:00:21.700
-Le stock du jour, valorisé : quantité, coût HT et TTC,
-article par article, catégorie par catégorie.
+00:00:15.650 --> 00:00:22.200
+Le stock valorisé : la catégorie Épicerie ouverte, quantités et coûts
+totaux recalculés à chaque saisie, seuils et pertes à portée de clic.
 
 5
-00:00:21.700 --> 00:00:26.750
-L'historique des approvisionnements exporté en Excel :
-date, ingrédient, quantité, prix, TVA, fournisseur, référence de facture.
+00:00:22.200 --> 00:00:29.250
+La fiche technique du mille-feuille : composition avec sous-recettes,
+coût de revient calculé en temps réel sur les derniers prix d'achat.
 
 6
-00:00:26.750 --> 00:00:29.850
-De la matière première au produit vendu.
-Produits vendables, produits transformés, sous-recettes.
+00:00:29.250 --> 00:00:33.800
+L'historique du labo : les lignes AUTO — produire déduit
+automatiquement les ingrédients du stock.
 
 7
-00:00:29.850 --> 00:00:35.900
-Le catalogue des produits : chacun avec sa composition
-et son coût réel.
+00:00:33.800 --> 00:00:37.350
+Vous partez d'Excel ? LabFlow aussi. — Trois modèles fournis :
+articles, fournisseurs, clients pros.
 
 8
-00:00:35.900 --> 00:00:42.950
-La fiche technique du mille-feuille : la recette descend
-jusqu'aux sous-recettes, au choix en Dernier Prix ou en Prix Moyen Pondéré.
+00:00:37.350 --> 00:00:46.400
+L'Ajout dynamique : le modèle Excel rempli est importé — « Import
+terminé », six articles créés avec leurs catégories et familles,
+affectés automatiquement aux points de vente.
 
 9
-00:00:42.950 --> 00:00:46.050
-Chaque transfert est valorisé, tracé, facturé.
+00:00:46.400 --> 00:00:49.450
+Ils commandent seuls. Disponible 24 h/24, 7 j/7.
 
 10
-00:00:46.050 --> 00:00:53.100
-L'historique des transferts du laboratoire vers les points de vente,
-chaque ligne valorisée au coût réel.
+00:00:49.450 --> 00:00:56.000
+Le portail acheteur : chaque client professionnel voit son catalogue
+à ses tarifs, reprend sa commande habituelle et remplit son panier.
 
 11
-00:00:53.100 --> 00:00:58.650
-Le même historique exporté en Excel,
-avec le logo de l'entreprise sur le fichier.
+00:00:56.000 --> 00:01:01.050
+Les ventes acheteurs côté vendeur : le détail d'une commande livrée,
+sa facture avec timbre fiscal et le suivi en trois étapes —
+en attente, expédiée, livrée.
 
 12
-00:00:58.650 --> 00:01:01.700
-Vos clients professionnels commandent seuls, à leurs tarifs négociés.
+00:01:01.050 --> 00:01:04.600
+Vous n'êtes jamais seul. — Une équipe qui vous installe, un manuel
+sur chaque écran, un assistant IA intégré.
 
 13
-00:01:01.700 --> 00:01:08.250
-Le catalogue tel que le voit un client professionnel :
-ses tarifs à lui, ses quantités, son panier.
+00:01:04.600 --> 00:01:12.150
+Le manuel d'utilisation : chaque écran de l'application a sa fiche,
+et le manuel complet se télécharge en PDF.
 
 14
-00:01:08.250 --> 00:01:13.750
-Le suivi des ventes aux professionnels : chaque commande,
-son état, sa facture.
+00:01:12.150 --> 00:01:23.700
+L'assistant IA répond dans l'application : le guide de mise en route
+détaille pas à pas où cliquer, appuyé sur le manuel et la
+configuration réelle du compte.
 
 15
-00:01:13.750 --> 00:01:18.800
-Votre système vous attend. labflow-tn.com
-Rappel par un conseiller · Démonstration personnalisée · Compte livré prêt
+00:01:23.700 --> 00:01:29.700
+Votre système vous attend. Votre premier mois est offert. —
+Demander un accès sur labflow-tn.com.

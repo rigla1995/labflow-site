@@ -92,6 +92,12 @@
     padding: 20px 48px; border-radius: 999px; margin-top: 40px;
     box-shadow: 0 14px 40px rgba(99,102,241,0.45);
   }
+  .offre {
+    display: inline-flex; align-items: center; gap: 12px; margin-top: 34px;
+    font-family: var(--titre); font-size: 1.45rem; font-weight: 700; color: #fff;
+    background: var(--surface-nuit); border: 1px solid var(--border-nuit);
+    padding: 16px 34px; border-radius: 999px;
+  }
   .url { font-family: var(--mono); font-size: 1.35rem; color: var(--texte-nuit-2); margin-top: 30px; letter-spacing: 0.02em; }
   .reassur { display: flex; gap: 34px; justify-content: center; margin-top: 34px; color: var(--texte-nuit-2); font-size: 1.05rem; }
   .reassur span::before { content: '✓ '; color: var(--vert); font-weight: 800; }
@@ -118,10 +124,11 @@
   </defs>
 </svg>
 
-<!-- 1. OUVERTURE -->
+<!-- 1. OUVERTURE — « commerce » et pas « labo » : discours globalisé tout
+     commerce de bouche (correction explicite du client, règle de véracité). -->
 <div class="carton" id="c1">
   <svg class="losange"><use href="#lf-losange"/></svg>
-  <h1 class="xxl">Tout votre labo.<br>Un seul <span class="grad">système</span>.</h1>
+  <h1 class="xxl">Tout votre commerce.<br>Un seul <span class="grad">système</span>.</h1>
   <div class="sous">Le logiciel de gestion des métiers de bouche — conçu en Tunisie</div>
 </div>
 
@@ -194,10 +201,38 @@
   <div class="sous">Historiques, transferts, fiches techniques — filtrés comme vous voulez, prêts pour votre comptable.</div>
 </div>
 
+<!-- 9. MIGRATION (2026-07-24) — les 3 modèles d'import, mêmes libellés que la
+     section #migration du site (colonnes/plafonds vérifiés dans le backend). -->
+<div class="carton" id="c9">
+  <div class="eyebrow"><svg class="lf"><use href="#lf-losange"/></svg>Migration — démarrage rapide</div>
+  <h1 class="xl">Vous partez d'Excel&nbsp;?<br>LabFlow aussi.</h1>
+  <div class="liste">
+    <div class="item"><span class="p"></span>Articles</div>
+    <div class="item"><span class="p"></span>Fournisseurs</div>
+    <div class="item"><span class="p"></span>Clients pros</div>
+  </div>
+  <div class="sous">Trois modèles fournis — remplissez, importez&nbsp;: tout est créé d'un coup.</div>
+</div>
+
+<!-- 10. ACCOMPAGNEMENT (2026-07-24) — mêmes trois appuis que la section
+     #accompagnement du site ; aucune promesse de délai (véracité). -->
+<div class="carton" id="c10">
+  <div class="eyebrow"><svg class="lf"><use href="#lf-losange"/></svg>Accompagnement</div>
+  <h1 class="xl">Vous n'êtes<br>jamais seul.</h1>
+  <div class="liste">
+    <div class="item"><span class="p"></span>Une équipe qui vous installe</div>
+    <div class="item"><span class="p"></span>Un manuel sur chaque écran</div>
+    <div class="item"><span class="p"></span>Un assistant IA intégré</div>
+  </div>
+</div>
+
 <!-- 6. CLÔTURE -->
 <div class="carton" id="c6">
   <svg class="losange sm"><use href="#lf-losange"/></svg>
   <h1 class="xl">Votre système vous attend.</h1>
+  <!-- Offre réelle et systématique côté app (mensualité du mois de création à
+       0 DT, verrouillée) — même formulation que la barre d'annonce du site. -->
+  <div class="offre">🎁 Votre premier mois est offert</div>
   <div class="cta">Demander un accès</div>
   <div class="url">labflow-tn.com</div>
   <div class="reassur">

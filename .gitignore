@@ -12,3 +12,6 @@ assets/video/demo-60s.webm
 assets/video/demo-hero-son.mp4
 assets/video/demo-60s-son.webm
 tools/raw2/
+# pistes audio dérivées (ré-extraites de demo-60s-son.mp4 : voir refonte 25/07)
+tools/video/musique-a.m4a
+tools/video/musique-longue.m4a
