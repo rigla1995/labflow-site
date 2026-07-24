@@ -5,9 +5,14 @@
  * période), ecran-commande-detail (NOUVEAU : modal suivi/étapes), ecran-ft.
  * Ré-encode SANS recapture (source @2x existante, downscale = net) :
  * ecran-facture, ecran-import-succes.
- * Sorties : @1x = largeur d'affichage réelle (896-900 px mesurés), @2x = ×2,
- * AVIF/WebP qualité plancher relevée + légère accentuation.
+ * Sorties : @1x = largeur d'affichage réelle (896-900 px mesurés), puis ×2/×3/×4
+ * (le ×4 ≈ 3 100-3 600 px : qualité « 4K » demandée par le client, servie par
+ * srcset aux seuls écrans denses), AVIF/WebP qualité plancher relevée + légère
+ * accentuation. Le budget de poids est PROPORTIONNEL à la densité (budget × d) :
+ * un plafond unique écraserait la qualité des grandes déclinaisons.
  * Run : node tools/refresh-captures.js  (backend 3000 + frontend 5173 démarrés)
+ *       node tools/refresh-captures.js --encode-only   (ré-encode depuis tools/raw2
+ *       sans navigateur ni app : les sources ×4 déjà shootées suffisent)
  */
 const fs = require('fs');
 const path = require('path');
@@ -26,7 +31,10 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const ONLY = process.argv.includes('--only-dashboard')
   ? 'dashboard'
   : (process.argv.find((a) => a.startsWith('--only=')) || '').split('=')[1] || null;
-const veut = (k) => !ONLY || ONLY === k;
+// `--encode-only` : aucune capture (ni navigateur, ni app locale) — ré-encode
+// les déclinaisons depuis les sources ×4 déjà présentes dans tools/raw2.
+const ENCODE_ONLY = process.argv.includes('--encode-only');
+const veut = (k) => !ENCODE_ONLY && (!ONLY || ONLY === k);
 
 // Masque la chrome de l'app (sidebar + header) : le flex .layout-body étire
 // automatiquement .main-content sur toute la largeur.
@@ -113,15 +121,18 @@ const PLANS = {
   // Règle de NETTETÉ PERÇUE : la fenêtre de capture doit rester PROCHE de la
   // largeur d'affichage (texte ≥ ~50 % de sa taille réelle) — c'est l'échelle du
   // texte qui fait le « clean », pas les pixels.
-  'ecran-dashboard':       { raw: 'ecran-dashboard.png',       w1: 780, budget: 260, dens: [1, 2, 3] },
+  // Densités : jusqu'à ×4 quand la source ×4 le permet (« captures 4K », demande
+  // client 2026-07-24). ecran-ft plafonne à ×3 : sa source (crop modal) fait
+  // 2 544 px — withoutEnlargement borne, inutile de déclarer ×4.
+  'ecran-dashboard':       { raw: 'ecran-dashboard.png',       w1: 780, budget: 260, dens: [1, 2, 3, 4] },
   // Commandes : table + modal détail LIVRÉE ouverte par-dessus (fenêtre 1100).
-  'ecran-commandes':       { raw: 'ecran-commandes.png',       w1: 900, budget: 220 },
-  'ecran-ft':              { raw: 'ecran-ft.png',              w1: 900, budget: 200 },
+  'ecran-commandes':       { raw: 'ecran-commandes.png',       w1: 900, budget: 220, dens: [1, 2, 3, 4] },
+  'ecran-ft':              { raw: 'ecran-ft.png',              w1: 900, budget: 200, dens: [1, 2, 3] },
   // Facture : rendu pdf.js recadré sur l'essentiel (en-tête → NET À PAYER) —
   // texte ~40 % plus grand qu'en A4 entière ; qualité relevée (texte fin dense).
-  'ecran-facture':         { raw: 'ecran-facture.png',         w1: 470, budget: 220, dens: [1, 2, 3], qual: { avif: 68, webp: 84 } },
+  'ecran-facture':         { raw: 'ecran-facture.png',         w1: 470, budget: 220, dens: [1, 2, 3, 4], qual: { avif: 68, webp: 84 } },
   // Import : fenêtre 1020 + crop sur la carte « Import terminé » (texte lisible).
-  'ecran-import-succes':   { raw: 'ecran-import-succes.png',   w1: 900, budget: 220 },
+  'ecran-import-succes':   { raw: 'ecran-import-succes.png',   w1: 900, budget: 220, dens: [1, 2, 3, 4] },
 };
 
 async function encode(input, outPath, format, width, budgetKo, qual = null) {
@@ -159,11 +170,13 @@ async function encodeAll() {
     const input = fs.readFileSync(srcPath);
     const meta = await sharp(input).metadata();
     const w1 = Math.min(p.w1, meta.width);
-    const pairs = (p.dens || [1, 2]).map((d) => [`@${d}x`, Math.min(w1 * d, meta.width)]);
-    for (const [suffix, w] of pairs) {
+    const pairs = (p.dens || [1, 2]).map((d) => [`@${d}x`, Math.min(w1 * d, meta.width), d]);
+    for (const [suffix, w, d] of pairs) {
       for (const fmt of ['avif', 'webp']) {
         const out = path.join(OUT, `${name}${suffix}.${fmt}`);
-        const { ko, quality } = await encode(input, out, fmt, w, p.budget, p.qual);
+        // budget × densité : à budget constant, les grandes déclinaisons
+        // finiraient à q40 — le contraire du « 4K propre » recherché.
+        const { ko, quality } = await encode(input, out, fmt, w, p.budget * d, p.qual);
         total += ko;
         console.log(`🖼  ${name}${suffix}.${fmt} — ${w}px, q${quality}, ${ko} Ko`);
       }
@@ -176,6 +189,12 @@ async function encodeAll() {
 
 (async () => {
   fs.mkdirSync(RAW, { recursive: true });
+
+  if (ENCODE_ONLY) {
+    console.log('— Encodage seul (sources tools/raw2, aucune capture) —');
+    await encodeAll();
+    return;
+  }
 
   const browser = await puppeteer.launch({
     headless: true,

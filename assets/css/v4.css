@@ -30,6 +30,12 @@
      19. Contenu long sobre (pages légales, merci)
      20. Responsive
      21. Préférence « animations réduites »
+     22. Annonce « premier mois offert » (index seul, body.avec-annonce)
+     23. Pictos des interfaces de l'app (tuiles emoji partagées)
+     24. Compo clients pros (facture superposée à l'écran commandes)
+     25. Flux « le circuit complet » (remplace les trois regards de l'accueil)
+     26. Modèles d'import (migration : articles / fournisseurs / clients pros)
+     27. Accompagnement + offre finale
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════ 0 · POLICE ══════════════ */
@@ -99,7 +105,7 @@ body::after{
 /* ══════════════ 4 · NAVIGATION ══════════════ */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  transition:background .35s var(--ease),border-color .35s var(--ease),backdrop-filter .35s;
+  transition:background .35s var(--ease),border-color .35s var(--ease),backdrop-filter .35s,top .35s var(--ease);
   border-bottom:1px solid transparent;
 }
 .nav.colle{
@@ -540,6 +546,138 @@ input.champ,select.champ,textarea.champ,
 @media (max-width:420px){
   h1{font-size:36px}
   .pastille{font-size:11.5px;letter-spacing:.3px}
+}
+
+/* ══════════════ 22 · ANNONCE « PREMIER MOIS OFFERT » ══════════════ */
+/* Barre au sommet de l'index (body.avec-annonce), NON fixe : elle défile avec
+   la page et la nav (top décalé tant qu'on est en haut) reprend le sommet dès
+   .colle. Texte blanc sur --grad-btn : AA tenu à chaque arrêt (contraste.js). */
+.annonce{
+  position:absolute;top:0;left:0;right:0;z-index:80;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  height:42px;padding-inline:16px;
+  font-size:13.5px;letter-spacing:.2px;color:#fff;
+  background:var(--grad-btn);
+  transition:filter .25s;
+}
+.annonce:hover{filter:saturate(1.12) brightness(1.06)}
+.annonce b{font-weight:700}
+.annonce .annonce-suite{color:rgba(255,255,255,.88);font-weight:400}
+.annonce svg{width:14px;height:14px;flex:0 0 auto}
+body.avec-annonce .nav{top:42px}
+body.avec-annonce .nav.colle{top:0}
+body.avec-annonce .hero{padding-top:192px}
+
+/* ══════════════ 23 · PICTOS DES INTERFACES ══════════════ */
+/* Les emojis sont CEUX de la sidebar de l'application (📚 Référentiel, 📦 Stock,
+   🍔 Produits, 🛒 Vente, 🤝 Acheteurs, 📊 Dashboard, 📖 Manuel, 🤖 Assistant…) :
+   un client retrouve dans l'app exactement ce que la vitrine lui a montré. */
+.picto{
+  display:grid;place-items:center;flex:0 0 auto;
+  width:46px;height:46px;border-radius:14px;
+  font-size:22px;line-height:1;
+  background:linear-gradient(140deg,rgba(14,165,233,.18),rgba(168,85,247,.18));
+  border:1px solid rgba(255,255,255,.14);
+}
+
+/* ══════════════ 24 · COMPO CLIENTS PROS (commande + facture) ══════════════ */
+/* Le cadre commandes garde sa taille ; la facture PDF, plus petite, chevauche
+   son coin bas-droit — le récit « commande → facture » se lit d'un regard.
+   Le padding du conteneur réserve la place du débord. */
+.compo{padding-bottom:64px;padding-right:20px}
+.compo .compo-doc{
+  position:absolute;right:-14px;bottom:0;width:46%;max-width:300px;z-index:3;
+  box-shadow:0 34px 90px -22px rgba(0,0,0,.85),0 18px 60px -18px rgba(79,70,229,.6);
+}
+
+/* ══════════════ 25 · FLUX « LE CIRCUIT COMPLET » ══════════════ */
+.flux{
+  list-style:none;counter-reset:etape;position:relative;z-index:2;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:18px;
+}
+.flux-etape{
+  position:relative;display:flex;flex-direction:column;align-items:center;
+  gap:10px;text-align:center;padding:24px 12px 20px;border-radius:var(--r-m);
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  border:1px solid var(--trait);
+  transition:transform .4s var(--ease),border-color .4s var(--ease);
+}
+.flux-etape:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.2)}
+/* numéro d'étape, posé sur le bord haut de la tuile */
+.flux-etape::before{
+  counter-increment:etape;content:counter(etape);
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  font-size:11.5px;font-weight:600;color:#fff;background:var(--grad-btn);
+  box-shadow:0 0 12px -2px rgba(99,102,241,.8);
+}
+/* chevron lumineux vers l'étape suivante (desktop : la chaîne est horizontale) */
+.flux-etape::after{
+  content:'';position:absolute;top:50%;right:-14px;width:9px;height:9px;margin-top:-5px;
+  border-top:2px solid #A5B4FC;border-right:2px solid #A5B4FC;transform:rotate(45deg);
+  filter:drop-shadow(0 0 6px rgba(165,180,252,.8));
+}
+.flux-etape:last-child::after{display:none}
+.flux-nom{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.flux-det{font-size:12.5px;color:var(--gris);font-weight:300;line-height:1.45}
+/* l'aboutissement (Marges) : même traitement lumineux que la carte « Vous » */
+.flux-fin{background:linear-gradient(180deg,rgba(99,102,241,.16),rgba(168,85,247,.06));border-color:rgba(139,92,246,.35)}
+/* les modules satellites, en puces sous la chaîne */
+.flux-plus{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:34px}
+.flux-plus-titre{font-size:12.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gris-fonce);font-weight:500;margin-right:4px}
+.puce-module{
+  display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;
+  font-size:13.5px;font-weight:500;color:#CBD1EC;
+  background:rgba(255,255,255,.045);border:1px solid var(--trait);
+}
+
+/* ══════════════ 26 · MODÈLES D'IMPORT (migration) ══════════════ */
+.modeles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:60px;position:relative;z-index:2}
+.modele{
+  border-radius:var(--r-m);padding:24px;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.018));
+  border:1px solid var(--trait);
+  transition:transform .4s var(--ease),border-color .4s var(--ease);
+}
+.modele:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.2)}
+.modele-tete{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.modele-tete h3{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.modele-limite{display:block;font-size:12.5px;color:var(--gris-fonce);margin-top:2px}
+/* les colonnes du modèle, comme des en-têtes de tableur */
+.modele-colonnes{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.modele-colonnes span{
+  font-size:12.5px;font-weight:500;letter-spacing:.3px;color:#D4D9EC;
+  padding:5px 10px;border-radius:8px;
+  background:rgba(255,255,255,.05);border:1px solid var(--trait);
+}
+.modele-note{font-size:14px;color:var(--gris);font-weight:300;line-height:1.55}
+
+/* ══════════════ 27 · ACCOMPAGNEMENT + OFFRE FINALE ══════════════ */
+/* Tuile emoji dans le coin des cartes .regard (réutilisées pour l'accompagnement) */
+.regard>.picto{position:absolute;top:18px;right:18px}
+.final .offre-finale{
+  display:inline-flex;align-items:center;gap:9px;
+  margin:0 auto 30px;padding:10px 20px;border-radius:999px;
+  font-size:14.5px;color:#D4D9EC;
+  background:rgba(255,255,255,.05);border:1px solid var(--trait);
+}
+.final .offre-finale b{font-weight:600;color:#fff}
+
+/* ══ Responsive des sections 22-27 ══ */
+@media (max-width:980px){
+  .flux{grid-template-columns:repeat(2,1fr);row-gap:26px}
+  .flux-etape::after{display:none} /* la chaîne n'est plus horizontale : les numéros portent l'ordre */
+  .modeles{grid-template-columns:1fr}
+  .compo{padding-right:0}
+}
+@media (max-width:760px){
+  .annonce .annonce-suite{display:none}
+  body.avec-annonce .hero{padding-top:158px}
+  .compo{padding-bottom:52px}
+  .compo .compo-doc{width:52%;right:-8px}
+}
+@media (max-width:560px){
+  .flux{grid-template-columns:1fr;row-gap:26px}
 }
 
 /* ══════════════ 21 · PRÉFÉRENCE « ANIMATIONS RÉDUITES » ══════════════ */
