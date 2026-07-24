@@ -224,9 +224,13 @@ h1 .clair{
 
 /* ── L'écran allumé dans le noir ── */
 .scene{position:relative;margin-top:70px;padding-bottom:120px}
+/* pointer-events:none OBLIGATOIRE : ces halos absolus (520 px de haut) recouvrent
+   le bouton « Voir la démo » sur mobile (vidéo plus courte, le bouton remonte
+   dans leur emprise) et avalaient les taps — bug réel remonté par le client
+   le 24/07 (« pas cliquable au téléphone, OK sur PC »). */
 .scene-lueur{
   position:absolute;top:-40px;left:50%;transform:translateX(-50%);
-  width:min(1080px,96vw);height:520px;z-index:0;
+  width:min(1080px,96vw);height:520px;z-index:0;pointer-events:none;
   background:var(--grad);opacity:.62;filter:blur(120px);border-radius:50%;
 }
 .scene-lueur.serree{top:40px;width:min(860px,80vw);height:340px;opacity:.55;filter:blur(58px)}
@@ -274,6 +278,7 @@ h1 .clair{
 
 /* Lien « Voir la démo » sous le cadre, ouvre la modale */
 .voir-demo{
+  position:relative;z-index:3; /* toujours au-dessus des halos décoratifs de la scène */
   display:inline-flex;align-items:center;gap:9px;margin-top:26px;
   font-size:14.5px;font-weight:500;color:#D4D9EC;
   padding:11px 20px;border-radius:999px;
@@ -420,7 +425,11 @@ h2{font-size:clamp(28px,4vw,45px);line-height:1.1;font-weight:600;letter-spacing
   box-shadow:0 40px 120px -30px rgba(79,70,229,.6),0 8px 40px -12px rgba(0,0,0,.85);
 }
 .demo-cadre video{
-  width:100%;display:block;border-radius:calc(var(--r-l) - 1px);
+  /* height:auto OBLIGATOIRE : sans lui, l'attribut height=720 de la balise
+     s'applique tel quel (le CSS ne surchargeait que width) → sur mobile la
+     modale ouvrait une boîte 325×720 letterboxée. Constaté le 24/07. */
+  width:100%;height:auto;aspect-ratio:16/9;display:block;
+  border-radius:calc(var(--r-l) - 1px);
   background:#000;
 }
 .demo-fermer{
