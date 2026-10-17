@@ -37,7 +37,7 @@
   </defs>
 </svg>
 
-<nav class="maq-nav" aria-label="Maquettes V5-1"><b>V5-1</b><a href="accueil-a.html">Accueil A</a><a class="actif" href="accueil-b.html">Accueil B</a><a href="accueil-c.html">Accueil C</a><a href="approvisionnements.html">Page Appros</a></nav>
+<nav class="maq-nav" aria-label="Maquettes V5-1"><b>V5-1</b><a href="accueil-a.html">Accueil A</a><a class="actif" href="accueil-b.html">Accueil B</a><a href="accueil-c.html">Accueil C</a><a href="approvisionnements.html">Appros</a><a href="comptabilite.html">Compta</a><a href="ventes-clients.html">Ventes</a><a href="stock-suivi.html">Stock & suivi</a></nav>
 
 <a class="annonce" href="#final"><span aria-hidden="true">🎁</span><b>Votre premier mois est offert</b><span class="annonce-suite">— demandez votre accès</span><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
 
@@ -47,12 +47,12 @@
     <a class="marque" href="#top" aria-label="LabFlow — accueil"><svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg><span class="mot"><b>Lab</b><span>Flow</span></span></a>
     <div class="nav-liens">
       <div class="deroulant">
-        <a href="#preuves" aria-haspopup="true">Produit<i aria-hidden="true"></i></a>
+        <a href="#preuves" aria-haspopup="true">Produits<i aria-hidden="true"></i></a>
         <div class="sous">
           <a href="approvisionnements.html"><span class="ic" aria-hidden="true">🧾</span><span>Approvisionnements &amp; factures<small>La facture entre toute seule</small></span></a>
-          <a href="#preuves"><span class="ic" aria-hidden="true">📒</span><span>Comptabilité<small>LabFlow Compta, votre comptable dedans</small></span></a>
-          <a href="#pros"><span class="ic" aria-hidden="true">🤝</span><span>Ventes &amp; clients<small>Recettes, ventes, portail, factures</small></span></a>
-          <a href="#circuit"><span class="ic" aria-hidden="true">🏪</span><span>Métiers &amp; sites<small>Six métiers, vos mots, vos sites</small></span></a>
+          <a href="comptabilite.html"><span class="ic" aria-hidden="true">📒</span><span>Comptabilité<small>Votre comptable, dans votre dossier</small></span></a>
+          <a href="ventes-clients.html"><span class="ic" aria-hidden="true">🤝</span><span>Ventes &amp; clients<small>Pros et particuliers, portail, factures</small></span></a>
+          <a href="stock-suivi.html"><span class="ic" aria-hidden="true">📊</span><span>Stock, production &amp; suivi<small>Du stock au tableau de bord</small></span></a>
         </div>
       </div>
       <a href="#demo">Démo</a>
@@ -66,11 +66,11 @@
   </div>
 </nav>
 <div class="menu-mobile" id="menu-mobile">
-  <span class="mm-groupe">Produit</span>
+  <span class="mm-groupe">Produits</span>
   <a class="mm-sous" href="approvisionnements.html">Approvisionnements &amp; factures</a>
-  <a class="mm-sous" href="#preuves">Comptabilité</a>
-  <a class="mm-sous" href="#pros">Ventes &amp; clients</a>
-  <a class="mm-sous" href="#circuit">Métiers &amp; sites</a>
+  <a class="mm-sous" href="comptabilite.html">Comptabilité</a>
+  <a class="mm-sous" href="ventes-clients.html">Ventes &amp; clients</a>
+  <a class="mm-sous" href="stock-suivi.html">Stock, production &amp; suivi</a>
   <a href="#demo">Démo</a>
   <a href="../../tarifs.html">Combien ça coûte&nbsp;?</a>
   <a class="btn mm-cta" href="#final">Demander un accès</a>
@@ -128,7 +128,7 @@
     <div class="chapeau centre reveal">
       <span class="oeil">Trois preuves — <b>ce qui a changé</b></span>
       <h2>La facture entre. Le bilan sort.<br>Entre les deux, tout suit.</h2>
-      <p>Trois écrans suffisent à le montrer. Chacun a sa page, sa vidéo courte et ses captures réelles.</p>
+      <p>Trois cartes suffisent à le dire. Chaque module a sa page, sa vidéo courte et ses captures réelles.</p>
     </div>
     <div class="preuves">
       <a class="preuve reveal" href="approvisionnements.html">
@@ -146,7 +146,7 @@
         </div>
         <div class="preuve-corps"><span class="tag">Approvisionnements</span><h3>La facture entre toute seule</h3><p>Photo, scan ou PDF : le fournisseur est reconnu, les lignes sont lues et vérifiées, le stock et la compta suivent.</p><span class="suite">Voir comment<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></span></div>
       </a>
-      <a class="preuve reveal d1" href="#preuves" title="Page Comptabilité — lot V5-3">
+      <a class="preuve reveal d1" href="comptabilite.html">
         <div class="preuve-visu"><div class="lueur" aria-hidden="true"></div>
           <div class="app" aria-hidden="true"><div class="app-tete">États financiers · Bilan 2026 <span class="b">NC 01</span></div>
             <div class="bilan"><div><h5>Actifs</h5><div class="li"><span>Stocks</span><span>18 420</span></div><div class="li"><span>Clients</span><span>9 310</span></div><div class="li"><span>Banques et caisse</span><span>27 850</span></div><div class="li total"><span>Total</span><span>55 580</span></div></div>
@@ -155,14 +155,14 @@
         </div>
         <div class="preuve-corps"><span class="tag">LabFlow Compta</span><h3>Une comptabilité complète, votre comptable dedans</h3><p>Journaux, TVA, déclaration mensuelle, clôture et états financiers selon la NC 01. Le cabinet travaille dans votre dossier, sans ressaisie.</p><span class="suite">Découvrir<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></span></div>
       </a>
-      <a class="preuve reveal d2" href="#circuit" title="Page Métiers & sites — lot V5-3">
+      <a class="preuve reveal d2" href="stock-suivi.html">
         <div class="preuve-visu"><div class="lueur" aria-hidden="true"></div>
-          <div class="metiers" aria-hidden="true">
-            <span class="metier"><span class="picto">🍽️</span>Restauration</span><span class="metier"><span class="picto">☕</span>Café</span><span class="metier"><span class="picto">🥐</span>Boulangerie</span>
-            <span class="metier"><span class="picto">🏨</span>Hôtellerie</span><span class="metier"><span class="picto">🏭</span>Industrie</span><span class="metier"><span class="picto">🏪</span>Commerce</span>
-          </div>
+          <ul class="coches" aria-hidden="true">
+            <li><i></i>des fournisseurs</li><li><i></i>un stock</li><li><i></i>une production</li><li><i></i>des clients pros</li><li><i></i>des particuliers</li><li><i></i>un comptable</li>
+            <li class="fin">LabFlow est fait pour vous</li>
+          </ul>
         </div>
-        <div class="preuve-corps"><span class="tag">Métiers</span><h3>Votre métier, dans vos mots</h3><p>Restaurant, café, boulangerie, hôtel, atelier, commerce : les écrans et le manuel parlent votre langue, site par site.</p><span class="suite">Voir les métiers<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></span></div>
+        <div class="preuve-corps"><span class="tag">Pour qui</span><h3>Tout commerce qui achète, stocke, produit et vend</h3><p>Restaurant, boulangerie, hôtel, atelier, boutique&nbsp;: peu importe l'enseigne. Des appros, un stock, une production, des ventes aux pros ou aux particuliers, et la comptabilité qui suit.</p><span class="suite">Voir le suivi<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></span></div>
       </a>
     </div>
   </div>
@@ -178,11 +178,11 @@
     </div>
     <ol class="flux sept reveal d1">
       <li class="flux-etape"><span class="picto" aria-hidden="true">📚</span><b class="flux-nom">Référentiel</b><span class="flux-det">Articles codés, unités, catégories</span></li>
-      <li class="flux-etape neuf"><span class="nouveau">Nouveau</span><span class="picto" aria-hidden="true">🧾</span><b class="flux-nom">Factures &amp; achats</b><span class="flux-det">Déposées, lues, vérifiées</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">🧾</span><b class="flux-nom">Factures &amp; achats</b><span class="flux-det">Déposées, lues, vérifiées</span></li>
       <li class="flux-etape"><span class="picto" aria-hidden="true">📦</span><b class="flux-nom">Stock</b><span class="flux-det">Par site, transferts, inventaires</span></li>
       <li class="flux-etape"><span class="picto" aria-hidden="true">🍔</span><b class="flux-nom">Production</b><span class="flux-det">Fiches techniques, coûts réels</span></li>
       <li class="flux-etape"><span class="picto" aria-hidden="true">🛒</span><b class="flux-nom">Ventes</b><span class="flux-det">Comptoir, livraison, clients pros</span></li>
-      <li class="flux-etape neuf"><span class="nouveau">Nouveau</span><span class="picto" aria-hidden="true">📒</span><b class="flux-nom">Comptabilité</b><span class="flux-det">Écritures, TVA, états financiers</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">📒</span><b class="flux-nom">Comptabilité</b><span class="flux-det">Écritures, TVA, états financiers</span></li>
       <li class="flux-etape flux-fin"><span class="picto" aria-hidden="true">📊</span><b class="flux-nom">Marges</b><span class="flux-det">Le tableau de bord conclut</span></li>
     </ol>
     <p class="flux-plus reveal d2">
@@ -204,7 +204,7 @@
         <li><i></i>Commandes en quatre états, stock déduit à l'expédition</li>
         <li><i></i>Facture PDF à identité figée, timbre et numérotation</li>
       </ul>
-      <a class="btn" href="#final">Demander un accès</a>
+      <a class="btn" href="ventes-clients.html">Voir Ventes &amp; clients</a>
     </div>
     <div class="duo-visu cadre-visu compo reveal d1">
       <div class="lueur" aria-hidden="true"></div>
@@ -277,7 +277,7 @@
   <div class="container">
     <div class="marque"><svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg><span class="mot"><b>Lab</b><span>Flow</span></span></div>
     <nav class="pied-liens" aria-label="Pied de page">
-      <a href="#top" aria-current="page">Accueil</a><a href="approvisionnements.html">Approvisionnements &amp; factures</a><a href="#preuves">Comptabilité</a><a href="#pros">Ventes &amp; clients</a><a href="#circuit">Métiers &amp; sites</a><a href="#demo">Démo</a><a href="../../tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="../../mentions-legales.html">Mentions légales</a><a href="../../confidentialite.html">Confidentialité</a>
+      <a href="#top" aria-current="page">Accueil</a><a href="approvisionnements.html">Approvisionnements &amp; factures</a><a href="comptabilite.html">Comptabilité</a><a href="ventes-clients.html">Ventes &amp; clients</a><a href="stock-suivi.html">Stock, production &amp; suivi</a><a href="#demo">Démo</a><a href="../../tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="../../mentions-legales.html">Mentions légales</a><a href="../../confidentialite.html">Confidentialité</a>
     </nav>
     <p>Conçu en Tunisie 🇹🇳</p>
   </div>
