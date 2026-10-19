@@ -25,7 +25,7 @@ const contraste = require('./contraste.js');
 // noindex et hors sitemap mais doit charger v4.css sans erreur.
 // NB : l'énoncé « PAGES à 6 entrées dont 404.html » est un report du plan d'avant D1.
 const PAGES = [
-  '/', '/tarifs.html', '/demande-acces.html', '/merci.html',
+  '/', '/approvisionnements.html', '/comptabilite.html', '/ventes-clients.html', '/stock-suivi.html', '/tarifs.html', '/demande-acces.html', '/merci.html',
   '/mentions-legales.html', '/confidentialite.html', '/404.html',
 ];
 // Le canonical ne concerne PAS 404.html (§3.3 / §6.1 du brief).
@@ -37,6 +37,8 @@ const BASE = 'http://localhost:8322';
 // « (1 min 30) » de l'accueil suppose cette durée : une remontée de la vidéo
 // sans mise à jour du libellé est signalée par le contrôle 3.
 const DUREE_VIDEO_ATTENDUE = 89.7;
+// V5 (19/10/2026) : index.html = accueil B des maquettes ; 4 pages Produits en plus.
+// V5 (19/10/2026) : index.html = accueil B des maquettes ; 4 pages Produits en plus.
 // V5 (19/10/2026) : index.html = accueil B des maquettes ; 4 pages Produits en plus.
 const BUDGET_PREMIERE_VUE = 500;     // Ko, §13.6
 const MENTION_DEMO = 'Compte de démonstration Dar Yasmine';

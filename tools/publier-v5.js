@@ -242,7 +242,8 @@ ${SOUS.map(([s, , nom]) => `      <a href="${s}"${cur(f, s)}>${nom}</a>`).join('
   const vp = path.join(ROOT, 'tools', 'verify-pages.js');
   let v = lire(vp);
   if (!v.includes("'/approvisionnements.html'")) {
-    v = v.replace("const PAGES = [\n  '/', '/tarifs.html',", "const PAGES = [\n  '/', '/approvisionnements.html', '/comptabilite.html', '/ventes-clients.html', '/stock-suivi.html',\n  '/tarifs.html',");
+    // le fichier peut être en CRLF : on remplace le seul segment « '/', '/tarifs.html', »
+    v = v.replace("'/', '/tarifs.html',", "'/', '/approvisionnements.html', '/comptabilite.html', '/ventes-clients.html', '/stock-suivi.html', '/tarifs.html',");
     v = v.replace("const DUREE_VIDEO_ATTENDUE = 89.7;", "const DUREE_VIDEO_ATTENDUE = 89.7;\n// V5 (19/10/2026) : index.html = accueil B des maquettes ; 4 pages Produits en plus.");
     ecrire(vp, v);
   }
