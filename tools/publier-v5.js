@@ -24,7 +24,7 @@ const SCHEMAS_OK = process.argv.includes('--schemas');
 const MENTION = 'Compte de démonstration Dar Yasmine';
 const AUJOURDHUI = new Date().toISOString().slice(0, 10);
 
-const lire = (f) => fs.readFileSync(f, 'utf8');
+const lire = (f) => fs.readFileSync(f, 'utf8').replace(/\r\n/g, '\n'); // tolérant aux CRLF du checkout Windows
 const ecrire = (f, s) => fs.writeFileSync(f, s);
 
 /** Fin (exclue) du <div …> ouvert à `debut` : comptage des balises div. */

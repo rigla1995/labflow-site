@@ -2,6 +2,12 @@
  * Captures V5 (19/10/2026) : les onze écrans réels qui remplacent les compositions
  * schématiques des maquettes (plan V5 §4, véracité §8).
  *
+ * Netteté (règle héritée de refresh-captures.js, « captures 4K » demandées par le client) :
+ *   - source à densité 4 (deviceScaleFactor 4) → déclinaisons @1x…@4x AVIF + WebP ;
+ *   - la fenêtre de capture reste PROCHE de la largeur d'affichage (texte ≥ ~65 % de sa
+ *     taille réelle) : ~860 px pour un visuel de colonne (affiché ~600 px), ~1300 px pour
+ *     un visuel pleine largeur (affiché ~1000 px). C'est l'échelle du texte qui fait le net.
+ *
  * Prérequis (base LOCALE, données fictives) :
  *   - backend de test sur 3000, LabFlow sur 5176, LabFlow Compta sur 5174 ;
  *   - compte démo Dar Yasmine (seed-demo-vitrine) + 2 clients B2C ajoutés ;
@@ -10,9 +16,10 @@
  *   - cabinet d'essai (labflow-reprise/achats-compta/outils/comptes-essai-s4c.js).
  *   Les identifiants sont lus dans un carnet local HORS dépôt (variable CARNET, JSON :
  *   { PATIO:{email,password,dossier}, DAR:{…}, ACHETEUR:{…}, CABINET:{…} }) — jamais écrits ici.
+ *   Le limiteur de /auth/login autorise 20 connexions par 15 min : redémarrer le backend de test au besoin.
  *
  * Run : CARNET=<chemin.json> node tools/capture-v5.js [--only=<cle>] [--encode-only]
- *   → PNG bruts dans tools/raw2/, déclinaisons @1x..@3x AVIF+WebP dans assets/img/.
+ *   → PNG bruts dans tools/raw2/, déclinaisons @1x..@4x AVIF+WebP dans assets/img/.
  */
 const fs = require('fs');
 const path = require('path');
@@ -29,9 +36,11 @@ const ENCODE_ONLY = process.argv.includes('--encode-only');
 const veut = (k) => !ENCODE_ONLY && (!ONLY || ONLY === k);
 const J = ENCODE_ONLY ? {} : JSON.parse(fs.readFileSync(process.env.CARNET, 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const DSF = 4; // densité de la source : « 4K »
 
 const CSS_CONTENU_PUR = `.sidebar, .header, .sidebar-overlay { display: none !important; } .main-content { max-width: none !important; }`;
 
+async function fenetre(page, width, height = 1000) { await page.setViewport({ width, height, deviceScaleFactor: DSF }); await sleep(500); }
 async function login(page, base, creds) {
   await page.goto(`${base}/login`, { waitUntil: 'domcontentloaded' });
   await page.waitForSelector('input[type="email"]', { timeout: 15000 });
@@ -39,7 +48,7 @@ async function login(page, base, creds) {
   await page.type('input[type="password"]', creds.password, { delay: 5 });
   await Promise.all([page.click('button[type="submit"]'), page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 20000 }).catch(() => {})]);
   await page.waitForFunction(() => !document.querySelector('input[type="password"]'), { timeout: 15000 });
-  await sleep(600);
+  await sleep(2500); // laisser l'application charger ses accès avant de changer de page (sinon « Chargement… » sans fin)
 }
 /** Repart d'une session vierge : cookies et stockage des deux applications (sur leur origine, sinon SecurityError). */
 async function purger(page) {
@@ -74,7 +83,7 @@ async function cadre(page, motifs, { wMin = 600, hMin = 120, hMax = 1100, marge 
 }
 async function shoot(page, file, clip = null) {
   await page.screenshot({ path: path.join(RAW, file), ...(clip ? { clip } : {}) });
-  console.log(`📸 ${file}${clip ? ` (${Math.round(clip.width)}×${Math.round(clip.height)})` : ''}`);
+  console.log(`📸 ${file}${clip ? ` (${Math.round(clip.width)}×${Math.round(clip.height)} css px, ×${DSF})` : ''}`);
 }
 async function clickTexte(page, txt) {
   const ok = await page.evaluate((t) => {
@@ -86,6 +95,7 @@ async function clickTexte(page, txt) {
 }
 
 // ── Encodage (même règle que refresh-captures.js : budget × densité, netteté douce) ──
+// w1 = largeur d'affichage @1x : 1000 px pour les visuels pleine largeur (hero), 900 px sinon.
 const PLANS = {
   'ecran-verifier-facture':  { w1: 1000, budget: 240 },
   'ecran-depot-facture':     { w1: 900, budget: 200 },
@@ -100,11 +110,11 @@ const PLANS = {
   'ecran-dashboard-filtres': { w1: 900, budget: 220 },
 };
 async function encode(input, outPath, format, width, budgetKo) {
-  let quality = format === 'avif' ? 62 : 78;
+  let quality = format === 'avif' ? 64 : 80;
   for (;;) {
     const pipe = sharp(input).resize({ width, withoutEnlargement: true }).sharpen({ sigma: 0.7 });
     const buf = format === 'avif' ? await pipe.avif({ quality, effort: 5 }).toBuffer() : await pipe.webp({ quality }).toBuffer();
-    if (buf.length <= budgetKo * 1024 || quality <= 40) { fs.writeFileSync(outPath, buf); return { ko: Math.round(buf.length / 1024), quality }; }
+    if (buf.length <= budgetKo * 1024 || quality <= 44) { fs.writeFileSync(outPath, buf); return { ko: Math.round(buf.length / 1024), quality }; }
     quality -= 6;
   }
 }
@@ -116,7 +126,7 @@ async function encodeAll() {
     const input = fs.readFileSync(src);
     const meta = await sharp(input).metadata();
     const w1 = Math.min(p.w1, meta.width);
-    for (const d of [1, 2, 3]) {
+    for (const d of [1, 2, 3, 4]) {
       const w = Math.min(w1 * d, meta.width);
       if (d > 1 && w === Math.min(w1 * (d - 1), meta.width)) break; // source trop petite : pas de déclinaison vide
       for (const fmt of ['avif', 'webp']) {
@@ -124,20 +134,24 @@ async function encodeAll() {
         console.log(`🖼  ${name}@${d}x.${fmt} — ${w}px, q${quality}, ${ko} Ko`);
       }
     }
+    // déclinaisons périmées d'un ancien encodage plus dense : à retirer
+    for (const d of [1, 2, 3, 4]) if (w1 * d > meta.width && d > 1 && Math.min(w1 * (d - 1), meta.width) === meta.width) for (const fmt of ['avif', 'webp']) { const f = path.join(OUT, `${name}@${d}x.${fmt}`); if (fs.existsSync(f)) fs.unlinkSync(f); }
+    const m1 = await sharp(path.join(OUT, `${name}@1x.webp`)).metadata();
+    console.log(`   ↳ ${name} : @1x ${m1.width}×${m1.height}, source ${meta.width}×${meta.height}`);
   }
 }
 
 (async () => {
   fs.mkdirSync(RAW, { recursive: true });
   if (!ENCODE_ONLY) {
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-gpu', '--lang=fr-FR'], defaultViewport: { width: 1200, height: 1000, deviceScaleFactor: 3 } });
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-gpu', '--lang=fr-FR', `--force-device-scale-factor=${DSF}`], defaultViewport: { width: 1200, height: 1000, deviceScaleFactor: DSF } });
     const page = await browser.newPage();
     page.on('dialog', (d) => d.dismiss().catch(() => {}));
 
-    // ══ A · Le Patio : dépôt, en-tête lu, fenêtre « Vérifier la facture » ══
+    // ══ A · Le Patio : dépôt (+ panneau lu), en-tête lue, fenêtre « Vérifier la facture » ══
     if (veut('depot-facture') || veut('facture-entete') || veut('verifier-facture')) {
       await login(page, FRONT, J.PATIO);
-      await page.setViewport({ width: 860, height: 1100, deviceScaleFactor: 3 });
+      await fenetre(page, 860, 1100);
       await page.goto(`${FRONT}/client/stock`, { waitUntil: 'domcontentloaded' });
       await attendreTexte(page, /Facture du fournisseur/);
       await page.addStyleTag({ content: CSS_CONTENU_PUR }); await sleep(500);
@@ -147,12 +161,18 @@ async function encodeAll() {
       await sleep(1200);
       // dépôt : le bloc d'appro avec la pièce déposée ET le panneau « lu sur la facture » (composition haute, lisible)
       if (veut('depot-facture')) await shoot(page, 'ecran-depot-facture.png', await cadre(page, ['APPROVISIONNEMENT', 'LU SUR LA FACTURE'], { wMin: 500, hMax: 1000, marge: 6 }));
-      if (veut('verifier-facture') || veut('facture-entete')) {
-        await page.setViewport({ width: 1600, height: 1080, deviceScaleFactor: 3 }); await sleep(600);
+      // en-tête lue : le panneau « Lu sur la facture » seul (fournisseur reconnu, n°, date, HT, TVA, timbre, TTC,
+      // 6 lignes lues) dans une fenêtre étroite pour qu'il s'empile et reste lisible dans une colonne du site
+      if (veut('facture-entete')) {
+        await fenetre(page, 700, 1100);
+        await shoot(page, 'ecran-facture-entete.png', await cadre(page, ['LU SUR LA FACTURE', 'TTC'], { wMin: 400, hMax: 900, marge: 6 }));
+        await fenetre(page, 860, 1100);
+      }
+      if (veut('verifier-facture')) {
+        await fenetre(page, 1300, 1000);
         await clickTexte(page, 'Vérifier la facture et enregistrer');
         await attendreTexte(page, /Tomates/, 20000);
         await sleep(1800); // rendu de la pièce (pdf.js)
-        // la fenêtre s'ouvre parfois défilée : tout remonter en haut avant la prise
         await page.evaluate(() => { document.querySelectorAll('*').forEach((e) => { if (e.scrollTop > 0) e.scrollTop = 0; }); window.scrollTo(0, 0); });
         await sleep(500);
         // le panneau de la fenêtre = le plus grand enfant de .modal-overlay (pièce à gauche, lignes à droite, pied d'action)
@@ -160,12 +180,10 @@ async function encodeAll() {
           const ov = document.querySelector('.modal-overlay'); if (!ov) return null;
           const el = [...ov.children].sort((a, b) => b.getBoundingClientRect().width - a.getBoundingClientRect().width)[0];
           const b = el.getBoundingClientRect();
-          return { x: Math.max(0, b.x), y: Math.max(0, b.y), width: Math.min(b.width, 1600 - Math.max(0, b.x)), height: Math.min(b.height, 1080 - Math.max(0, b.y)) };
+          return { x: Math.max(0, b.x), y: Math.max(0, b.y), width: Math.min(b.width, 1300 - Math.max(0, b.x)), height: Math.min(b.height, 1000 - Math.max(0, b.y)) };
         });
         if (!clip) throw new Error('fenêtre Vérifier la facture introuvable');
-        if (veut('verifier-facture')) await shoot(page, 'ecran-verifier-facture.png', clip);
-        // en-tête lu : le haut de la fenêtre (fournisseur reconnu, n°, date, premières lignes proposées)
-        if (veut('facture-entete')) await shoot(page, 'ecran-facture-entete.png', { ...clip, height: Math.min(clip.height, 560) });
+        await shoot(page, 'ecran-verifier-facture.png', clip);
         await page.keyboard.press('Escape').catch(() => {});
       }
     }
@@ -173,19 +191,18 @@ async function encodeAll() {
     // ══ B · LabFlow Compta (Le Patio) : plan de comptes, écriture du pont, bilan, état de résultat ══
     if (veut('plan-comptes') || veut('ecriture-achat') || veut('bilan') || veut('etat-resultat')) {
       const D = J.PATIO.dossier;
-      await page.setViewport({ width: 1200, height: 1000, deviceScaleFactor: 3 });
+      await fenetre(page, 980, 1000);
       await login(page, COMPTA, J.PATIO);
       if (veut('plan-comptes')) {
         await page.goto(`${COMPTA}/dossiers/${D}/plan`, { waitUntil: 'domcontentloaded' });
         await attendreTexte(page, /Classe 4/);
         await page.evaluate(() => { const l = [...document.querySelectorAll('button, summary, [role="button"], div, h3, h4')].filter((e) => /^▸?\s*Classe 4/.test((e.innerText || '').trim()) && (e.innerText || '').length < 80); (l[l.length - 1] || l[0])?.click(); });
         await attendreTexte(page, /Fournisseurs/);
-        await shoot(page, 'ecran-plan-comptes.png', await cadre(page, ['Plan de comptes', 'Fournisseurs'], { wMin: 700, hMax: 950, tags: 'main' }));
+        await shoot(page, 'ecran-plan-comptes.png', await cadre(page, ['Plan de comptes', 'Fournisseurs'], { wMin: 600, hMax: 950, tags: 'main' }));
       }
       if (veut('ecriture-achat')) {
         await page.goto(`${COMPTA}/dossiers/${D}/ecritures?etat=brouillard`, { waitUntil: 'domcontentloaded' });
         await attendreTexte(page, /B-0000\d\d/);
-        // déplier la première écriture du pont (Facture … — fournisseur)
         // déplier la première ligne : le bouton ▸ (ou le premier bouton) de la ligne B-0000xx, sinon la ligne elle-même
         await page.evaluate(() => {
           const lignes = [...document.querySelectorAll('div, tr, li')].filter((e) => /B-0000\d\d/.test(e.innerText || '') && (e.innerText || '').length < 300);
@@ -196,66 +213,84 @@ async function encodeAll() {
         });
         await page.waitForFunction(() => /D[ée]bit/i.test(document.body.innerText), { timeout: 8000 }).catch(() => {});
         await sleep(1200);
-        await shoot(page, 'ecran-ecriture-achat.png', await cadre(page, ['B-0000', 'Débit'], { wMin: 700, hMax: 900, marge: 4 }).catch(() => cadre(page, ['écritures en brouillard'], { wMin: 700, hMax: 900, tags: 'main' })));
+        await shoot(page, 'ecran-ecriture-achat.png', await cadre(page, ['B-0000', 'Débit'], { wMin: 600, hMax: 900, marge: 4 }).catch(() => cadre(page, ['écritures en brouillard'], { wMin: 600, hMax: 900, tags: 'main' })));
       }
       if (veut('bilan') || veut('etat-resultat')) {
         await page.goto(`${COMPTA}/dossiers/${D}/etats`, { waitUntil: 'domcontentloaded' });
         await attendreTexte(page, /Total des actifs/);
-        if (veut('bilan')) await shoot(page, 'ecran-bilan.png', await cadre(page, ['Bilan', 'Total des actifs', 'Total des capitaux propres et des passifs'], { wMin: 700, hMax: 1100, marge: 4 }));
-        if (veut('etat-resultat')) await shoot(page, 'ecran-etat-resultat.png', await cadre(page, ['État de résultat', 'Résultat net de l\'exercice'], { wMin: 700, hMax: 1000, marge: 4 }));
+        if (veut('etat-resultat')) await shoot(page, 'ecran-etat-resultat.png', await cadre(page, ['État de résultat', 'Résultat net de l\'exercice'], { wMin: 600, hMax: 1000, marge: 4 }));
+        if (veut('bilan')) {
+          await fenetre(page, 1200, 1000); // visuel pleine largeur (hero de la page Comptabilité)
+          await attendreTexte(page, /Total des actifs/);
+          await shoot(page, 'ecran-bilan.png', await cadre(page, ['Bilan', 'Total des actifs', 'Total des capitaux propres et des passifs'], { wMin: 700, hMax: 1100, marge: 4 }));
+        }
       }
     }
 
     // ══ C · Cabinet d'essai : mes dossiers ══
     if (veut('cabinet-dossiers')) {
-      await page.setViewport({ width: 1200, height: 900, deviceScaleFactor: 3 });
+      await fenetre(page, 980, 900);
       await purger(page);
       await login(page, COMPTA, J.CABINET);
-      await sleep(2500); // laisser l'application charger ses accès avant de changer de page (sinon « Chargement… » sans fin)
       await page.goto(`${COMPTA}/dossiers`, { waitUntil: 'domcontentloaded' });
       try { await attendreTexte(page, /Boulangerie Ben Ali/, 12000); }
       catch { await page.reload({ waitUntil: 'domcontentloaded' }); await attendreTexte(page, /Boulangerie Ben Ali/, 20000); }
-      await shoot(page, 'ecran-cabinet-dossiers.png', await cadre(page, ['Boulangerie Ben Ali', 'Menuiserie Sfaxienne'], { wMin: 700, hMax: 800, marge: 4 }));
+      await shoot(page, 'ecran-cabinet-dossiers.png', await cadre(page, ['Boulangerie Ben Ali', 'Menuiserie Sfaxienne'], { wMin: 600, hMax: 800, marge: 4 }));
     }
 
-    // ══ D · Dar Yasmine : carnet des clients (B2B + B2C) ══
-    if (veut('carnet-clients')) {
-      await page.setViewport({ width: 1100, height: 900, deviceScaleFactor: 3 });
+    // ══ D · Dar Yasmine : carnet des clients (B2B + B2C) et tableau de bord (onglets, filtres, tuiles) ══
+    if (veut('carnet-clients') || veut('dashboard-filtres')) {
+      await fenetre(page, 860, 1000);
       await purger(page);
       await login(page, FRONT, J.DAR);
-      await page.goto(`${FRONT}/client/acheteurs`, { waitUntil: 'domcontentloaded' });
-      await attendreTexte(page, /Mme Ben Salah/);
-      // Les quatre acheteurs pros du compte démo portent des alias d'une boîte réelle (compte portail : l'e-mail
-      // n'est pas modifiable par l'API) : on les anonymise à l'affichage, le reste de l'écran est inchangé.
-      await page.evaluate(() => {
-        const FICTIFS = { 1: 'achats@cafe-el-medina.example', 2: 'achats@hotel-dar-el-bhar.example', 3: 'achats@comptoir-carthage.example', 4: 'achats@legrandbleu.example' };
-        const it = document.createNodeIterator(document.body, NodeFilter.SHOW_TEXT);
-        let n; while ((n = it.nextNode())) { n.nodeValue = n.nodeValue.replace(/m\.khelil\.prof\+acheteur(\d)@gmail\.com/g, (_, i) => FICTIFS[i] || `achats@client-${i}.example`); }
-      });
-      await page.addStyleTag({ content: CSS_CONTENU_PUR }); await sleep(500);
-      await shoot(page, 'ecran-carnet-clients.png', await cadre(page, ['Karim Jelassi', 'Mme Ben Salah'], { wMin: 700, hMax: 800, marge: 4 }));
+      if (veut('carnet-clients')) {
+        await page.goto(`${FRONT}/client/acheteurs`, { waitUntil: 'domcontentloaded' });
+        await attendreTexte(page, /Mme Ben Salah/);
+        // Les quatre acheteurs pros du compte démo portent des alias d'une boîte réelle (compte portail : l'e-mail
+        // n'est pas modifiable par l'API) : on les anonymise à l'affichage, le reste de l'écran est inchangé.
+        await page.evaluate(() => {
+          const FICTIFS = { 1: 'achats@cafe-el-medina.example', 2: 'achats@hotel-dar-el-bhar.example', 3: 'achats@comptoir-carthage.example', 4: 'achats@legrandbleu.example' };
+          const it = document.createNodeIterator(document.body, NodeFilter.SHOW_TEXT);
+          let n; while ((n = it.nextNode())) { n.nodeValue = n.nodeValue.replace(/m\.khelil\.prof\+acheteur(\d)@gmail\.com/g, (_, i) => FICTIFS[i] || `achats@client-${i}.example`); }
+        });
+        await page.addStyleTag({ content: CSS_CONTENU_PUR }); await sleep(500);
+        await shoot(page, 'ecran-carnet-clients.png', await cadre(page, ['Karim Jelassi', 'Mme Ben Salah'], { wMin: 600, hMax: 1000, marge: 4 }));
+      }
+      if (veut('dashboard-filtres')) {
+        await fenetre(page, 900, 1000);
+        await page.goto(`${FRONT}/client/dashboard`, { waitUntil: 'domcontentloaded' });
+        await attendreTexte(page, /Vue d'ensemble/);
+        await page.waitForFunction(() => /\d[\d\s.,]*\s?DT/.test(document.body.innerText), { timeout: 25000 });
+        // période de juillet 2026 : celle des ventes du compte démo (la période courante serait à zéro)
+        await page.evaluate(() => {
+          const dates = [...document.querySelectorAll('input[type="date"]')];
+          const set = (el, v) => { Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set.call(el, v); el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); };
+          if (dates.length >= 2) { set(dates[0], '2026-07-01'); set(dates[1], '2026-07-22'); }
+        });
+        await page.waitForFunction(() => /[1-9]\d* ventes/.test(document.body.innerText), { timeout: 25000 });
+        await sleep(1200);
+        await page.addStyleTag({ content: CSS_CONTENU_PUR }); await sleep(800);
+        // le haut du tableau de bord : bandeau, onglets, barre de filtres, premières tuiles
+        await shoot(page, 'ecran-dashboard-filtres.png', await cadre(page, ['Vue d\'ensemble', 'PÉRIODE'], { wMin: 600, hMax: 720, tags: 'main' }));
+      }
     }
 
     // ══ E · Portail acheteur : catalogue et commande ══
     if (veut('portail-commande')) {
-      await page.setViewport({ width: 1100, height: 900, deviceScaleFactor: 3 });
+      await fenetre(page, 860, 1000);
       await purger(page);
       await login(page, FRONT, J.ACHETEUR);
       await page.goto(`${FRONT}/portail`, { waitUntil: 'domcontentloaded' });
       await attendreTexte(page, /\d[\d\s.,]*\s?DT/);
       await sleep(800);
-      await shoot(page, 'ecran-portail-commande.png', await cadre(page, ['DT'], { wMin: 800, hMax: 820, tags: 'main' }));
+      const c = await cadre(page, ['DT'], { wMin: 600, hMax: 1100, tags: 'main' });
+      // le titre du catalogue porte le nom du compte acheteur (réel) : on commence sous la barre de recherche
+      const sousTitre = await page.evaluate(() => { const i = document.querySelector('main input[type="search"], main input[placeholder*="Rechercher"]'); if (!i) return 0; const b = i.closest('div').getBoundingClientRect(); return b.y + window.scrollY - 14; });
+      const y = sousTitre > c.y ? sousTitre : c.y + 120;
+      await shoot(page, 'ecran-portail-commande.png', { ...c, y, height: Math.min(c.height - (y - c.y), 900) });
     }
 
     await browser.close();
-  }
-
-  // ══ F · Tableau de bord : onglets + filtres + tuiles (recadrage de la source 4K existante) ══
-  if (veut('dashboard-filtres')) {
-    const src = path.join(RAW, 'ecran-dashboard.png');
-    const m = await sharp(src).metadata();
-    await sharp(src).extract({ left: 0, top: 0, width: m.width, height: Math.round(m.height * 0.42) }).toFile(path.join(RAW, 'ecran-dashboard-filtres.png'));
-    console.log('📸 ecran-dashboard-filtres.png (recadrage haut du tableau de bord)');
   }
 
   console.log('\n— Encodage —');
