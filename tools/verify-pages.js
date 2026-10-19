@@ -37,6 +37,7 @@ const BASE = 'http://localhost:8322';
 // « (1 min 30) » de l'accueil suppose cette durée : une remontée de la vidéo
 // sans mise à jour du libellé est signalée par le contrôle 3.
 const DUREE_VIDEO_ATTENDUE = 89.7;
+// V5 (19/10/2026) : index.html = accueil B des maquettes ; 4 pages Produits en plus.
 const BUDGET_PREMIERE_VUE = 500;     // Ko, §13.6
 const MENTION_DEMO = 'Compte de démonstration Dar Yasmine';
 
