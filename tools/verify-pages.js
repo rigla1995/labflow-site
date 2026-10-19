@@ -44,6 +44,19 @@ const BUDGET_PREMIERE_VUE = 500;     // Ko, §13.6
 const MENTION_DEMO = 'Compte de démonstration Dar Yasmine';
 
 const echecs = [];
+
+// ── (contrôle 0) Dockerfile : le COPY des pages est EXPLICITE. Une page absente de
+//    cette ligne répond 404 en production alors qu'elle passe en local (incident
+//    V5 du 19/10/2026 : les quatre pages Produits). Chaque entrée de PAGES doit y être.
+{
+  const fs = require('fs');
+  const docker = fs.readFileSync(require('path').join(__dirname, '..', 'Dockerfile'), 'utf8');
+  const copie = (docker.match(/^COPY (.*?) \/usr\/share\/nginx\/html\/\s*$/m) || [])[1] || '';
+  const cites = new Set(copie.split(/\s+/));
+  const absents = PAGES.map((p) => (p === '/' ? 'index.html' : p.slice(1))).filter((f) => !cites.has(f));
+  if (absents.length) { console.error(`❌ Dockerfile : page(s) absente(s) du COPY → 404 en prod : ${absents.join(', ')}`); process.exit(1); }
+  console.log(`── Dockerfile : ${PAGES.length} pages citées dans le COPY ✓`);
+}
 const rate = (m) => { echecs.push(m); console.error('   ❌ ' + m); };
 
 (async () => {
