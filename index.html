@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LabFlow — Tout votre commerce dans un seul écran</title>
+<title>LabFlow — Du bon de livraison au bilan</title>
 <!-- ≤ 155 caractères : au-delà, Google tronque. Aucun terme « ERP ». -->
-<meta name="description" content="Vous achetez, vous stockez, vous vendez : LabFlow suit le stock, les coûts et la marge à votre place. Une seule saisie, et tout se met à jour.">
-<meta property="og:title" content="Tout votre commerce dans un seul écran">
-<meta property="og:description" content="LabFlow suit le stock, les coûts et la marge à votre place. Demandez un accès : un conseiller vous rappelle.">
+<meta name="description" content="Vous photographiez la facture du fournisseur : LabFlow la lit, met le stock à jour et prépare l'écriture comptable. Votre comptable valide, dans le même logiciel.">
+<meta property="og:title" content="Du bon de livraison au bilan">
+<meta property="og:description" content="Vous photographiez la facture du fournisseur : LabFlow la lit, met le stock à jour et prépare l'écriture comptable. Votre comptable valide, dans le même logiciel.">
 <meta property="og:image" content="https://labflow-tn.com/assets/img/og.jpg?v=6">
 <meta property="og:url" content="https://labflow-tn.com/">
 <meta property="og:type" content="website">
@@ -16,6 +16,7 @@
 <link rel="preload" as="image" href="assets/video/demo-hero-poster.webp?v=11" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/v4.css?v=8">
+<link rel="stylesheet" href="assets/css/v5.css?v=1">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -24,26 +25,19 @@
 
 <a class="saut-contenu" href="#top">Aller au contenu</a>
 
-<!-- ══ SPRITE : logo LabFlow + icônes (repris tel quel du thème validé) ══ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0ea5e9"/>
-      <stop offset="52%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#a855f7"/>
+      <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
-    <clipPath id="lf-clip">
-      <rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/>
-    </clipPath>
+    <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
     <symbol id="lf-losange" viewBox="0 0 52 52">
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
       <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
       <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
       <g transform="translate(26,26) rotate(45)" fill="#fff">
-        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/>
-        <rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
-        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/>
-        <rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
+        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/><rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
+        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
         <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
       </g>
     </symbol>
@@ -54,31 +48,24 @@
   </defs>
 </svg>
 
-<!-- ══ ANNONCE : premier mois offert ══
-     Barre en haut de page, NON fixe (elle défile) : la nav prend le relais dès
-     que .colle s'applique. La promo est réelle et systématique côté app
-     (mensualité du mois de création à 0 DT, verrouillée) — aucune date limite
-     à afficher. Texte blanc sur --grad-btn : AA vérifié par tools/contraste.js. -->
-<a class="annonce" href="demande-acces.html">
-  <span aria-hidden="true">🎁</span>
-  <b>Votre premier mois est offert</b>
-  <span class="annonce-suite">— demandez votre accès</span>
-  <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg>
-</a>
+<a class="annonce" href="demande-acces.html"><span aria-hidden="true">🎁</span><b>Votre premier mois est offert</b><span class="annonce-suite">— demandez votre accès</span><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
 
-<!-- ══ NAVIGATION ══ -->
+<!-- ══ NAVIGATION : menu Produit (4 pages) · Démo · Tarifs · CTA ══ -->
 <nav class="nav" id="nav">
   <div class="container nav-in">
-    <a class="marque" href="#top" aria-label="LabFlow — accueil">
-      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
-      <span class="mot"><b>Lab</b><span>Flow</span></span>
-    </a>
+    <a class="marque" href="index.html" aria-label="LabFlow — accueil"><svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg><span class="mot"><b>Lab</b><span>Flow</span></span></a>
     <div class="nav-liens">
-      <a href="#suivre">Ce que ça suit</a>
-      <a href="#recette">Prix de revient</a>
-      <a href="#pros">Clients pros</a>
-      <a href="#circuit">Tout LabFlow</a>
-      <a href="#migration">Migration</a>
+      <div class="deroulant">
+        <a href="#preuves" aria-haspopup="true">Produits<i aria-hidden="true"></i></a>
+        <div class="sous">
+          <a href="approvisionnements.html"><span class="ic" aria-hidden="true">🧾</span><span>Approvisionnements &amp; factures<small>La facture entre toute seule</small></span></a>
+          <a href="comptabilite.html"><span class="ic" aria-hidden="true">📒</span><span>Comptabilité<small>Votre comptable, dans votre dossier</small></span></a>
+          <a href="ventes-clients.html"><span class="ic" aria-hidden="true">🤝</span><span>Ventes &amp; clients<small>Pros et particuliers, portail, factures</small></span></a>
+          <a href="stock-suivi.html"><span class="ic" aria-hidden="true">📊</span><span>Stock, production &amp; suivi<small>Du stock au tableau de bord</small></span></a>
+        </div>
+      </div>
+      <a href="#demo">Démo</a>
+      <a href="tarifs.html">Combien ça coûte&nbsp;?</a>
       <a href="#accompagnement">Accompagnement</a>
     </div>
     <div class="nav-droite">
@@ -87,47 +74,48 @@
     </div>
   </div>
 </nav>
-
-<!-- ══ MENU MOBILE ══ -->
 <div class="menu-mobile" id="menu-mobile">
-  <a href="#suivre">Ce que ça suit</a>
-  <a href="#recette">Prix de revient</a>
-  <a href="#pros">Clients pros</a>
-  <a href="#circuit">Tout LabFlow</a>
-  <a href="#migration">Migration</a>
-  <a href="#accompagnement">Accompagnement</a>
+  <span class="mm-groupe">Produits</span>
+  <a class="mm-sous" href="approvisionnements.html">Approvisionnements &amp; factures</a>
+  <a class="mm-sous" href="comptabilite.html">Comptabilité</a>
+  <a class="mm-sous" href="ventes-clients.html">Ventes &amp; clients</a>
+  <a class="mm-sous" href="stock-suivi.html">Stock, production &amp; suivi</a>
+  <a href="#demo">Démo</a>
+  <a href="tarifs.html">Combien ça coûte&nbsp;?</a>
   <a class="btn mm-cta" href="demande-acces.html">Demander un accès</a>
 </div>
 
 <main id="top">
 
 <!-- ══ 1 · HERO ══ -->
-<header class="hero">
+<header class="hero parcours">
   <div class="hero-aurore" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-in">
-      <div class="pastille reveal"><i></i>Achats · Stock · Ventes · Marges</div>
-      <h1 class="reveal d1">Tout votre commerce<br>dans <span class="clair">un seul écran</span>.</h1>
-      <p class="sous reveal d2">
-        Vous achetez, vous stockez, vous vendez. LabFlow suit le stock,
-        les coûts et la marge à votre place. Une seule saisie.
-      </p>
-      <div class="hero-ctas reveal d3">
+      <div>
+        <div class="pastille reveal"><i></i>Achats · Stock · Ventes · Comptabilité</div>
+        <h1 class="reveal d1">Vous photographiez la facture. <span class="clair">LabFlow fait le reste</span>, jusqu'au bilan.</h1>
+        <p class="sous reveal d2">Fournisseur reconnu, lignes lues et vérifiées par vous, stock à jour, écriture d'achat préparée. Votre comptable valide, dans le même logiciel.</p>
+        <div class="hero-ctas reveal d3">
         <a class="btn" href="demande-acces.html">Demander un accès</a>
-        <a class="btn-fantome" href="https://wa.me/21654183189?text=Bonjour%2C%20je%20voudrais%20demander%20un%20acc%C3%A8s%20%C3%A0%20LabFlow." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
+        <a class="btn-fantome" href="https://wa.me/21654183189" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
       </div>
       <p class="rappel reveal d3">Un conseiller vous rappelle.</p>
+      </div>
+      <ol class="chaine reveal d2" aria-label="Le parcours d'une facture dans LabFlow">
+        <li class="maillon"><span class="picto" aria-hidden="true">📷</span><div><b>La facture, photographiée</b><span>Épicerie du Lac · 12 lignes · 2 pages</span></div><span class="etat">lue</span></li>
+        <li class="maillon"><span class="picto" aria-hidden="true">📦</span><div><b>Le stock, à jour</b><span>Farine T55 +100 kg · Sucre +24 kg · point de vente du Lac</span></div><span class="etat">entré</span></li>
+        <li class="maillon"><span class="picto" aria-hidden="true">📒</span><div><b>L'écriture d'achat, préparée</b><span>Achats · TVA déductible · timbre · fournisseur</span></div><span class="etat">brouillard</span></li>
+        <li class="maillon fin"><span class="picto" aria-hidden="true">📊</span><div><b>Le bilan, à jour</b><span>Validé par votre comptable, états financiers selon la NC 01</span></div><span class="etat">validé</span></li>
+      </ol>
     </div>
   </div>
-  <div class="container scene">
+  <div class="container scene" id="demo">
     <div class="scene-lueur" aria-hidden="true"></div>
     <div class="scene-lueur serree" aria-hidden="true"></div>
     <div class="ecran reveal d3">
       <div class="ecran-in">
-        <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Tableau de bord</span></div>
-        <!-- Boucle vidéo dans le cadre « écran allumé » : l'affiche s'affiche
-             instantanément, la vidéo prend le relais une fois chargée (et ne
-             démarre pas du tout en « animations réduites »). -->
+        <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — de la facture au bilan</span></div>
         <div class="ecran-video fondu-bas">
           <video id="hero-video" muted loop playsinline preload="none"
                  poster="assets/video/demo-hero-poster.webp?v=11"
@@ -136,280 +124,145 @@
             <source src="assets/video/demo-hero.webm?v=11" type="video/webm">
             <source src="assets/video/demo-hero.mp4?v=11" type="video/mp4">
           </video>
-          <button type="button" class="video-pause" id="hero-pause"
-                  aria-pressed="false" aria-label="Mettre la démonstration en pause">
-            <svg aria-hidden="true"><use href="#ic-pause"/></svg>
-          </button>
+          <button type="button" class="video-pause" id="hero-pause" aria-pressed="false" aria-label="Mettre la démonstration en pause"><svg aria-hidden="true"><use href="#ic-pause"/></svg></button>
         </div>
       </div>
     </div>
     <div style="text-align:center">
-      <button type="button" class="voir-demo reveal" id="ouvrir-demo">
-        <span class="lecture" aria-hidden="true"><svg viewBox="0 0 12 14"><use href="#ic-play"/></svg></span>
-        Voir la démo <span class="duree">(1 min 30)</span>
-      </button>
-    </div>
+      <button type="button" class="voir-demo reveal" id="ouvrir-demo"><span class="lecture" aria-hidden="true"><svg viewBox="0 0 12 14"><use href="#ic-play"/></svg></span>Voir la démo <span class="duree">(1 min 30)</span></button>
+          </div>
   </div>
 </header>
 
-<!-- ══ 2 · UNE SAISIE, TOUT SUIT ══ -->
-<section id="suivre" class="sombre-2">
-  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
+<!-- ══ 2 · TROIS PREUVES ══ -->
+<section id="preuves" class="sombre-2">
   <div class="container">
     <div class="chapeau centre reveal">
-      <span class="oeil">Le principe — <b>une seule saisie</b></span>
-      <h2>Vous entrez l'achat.<br>Le reste se met à jour seul.</h2>
-      <p>Le stock, le coût réel et la marge se recalculent au moment où vous enregistrez.
-         Pas de tableur à tenir le soir, pas de double saisie.</p>
+      <span class="oeil">Trois preuves — <b>ce qui a changé</b></span>
+      <h2>La facture entre. Le bilan sort.<br>Entre les deux, tout suit.</h2>
+      <p>Trois cartes suffisent à le dire. Chaque module a sa page, sa vidéo courte et ses captures réelles.</p>
     </div>
-    <div class="cadre-visu ecran-plein taille-m reveal d1">
-      <div class="lueur" aria-hidden="true"></div>
-      <div class="ecran">
-        <div class="ecran-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Tableau de bord</span></div>
-          <div class="ecran-visu">
-            <picture>
-              <source type="image/avif" srcset="assets/img/ecran-dashboard@1x.avif?v=7 1x, assets/img/ecran-dashboard@2x.avif?v=7 2x, assets/img/ecran-dashboard@3x.avif?v=7 3x, assets/img/ecran-dashboard@4x.avif?v=7 4x">
-              <source type="image/webp" srcset="assets/img/ecran-dashboard@1x.webp?v=7 1x, assets/img/ecran-dashboard@2x.webp?v=7 2x, assets/img/ecran-dashboard@3x.webp?v=7 3x, assets/img/ecran-dashboard@4x.webp?v=7 4x">
-              <img src="assets/img/ecran-dashboard@1x.webp?v=7"
-                   alt="Tableau de bord LabFlow : chiffre d'affaires, marge brute, food cost, pertes, valeur du stock et ventes aux professionnels réunis sur un seul écran. Compte de démonstration Dar Yasmine."
-                   loading="lazy" width="780" height="687">
-            </picture>
+    <div class="preuves">
+      <a class="preuve reveal" href="approvisionnements.html">
+        <div class="preuve-visu"><div class="lueur" aria-hidden="true"></div>
+          <div class="app facture-verif" aria-hidden="true">
+            <div class="feuille"><div class="papier" style="position:relative"><span class="l titre"></span><span class="l c"></span><span class="l d"></span><div class="grille"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="l e"></span><span class="tot"></span><span class="tampon">LUE</span></div></div>
+            <div class="lignes"><div class="app capture"><picture><source type="image/avif" srcset="assets/img/ecran-verifier-facture@1x.avif?v=8 1x, assets/img/ecran-verifier-facture@2x.avif?v=8 2x, assets/img/ecran-verifier-facture@3x.avif?v=8 3x"><source type="image/webp" srcset="assets/img/ecran-verifier-facture@1x.webp?v=8 1x, assets/img/ecran-verifier-facture@2x.webp?v=8 2x, assets/img/ecran-verifier-facture@3x.webp?v=8 3x"><img src="assets/img/ecran-verifier-facture@1x.webp?v=8" alt="Écran Vérifier la facture de LabFlow : les lignes lues et l'article reconnu. Compte de démonstration Dar Yasmine." loading="lazy" width="1000" height="720" style="width:100%;height:100%;object-fit:cover;object-position:left top;display:block"></picture></div>
+              <table><thead><tr><th>Ligne lue</th><th>Article</th><th class="r">Qté</th><th></th></tr></thead><tbody>
+                <tr><td>FARINE T55 25KG</td><td>Farine T55<span class="code">FAR-0001</span></td><td class="r">4</td><td><span class="puce">reconnu</span></td></tr>
+                <tr><td>SUCRE SEMOULE 1KG</td><td>Sucre semoule<span class="code">SUC-0001</span></td><td class="r">24</td><td><span class="puce">reconnu</span></td></tr>
+                <tr><td>LEVURE FRAICHE</td><td>Levure boulangère<span class="code">LEV-0003</span></td><td class="r">6</td><td><span class="puce att">à choisir</span></td></tr>
+                <tr><td>LIVRAISON</td><td>Hors stock · transport</td><td class="r">1</td><td><span class="puce hs">hors stock</span></td></tr>
+              </tbody></table></div>
           </div>
         </div>
-      </div>
-    </div>
-    <p class="legende centre reveal d1">Marge · Stock · Ventes · Pertes — recalculés à chaque saisie. Compte de démonstration Dar Yasmine.</p>
-  </div>
-</section>
-
-<!-- ══ 3 · PRIX DE REVIENT ══ -->
-<section id="recette">
-  <div class="container duo">
-    <div class="duo-texte reveal">
-      <span class="oeil">Si vous transformez — <b>recettes</b></span>
-      <h2>Combien vous coûte<br>ce que vous fabriquez&nbsp;?</h2>
-      <p>Composez la recette une fois. LabFlow additionne le coût réel de chaque
-         ingrédient et vous dit ce que le produit fini vous coûte, aujourd'hui.</p>
-      <ul class="liste">
-        <li><i aria-hidden="true"></i>Le coût suit vos derniers prix d'achat</li>
-        <li><i aria-hidden="true"></i>Une recette peut en contenir une autre</li>
-        <li><i aria-hidden="true"></i>Produire déduit les ingrédients du stock</li>
-      </ul>
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
-    </div>
-    <div class="cadre-visu duo-visu reveal d1">
-      <div class="lueur" aria-hidden="true"></div>
-      <div class="ecran compact">
-        <div class="ecran-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Fiche technique · Mille-feuille</span></div>
-          <div class="ecran-visu">
-            <picture>
-              <source type="image/avif" srcset="assets/img/ecran-ft@1x.avif?v=7 1x, assets/img/ecran-ft@2x.avif?v=7 2x, assets/img/ecran-ft@3x.avif?v=7 3x">
-              <source type="image/webp" srcset="assets/img/ecran-ft@1x.webp?v=7 1x, assets/img/ecran-ft@2x.webp?v=7 2x, assets/img/ecran-ft@3x.webp?v=7 3x">
-              <img src="assets/img/ecran-ft@1x.webp?v=7"
-                   alt="Fiche technique du mille-feuille en mode FT Stock : composition avec sous-recettes (pâte feuilletée, crème pâtissière), prix issus des approvisionnements, méthode Dernier Prix ou PMP, et coût en temps réel calculé — 1,494 DT. Compte de démonstration Dar Yasmine."
-                   loading="lazy" width="900" height="1143">
-            </picture>
+        <div class="preuve-corps"><span class="tag">Approvisionnements</span><h3>La facture entre toute seule</h3><p>Photo, scan ou PDF : le fournisseur est reconnu, les lignes sont lues et vérifiées, le stock et la compta suivent.</p><span class="suite">Voir comment<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></span></div>
+      </a>
+      <a class="preuve reveal d1" href="comptabilite.html">
+        <div class="preuve-visu"><div class="lueur" aria-hidden="true"></div>
+          <div class="app" aria-hidden="true"><div class="app capture"><picture><source type="image/avif" srcset="assets/img/ecran-bilan@1x.avif?v=8 1x, assets/img/ecran-bilan@2x.avif?v=8 2x, assets/img/ecran-bilan@3x.avif?v=8 3x"><source type="image/webp" srcset="assets/img/ecran-bilan@1x.webp?v=8 1x, assets/img/ecran-bilan@2x.webp?v=8 2x, assets/img/ecran-bilan@3x.webp?v=8 3x"><img src="assets/img/ecran-bilan@1x.webp?v=8" alt="Bilan de l'exercice dans LabFlow Compta. Compte de démonstration Dar Yasmine." loading="lazy" width="1000" height="1107" style="width:100%;height:100%;object-fit:cover;object-position:left top;display:block"></picture></div>
+            <div class="bilan"><div><h5>Actifs</h5><div class="li"><span>Stocks</span><span>18 420</span></div><div class="li"><span>Clients</span><span>9 310</span></div><div class="li"><span>Banques et caisse</span><span>27 850</span></div><div class="li total"><span>Total</span><span>55 580</span></div></div>
+              <div><h5>Capitaux et passifs</h5><div class="li"><span>Capital</span><span>20 000</span></div><div class="li"><span>Résultat</span><span>14 240</span></div><div class="li"><span>Fournisseurs</span><span>21 340</span></div><div class="li total"><span>Total</span><span>55 580</span></div></div></div>
           </div>
         </div>
-      </div>
+        <div class="preuve-corps"><span class="tag">LabFlow Compta</span><h3>Une comptabilité complète, votre comptable dedans</h3><p>Journaux, TVA, déclaration mensuelle, clôture et états financiers selon la NC 01. Le cabinet travaille dans votre dossier, sans ressaisie.</p><span class="suite">Découvrir<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></span></div>
+      </a>
+      <a class="preuve reveal d2" href="stock-suivi.html">
+        <div class="preuve-visu"><div class="lueur" aria-hidden="true"></div>
+          <ul class="coches" aria-hidden="true">
+            <li><i></i>des fournisseurs</li><li><i></i>un stock</li><li><i></i>une production</li><li><i></i>des clients pros</li><li><i></i>des particuliers</li><li><i></i>un comptable</li>
+            <li class="fin">LabFlow est fait pour vous</li>
+          </ul>
+        </div>
+        <div class="preuve-corps"><span class="tag">Pour qui</span><h3>Tout commerce qui achète, stocke, produit et vend</h3><p>Restaurant, boulangerie, hôtel, atelier, boutique&nbsp;: peu importe l'enseigne. Des appros, un stock, une production, des ventes aux pros ou aux particuliers, et la comptabilité qui suit.</p><span class="suite">Voir le suivi<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></span></div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ══ 4 · CLIENTS PROS + FACTURATION (blocs fusionnés 2026-07-24) ══
-     Un seul récit : la commande arrive par le portail, la facture (TVA,
-     numérotation, timbre fiscal) sort prête. Visuel composé : l'écran des
-     commandes + la facture PDF en carte superposée. -->
-<section id="pros" class="sombre-2">
-  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
-  <div class="container duo inverse">
-    <div class="duo-texte reveal d1">
-      <span class="oeil">Clients pros — <b>du portail à la facture</b></span>
-      <h2>Vos clients pros commandent.<br>La facture suit, toute seule.</h2>
-      <p>Chaque client professionnel a son espace, à ses tarifs. Il commande quand il veut,
-         sans vous appeler ; vous suivez la commande jusqu'à la livraison — et la facture
-         sort prête, aux normes tunisiennes.</p>
-      <ul class="liste">
-        <li><i aria-hidden="true"></i>Reçue → préparée → expédiée → livrée</li>
-        <li><i aria-hidden="true"></i>Chaque client voit ses propres tarifs</li>
-        <li><i aria-hidden="true"></i>TVA, numérotation, timbre fiscal — rien à recompter</li>
-      </ul>
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
-    </div>
-    <div class="cadre-visu duo-visu compo reveal">
-      <div class="lueur" aria-hidden="true"></div>
-      <div class="ecran compact">
-        <div class="ecran-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Ventes acheteurs · commande livrée</span></div>
-          <div class="ecran-visu">
-            <picture>
-              <source type="image/avif" srcset="assets/img/ecran-commandes@1x.avif?v=7 1x, assets/img/ecran-commandes@2x.avif?v=7 2x, assets/img/ecran-commandes@3x.avif?v=7 3x, assets/img/ecran-commandes@4x.avif?v=7 4x">
-              <source type="image/webp" srcset="assets/img/ecran-commandes@1x.webp?v=7 1x, assets/img/ecran-commandes@2x.webp?v=7 2x, assets/img/ecran-commandes@3x.webp?v=7 3x, assets/img/ecran-commandes@4x.webp?v=7 4x">
-              <img src="assets/img/ecran-commandes@1x.webp?v=7"
-                   alt="Écran Ventes Acheteurs de LabFlow avec le détail d'une commande livrée ouvert par-dessus la liste : lignes commandées, facture FA-2026-0002 avec timbre fiscal (TTC 451,470 DT) et suivi de la commande accompli en trois étapes — en attente, expédiée, livrée. Compte de démonstration Dar Yasmine."
-                   loading="lazy" width="900" height="736">
-            </picture>
-          </div>
-        </div>
-      </div>
-      <!-- La facture PDF, posée par-dessus le coin de l'écran : le duo
-           « commande → facture » se lit d'un seul regard. -->
-      <div class="ecran compo-doc" aria-hidden="false">
-        <div class="ecran-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Facture PDF</span></div>
-          <div class="ecran-visu">
-            <picture>
-              <source type="image/avif" srcset="assets/img/ecran-facture@1x.avif?v=7 1x, assets/img/ecran-facture@2x.avif?v=7 2x, assets/img/ecran-facture@3x.avif?v=7 3x, assets/img/ecran-facture@4x.avif?v=7 4x">
-              <source type="image/webp" srcset="assets/img/ecran-facture@1x.webp?v=7 1x, assets/img/ecran-facture@2x.webp?v=7 2x, assets/img/ecran-facture@3x.webp?v=7 3x, assets/img/ecran-facture@4x.webp?v=7 4x">
-              <img src="assets/img/ecran-facture@1x.webp?v=7"
-                   alt="Facture PDF LabFlow : émetteur Dar Yasmine, client, détail des lignes, Total HT, TVA, timbre fiscal 1,000 DT et Net à payer 256,088 DT. Compte de démonstration Dar Yasmine."
-                   loading="lazy" width="470" height="412">
-            </picture>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 5 · LE CIRCUIT COMPLET (remplace « qui voit quoi », 2026-07-24) ══
-     Objectif : montrer la GLOBALITÉ des fonctionnalités d'un seul regard.
-     Pas de captures ici : les pictos sont ceux des interfaces de l'application
-     (mêmes emojis que la sidebar de l'app — reconnaissables une fois client). -->
+<!-- ══ 3 · LE CIRCUIT COMPLET (7 étapes) ══ -->
 <section id="circuit">
   <div class="container">
     <div class="chapeau centre reveal">
-      <span class="oeil">Vue d'ensemble — <b>tout est relié</b></span>
-      <h2>Un seul système,<br>du fournisseur à la marge.</h2>
-      <p>Chaque module alimente le suivant — les icônes sont celles de l'application.
-         Vous saisissez une fois&nbsp;; LabFlow relie tout, jusqu'au tableau de bord.</p>
+      <span class="oeil">Le circuit complet — <b>du fournisseur au bilan</b></span>
+      <h2>Un seul système,<br>du fournisseur au bilan.</h2>
+      <p>Chaque étape alimente la suivante. Rien n'est ressaisi.</p>
     </div>
-    <ol class="flux reveal d1">
-      <li class="flux-etape"><span class="picto" aria-hidden="true">📚</span><b class="flux-nom">Référentiel</b><span class="flux-det">Articles, unités, catégories, familles</span></li>
-      <li class="flux-etape"><span class="picto" aria-hidden="true">📦</span><b class="flux-nom">Stock &amp; achats</b><span class="flux-det">Approvisionnements, valeur du stock</span></li>
-      <li class="flux-etape"><span class="picto" aria-hidden="true">🍔</span><b class="flux-nom">Recettes &amp; production</b><span class="flux-det">Fiches techniques, coûts réels</span></li>
-      <li class="flux-etape"><span class="picto" aria-hidden="true">🛒</span><b class="flux-nom">Ventes</b><span class="flux-det">Comptoir et prestataires de livraison</span></li>
-      <li class="flux-etape"><span class="picto" aria-hidden="true">🤝</span><b class="flux-nom">Clients pros</b><span class="flux-det">Portail, commandes, factures</span></li>
+    <ol class="flux sept reveal d1">
+      <li class="flux-etape"><span class="picto" aria-hidden="true">📚</span><b class="flux-nom">Référentiel</b><span class="flux-det">Articles codés, unités, catégories</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">🧾</span><b class="flux-nom">Factures &amp; achats</b><span class="flux-det">Déposées, lues, vérifiées</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">📦</span><b class="flux-nom">Stock</b><span class="flux-det">Par site, transferts, inventaires</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">🍔</span><b class="flux-nom">Production</b><span class="flux-det">Fiches techniques, coûts réels</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">🛒</span><b class="flux-nom">Ventes</b><span class="flux-det">Comptoir, livraison, clients pros</span></li>
+      <li class="flux-etape"><span class="picto" aria-hidden="true">📒</span><b class="flux-nom">Comptabilité</b><span class="flux-det">Écritures, TVA, états financiers</span></li>
       <li class="flux-etape flux-fin"><span class="picto" aria-hidden="true">📊</span><b class="flux-nom">Marges</b><span class="flux-det">Le tableau de bord conclut</span></li>
     </ol>
     <p class="flux-plus reveal d2">
       <span class="flux-plus-titre">Et tout autour&nbsp;:</span>
-      <span class="puce-module"><span aria-hidden="true">🚚</span> Fournisseurs</span>
-      <span class="puce-module"><span aria-hidden="true">🏭</span> Labo &amp; transferts</span>
-      <span class="puce-module"><span aria-hidden="true">🔢</span> Inventaires</span>
-      <span class="puce-module"><span aria-hidden="true">📉</span> Pertes</span>
-      <span class="puce-module"><span aria-hidden="true">👥</span> Accès gérants</span>
-      <span class="puce-module"><span aria-hidden="true">🧾</span> Factures d'achat</span>
+      <span class="puce-module">Pertes</span><span class="puce-module">Inventaires</span><span class="puce-module">Gérants</span><span class="puce-module">Portail acheteurs</span><span class="puce-module">Exports Excel</span><span class="puce-module">Manuel &amp; assistant</span>
     </p>
-    <p class="cloison-note reveal d2">Vos chiffres restent à vous — exportables en Excel à tout moment.</p>
   </div>
 </section>
 
-<!-- ══ 6 · MIGRATION — DÉMARRAGE RAPIDE (enrichi 2026-07-24 : les 3 modèles) ══
-     Colonnes et plafonds RELEVÉS DANS LE CODE (règle de véracité) :
-     articles = Article/Unité/Catégorie/Famille, 1 000 lignes (referentielController) ·
-     fournisseurs = Nom/Téléphone/Adresse, 500 (fournisseurController) ·
-     acheteurs = Nom/Entreprise/Email/Téléphone/Adresse/Matricule fiscal, 500
-     (acheteursController). Ne pas embellir sans re-vérifier. -->
-<section id="migration" class="sombre-2">
-  <hr class="sep" style="position:absolute;top:0;left:0;right:0" aria-hidden="true">
+<!-- ══ 4 · CLIENTS PROS ET PARTICULIERS ══ -->
+<section id="pros" class="sombre-2">
+  <div class="container duo">
+    <div class="duo-texte reveal">
+      <span class="oeil">Clients pros <b>et particuliers</b></span>
+      <h2>Vos clients commandent.<br>La facture suit, toute seule.</h2>
+      <p>Un portail de commande pour vos clients professionnels, une facture conforme pour chacun, société ou particulier.</p>
+      <ul class="liste">
+        <li><i></i>Carnet B2B et B2C : raison sociale et matricule lus sur la patente</li>
+        <li><i></i>Commandes en quatre états, stock déduit à l'expédition</li>
+        <li><i></i>Facture PDF à identité figée, timbre et numérotation</li>
+      </ul>
+      <a class="btn" href="ventes-clients.html">Voir Ventes &amp; clients</a>
+    </div>
+    <div class="duo-visu cadre-visu compo reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran compact"><div class="ecran-in"><div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Ventes acheteurs · commande livrée</span></div>
+        <div class="ecran-visu"><picture><source type="image/avif" srcset="assets/img/ecran-commandes@1x.avif?v=7 1x, assets/img/ecran-commandes@2x.avif?v=7 2x"><img src="assets/img/ecran-commandes@1x.webp?v=7" alt="Écran des commandes acheteurs avec le détail d'une commande livrée. Compte de démonstration Dar Yasmine." loading="lazy" width="900" height="560"></picture></div></div></div>
+      <div class="ecran compo-doc"><div class="ecran-in"><div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Facture PDF</span></div>
+        <div class="ecran-visu"><picture><source type="image/avif" srcset="assets/img/ecran-facture@1x.avif?v=7 1x, assets/img/ecran-facture@2x.avif?v=7 2x"><img src="assets/img/ecran-facture@1x.webp?v=7" alt="Facture de vente PDF générée par LabFlow. Compte de démonstration Dar Yasmine." loading="lazy" width="470" height="640"></picture></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5 · VOUS PARTEZ D'EXCEL ? ══ -->
+<section id="migration">
   <div class="container">
     <div class="chapeau centre reveal">
-      <span class="oeil">Migration — <b>démarrage rapide</b></span>
+      <span class="oeil">Vous partez d'Excel&nbsp;?</span>
       <h2>Vos fichiers Excel<br>deviennent votre compte.</h2>
-      <p>Trois modèles fournis — articles, fournisseurs, clients pros. Vous téléchargez,
-         vous remplissez, vous importez&nbsp;: LabFlow crée tout d'un coup, rien à paramétrer.</p>
+      <p>Trois modèles à remplir, un clic, et le résultat ligne par ligne.</p>
     </div>
-    <div class="modeles">
-      <article class="modele reveal">
-        <div class="modele-tete">
-          <span class="picto" aria-hidden="true">🧂</span>
-          <div><h3>Articles</h3><span class="modele-limite">jusqu'à 1&nbsp;000 lignes par fichier</span></div>
-        </div>
-        <p class="modele-colonnes"><span>Article</span><span>Unité</span><span>Catégorie</span><span>Famille</span></p>
-        <p class="modele-note">Créés avec leurs unités, catégories et familles, aussitôt disponibles
-           dans tous vos points de vente.</p>
-      </article>
-      <article class="modele reveal d1">
-        <div class="modele-tete">
-          <span class="picto" aria-hidden="true">🚚</span>
-          <div><h3>Fournisseurs</h3><span class="modele-limite">jusqu'à 500 lignes par fichier</span></div>
-        </div>
-        <p class="modele-colonnes"><span>Nom</span><span>Téléphone</span><span>Adresse</span></p>
-        <p class="modele-note">Affectés d'office à vos points de vente et votre labo — les doublons
-           sont ignorés et signalés.</p>
-      </article>
-      <article class="modele reveal d2">
-        <div class="modele-tete">
-          <span class="picto" aria-hidden="true">🤝</span>
-          <div><h3>Clients pros</h3><span class="modele-limite">jusqu'à 500 lignes par fichier</span></div>
-        </div>
-        <p class="modele-colonnes"><span>Nom</span><span>Entreprise</span><span>Email</span><span>Téléphone</span><span>Adresse</span><span>Matricule fiscal</span></p>
-        <p class="modele-note">Votre carnet d'acheteurs constitué en une fois — il ne reste
-           qu'à les inviter sur leur portail.</p>
-      </article>
-    </div>
-    <div class="cadre-visu ecran-plein taille-m reveal d2">
-      <div class="lueur" aria-hidden="true"></div>
-      <div class="ecran">
-        <div class="ecran-in">
-          <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Ajout dynamique</span></div>
-          <div class="ecran-visu">
-            <picture>
-              <source type="image/avif" srcset="assets/img/ecran-import-succes@1x.avif?v=7 1x, assets/img/ecran-import-succes@2x.avif?v=7 2x, assets/img/ecran-import-succes@3x.avif?v=7 3x, assets/img/ecran-import-succes@4x.avif?v=7 4x">
-              <source type="image/webp" srcset="assets/img/ecran-import-succes@1x.webp?v=7 1x, assets/img/ecran-import-succes@2x.webp?v=7 2x, assets/img/ecran-import-succes@3x.webp?v=7 3x, assets/img/ecran-import-succes@4x.webp?v=7 4x">
-              <img src="assets/img/ecran-import-succes@1x.webp?v=7"
-                   alt="Écran d'import LabFlow après un import réussi : bandeau « Import terminé — 6 lignes traitées », compteurs 6 articles, 4 catégories et 1 famille créés, et le détail ligne par ligne avec affectation automatique. Compte de démonstration Dar Yasmine."
-                   loading="lazy" width="900" height="580">
-            </picture>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="legende centre reveal d2">Un modèle rempli, un clic — et le résultat, ligne par ligne. Compte de démonstration Dar Yasmine.</p>
-    <div style="text-align:center;margin-top:34px" class="reveal d2">
-      <a class="btn" href="demande-acces.html">Demander un accès</a>
+    <div class="modeles" style="margin-bottom:0">
+      <article class="modele reveal"><div class="modele-tete"><span class="picto" aria-hidden="true">📚</span><div><h3>Articles</h3><span class="modele-limite">jusqu'à 1&nbsp;000 lignes par fichier</span></div></div>
+        <p class="modele-colonnes"><span>Article</span><span>Unité</span><span>Catégorie</span><span>Famille</span><span>Code</span></p>
+        <p class="modele-note">Créés avec leurs unités, catégories et familles. Le code est proposé par catégorie si la colonne est vide.</p></article>
+      <article class="modele reveal d1"><div class="modele-tete"><span class="picto" aria-hidden="true">🚚</span><div><h3>Fournisseurs</h3><span class="modele-limite">jusqu'à 500 lignes par fichier</span></div></div>
+        <p class="modele-colonnes"><span>Nom</span><span>Téléphone</span><span>Adresse</span><span>Matricule fiscal</span></p>
+        <p class="modele-note">Reconnus ensuite sur leurs factures par le matricule.</p></article>
+      <article class="modele reveal d2"><div class="modele-tete"><span class="picto" aria-hidden="true">🤝</span><div><h3>Clients pros</h3><span class="modele-limite">jusqu'à 500 lignes par fichier</span></div></div>
+        <p class="modele-colonnes"><span>Nom</span><span>Entreprise</span><span>Email</span><span>Téléphone</span><span>Adresse</span><span>Matricule</span><span>Type</span><span>RNE</span></p>
+        <p class="modele-note">Professionnels ou particuliers, prêts à être invités sur leur portail.</p></article>
     </div>
   </div>
 </section>
 
-<!-- ══ 7 · ACCOMPAGNEMENT (nouveau 2026-07-24) ══
-     Trois appuis réels — pas de promesse de délai (règle de véracité : jamais
-     de « réponse sous 24 h ») : l'équipe (pas de self-service, un conseiller
-     rappelle, WhatsApp réel), le manuel (bouton d'aide sur chaque page + PDF),
-     l'assistant IA du header de l'app (appuyé sur le manuel). -->
-<section id="accompagnement">
+<!-- ══ 6 · ACCOMPAGNEMENT (+ le comptable) ══ -->
+<section id="accompagnement" class="sombre-2">
   <div class="container">
     <div class="chapeau centre reveal">
       <span class="oeil">Accompagnement — <b>vous n'êtes jamais seul</b></span>
-      <h2>Une équipe, un manuel,<br>un assistant. Les trois vous suivent.</h2>
-      <p>LabFlow ne vous laisse pas seul devant un logiciel&nbsp;: on vous installe,
-         on vous guide, et l'aide vit dans l'application.</p>
+      <h2>Une équipe, un manuel, un assistant…<br>et votre comptable.</h2>
+      <p>On vous installe, on vous guide, l'aide vit dans l'application, et votre comptable y a sa place.</p>
     </div>
-    <div class="trois">
-      <article class="regard moi reveal">
-        <span class="picto" aria-hidden="true">👥</span>
-        <span class="tag">Notre équipe</span>
-        <h3>Une mise en route accompagnée</h3>
-        <p>Votre compte est préparé avec vous&nbsp;: un conseiller vous rappelle, met
-           l'essentiel en place et reste joignable sur WhatsApp.</p>
-      </article>
-      <article class="regard reveal d1">
-        <span class="picto" aria-hidden="true">📖</span>
-        <span class="tag">Le manuel</span>
-        <h3>Chaque écran a sa fiche</h3>
-        <p>Un bouton d'aide sur chaque page ouvre la fiche du manuel qui lui correspond —
-           et le manuel complet se télécharge en PDF.</p>
-      </article>
-      <article class="regard reveal d2">
-        <span class="picto" aria-hidden="true">🤖</span>
-        <span class="tag">Assistant IA</span>
-        <h3>Des réponses dans l'application</h3>
-        <p>Un assistant intégré à la barre de l'application répond à vos questions
-           d'usage, appuyé sur le manuel LabFlow.</p>
-      </article>
+    <div class="quatre">
+      <article class="regard moi reveal"><span class="picto" aria-hidden="true">👥</span><span class="tag">Notre équipe</span><h3>Une mise en route accompagnée</h3><p>Votre compte est préparé avec vous : un conseiller vous rappelle et reste joignable sur WhatsApp.</p></article>
+      <article class="regard reveal d1"><span class="picto" aria-hidden="true">📖</span><span class="tag">Le manuel</span><h3>Chaque écran a sa fiche</h3><p>Un bouton d'aide sur chaque page ouvre la fiche du manuel, dans les mots de votre métier.</p></article>
+      <article class="regard reveal d2"><span class="picto" aria-hidden="true">🤖</span><span class="tag">Assistant</span><h3>Des réponses dans l'application</h3><p>Un assistant intégré répond à vos questions d'usage, appuyé sur le manuel.</p></article>
+      <article class="regard reveal d3"><span class="picto" aria-hidden="true">📒</span><span class="tag">Votre comptable</span><h3>Dans le même logiciel</h3><p>Il se connecte à votre dossier, valide le brouillard et sort les états financiers, sans export ni ressaisie.</p></article>
     </div>
     <!-- Carrousel de partenaires : masqué tant que GET /api/public/partenaires
          ne renvoie rien. Contrat inchangé. -->
@@ -422,37 +275,27 @@
 
 </main>
 
-<!-- ══ 8 · CTA FINAL ══ -->
+<!-- ══ 7 · CTA FINAL ══ -->
 <section class="final" id="final">
   <div class="hero-aurore" aria-hidden="true"></div>
-  <div class="container">
-    <div class="final-in reveal">
-      <h2>Le prochain chiffre que<br>vous regarderez sera le vôtre.</h2>
-      <p>Racontez-nous votre commerce. Un conseiller vous rappelle, vous montre LabFlow
-         sur vos propres chiffres, et vous repartez avec un compte prêt à l'emploi.</p>
-      <p class="offre-finale"><span aria-hidden="true">🎁</span> <b>Votre premier mois est offert.</b></p>
-      <div class="final-ctas">
-        <a class="btn" href="demande-acces.html">Demander un accès<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
-        <a class="btn-fantome" href="https://wa.me/21654183189?text=Bonjour%2C%20je%20voudrais%20demander%20un%20acc%C3%A8s%20%C3%A0%20LabFlow." target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
-      </div>
-      <p class="rappel">Réponse rapide, par un humain. Aucun paiement en ligne.</p>
-      <a class="lien-cout" href="tarifs.html">Combien ça coûte&nbsp;?</a>
+  <div class="container"><div class="final-in reveal">
+    <h2>Le prochain chiffre que<br>vous regarderez sera le vôtre.</h2>
+    <p>Racontez-nous votre commerce. Un conseiller vous rappelle, vous montre LabFlow sur vos propres chiffres, et vous repartez avec un compte prêt à l'emploi.</p>
+    <p class="offre-finale"><span aria-hidden="true">🎁</span> <b>Votre premier mois est offert.</b></p>
+    <div class="final-ctas">
+      <a class="btn" href="demande-acces.html">Demander un accès<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
+      <a class="btn-fantome" href="https://wa.me/21654183189" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
     </div>
-  </div>
+    <p class="rappel">Réponse rapide, par un humain. Aucun paiement en ligne.</p>
+    <a class="lien-cout" href="tarifs.html">Combien ça coûte&nbsp;?</a>
+  </div></div>
 </section>
 
 <footer class="pied">
   <div class="container">
-    <div class="marque">
-      <svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg>
-      <span class="mot"><b>Lab</b><span>Flow</span></span>
-    </div>
+    <div class="marque"><svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg><span class="mot"><b>Lab</b><span>Flow</span></span></div>
     <nav class="pied-liens" aria-label="Pied de page">
-      <a href="index.html" aria-current="page">Accueil</a>
-      <a href="demande-acces.html">Demande d'accès</a>
-      <a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a>
-      <a href="mentions-legales.html">Mentions légales</a>
-      <a href="confidentialite.html">Confidentialité</a>
+      <a href="#top" aria-current="page">Accueil</a><a href="approvisionnements.html">Approvisionnements &amp; factures</a><a href="comptabilite.html">Comptabilité</a><a href="ventes-clients.html">Ventes &amp; clients</a><a href="stock-suivi.html">Stock, production &amp; suivi</a><a href="#demo">Démo</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
     </nav>
     <p>Conçu en Tunisie 🇹🇳</p>
   </div>

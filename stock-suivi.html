@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stock, production & suivi — LabFlow</title>
+<!-- ≤ 155 caractères : au-delà, Google tronque. Aucun terme « ERP ». -->
+<meta name="description" content="Stock par site, fiches techniques au coût réel, production, inventaires, pertes et un tableau de bord filtrable par période, site, produit et canal.">
+<meta property="og:title" content="Le stock juste, la marge vraie">
+<meta property="og:description" content="Stock par site, fiches techniques au coût réel, production, inventaires, pertes et un tableau de bord filtrable par période, site, produit et canal.">
+<meta property="og:image" content="https://labflow-tn.com/assets/img/og.jpg?v=6">
+<meta property="og:url" content="https://labflow-tn.com/stock-suivi.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_TN">
+<link rel="canonical" href="https://labflow-tn.com/stock-suivi.html">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/v4.css?v=8">
+<link rel="stylesheet" href="assets/css/v5.css?v=1">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+</head>
+<body class="avec-annonce">
+
+<a class="saut-contenu" href="#top">Aller au contenu</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
+    <symbol id="lf-losange" viewBox="0 0 52 52">
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
+      <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
+      <g transform="translate(26,26) rotate(45)" fill="#fff">
+        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/><rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
+        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
+        <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
+      </g>
+    </symbol>
+    <symbol id="ic-wa" viewBox="0 0 20 20"><path d="M10 1a9 9 0 0 0-7.7 13.6L1 19l4.5-1.2A9 9 0 1 0 10 1zm0 2a7 7 0 1 1-3.6 13l-.3-.2-2.2.6.6-2.1-.2-.4A7 7 0 0 1 10 3zm-3 3.6c-.2 0-.5.1-.7.4-.3.3-.8.8-.8 1.9s.9 2.2 1 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.6-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a5.7 5.7 0 0 1-2.8-2.5c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></symbol>
+    <symbol id="ic-fleche" viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-play" viewBox="0 0 12 14"><path d="M0 0v14l12-7z"/></symbol>
+  </defs>
+</svg>
+
+<a class="annonce" href="demande-acces.html"><span aria-hidden="true">🎁</span><b>Votre premier mois est offert</b><span class="annonce-suite">— demandez votre accès</span><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
+
+<nav class="nav" id="nav">
+  <div class="container nav-in">
+    <a class="marque" href="index.html" aria-label="LabFlow — accueil"><svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg><span class="mot"><b>Lab</b><span>Flow</span></span></a>
+    <div class="nav-liens">
+      <div class="deroulant">
+        <a href="index.html#preuves" aria-haspopup="true">Produits<i aria-hidden="true"></i></a>
+        <div class="sous">
+          <a href="approvisionnements.html"><span class="ic" aria-hidden="true">🧾</span><span>Approvisionnements &amp; factures<small>La facture entre toute seule</small></span></a>
+          <a href="comptabilite.html"><span class="ic" aria-hidden="true">📒</span><span>Comptabilité<small>Votre comptable, dans votre dossier</small></span></a>
+          <a href="ventes-clients.html"><span class="ic" aria-hidden="true">🤝</span><span>Ventes &amp; clients<small>Pros et particuliers, portail, factures</small></span></a>
+          <a href="stock-suivi.html" aria-current="page"><span class="ic" aria-hidden="true">📊</span><span>Stock, production &amp; suivi<small>Du stock au tableau de bord</small></span></a>
+        </div>
+      </div>
+      <a href="index.html#demo">Démo</a>
+      <a href="tarifs.html">Combien ça coûte&nbsp;?</a>
+      <a href="index.html#accompagnement">Accompagnement</a>
+    </div>
+    <div class="nav-droite">
+      <a class="btn petit" href="demande-acces.html">Demander un accès</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="menu-mobile" id="menu-mobile">
+  <span class="mm-groupe">Produits</span>
+  <a class="mm-sous" href="approvisionnements.html">Approvisionnements &amp; factures</a>
+  <a class="mm-sous" href="comptabilite.html">Comptabilité</a>
+  <a class="mm-sous" href="ventes-clients.html">Ventes &amp; clients</a>
+  <a class="mm-sous" href="stock-suivi.html">Stock, production &amp; suivi</a>
+  <a href="index.html#demo">Démo</a>
+  <a href="tarifs.html">Combien ça coûte&nbsp;?</a>
+  <a class="btn mm-cta" href="demande-acces.html">Demander un accès</a>
+</div>
+
+<main id="top">
+
+<!-- ══ HERO DE PAGE ══ -->
+<header class="hero page">
+  <div class="hero-aurore" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-in">
+      <nav class="ariane reveal" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><span>›</span><span>Produits</span><span>›</span><span>Stock, production &amp; suivi</span></nav>
+      <div class="pastille reveal"><i></i>Stock · Production · Tableau de bord</div>
+      <h1 class="reveal d1">Le stock juste,<br><span class="clair">la marge vraie</span>.</h1>
+      <p class="sous reveal d2">Un stock par site, des fiches techniques au coût réel, la production au labo, les pertes et les inventaires. Et un tableau de bord qui répond à toutes vos questions.</p>
+      <div class="hero-ctas reveal d3">
+        <a class="btn" href="demande-acces.html">Demander un accès</a>
+      </div>
+    </div>
+  </div>
+  <div class="container scene">
+    <div class="scene-lueur" aria-hidden="true"></div>
+    <div class="scene-lueur serree" aria-hidden="true"></div>
+    <div class="ecran reveal d3">
+      <div class="ecran-in">
+        <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Tableau de bord</span></div>
+        <div class="ecran-visu"><picture><source type="image/avif" srcset="assets/img/ecran-dashboard@1x.avif?v=7 1x, assets/img/ecran-dashboard@2x.avif?v=7 2x"><img src="assets/img/ecran-dashboard@1x.webp?v=7" alt="Tableau de bord LabFlow : ventes, marges, achats et stocks de la période. Compte de démonstration Dar Yasmine." width="1100" height="686"></picture></div>
+      </div>
+    </div>
+      </div>
+</header>
+
+<!-- ══ 1 · LE STOCK, PAR SITE ══ -->
+<section id="stock" class="sombre-2">
+  <div class="container duo">
+    <div class="duo-texte reveal">
+      <span class="etape-num"><i>1</i>Le stock, par site</span>
+      <h2>Chaque site son stock,<br>chaque mouvement sa trace.</h2>
+      <p>Point de vente et labo ont chacun leur stock. Tout ce qui entre, sort ou se transfère laisse une ligne.</p>
+      <ul class="liste">
+        <li><i></i>Entrées par facture ou saisie, sorties par vente ou production</li>
+        <li><i></i>Transferts entre sites, inventaires, pertes avec leur motif</li>
+        <li><i></i>Coût moyen pondéré, seuils d'alerte, codes des articles partout</li>
+      </ul>
+    </div>
+    <div class="duo-visu cadre-visu reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran"><div class="ecran-in"><div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Stock du point de vente</span></div>
+        <div class="ecran-visu"><picture><source type="image/avif" srcset="assets/img/ecran-stock@1x.avif?v=7 1x, assets/img/ecran-stock@2x.avif?v=7 2x"><img src="assets/img/ecran-stock@1x.webp?v=7" alt="Écran du stock d'un point de vente avec quantités, coûts moyens et seuils. Compte de démonstration Dar Yasmine." loading="lazy" width="900" height="560"></picture></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 2 · FICHES TECHNIQUES ET PRODUCTION ══ -->
+<section id="production">
+  <div class="container duo inverse">
+    <div class="duo-texte reveal">
+      <span class="etape-num"><i>2</i>Fiches techniques et production</span>
+      <h2>Le coût de revient<br>se met à jour tout seul.</h2>
+      <p>Chaque fiche technique recalcule son coût à chaque facture d'achat. La production au labo déduit les ingrédients.</p>
+      <ul class="liste">
+        <li><i></i>Fiches techniques, produits composés et sous-produits</li>
+        <li><i></i>Production au labo&nbsp;: ingrédients déduits, produits finis en stock</li>
+        <li><i></i>Coût matière par portion et marge par produit, en temps réel</li>
+      </ul>
+    </div>
+    <div class="duo-visu cadre-visu reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran"><div class="ecran-in"><div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Fiche technique</span></div>
+        <div class="ecran-visu"><picture><source type="image/avif" srcset="assets/img/ecran-ft@1x.avif?v=7 1x, assets/img/ecran-ft@2x.avif?v=7 2x"><img src="assets/img/ecran-ft@1x.webp?v=7" alt="Fiche technique d'un produit avec ses ingrédients et son coût de revient. Compte de démonstration Dar Yasmine." loading="lazy" width="900" height="560"></picture></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3 · INVENTAIRES, PERTES, HISTORIQUES ══ -->
+<section id="inventaires" class="sombre-2">
+  <div class="container">
+    <div class="chapeau centre reveal">
+      <span class="etape-num"><i>3</i>Inventaires, pertes, historiques</span>
+      <h2>Compter, expliquer,<br>exporter.</h2>
+    </div>
+    <div class="trois">
+      <article class="regard reveal"><span class="picto" aria-hidden="true">📋</span><span class="tag">Inventaire</span><h3>Guidé, site par site</h3><p>Vous comptez, LabFlow compare au stock théorique et valorise les écarts.</p></article>
+      <article class="regard moi reveal d1"><span class="picto" aria-hidden="true">🗑️</span><span class="tag">Pertes</span><h3>Un motif, une valeur</h3><p>Chaque perte a un motif, un site, une valeur. Elle pèse dans la marge, pas dans l'oubli.</p></article>
+      <article class="regard reveal d2"><span class="picto" aria-hidden="true">📗</span><span class="tag">Historiques</span><h3>Tout s'exporte en Excel</h3><p>Approvisionnements, transferts, ventes, pertes&nbsp;: au modèle LabFlow, avec les codes des articles.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4 · LE TABLEAU DE BORD, TOUS LES CHOIX ══ -->
+<section id="tableau">
+  <div class="container duo">
+    <div class="duo-texte reveal">
+      <span class="etape-num"><i>4</i>Le tableau de bord, tous les choix</span>
+      <h2>Une question,<br>un filtre, une réponse.</h2>
+      <p>Période libre, site, activité, catégorie, produit, canal&nbsp;: vous choisissez, le tableau de bord répond.</p>
+      <ul class="liste">
+        <li><i></i>Onglets ventes, achats, stock, pertes, labo, clients pros</li>
+        <li><i></i>Marge lue à trois niveaux, du coût matière au résultat</li>
+        <li><i></i>Export Excel de chaque vue, au modèle LabFlow</li>
+      </ul>
+      <a class="btn" href="demande-acces.html">Demander un accès</a>
+    </div>
+    <div class="duo-visu cadre-visu reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran"><div class="ecran-in"><div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Tableau de bord › Ventes › tous les filtres</span></div>
+        <div class="ecran-visu"><picture><source type="image/avif" srcset="assets/img/ecran-dashboard-filtres@1x.avif?v=8 1x, assets/img/ecran-dashboard-filtres@2x.avif?v=8 2x, assets/img/ecran-dashboard-filtres@3x.avif?v=8 3x"><source type="image/webp" srcset="assets/img/ecran-dashboard-filtres@1x.webp?v=8 1x, assets/img/ecran-dashboard-filtres@2x.webp?v=8 2x, assets/img/ecran-dashboard-filtres@3x.webp?v=8 3x"><img src="assets/img/ecran-dashboard-filtres@1x.webp?v=8" alt="Tableau de bord LabFlow : onglets et barre de filtres par période, site, activité, catégorie, produit et canal. Compte de démonstration Dar Yasmine." loading="lazy" width="900" height="333"></picture></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5 · PLUSIEURS SITES, PLUSIEURS GÉRANTS ══ -->
+<section id="sites" class="sombre-2">
+  <div class="container">
+    <div class="chapeau centre reveal">
+      <span class="etape-num"><i>5</i>Plusieurs sites, plusieurs gérants</span>
+      <h2>Vous voyez tout.<br>Chacun voit son site.</h2>
+    </div>
+    <div class="trois">
+      <article class="regard reveal"><span class="picto" aria-hidden="true">🏪</span><span class="tag">Sites</span><h3>Points de vente et labo</h3><p>Plusieurs points de vente et un labo dans le même compte, chacun avec son stock et ses ventes.</p></article>
+      <article class="regard moi reveal d1"><span class="picto" aria-hidden="true">👤</span><span class="tag">Gérants</span><h3>Des droits par site</h3><p>Un gérant par site, avec ses droits&nbsp;: il saisit, vous validez et vous comparez.</p></article>
+      <article class="regard reveal d2"><span class="picto" aria-hidden="true">🔔</span><span class="tag">Alertes</span><h3>Dans l'application</h3><p>Seuils de stock, commandes reçues, factures à vérifier&nbsp;: les notifications arrivent là où vous travaillez.</p></article>
+    </div>
+    <div class="suite-pages reveal d2">
+      <a href="approvisionnements.html"><span class="picto" aria-hidden="true">🧾</span><span>Approvisionnements &amp; factures<small>La facture entre toute seule</small></span></a>
+      <a href="comptabilite.html"><span class="picto" aria-hidden="true">📒</span><span>Comptabilité<small>Votre comptable, dans votre dossier</small></span></a>
+      <a href="ventes-clients.html"><span class="picto" aria-hidden="true">🤝</span><span>Ventes &amp; clients<small>Pros et particuliers, portail, factures</small></span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ CTA FINAL ══ -->
+<section class="final" id="final">
+  <div class="hero-aurore" aria-hidden="true"></div>
+  <div class="container"><div class="final-in reveal">
+    <h2>Regardez vos chiffres,<br>pas un fichier.</h2>
+    <p>Un conseiller vous rappelle, charge votre référentiel et vous montre votre tableau de bord sur vos propres ventes.</p>
+    <p class="offre-finale"><span aria-hidden="true">🎁</span> <b>Votre premier mois est offert.</b></p>
+    <div class="final-ctas">
+      <a class="btn" href="demande-acces.html">Demander un accès<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
+      <a class="btn-fantome" href="https://wa.me/21654183189" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
+    </div>
+    <p class="rappel">Réponse rapide, par un humain. Aucun paiement en ligne.</p>
+    <a class="lien-cout" href="tarifs.html">Combien ça coûte&nbsp;?</a>
+  </div></div>
+</section>
+
+<footer class="pied">
+  <div class="container">
+    <div class="marque"><svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg><span class="mot"><b>Lab</b><span>Flow</span></span></div>
+    <nav class="pied-liens" aria-label="Pied de page">
+      <a href="index.html">Accueil</a><a href="approvisionnements.html">Approvisionnements &amp; factures</a><a href="comptabilite.html">Comptabilité</a><a href="ventes-clients.html">Ventes &amp; clients</a><a href="stock-suivi.html" aria-current="page">Stock, production &amp; suivi</a><a href="index.html#demo">Démo</a><a href="tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>Conçu en Tunisie 🇹🇳</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav = document.getElementById('nav');
+  function auDefilement(){ nav.classList.toggle('colle', window.scrollY > 24); }
+  auDefilement(); window.addEventListener('scroll', auDefilement, {passive:true});
+  var burger = document.getElementById('burger'), menu = document.getElementById('menu-mobile');
+  function fermerMenu(){ document.body.classList.remove('menu-ouvert'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){ var o = document.body.classList.toggle('menu-ouvert'); burger.setAttribute('aria-expanded', o ? 'true' : 'false'); });
+  menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') fermerMenu(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fermerMenu(); });
+  var cibles = document.querySelectorAll('.reveal');
+  if(RM || !('IntersectionObserver' in window)){ cibles.forEach(function(el){ el.classList.add('vu'); }); }
+  else { var obs = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); } }); }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'}); cibles.forEach(function(el){ obs.observe(el); }); }
+})();
+</script>
+</body>
+</html>

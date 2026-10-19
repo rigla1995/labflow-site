@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquette V5 — Approvisionnements &amp; factures — LabFlow</title>
+<meta name="robots" content="noindex">
+<link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/bricolage-grotesque-latin.woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/v4.css?v=8">
+<link rel="stylesheet" href="v5.css">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body class="avec-annonce">
+
+<a class="saut-contenu" href="#top">Aller au contenu</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/><stop offset="52%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <clipPath id="lf-clip"><rect x="-18" y="-18" width="36" height="36" rx="6.74" transform="translate(26,26) rotate(45)"/></clipPath>
+    <symbol id="lf-losange" viewBox="0 0 52 52">
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="url(#lf-bg)" transform="translate(26,26) rotate(45)"/>
+      <rect x="0" y="0" width="52" height="26" fill="rgba(255,255,255,0.13)" clip-path="url(#lf-clip)"/>
+      <rect x="-18" y="-18" width="36" height="36" rx="6.74" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.6" transform="translate(26,26) rotate(45)"/>
+      <g transform="translate(26,26) rotate(45)" fill="#fff">
+        <rect x="-7.66" y="-5.46" width="3.37" height="14.98" rx="1.28"/><rect x="-7.66" y="6.15" width="11.27" height="3.37" rx="1.28"/>
+        <rect x="4.30" y="-9.52" width="3.37" height="19.04" rx="1.28"/><rect x="-7.66" y="-9.52" width="15.33" height="3.37" rx="1.28"/>
+        <rect x="-1.51" y="-1.33" width="9.17" height="3.37" rx="1.28"/>
+      </g>
+    </symbol>
+    <symbol id="ic-wa" viewBox="0 0 20 20"><path d="M10 1a9 9 0 0 0-7.7 13.6L1 19l4.5-1.2A9 9 0 1 0 10 1zm0 2a7 7 0 1 1-3.6 13l-.3-.2-2.2.6.6-2.1-.2-.4A7 7 0 0 1 10 3zm-3 3.6c-.2 0-.5.1-.7.4-.3.3-.8.8-.8 1.9s.9 2.2 1 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.6-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a5.7 5.7 0 0 1-2.8-2.5c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></symbol>
+    <symbol id="ic-fleche" viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-play" viewBox="0 0 12 14"><path d="M0 0v14l12-7z"/></symbol>
+  </defs>
+</svg>
+
+<nav class="maq-nav" aria-label="Maquettes V5-1"><b>V5-1</b><a href="accueil-b.html">Accueil A</a><a href="accueil-b.html">Accueil B</a><a href="accueil-c.html">Accueil C</a><a class="actif" href="approvisionnements.html">Appros</a><a href="comptabilite.html">Compta</a><a href="ventes-clients.html">Ventes</a><a href="stock-suivi.html">Stock & suivi</a></nav>
+
+<a class="annonce" href="#final"><span aria-hidden="true">🎁</span><b>Votre premier mois est offert</b><span class="annonce-suite">— demandez votre accès</span><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
+
+<nav class="nav" id="nav">
+  <div class="container nav-in">
+    <a class="marque" href="accueil-b.html" aria-label="LabFlow — accueil"><svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg><span class="mot"><b>Lab</b><span>Flow</span></span></a>
+    <div class="nav-liens">
+      <div class="deroulant">
+        <a href="accueil-b.html#preuves" aria-haspopup="true">Produits<i aria-hidden="true"></i></a>
+        <div class="sous">
+          <a href="approvisionnements.html" aria-current="page"><span class="ic" aria-hidden="true">🧾</span><span>Approvisionnements &amp; factures<small>La facture entre toute seule</small></span></a>
+          <a href="comptabilite.html"><span class="ic" aria-hidden="true">📒</span><span>Comptabilité<small>Votre comptable, dans votre dossier</small></span></a>
+          <a href="ventes-clients.html"><span class="ic" aria-hidden="true">🤝</span><span>Ventes &amp; clients<small>Pros et particuliers, portail, factures</small></span></a>
+          <a href="stock-suivi.html"><span class="ic" aria-hidden="true">📊</span><span>Stock, production &amp; suivi<small>Du stock au tableau de bord</small></span></a>
+        </div>
+      </div>
+      <a href="accueil-b.html#demo">Démo</a>
+      <a href="../../tarifs.html">Combien ça coûte&nbsp;?</a>
+      <a href="accueil-b.html#accompagnement">Accompagnement</a>
+    </div>
+    <div class="nav-droite">
+      <a class="btn petit" href="#final">Demander un accès</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="menu-mobile" id="menu-mobile">
+  <span class="mm-groupe">Produits</span>
+  <a class="mm-sous" href="approvisionnements.html">Approvisionnements &amp; factures</a>
+  <a class="mm-sous" href="comptabilite.html">Comptabilité</a>
+  <a class="mm-sous" href="ventes-clients.html">Ventes &amp; clients</a>
+  <a class="mm-sous" href="stock-suivi.html">Stock, production &amp; suivi</a>
+  <a href="accueil-b.html#demo">Démo</a>
+  <a href="../../tarifs.html">Combien ça coûte&nbsp;?</a>
+  <a class="btn mm-cta" href="#final">Demander un accès</a>
+</div>
+
+<main id="top">
+
+<!-- ══ HERO DE PAGE ══ -->
+<header class="hero page">
+  <div class="hero-aurore" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-in">
+      <nav class="ariane reveal" aria-label="Fil d'Ariane"><a href="accueil-b.html">Accueil</a><span>›</span><span>Produits</span><span>›</span><span>Approvisionnements &amp; factures</span></nav>
+      <div class="pastille reveal"><i></i>Approvisionnements &amp; factures</div>
+      <h1 class="reveal d1">La facture entre<br><span class="clair">toute seule</span>.</h1>
+      <p class="sous reveal d2">PDF, scan ou photo au téléphone. LabFlow reconnaît le fournisseur et lit les lignes, vous vérifiez. Le stock et la comptabilité suivent d'un coup.</p>
+      <div class="hero-ctas reveal d3">
+        <a class="btn" href="#final">Demander un accès</a>
+        <a class="voir-demo" href="#lire"><span class="lecture" aria-hidden="true"><svg viewBox="0 0 12 14"><use href="#ic-play"/></svg></span>Une facture, photographiée au téléphone <span class="duree">(45 s)</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="container scene">
+    <div class="scene-lueur" aria-hidden="true"></div>
+    <div class="scene-lueur serree" aria-hidden="true"></div>
+    <div class="ecran reveal d3">
+      <div class="ecran-in">
+        <div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>app.labflow-tn.com — Fournisseurs › Factures › Vérifier la facture</span></div>
+        <div class="visu-schema">
+          <div class="app facture-verif" role="img" aria-label="Aperçu de l'écran Vérifier la facture : la pièce à gauche, les lignes lues à droite">
+            <div class="feuille"><div class="papier" style="position:relative"><span class="l titre"></span><span class="l c"></span><span class="l d"></span><div class="grille"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="l e"></span><span class="l c"></span><span class="tot"></span><span class="tampon">LUE</span></div></div>
+            <div class="lignes"><div class="app-tete">Épicerie du Lac · F-2026-0412 · 14/10/2026 <span class="b">MF reconnu</span></div>
+              <table><thead><tr><th>Ligne lue</th><th>Article</th><th class="r">Qté</th><th class="r">PU HT</th><th></th></tr></thead><tbody>
+                <tr><td>FARINE T55 25KG</td><td>Farine T55 · sac 25 kg<span class="code">FAR-0001</span></td><td class="r">4</td><td class="r">62,500</td><td><span class="puce">reconnu</span></td></tr>
+                <tr><td>SUCRE SEMOULE 1KG</td><td>Sucre semoule<span class="code">SUC-0001</span></td><td class="r">24</td><td class="r">2,900</td><td><span class="puce">reconnu</span></td></tr>
+                <tr><td>LEVURE FRAICHE 500G</td><td>Levure boulangère · 0,5 kg<span class="code">LEV-0003</span></td><td class="r">6</td><td class="r">4,200</td><td><span class="puce att">à confirmer</span></td></tr>
+                <tr><td>HUILE TOURNESOL 5L</td><td>Huile de tournesol · bidon 5 L<span class="code">HUI-0002</span></td><td class="r">3</td><td class="r">38,000</td><td><span class="puce">reconnu</span></td></tr>
+                <tr><td>OEUFS PLATEAU 30</td><td>Œufs · plateau de 30<span class="code">OEU-0001</span></td><td class="r">10</td><td class="r">9,600</td><td><span class="puce">reconnu</span></td></tr>
+                <tr><td>LIVRAISON</td><td>Hors stock · transport</td><td class="r">1</td><td class="r">15,000</td><td><span class="puce hs">hors stock</span></td></tr>
+              </tbody></table>
+              <table><tbody><tr><td class="fine">HT 622,400 · TVA 19 % 118,256 · timbre 1,000</td><td class="r"><b>TTC 741,656</b></td><td><span class="puce">calculs OK</span></td></tr></tbody></table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="legende centre note-maquette">Maquette : écran schématique. Capture réelle et vidéo de 45 s au lot V5-2.</p>
+  </div>
+</header>
+
+<!-- ══ 1 · DÉPOSEZ LA FACTURE ══ -->
+<section id="deposer" class="sombre-2">
+  <div class="container duo">
+    <div class="duo-texte reveal">
+      <span class="etape-num"><i>1</i>Déposez la facture</span>
+      <h2>Comme elle vient&nbsp;:<br>PDF, scan ou photo.</h2>
+      <p>La facture du fournisseur arrive comme elle arrive. Vous la déposez depuis l'ordinateur ou le téléphone.</p>
+      <ul class="liste">
+        <li><i></i>PDF, scan ou photo au téléphone, format HEIC compris</li>
+        <li><i></i>Plusieurs pages, recadrage et rotation avant lecture</li>
+        <li><i></i>La pièce est conservée&nbsp;: consultable depuis l'approvisionnement et depuis l'écriture comptable</li>
+      </ul>
+    </div>
+    <div class="duo-visu cadre-visu reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran"><div class="ecran-in"><div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Fournisseurs › Factures › Nouvelle facture</span></div>
+        <div class="visu-schema haut"><div class="app depot" role="img" aria-label="Aperçu de la zone de dépôt : glisser un PDF, un scan ou une photo">
+          <div class="zone">Déposez la facture ici<small>PDF, JPG, PNG, HEIC · plusieurs pages acceptées</small></div>
+          <div class="vignettes">
+            <div class="vignette"><div class="ap photo"></div><b>photo-telephone.heic</b><small>2 pages · redressée</small></div>
+            <div class="vignette"><div class="ap scan"></div><b>scan-0412.jpg</b><small>1 page · pivotée</small></div>
+            <div class="vignette"><div class="ap pdf"></div><b>F-2026-0412.pdf</b><small>1 page</small></div>
+          </div>
+        </div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 2 · LABFLOW LA LIT, VOUS VÉRIFIEZ ══ -->
+<section id="lire">
+  <div class="container duo inverse">
+    <div class="duo-texte reveal">
+      <span class="etape-num"><i>2</i>LabFlow la lit, vous vérifiez</span>
+      <h2>La facture à gauche,<br>les lignes à droite.</h2>
+      <p>Tout ce qui est lu sur la pièce est posé devant vous, ligne par ligne. Vous confirmez, vous corrigez, vous validez.</p>
+      <ul class="liste">
+        <li><i></i>Fournisseur reconnu par son matricule fiscal, sinon par son nom, créé après votre accord</li>
+        <li><i></i>Numéro, date, HT, TVA par taux, timbre, TTC, avec contrôles de calcul</li>
+        <li><i></i>Chaque ligne&nbsp;: l'article proposé, sa conversion d'unité, ou «&nbsp;hors stock&nbsp;»</li>
+      </ul>
+      <span class="verite"><b>Lue sur la pièce, vérifiée par vous.</b> Rien n'entre sans votre validation.</span>
+    </div>
+    <div class="duo-visu cadre-visu reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran"><div class="ecran-in"><div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>Vérifier la facture — en-tête</span></div>
+        <div class="visu-schema haut"><div class="app" role="img" aria-label="Aperçu de l'en-tête lu : fournisseur, numéro, date, totaux">
+          <div class="app-tete">En-tête lu sur la pièce <span class="b">à vérifier</span></div>
+          <table><tbody>
+            <tr><td class="fine">Fournisseur</td><td><b>Épicerie du Lac</b><span class="code">MF 1234567/A/M/000 — reconnu</span></td><td><span class="puce">reconnu</span></td></tr>
+            <tr><td class="fine">Numéro · date</td><td>F-2026-0412 · 14/10/2026</td><td><span class="puce">lu</span></td></tr>
+            <tr><td class="fine">HT</td><td>622,400</td><td><span class="puce">somme des lignes OK</span></td></tr>
+            <tr><td class="fine">TVA 19 %</td><td>118,256</td><td><span class="puce">OK</span></td></tr>
+            <tr><td class="fine">Timbre fiscal</td><td>1,000</td><td><span class="puce">lu</span></td></tr>
+            <tr><td class="fine">TTC</td><td><b>741,656</b></td><td><span class="puce">OK</span></td></tr>
+            <tr><td class="fine">Ligne 3</td><td>LEVURE FRAICHE 500G → Levure boulangère, 0,5 kg</td><td><span class="puce att">à confirmer</span></td></tr>
+          </tbody></table>
+        </div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3 · ELLE APPREND ══ -->
+<section id="apprend" class="sombre-2">
+  <div class="container">
+    <div class="chapeau centre reveal">
+      <span class="etape-num"><i>3</i>Elle apprend</span>
+      <h2>La deuxième facture<br>va plus vite que la première.</h2>
+      <p>Ce que vous confirmez une fois est retenu pour la suite.</p>
+    </div>
+    <div class="trois">
+      <article class="regard reveal"><span class="picto" aria-hidden="true">🔗</span><span class="tag">Correspondances</span><h3>Une fois pour toutes</h3><p>«&nbsp;FARINE T55 25KG&nbsp;» devient Farine T55, sac de 25 kg. La correspondance est gardée par fournisseur, avec sa conversion.</p></article>
+      <article class="regard moi reveal d1"><span class="picto" aria-hidden="true">🧠</span><span class="tag">Mise en page</span><h3>Reconnue d'emblée</h3><p>La disposition de la facture est apprise. La suivante du même fournisseur est lue sans réglage.</p></article>
+      <article class="regard reveal d2"><span class="picto" aria-hidden="true">🔎</span><span class="tag">Référentiel</span><h3>Trouvé, ou créé sur place</h3><p>Recherche parmi des milliers d'articles par nom ou par code. Un article manquant se crée depuis la ligne, sans quitter l'écran.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4 · LE STOCK ET LA COMPTA SUIVENT ══ -->
+<section id="suivent">
+  <div class="container duo">
+    <div class="duo-texte reveal">
+      <span class="etape-num"><i>4</i>Le stock et la compta suivent</span>
+      <h2>Un clic.<br>Le stock entre, l'écriture est prête.</h2>
+      <p>La facture validée devient un approvisionnement et, si vous le demandez, une écriture d'achat dans LabFlow Compta.</p>
+      <ul class="liste">
+        <li><i></i>L'approvisionnement entre d'un coup, par site&nbsp;: point de vente ou labo</li>
+        <li><i></i>Coût moyen et stock mis à jour, historique conservé avec la pièce</li>
+        <li><i></i>«&nbsp;Envoyer à la comptabilité&nbsp;» coché&nbsp;: l'écriture d'achat est préparée au brouillard, avec les codes des articles</li>
+      </ul>
+      <a class="btn" href="#final">Demander un accès</a>
+    </div>
+    <div class="duo-visu cadre-visu reveal d1">
+      <div class="lueur" aria-hidden="true"></div>
+      <div class="ecran"><div class="ecran-in"><div class="ecran-barre" aria-hidden="true"><i></i><i></i><i></i><span>LabFlow Compta › Journal des achats › brouillard</span></div>
+        <div class="visu-schema haut"><div class="app ecriture" role="img" aria-label="Aperçu de l'écriture d'achat préparée depuis la facture">
+          <div class="app-tete">Écriture d'achat · brouillard <span class="b">pièce F-2026-0412 jointe</span></div>
+          <table><thead><tr><th>Compte</th><th>Libellé</th><th class="r">Débit</th><th class="r">Crédit</th></tr></thead><tbody>
+            <tr><td>Achats</td><td>FAR-0001 Farine T55, SUC-0001 Sucre, LEV-0003 Levure — F-0412</td><td class="r">344,800</td><td class="r"></td></tr>
+            <tr><td>Achats</td><td>HUI-0002 Huile, OEU-0001 Œufs — F-0412</td><td class="r">210,000</td><td class="r"></td></tr>
+            <tr><td>Transports</td><td>Livraison — F-0412</td><td class="r">15,000</td><td class="r"></td></tr>
+            <tr><td>TVA déductible 19 %</td><td>sur 622,400</td><td class="r">118,256</td><td class="r"></td></tr>
+            <tr><td>Timbre fiscal</td><td>F-0412</td><td class="r">1,000</td><td class="r"></td></tr>
+            <tr><td>Fournisseur</td><td>Épicerie du Lac</td><td class="r"></td><td class="r">741,656</td></tr>
+            <tr class="tot"><td colspan="2">Équilibrée</td><td class="r">741,656</td><td class="r">741,656</td></tr>
+          </tbody></table>
+        </div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5 · ET SANS FACTURE ? ══ -->
+<section id="sans-facture" class="sombre-2">
+  <div class="container">
+    <div class="chapeau centre reveal">
+      <span class="etape-num"><i>5</i>Et sans facture&nbsp;?</span>
+      <h2>Trois autres portes<br>pour faire entrer la marchandise.</h2>
+    </div>
+    <div class="trois">
+      <article class="regard reveal"><span class="picto" aria-hidden="true">✍️</span><span class="tag">Saisie</span><h3>À la main</h3><p>Un bon de livraison sans facture, un achat au marché&nbsp;: la saisie guidée propose l'article, l'unité et le dernier prix.</p></article>
+      <article class="regard reveal d1"><span class="picto" aria-hidden="true">📗</span><span class="tag">Excel</span><h3>Au modèle</h3><p>Un fichier à cinq colonnes, article, unité, catégorie, famille, code, pour charger un référentiel entier. Le résultat ligne par ligne.</p></article>
+      <article class="regard reveal d2"><span class="picto" aria-hidden="true">🔢</span><span class="tag">Codes</span><h3>Par catégorie</h3><p>FAR-0012, SUC-0003&nbsp;: chaque article porte un code unique, proposé d'après sa catégorie, repris dans les exports et en comptabilité.</p></article>
+    </div>
+    <div class="suite-pages reveal d2">
+      <a href="comptabilite.html"><span class="picto" aria-hidden="true">📒</span><span>Comptabilité<small>LabFlow Compta, votre comptable dedans</small></span></a>
+      <a href="ventes-clients.html"><span class="picto" aria-hidden="true">🤝</span><span>Ventes &amp; clients<small>Recettes, ventes, portail, factures</small></span></a>
+      <a href="stock-suivi.html"><span class="picto" aria-hidden="true">🏪</span><span>Stock, production &amp; suivi<small>Du stock au tableau de bord</small></span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ CTA FINAL ══ -->
+<section class="final" id="final">
+  <div class="hero-aurore" aria-hidden="true"></div>
+  <div class="container"><div class="final-in reveal">
+    <h2>Apportez une de vos factures.</h2>
+    <p>Un conseiller vous rappelle et la passe avec vous dans LabFlow, sur votre propre référentiel. Vous repartez avec un compte prêt à l'emploi.</p>
+    <p class="offre-finale"><span aria-hidden="true">🎁</span> <b>Votre premier mois est offert.</b></p>
+    <div class="final-ctas">
+      <a class="btn" href="../../demande-acces.html">Demander un accès<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-fleche"/></svg></a>
+      <a class="btn-fantome" href="https://wa.me/21654183189" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#ic-wa"/></svg>Écrire sur WhatsApp</a>
+    </div>
+    <p class="rappel">Réponse rapide, par un humain. Aucun paiement en ligne.</p>
+    <a class="lien-cout" href="../../tarifs.html">Combien ça coûte&nbsp;?</a>
+  </div></div>
+</section>
+
+<footer class="pied">
+  <div class="container">
+    <div class="marque"><svg viewBox="0 0 52 52" role="img" aria-label="LabFlow"><use href="#lf-losange"/></svg><span class="mot"><b>Lab</b><span>Flow</span></span></div>
+    <nav class="pied-liens" aria-label="Pied de page">
+      <a href="accueil-b.html">Accueil</a><a href="approvisionnements.html" aria-current="page">Approvisionnements &amp; factures</a><a href="comptabilite.html">Comptabilité</a><a href="ventes-clients.html">Ventes &amp; clients</a><a href="stock-suivi.html">Stock, production &amp; suivi</a><a href="accueil-b.html#demo">Démo</a><a href="../../tarifs.html">Combien coûte LabFlow&nbsp;?</a><a href="../../mentions-legales.html">Mentions légales</a><a href="../../confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>Conçu en Tunisie 🇹🇳</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav = document.getElementById('nav');
+  function auDefilement(){ nav.classList.toggle('colle', window.scrollY > 24); }
+  auDefilement(); window.addEventListener('scroll', auDefilement, {passive:true});
+  var burger = document.getElementById('burger'), menu = document.getElementById('menu-mobile');
+  function fermerMenu(){ document.body.classList.remove('menu-ouvert'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){ var o = document.body.classList.toggle('menu-ouvert'); burger.setAttribute('aria-expanded', o ? 'true' : 'false'); });
+  menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') fermerMenu(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fermerMenu(); });
+  var cibles = document.querySelectorAll('.reveal');
+  if(RM || !('IntersectionObserver' in window)){ cibles.forEach(function(el){ el.classList.add('vu'); }); }
+  else { var obs = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); } }); }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'}); cibles.forEach(function(el){ obs.observe(el); }); }
+})();
+</script>
+</body>
+</html>
